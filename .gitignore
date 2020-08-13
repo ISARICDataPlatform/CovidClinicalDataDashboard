@@ -3,3 +3,5 @@
 .RData
 .Ruserdata
 CovidClinicalDataDashboard.Rproj
+.DS_Store
+rsconnect
