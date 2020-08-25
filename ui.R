@@ -23,68 +23,67 @@ dbHeader <- dashboardHeader(title = "COVID-19 Analysis Report",
                             ))
 
 # Define UI for application that draws a histogram
-dashboardPage( skin = "black",
-               dbHeader,
-               dashboardSidebar(
-                 # tags$style(".left-side, .main-sidebar {padding-top: 50px}"),
-                 sidebarMenu(
-                   menuItem("Patient Characteristics", tabName = "patients", icon = icon("bed"))
-                 ),
-
-                 hr(),
-                 fluidRow(column(3, verbatimTextOutput("value")))
-               ),
-               dashboardBody(
-                 tags$head(tags$style(HTML('
+dashboardPage(skin = "black",
+              dbHeader,
+              dashboardSidebar(
+                sidebarMenu(
+                  menuItem("Patient Characteristics", tabName = "patients", icon = icon("bed"))
+                ),
+                
+                hr(),
+                fluidRow(column(3, verbatimTextOutput("value")))
+              ),
+              dashboardBody(
+                tags$head(tags$style(HTML('
                  .btn-custom {background-color: #F70656; color:  #FFFFFF;}
                  .skin-black .main-header .logo {color: #F70656; font-weight: bold;}
                  .skin-black .main-sidebar .sidebar .sidebar-menu .active a {color: #F70656; border-left-color: #F70656;}
                  .irs-bar, .irs-bar-edge, .irs-single, .irs-to, .irs-from, .irs-grid-pol {background: #F70656; border-color: #F70656;}'
-                 ))),
-
-                 dropdown(
-                   inputId = "controls",
-                   icon = icon("gear"),
-                   size = "sm",
-                   status = "custom",
-                   tooltip = tooltipOptions(title = "Click for data settings"),
-                   options = list(`style` = "btm-custom"),
-                   tags$h3("Controls"),
-                   awesomeCheckboxGroup(
-                     inputId = "sex", label = "Gender", status = "custom",
-                     choices = list("Male" = "Male", "Female" = "Female", "Unknown" = NA),
-                     selected = c("Male","Female",NA)
-                   ),
-                   sliderInput(inputId = "agegp5", label = "Age group",
-                               min = 0, max = 90, step = 5, value = c(0,120), dragRange = T),
-
-
-                   pickerInput(
-                     inputId = "country",
-                     label = "Country",
-                     choices = countries,
-                     selected = countries,
-                     options = list(
-                       `actions-box` = TRUE),
-                     # choicesOpt = list(
-                     #   subtext = glue("{countries.and.sites$n.sites} sites")
-                     # ),
-                     multiple = TRUE
-                   ),
-                   awesomeCheckboxGroup(
-                     inputId = "outcome", label = "Outcome", status = 'custom',
-                     choices = list("Death" = "death", "Censored" = "censored", "Discharge" = "discharge"),
-                     selected = c("death","censored","discharge")
-                   )
-                 ),
-                 hr(),
-                 tabItem(tabName = "patients",
-                         fluidRow(
-                           box(plotOutput("agePyramid", height = "300px"),
-                               "Bar fills are outcome (death/discharge/censored) at the time of report.",
-                               width = 6, height = 400, solidHeader = T, title = 'Age and sex distribution of patients')
-                         )
-                 )
-               )
+                ))),
+                
+                dropdown(
+                  inputId = "controls",
+                  icon = icon("gear"),
+                  size = "sm",
+                  status = "custom",
+                  tooltip = tooltipOptions(title = "Click for data settings"),
+                  options = list(`style` = "btm-custom"),
+                  tags$h3("Controls"),
+                  awesomeCheckboxGroup(
+                    inputId = "sex", label = "Gender", status = "custom",
+                    choices = list("Male" = "Male", "Female" = "Female", "Unknown" = NA),
+                    selected = c("Male","Female",NA)
+                  ),
+                  sliderInput(inputId = "agegp5", label = "Age group",
+                              min = 0, max = 90, step = 5, value = c(0,120), dragRange = T),
+                  
+                  
+                  pickerInput(
+                    inputId = "country",
+                    label = "Country",
+                    choices = countries,
+                    selected = countries,
+                    options = list(
+                      `actions-box` = TRUE),
+                    multiple = TRUE
+                  ),
+                  awesomeCheckboxGroup(
+                    inputId = "outcome", label = "Outcome", status = 'custom',
+                    choices = list("Death" = "death", "Censored" = "censored", "Discharge" = "discharge"),
+                    selected = c("death","censored","discharge")
+                  )
+                ),
+                hr(),
+                tabItem(tabName = "patients",
+                        fluidRow(
+                          box(plotOutput("agePyramid", height = "300px"),
+                              "Bar fills are outcome (death/discharge/censored) at the time of report.",
+                              width = 6, height = 400, solidHeader = T, title = 'Age and sex distribution of patients'),
+                          box(plotOutput("outcomesByAdmissionDate", height = "300px"),
+                              "Bar fills are outcome (death/discharge/censored) at the time of report.",
+                              width = 6, height = 400, solidHeader = T, title = 'Cumulative patient count by admission date')
+                        )
+                )
+              )
 )
 
