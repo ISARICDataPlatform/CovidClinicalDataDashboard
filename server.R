@@ -21,19 +21,27 @@ confidentiality.check <- function(data, fn, min.rows = 5, ...){
 server <- function(input, output) {
 
   output$agePyramid <- {
+    
     age.pyramid.reactive <- reactive({
-
       fd <- age.pyramid.input %>%
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
-        filter(lower.ag.bound >= input$agegp5[1] & upper.ag.bound <= input$agegp5[2])
+        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2])
     })
     renderPlot(confidentiality.check(age.pyramid.reactive(), age.pyramid.plot), height = 300)
   }
-  # output$tree <- renderTree({
-  #   list(  'I lorem impsum'= list(
-  #     'I.1 lorem impsum'   =  structure(list('I.1.1 lorem impsum'='1', 'I.1.2 lorem impsum'='2'),stselected=TRUE),
-  #     'I.2 lorem impsum'   =  structure(list('I.2.1 lorem impsum'='3'), stselected=TRUE)))
-  # })
+  
+  output$outcomesByAdmissionDate <- {
+    
+    outcomes.by.admission.date.reactive <- reactive({
+      fd <- outcome.admission.date.input %>%
+        filter(country %in% input$country) %>%
+        filter(outcome %in% input$outcome) %>%
+        filter(sex %in% input$sex) %>%
+        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2])
+    })
+    renderPlot(confidentiality.check(outcomes.by.admission.date.reactive(), outcomes.by.admission.date.plot), height = 300)
+  }
+  
 }
