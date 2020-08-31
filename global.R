@@ -25,6 +25,17 @@ epiweek.year <- function(date){
 }
 
 
+outcome.remap <- function(oc, od){
+  if(is.na(od) & is.na(oc)){
+    "censored"
+  } else {
+    out <- case_when(is.na(oc) ~ NA_character_,
+                     oc == "Death" ~ "death",
+                     oc == "Discharged Alive" ~ "discharge")
+  }
+}
+
+
 example.data <- fread("example_data.csv") %>%
   lazy_dt(immutable = FALSE) %>%
   mutate(outcome.3 = map2_chr(outcome, date_outcome, outcome.remap)) %>%
@@ -59,15 +70,6 @@ example.data <- example.data %>%
 source("/Users/mdhall/CovidClinicalDataDashboard/plot_functions.R")
 
 
-outcome.remap <- function(oc, od){
-  if(is.na(od) & is.na(oc)){
-    "censored"
-  } else {
-    out <- case_when(is.na(oc) ~ NA_character_,
-                     oc == "Death" ~ "death",
-                     oc == "Discharged Alive" ~ "discharge")
-  }
-}
 
 age.pyramid.input <- example.data %>%
   lazy_dt(immutable = TRUE) %>%
