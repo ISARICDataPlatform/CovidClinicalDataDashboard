@@ -27,10 +27,10 @@ dashboardPage(skin = "black",
               dbHeader,
               dashboardSidebar(
                 sidebarMenu(
-                  menuItem("Patient Characteristics", tabName = "patients", icon = icon("bed"))
-                ),
-                sidebarMenu(
-                  menuItem("Symptoms at admission", tabName = "symptoms", icon = icon("stethoscope"))
+                  menuItem("Patient Characteristics", tabName = "patients", icon = icon("bed")),
+                  menuItem("Symptoms at admission", tabName = "symptoms", icon = icon("stethoscope")),
+                  menuItem("Comorbidities", tabName = "comorbidities", icon = icon("notes-medical")),
+                  menuItem("Treatment", tabName = "treatment", icon = icon("pills"))
                 ),
                 
                 hr(),
@@ -53,7 +53,7 @@ dashboardPage(skin = "black",
                  .content-wrapper, .right-side { background-color: #FFFFEA;}
                  .box-header h3.box-title {font-family: Roboto},
                  .box {font-family: Roboto}'
-                ))),
+                  ))),
                 
                 dropdown(
                   inputId = "controls",
@@ -88,18 +88,39 @@ dashboardPage(skin = "black",
                   )
                 ),
                 hr(),
-                tabItem(tabName = "patients",
-                        fluidRow(
-                          box(plotOutput("agePyramid", height = "300px"),
-                              "Bar fills are outcome (death/discharge/censored) at the time of report.",
-                              width = 6, height = 400, solidHeader = T, title = 'Age and sex distribution of patients'),
-                          box(plotOutput("outcomesByAdmissionDate", height = "300px"),
-                              "Bar fills are outcome (death/discharge/censored) at the time of report.",
-                              width = 6, height = 400, solidHeader = T, title = 'Cumulative patient count by admission date')
-                        )
-                ),
-                tabItem(tabName = "symptoms"
-                )
-              )
+                tabItems(
+                  tabItem(tabName = "patients",
+                          fluidRow(
+                            box(plotOutput("agePyramid", height = "300px"),
+                                "Bar fills are outcome (death/discharge/censored) at the time of report.",
+                                width = 6, height = 400, solidHeader = T, title = 'Age and sex distribution of patients'),
+                            box(plotOutput("outcomesByAdmissionDate", height = "300px"),
+                                "Bar fills are outcome (death/discharge/censored) at the time of report.",
+                                width = 6, height = 400, solidHeader = T, title = 'Cumulative patient count by admission date')
+                          )
+                  ),
+                  tabItem(tabName = "symptoms",
+                          fluidRow(
+                            box(plotOutput("symptomPrevalence", height = "500px"),
+                                "Bars are labelled with the fraction of patients presenting with the symptom to the number of patients with data on the symptom recorded",
+                                width = 6, height = 600, solidHeader = T, title = 'Prevalance of symptoms at admission')
+                          )
+                  ),
+                  tabItem(tabName = "comorbidities",
+                          fluidRow(
+                            box(plotOutput("comorbidityPrevalence", height = "500px"),
+                                "Bars are labelled with the fraction of patients presenting with the comorbidity to the number of patients with data on the comorbidity recorded",
+                                width = 6, height = 600, solidHeader = T, title = 'Prevalance of comorbidities')
+                          )
+                  ),
+                  tabItem(tabName = "treatment",
+                          fluidRow(
+                            box(plotOutput("treatmentPrevalence", height = "500px"),
+                                "Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
+                                width = 6, height = 600, solidHeader = T, title = 'Treatments given')
+                          )
+                  )
+                  
+                ))
 )
 

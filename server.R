@@ -27,7 +27,9 @@ server <- function(input, output) {
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
-        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2])
+        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        group_by(agegp5, sex, outcome) %>%
+        summarise(count = sum(count))
     })
     renderPlot(confidentiality.check(age.pyramid.reactive(), age.pyramid.plot), height = 300)
   }
@@ -39,9 +41,73 @@ server <- function(input, output) {
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
-        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2])
+        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        group_by(year.epiweek.admit, cum.count, outcome) %>%
+        summarise(cum.count = sum(cum.count))
     })
     renderPlot(confidentiality.check(outcomes.by.admission.date.reactive(), outcomes.by.admission.date.plot), height = 300)
+  }
+  
+  output$symptomPrevalence <- {
+    
+    symptom.prevalence.reactive <- reactive({
+      fd <- symptom.prevalence.input %>%
+        filter(country %in% input$country) %>%
+        filter(outcome %in% input$outcome) %>%
+        filter(sex %in% input$sex) %>%
+        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        group_by(nice.symptom) %>%
+        summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
+        mutate(p.present = times.present/times.recorded) %>%
+        mutate(p.absent = 1-p.present) %>%
+        pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
+        mutate(affected = map_lgl(affected, function(x) x == "p.present")) %>%
+        filter(!is.nan(proportion)) %>%
+        mutate(label = glue("{times.present} / {times.recorded}"))
+    })
+    renderPlot(confidentiality.check(symptom.prevalence.reactive(), symptom.prevalence.plot), height = 500)
+  }
+  
+  output$comorbidityPrevalence <- {
+    
+    comorbidity.prevalence.reactive <- reactive({
+      fd <- comorbidity.prevalence.input %>%
+        filter(country %in% input$country) %>%
+        filter(outcome %in% input$outcome) %>%
+        filter(sex %in% input$sex) %>%
+        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        group_by(nice.comorbidity) %>%
+        summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
+        mutate(p.present = times.present/times.recorded) %>%
+        mutate(p.absent = 1-p.present) %>%
+        pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
+        mutate(affected = map_lgl(affected, function(x) x == "p.present")) %>%
+        filter(!is.nan(proportion)) %>%
+        mutate(label = glue("{times.present} / {times.recorded}"))
+    })
+    renderPlot(confidentiality.check(comorbidity.prevalence.reactive(), comorbidity.prevalence.plot), height = 500)
+  }
+  
+  
+  output$treatmentPrevalence <- {
+    
+    treatment.prevalence.reactive <- reactive({
+
+      fd <- treatment.prevalence.input %>%
+        filter(country %in% input$country) %>%
+        filter(outcome %in% input$outcome) %>%
+        filter(sex %in% input$sex) %>%
+        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        group_by(nice.treatment) %>%
+        summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
+        mutate(p.present = times.present/times.recorded) %>%
+        mutate(p.absent = 1-p.present) %>%
+        pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
+        mutate(affected = map_lgl(affected, function(x) x == "p.present")) %>%
+        filter(!is.nan(proportion)) %>%
+        mutate(label = glue("{times.present} / {times.recorded}"))
+    })
+    renderPlot(confidentiality.check(treatment.prevalence.reactive(), treatment.prevalence.plot), height = 500)
   }
   
 }
