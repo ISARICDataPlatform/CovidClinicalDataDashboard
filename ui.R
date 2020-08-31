@@ -12,7 +12,7 @@
 
 dbHeader <- dashboardHeader(title = "COVID-19 Analysis Report",
                             tags$li(a(href = 'http://isaric.tghn.org/',
-                                      img(src = 'ISARIClogo.png',
+                                      img(src = 'ISARIClogoCream.png',
                                           title = "Company Home", height = "40px"),
                                       style = "padding-top:5px; padding-bottom:5px;"),
                                     class = "dropdown"
@@ -29,16 +29,28 @@ dashboardPage(skin = "black",
                 sidebarMenu(
                   menuItem("Patient Characteristics", tabName = "patients", icon = icon("bed"))
                 ),
+                sidebarMenu(
+                  menuItem("Symptoms at admission", tabName = "symptoms", icon = icon("stethoscope"))
+                ),
                 
                 hr(),
                 fluidRow(column(3, verbatimTextOutput("value")))
               ),
               dashboardBody(
-                tags$head(tags$style(HTML('
-                 .btn-custom {background-color: #F70656; color:  #FFFFFF;}
-                 .skin-black .main-header .logo {color: #F70656; font-weight: bold;}
-                 .skin-black .main-sidebar .sidebar .sidebar-menu .active a {color: #F70656; border-left-color: #F70656;}
-                 .irs-bar, .irs-bar-edge, .irs-single, .irs-to, .irs-from, .irs-grid-pol {background: #F70656; border-color: #F70656;}'
+                tags$head(
+                  tags$link(rel = "stylesheet", type = "text/css", href = "custom.css"),
+                  tags$style(HTML('
+                 .btn-custom {background-color: #df0442; color:  #FFFFFF;}
+                 .skin-black .main-header .logo {color: #df0442; font-weight: bold; background-color: #FFFFEA;}
+                 .skin-black .main-header .logo:hover {color: #df0442; font-weight: bold; background-color: #FFFFEA;}
+                 .skin-black .main-header .navbar { background-color: #FFFFEA;}
+                 .skin-black .main-header .navbar .nav > li > a:hover { background-color: #FFFFEA;}
+                 .skin-black .main-header .navbar .sidebar-toggle:hover {color: #999999; background: #f7b538;}
+                 .skin-black .main-sidebar {color: #df0442; border-left-color: #df0442; background-color: #4f6272;}
+                 .skin-black .main-sidebar .sidebar .sidebar-menu .active > a {color: #9e145f; border-left-color: #9e145f; background-color: #009cad;}
+                 .skin-black .main-sidebar .sidebar .sidebar-menu li:hover  > a {color: #df0442; border-left-color: #df0442; background-color: #f7b538;}
+                 .irs-bar, .irs-bar-edge, .irs-single, .irs-to, .irs-from, .irs-grid-pol {background: #df0442; border-color: #df0442;}
+                 .content-wrapper, .right-side { background-color: #FFFFEA;}'
                 ))),
                 
                 dropdown(
@@ -83,6 +95,8 @@ dashboardPage(skin = "black",
                               "Bar fills are outcome (death/discharge/censored) at the time of report.",
                               width = 6, height = 400, solidHeader = T, title = 'Cumulative patient count by admission date')
                         )
+                ),
+                tabItem(tabName = "symptoms"
                 )
               )
 )
