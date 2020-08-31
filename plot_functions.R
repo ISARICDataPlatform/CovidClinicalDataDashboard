@@ -69,3 +69,62 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
   
   return(plt)
 }
+
+
+symptom.prevalence.plot <- function(aggregated.tbl, ...){
+  aggregated.tbl <- aggregated.tbl %>%
+    mutate(label = glue("{times.present}/{times.recorded}")) 
+  
+  plt <- ggplot(aggregated.tbl) +
+    geom_col(aes(x = nice.symptom, y = proportion, fill = affected)) +
+    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.symptom, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
+    theme_bw() +
+    xlab("Symptom") +
+    ylab("Proportion") +
+    coord_flip() +
+    ylim(0, 1) +
+    scale_fill_manual(values = c("deepskyblue1", "deepskyblue4"), name = "Symptom\npresent", labels = c("No", "Yes")) +
+    theme(axis.text.y = element_text(size = 7))
+  
+  plt
+  
+}
+
+comorbidity.prevalence.plot <- function(aggregated.tbl, ...){
+  aggregated.tbl <- aggregated.tbl %>%
+    mutate(label = glue("{times.present}/{times.recorded}")) 
+  
+  plt <- ggplot(aggregated.tbl) +
+    geom_col(aes(x = nice.comorbidity, y = proportion, fill = affected)) +
+    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.comorbidity, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
+    theme_bw() +
+    xlab("Comorbidity") +
+    ylab("Proportion") +
+    coord_flip() +
+    ylim(0, 1) +
+    scale_fill_manual(values = c("indianred1", "indianred4"), name = "Condition\npresent", labels = c("No", "Yes")) +
+    theme(axis.text.y = element_text(size = 7))
+  
+  plt
+  
+}
+
+
+treatment.prevalence.plot <- function(aggregated.tbl, ...){
+  aggregated.tbl <- aggregated.tbl %>%
+    mutate(label = glue("{times.present}/{times.recorded}")) 
+  
+  plt <- ggplot(aggregated.tbl) +
+    geom_col(aes(x = nice.treatment, y = proportion, fill = affected)) +
+    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.treatment, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
+    theme_bw() +
+    xlab("Treatment") +
+    ylab("Proportion") +
+    coord_flip() +
+    ylim(0, 1) +
+    scale_fill_manual(values = c("chartreuse2", "chartreuse4"), name = "Treatment\received", labels = c("No", "Yes")) +
+    theme(axis.text.y = element_text(size = 7))
+  
+  plt
+  
+}
