@@ -222,3 +222,10 @@ icu.treatment.use.proportion.input <- icu.treatment.use.proportion.input %>%
 
 countries <- age.pyramid.input %>% pull(country) %>% unique %>% sort
 
+current.year <- year(today())
+current.month <- month(today())
+months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+month.options <- c("Dec 2019", glue("{months} {2020}") )
+
+
+

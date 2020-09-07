@@ -22,6 +22,9 @@ dbHeader <- dashboardHeader(title = "COVID-19 Analysis Report",
                                     # tags$style(".navbar {min-height:40px !important}")
                             ))
 
+month.option.list <- as.list(c(NA, month.options))
+names(month.option.list) <- c("Unknown", month.options)
+
 # Define UI for application that draws a histogram
 dashboardPage(skin = "black",
               dbHeader,
@@ -30,7 +33,8 @@ dashboardPage(skin = "black",
                   menuItem("Patient Characteristics", tabName = "patients", icon = icon("bed")),
                   menuItem("Symptoms at admission", tabName = "symptoms", icon = icon("stethoscope")),
                   menuItem("Comorbidities", tabName = "comorbidities", icon = icon("notes-medical")),
-                  menuItem("Treatment", tabName = "treatment", icon = icon("pills"))
+                  menuItem("Treatment", tabName = "treatment", icon = icon("pills")),
+                  menuItem("ICU Treatment", tabName = "icu_treatment", icon = icon("heartbeat"))
                 ),
                 
                 hr(),
@@ -84,7 +88,21 @@ dashboardPage(skin = "black",
                     inputId = "outcome", label = "Outcome", status = 'custom',
                     choices = list("Death" = "death", "Censored" = "censored", "Discharge" = "discharge"),
                     selected = c("death","censored","discharge")
-                  )
+                  ),
+                  awesomeCheckboxGroup(
+                    inputId = "icu_ever", label = "ICU admission", status = 'custom',
+                    choices = list("Yes" = TRUE, "No" = FALSE),
+                    selected = c(TRUE, FALSE)
+                  ),
+                  pickerInput(
+                    inputId = "admission_date",
+                    label = "Month of admission",
+                    choices = month.option.list,
+                    selected = c(NA, month.options),
+                    options = list(
+                      `actions-box` = TRUE),
+                    multiple = TRUE
+                  ),
                 ),
                 hr(),
                 tabItems(
@@ -118,7 +136,15 @@ dashboardPage(skin = "black",
                                 "Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
                                 width = 6, height = 600, solidHeader = T, title = 'Treatments given')
                           )
+                  ),
+                  tabItem(tabName = "icu_treatment",
+                          fluidRow(
+                            box(plotOutput("icuTreatmentPrevalence", height = "500px"),
+                                "Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
+                                width = 6, height = 600, solidHeader = T, title = 'Treatments given')
+                          )
                   )
+                  
                   
                 ))
 )
