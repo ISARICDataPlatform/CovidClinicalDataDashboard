@@ -124,30 +124,28 @@ server <- function(input, output) {
       })
       
       fd <- symptom.prevalence.input %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
         filter(icu_ever %in% input$icu_ever) %>%
         filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
-        mutate(monthyear = map2_chr(calendar.year.admit, calendar.month.admit, function(y,m){
-          if(any(is.na(c(y,m)))){
-            NA
-          } else if(m<10){
-            glue("0{m}-{y}")
-          } else {
-            glue("{m}-{y}")
-          }
-        })) %>%
+        mutate(monthyear = map2_chr(calendar.year.admit, calendar.month.admit, my.mapper)) %>%
         filter(monthyear %in% selected.my) %>%
         select(-monthyear) %>%
         group_by(nice.symptom) %>%
         summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
         mutate(p.present = times.present/times.recorded) %>%
         mutate(p.absent = 1-p.present) %>%
-        pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
-        mutate(affected = map_lgl(affected, function(x) x == "p.present")) %>%
+        as.data.table() %>%
+        dt_pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
+        lazy_dt(immutable = FALSE) %>%
+        mutate(affected = affected == "p.present") %>%
         filter(!is.nan(proportion)) %>%
-        mutate(label = glue("{times.present} / {times.recorded}"))
+        as_tibble() %>%
+        mutate(label = glue("{times.present} / {times.recorded}")) 
+        
     })
     renderPlot(confidentiality.check(symptom.prevalence.reactive(), symptom.prevalence.plot), height = 500)
   }
