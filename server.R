@@ -27,8 +27,8 @@ server <- function(input, output) {
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
-        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
-        group_by(agegp5, sex, outcome) %>%
+        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
+        group_by(agegp10, sex, outcome) %>%
         summarise(count = sum(count))
     })
     renderPlot(confidentiality.check(age.pyramid.reactive(), age.pyramid.plot), height = 300)
@@ -41,7 +41,11 @@ server <- function(input, output) {
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
-        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
+        group_by(year.epiweek.admit) %>%
+        filter(calendar.year.admit == max(calendar.year.admit)) %>%
+        filter(calendar.month.admit == max(calendar.month.admit)) %>%
+        ungroup() %>%
         group_by(year.epiweek.admit, cum.count, outcome) %>%
         summarise(cum.count = sum(cum.count))
     })
@@ -55,7 +59,7 @@ server <- function(input, output) {
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
-        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
         group_by(nice.symptom) %>%
         summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
         mutate(p.present = times.present/times.recorded) %>%
@@ -75,7 +79,7 @@ server <- function(input, output) {
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
-        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
         group_by(nice.comorbidity) %>%
         summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
         mutate(p.present = times.present/times.recorded) %>%
@@ -93,11 +97,11 @@ server <- function(input, output) {
     
     treatment.prevalence.reactive <- reactive({
 
-      fd <- treatment.prevalence.input %>%
+      fd <- treatment.use.proportion.input %>%
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
-        filter(lower.age.bound >= input$agegp5[1] & upper.age.bound <= input$agegp5[2]) %>%
+        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
         group_by(nice.treatment) %>%
         summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
         mutate(p.present = times.present/times.recorded) %>%

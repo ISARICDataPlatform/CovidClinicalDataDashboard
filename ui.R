@@ -68,9 +68,8 @@ dashboardPage(skin = "black",
                     choices = list("Male" = "Male", "Female" = "Female", "Unknown" = NA),
                     selected = c("Male","Female",NA)
                   ),
-                  sliderInput(inputId = "agegp5", label = "Age group",
-                              min = 0, max = 90, step = 5, value = c(0,120), dragRange = T),
-                  
+                  sliderInput(inputId = "agegp10", label = "Age group",
+                              min = 0, max = 90, step = 10, value = c(0,120), dragRange = T),
                   
                   pickerInput(
                     inputId = "country",
