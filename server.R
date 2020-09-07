@@ -18,7 +18,15 @@ confidentiality.check <- function(data, fn, min.rows = 5, ...){
   }
 }
 
-
+my.mapper <- function(y,m){
+  if(any(is.na(c(y,m)))){
+    NA
+  } else if(m<10){
+    glue("0{m}-{y}")
+  } else {
+    glue("{m}-{y}")
+  }
+}
 
 server <- function(input, output) {
 
@@ -35,24 +43,19 @@ server <- function(input, output) {
       })
       
       fd <- age.pyramid.input %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
         filter(icu_ever %in% input$icu_ever) %>%
-        mutate(monthyear = map2_chr(calendar.year.admit, calendar.month.admit, function(y,m){
-          if(any(is.na(c(y,m)))){
-            NA
-          } else if(m<10){
-            glue("0{m}-{y}")
-          } else {
-            glue("{m}-{y}")
-          }
-        })) %>%
+        mutate(monthyear = map2_chr(calendar.year.admit, calendar.month.admit, my.mapper)) %>%
         filter(monthyear %in% selected.my) %>%
         select(-monthyear) %>%
         filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
         group_by(agegp10, sex, outcome) %>%
-        summarise(count = sum(count))
+        summarise(count = sum(count)) %>%
+        as_tibble()
     })
     renderPlot(confidentiality.check(age.pyramid.reactive(), age.pyramid.plot), height = 300)
   }
@@ -70,26 +73,21 @@ server <- function(input, output) {
       
       
       fd <- outcome.admission.date.input %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
         filter(country %in% input$country) %>%
         filter(outcome %in% input$outcome) %>%
         filter(sex %in% input$sex) %>%
         filter(icu_ever %in% input$icu_ever) %>%
         filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
-        mutate(monthyear = map2_chr(calendar.year.admit, calendar.month.admit, function(y,m){
-          if(any(is.na(c(y,m)))){
-            NA
-          } else if(m<10){
-            glue("0{m}-{y}")
-          } else {
-            glue("{m}-{y}")
-          }
-        })) %>%
+        mutate(monthyear = map2_chr(calendar.year.admit, calendar.month.admit, my.mapper)) %>%
         filter(monthyear %in% selected.my) %>%
         select(-monthyear) %>%
         group_by(year.epiweek.admit) %>%
         filter(calendar.year.admit == max(calendar.year.admit)) %>%
         filter(calendar.month.admit == max(calendar.month.admit)) %>%
         ungroup() %>%
+        as.tibble() %>%
         complete(sex, 
                  nesting(agegp10, lower.age.bound, upper.age.bound), 
                  country, 
@@ -97,11 +95,18 @@ server <- function(input, output) {
                  outcome, 
                  icu_ever, 
                  fill = list(count = 0)) %>%
+        arrange(year.epiweek.admit) %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
         group_by(sex, outcome, country, agegp10, lower.age.bound, upper.age.bound, icu_ever) %>%
         mutate(cum.count = cumsum(count)) %>% 
+        ungroup() %>%
         filter(cum.count > 0) %>%
-        group_by(year.epiweek.admit, cum.count, outcome) %>%
-        summarise(cum.count = sum(cum.count))
+        mutate(temp.cum.count = cum.count) %>%
+        select(-cum.count) %>%
+        group_by(year.epiweek.admit, outcome) %>%
+        summarise(cum.count = sum(temp.cum.count)) %>%
+        as_tibble()
     })
     renderPlot(confidentiality.check(outcomes.by.admission.date.reactive(), outcomes.by.admission.date.plot), height = 300)
   }
