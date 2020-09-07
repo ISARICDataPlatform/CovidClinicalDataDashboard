@@ -110,9 +110,15 @@ comorbidity.prevalence.plot <- function(aggregated.tbl, ...){
 }
 
 
-treatment.prevalence.plot <- function(aggregated.tbl, ...){
+treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
   aggregated.tbl <- aggregated.tbl %>%
     mutate(label = glue("{times.present}/{times.recorded}")) 
+  
+  if(icu){
+    colours <- c("darkorchid2", "darkorchid4")
+  } else {
+    colours <- c("chartreuse2", "chartreuse4")
+  }
   
   plt <- ggplot(aggregated.tbl) +
     geom_col(aes(x = nice.treatment, y = proportion, fill = affected)) +
@@ -122,9 +128,11 @@ treatment.prevalence.plot <- function(aggregated.tbl, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
-    scale_fill_manual(values = c("chartreuse2", "chartreuse4"), name = "Treatment\received", labels = c("No", "Yes")) +
+    scale_fill_manual(values = colours, name = "Treatment\nreceived", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
   
   plt
   
 }
+
+
