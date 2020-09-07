@@ -11,6 +11,7 @@ library(grid)
 library(lubridate)
 library(glue)
 library(data.table)
+library(tidyfast)
 
 
 epiweek.year <- function(date){
