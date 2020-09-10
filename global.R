@@ -1,6 +1,9 @@
 library(devtools)
 
-# install_github("ISARICDataPlatform/CovidClinicalDataProcessor", force = TRUE)
+# if this keeps failing, try turning off caching in shinyapps (the web interface). And then deploy _twice_. The first time the browser will open with an error message, b
+# Then comment out the following line for the second deployment. It's mad, but there you go.
+
+devtools::install_github("ISARICDataPlatform/CovidClinicalDataProcessor")
 library(CovidClinicalDataProcessor)
 library(shinydashboard)
 library(shinyWidgets)
@@ -76,7 +79,7 @@ epiweek.order <- glue("{c(rep(2019,4), rep(2020,max(example.data$epiweek.admit[w
 #   group_by(sex, outcome, country, year.epiweek.admit, agegp10, lower.age.bound, upper.age.bound) %>%
 #   summarise(count = n()) %>%
 #   as_tibble()
-# 
+#
 # write_csv(age.pyramid.input, "age_pyramid_input.csv")
 
 age.pyramid.input <- fread("age_pyramid_input.csv")  %>%
@@ -98,7 +101,7 @@ age.pyramid.input <- fread("age_pyramid_input.csv")  %>%
 #   group_by(sex, outcome, country, agegp10) %>%
 #   mutate(cum.count = cumsum(count)) %>%
 #   left_join(age.bound.lookup, by="agegp10")
-# 
+#
 # write_csv(outcome.admission.date.input, "outcome_admission_date_input.csv")
 outcome.admission.date.input <- fread("outcome_admission_date_input.csv") %>%
   lazy_dt(immutable = FALSE) %>%
@@ -112,7 +115,7 @@ outcome.admission.date.input <- fread("outcome_admission_date_input.csv") %>%
 #   pivot_longer(any_of(starts_with("symptoms")), names_to = "symptom", values_to = "present") %>%
 #   group_by(sex, agegp10, country,year.epiweek.admit,outcome, symptom, lower.age.bound, upper.age.bound) %>%
 #   summarise(times.present = sum(present, na.rm = TRUE), times.recorded = sum(!is.na(present)))
-# 
+#
 # nice.symptom.mapper <- tibble(symptom = unique(symptom.prevalence.input$symptom)) %>%
 #   mutate(nice.symptom = map_chr(symptom, function(st){
 #     temp <- substr(st, 10, nchar(st)) %>% str_replace_all("_", " ")
@@ -124,11 +127,11 @@ outcome.admission.date.input <- fread("outcome_admission_date_input.csv") %>%
 #                                   nice.symptom=="Cough bloody sputum haemoptysis" ~ "Cough with bloody sputum/haemoptysis",
 #                                   nice.symptom=="Fatigue malaise" ~ "Fatigue/malaise",
 #                                   TRUE ~ nice.symptom))
-# 
+#
 # symptom.prevalence.input <- symptom.prevalence.input %>%
 #   left_join(nice.symptom.mapper) %>%
 #   left_join(age.bound.lookup, by="agegp10")
-# 
+#
 # write_csv(symptom.prevalence.input, "symptom_prevalence_input.csv")
 symptom.prevalence.input <- fread("symptom_prevalence_input.csv")
 
@@ -147,7 +150,7 @@ symptom.prevalence.input <- symptom.prevalence.input %>%
 #   pivot_longer(any_of(starts_with("comorb")), names_to = "comorbidity", values_to = "present") %>%
 #   group_by(sex, agegp10, country,year.epiweek.admit,outcome, comorbidity, lower.age.bound, upper.age.bound) %>%
 #   summarise(times.present = sum(present, na.rm = TRUE), times.recorded = sum(!is.na(present)))
-# 
+#
 # nice.comorbidity.mapper <- tibble(comorbidity = unique(comorbidity.prevalence.input$comorbidity)) %>%
 #   mutate(nice.comorbidity = map_chr(comorbidity, function(st){
 #     temp <- substr(st, 10, nchar(st)) %>% str_replace_all("_", " ")
@@ -156,12 +159,12 @@ symptom.prevalence.input <- symptom.prevalence.input %>%
 #   })) %>%
 #   mutate(nice.comorbidity = case_when(comorbidity=="Aids hiv" ~ "HIV/AIDS",
 #                                   TRUE ~ nice.comorbidity))
-# 
+#
 # comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
 #   left_join(nice.comorbidity.mapper) %>%
 #   left_join(age.bound.lookup, by="agegp10")
-# 
-# 
+#
+#
 # write_csv(comorbidity.prevalence.input, "comorbidity_prevalence_input.csv")
 
 comorbidity.prevalence.input <- fread("comorbidity_prevalence_input.csv")
@@ -182,18 +185,18 @@ comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
 #   pivot_longer(any_of(starts_with("treat")), names_to = "treatment", values_to = "present") %>%
 #   group_by(sex, agegp10, country,year.epiweek.admit,outcome, treatment, lower.age.bound, upper.age.bound) %>%
 #   summarise(times.present = sum(present, na.rm = TRUE), times.recorded = sum(!is.na(present)))
-# 
+#
 # nice.treatment.mapper <- tibble(treatment = unique(treatment.prevalence.input$treatment)) %>%
 #   mutate(nice.treatment = map_chr(treatment, function(st){
 #     temp <- substr(st, 7, nchar(st)) %>% str_replace_all("_", " ")
 #     temp2 <- glue("{toupper(substr(temp, 1, 1))}{substr(temp, 2, nchar(temp))}")
 #     temp2
 #   }))
-# 
+#
 # treatment.prevalence.input <- treatment.prevalence.input %>%
 #   left_join(nice.treatment.mapper) %>%
 #   left_join(age.bound.lookup, by="agegp10")
-# 
+#
 # write_csv(treatment.prevalence.input, "treatment_prevalence_input.csv")
 treatment.use.proportion.input <- fread("treatment_use_proportion_input.csv")
 
