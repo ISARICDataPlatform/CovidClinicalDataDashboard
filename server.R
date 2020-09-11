@@ -19,30 +19,43 @@ confidentiality.check <- function(data, fn, min.rows = 5, ...){
 }
 
 
+slider.filters <- function(tbl, input){
+
+  formatted.dates <- parse_date_time(input$admission_date, orders = "my")
+  selected.months <- month(formatted.dates)
+  selected.years <- year(formatted.dates)
+  selected.my <- glue("{selected.months}-{selected.years}")
+  
+
+  selected.my <- map_chr(selected.my, function(my){
+    ifelse(nchar(my) == 6, glue("0{my}"),my)
+  })
+  
+  out <- tbl %>% 
+    as.data.table() %>%
+    lazy_dt(immutable = FALSE) %>%
+    filter(country %in% input$country) %>%
+    filter(outcome %in% input$outcome) %>%
+    filter(sex %in% input$sex) %>%
+    filter(icu_ever %in% input$icu_ever) %>%
+    filter(monthyear %in% selected.my) %>%
+    filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
+    as.data.table() %>%
+    lazy_dt(immutable = FALSE)
+  
+  return(out)
+}
+
 server <- function(input, output) {
 
   output$agePyramid <- {
     
     age.pyramid.reactive <- reactive({
       
-      formatted.dates <- parse_date_time(input$admission_date, orders = "my")
-      selected.months <- month(formatted.dates)
-      selected.years <- year(formatted.dates)
-      selected.my <- glue("{selected.months}-{selected.years}")
-      selected.my <- map_chr(selected.my, function(my){
-        ifelse(nchar(my) == 6, glue("0{my}"),my)
-      })
-      
       fd <- age.pyramid.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        filter(country %in% input$country) %>%
-        filter(outcome %in% input$outcome) %>%
-        filter(sex %in% input$sex) %>%
-        filter(icu_ever %in% input$icu_ever) %>%
-        filter(monthyear %in% selected.my) %>%
-        select(-monthyear) %>%
-        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
+        slider.filters(input) %>%
         group_by(agegp10, sex, outcome) %>%
         summarise(count = sum(count)) %>%
         as_tibble()
@@ -53,25 +66,11 @@ server <- function(input, output) {
   output$outcomesByAdmissionDate <- {
  
     outcomes.by.admission.date.reactive <- reactive({
-      formatted.dates <- parse_date_time(input$admission_date, orders = "my")
-      selected.months <- month(formatted.dates)
-      selected.years <- year(formatted.dates)
-      selected.my <- glue("{selected.months}-{selected.years}")
-      selected.my <- map_chr(selected.my, function(my){
-        ifelse(nchar(my) == 6, glue("0{my}"),my)
-      })
-      
       
       fd <- outcome.admission.date.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        filter(country %in% input$country) %>%
-        filter(outcome %in% input$outcome) %>%
-        filter(sex %in% input$sex) %>%
-        filter(icu_ever %in% input$icu_ever) %>%
-        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
-        filter(monthyear %in% selected.my) %>%
-        select(-monthyear) %>%
+        slider.filters(input) %>%
         group_by(year.epiweek.admit) %>%
         filter(calendar.year.admit == max(calendar.year.admit)) %>%
         filter(calendar.month.admit == max(calendar.month.admit)) %>%
@@ -104,29 +103,14 @@ server <- function(input, output) {
     
     symptom.prevalence.reactive <- reactive({
       
-      formatted.dates <- parse_date_time(input$admission_date, orders = "my")
-      selected.months <- month(formatted.dates)
-      selected.years <- year(formatted.dates)
-      selected.my <- glue("{selected.months}-{selected.years}")
-      selected.my <- map_chr(selected.my, function(my){
-        ifelse(nchar(my) == 6, glue("0{my}"),my)
-      })
-      
       fd <- symptom.prevalence.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        filter(country %in% input$country & 
-                 outcome %in% input$outcome & 
-                 sex %in% input$sex & 
-                 icu_ever %in% input$icu_ever &
-                 lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2] &
-                 monthyear %in% selected.my) %>%
-        select(-monthyear) %>%
+        slider.filters(input) %>%
         group_by(nice.symptom) %>%
         summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>% 
         mutate(p.present = times.present/times.recorded) %>%
         mutate(p.absent = 1-p.present) %>%
-        as_tibble() %>%
         as.data.table() %>%
         dt_pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
         lazy_dt(immutable = FALSE) %>%
@@ -142,30 +126,21 @@ server <- function(input, output) {
   output$comorbidityPrevalence <- {
     
     comorbidity.prevalence.reactive <- reactive({
-      formatted.dates <- parse_date_time(input$admission_date, orders = "my")
-      selected.months <- month(formatted.dates)
-      selected.years <- year(formatted.dates)
-      selected.my <- glue("{selected.months}-{selected.years}")
-      selected.my <- map_chr(selected.my, function(my){
-        ifelse(nchar(my) == 6, glue("0{my}"),my)
-      })
-      
-      
+
       fd <- comorbidity.prevalence.input %>%
-        filter(country %in% input$country) %>%
-        filter(outcome %in% input$outcome) %>%
-        filter(sex %in% input$sex) %>%
-        filter(icu_ever %in% input$icu_ever) %>%
-        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
-        filter(monthyear %in% selected.my) %>%
-        select(-monthyear) %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
         group_by(nice.comorbidity) %>%
         summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
         mutate(p.present = times.present/times.recorded) %>%
         mutate(p.absent = 1-p.present) %>%
-        pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
-        mutate(affected = map_lgl(affected, function(x) x == "p.present")) %>%
+        as.data.table() %>%
+        dt_pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
+        lazy_dt(immutable = FALSE) %>%
+        mutate(affected = affected == "p.present") %>%
         filter(!is.nan(proportion)) %>%
+        as_tibble() %>%
         mutate(label = glue("{times.present} / {times.recorded}"))
     })
     renderPlot(confidentiality.check(comorbidity.prevalence.reactive(), comorbidity.prevalence.plot), height = 500)
@@ -176,30 +151,18 @@ server <- function(input, output) {
     
     treatment.prevalence.reactive <- reactive({
       
-      formatted.dates <- parse_date_time(input$admission_date, orders = "my")
-      selected.months <- month(formatted.dates)
-      selected.years <- year(formatted.dates)
-      selected.my <- glue("{selected.months}-{selected.years}")
-      selected.my <- map_chr(selected.my, function(my){
-        ifelse(nchar(my) == 6, glue("0{my}"),my)
-      })
-      
-
       fd <- treatment.use.proportion.input %>%
-        filter(country %in% input$country) %>%
-        filter(outcome %in% input$outcome) %>%
-        filter(sex %in% input$sex) %>%
-        filter(icu_ever %in% input$icu_ever) %>%
-        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
-        filter(monthyear %in% selected.my) %>%
-        select(-monthyear) %>%
+        slider.filters(input) %>%
         group_by(nice.treatment) %>%
         summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
         mutate(p.present = times.present/times.recorded) %>%
         mutate(p.absent = 1-p.present) %>%
-        pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
-        mutate(affected = map_lgl(affected, function(x) x == "p.present")) %>%
+        as.data.table() %>%
+        dt_pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
+        lazy_dt(immutable = FALSE) %>%
+        mutate(affected = affected == "p.present") %>%
         filter(!is.nan(proportion)) %>%
+        as_tibble() %>%
         mutate(label = glue("{times.present} / {times.recorded}"))
     })
     renderPlot(confidentiality.check(treatment.prevalence.reactive(), treatment.prevalence.plot, icu = FALSE), height = 500)
@@ -209,30 +172,18 @@ server <- function(input, output) {
     
     icu.treatment.prevalence.reactive <- reactive({
       
-      formatted.dates <- parse_date_time(input$admission_date, orders = "my")
-      selected.months <- month(formatted.dates)
-      selected.years <- year(formatted.dates)
-      selected.my <- glue("{selected.months}-{selected.years}")
-      selected.my <- map_chr(selected.my, function(my){
-        ifelse(nchar(my) == 6, glue("0{my}"),my)
-      })
-      
-      
       fd <- icu.treatment.use.proportion.input %>%
-        filter(country %in% input$country) %>%
-        filter(outcome %in% input$outcome) %>%
-        filter(sex %in% input$sex) %>%
-        filter(icu_ever %in% input$icu_ever) %>%
-        filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
-        filter(monthyear %in% selected.my) %>%
-        select(-monthyear) %>%
+        slider.filters(input) %>%
         group_by(nice.treatment) %>%
         summarise(times.present = sum(times.present), times.recorded = sum(times.recorded)) %>%
         mutate(p.present = times.present/times.recorded) %>%
         mutate(p.absent = 1-p.present) %>%
-        pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
-        mutate(affected = map_lgl(affected, function(x) x == "p.present")) %>%
+        as.data.table() %>%
+        dt_pivot_longer(c(p.present, p.absent), names_to = "affected", values_to = "proportion") %>%
+        lazy_dt(immutable = FALSE) %>%
+        mutate(affected = affected == "p.present") %>%
         filter(!is.nan(proportion)) %>%
+        as_tibble() %>%
         mutate(label = glue("{times.present} / {times.recorded}"))
     })
     renderPlot(confidentiality.check(icu.treatment.prevalence.reactive(), treatment.prevalence.plot, icu = TRUE), height = 500)
