@@ -40,23 +40,6 @@ outcome.remap <- function(oc, od){
 }
 
 source("plot_functions.R")
-example.data <- fread("example_data.csv") %>%
-  lazy_dt(immutable = FALSE) %>%
-  mutate(outcome.3 = map2_chr(outcome, date_outcome, outcome.remap)) %>%
-  select(-outcome) %>%
-  rename(outcome = outcome.3) %>%
-  mutate(agegp10 = cut(age, right = FALSE, breaks = c(0, 5, 10, 15, 20, 25, 30, 35, 40, 45, 50, 55, 60, 65, 70, 75, 80, 85, 90, 120))) %>%
-  mutate(year.admit = map_dbl(date_admit, epiweek.year)) %>%
-  mutate(epiweek.admit = epiweek(date_admit)) %>%
-  mutate(year.epiweek.admit = glue("{year.admit}-{epiweek.admit}", .envir = .SD)) %>%
-  mutate(year.epiweek.admit = replace(year.epiweek.admit, year.epiweek.admit == "NA-NA", NA)) %>%
-  mutate(lower.age.bound  = map_dbl(agegp10, extract.age.boundaries, TRUE)) %>%
-  mutate(upper.age.bound  = map_dbl(agegp10, extract.age.boundaries, FALSE)) %>%
-  mutate(agegp10t = fct_relabel(agegp10, prettify.age.labels)) %>%
-  select(-agegp10) %>%
-  rename(agegp10 = agegp10t) %>%
-  as_tibble()
-
 
 age.bound.lookup <- tibble(agegp10 = cut(1:100, right = FALSE, breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 120)) %>% unique()) %>%
   mutate(lower.age.bound  = map_dbl(agegp10, extract.age.boundaries, TRUE)) %>%
@@ -66,9 +49,6 @@ age.bound.lookup <- tibble(agegp10 = cut(1:100, right = FALSE, breaks = c(0, 10,
   rename(agegp10 = agegp10t)
 
 age.levels <- age.bound.lookup %>% pull(agegp10) %>% levels
-
-
-epiweek.order <- glue("{c(rep(2019,4), rep(2020,max(example.data$epiweek.admit[which(example.data$year.admit == 2020)], na.rm = T)))}-{c(49:52, 1:max(example.data$epiweek.admit[which(example.data$year.admit == 2020)], na.rm = T))}")
 
 # example.data <- example.data %>%
 #   mutate(year.epiweek.admit = factor(year.epiweek.admit, levels = epiweek.order))
@@ -82,10 +62,8 @@ epiweek.order <- glue("{c(rep(2019,4), rep(2020,max(example.data$epiweek.admit[w
 #
 # write_csv(age.pyramid.input, "age_pyramid_input.csv")
 
-age.pyramid.input <- fread("age_pyramid_input.csv")  %>%
-  lazy_dt(immutable = FALSE) %>%
-  mutate(agegp10 = factor(agegp10, levels = age.levels)) %>%
-  as_tibble()
+load("age_pyramid_input.rda")  
+     
 
 
 
@@ -103,11 +81,7 @@ age.pyramid.input <- fread("age_pyramid_input.csv")  %>%
 #   left_join(age.bound.lookup, by="agegp10")
 #
 # write_csv(outcome.admission.date.input, "outcome_admission_date_input.csv")
-outcome.admission.date.input <- fread("outcome_admission_date_input.csv") %>%
-  lazy_dt(immutable = FALSE) %>%
-  mutate(year.epiweek.admit = factor(year.epiweek.admit, levels = epiweek.order)) %>%
-  mutate(agegp10 = factor(agegp10, levels = age.levels)) %>%
-  as_tibble()
+load("outcome_admission_date_input.rda")
 
 # symptom.prevalence.input <- example.data %>%
 #   select(sex, agegp10, country, year.epiweek.admit, outcome, any_of(starts_with("symptoms")), lower.age.bound, upper.age.bound) %>%
@@ -133,15 +107,12 @@ outcome.admission.date.input <- fread("outcome_admission_date_input.csv") %>%
 #   left_join(age.bound.lookup, by="agegp10")
 #
 # write_csv(symptom.prevalence.input, "symptom_prevalence_input.csv")
-symptom.prevalence.input <- fread("symptom_prevalence_input.csv")
+load("symptom_prevalence_input.rda")
 
 rev.symptom.order <- symptom.prevalence.input %>% pull(nice.symptom) %>% unique() %>% sort(decreasing = TRUE)
 
 symptom.prevalence.input <- symptom.prevalence.input %>%
-  lazy_dt(immutable = FALSE) %>%
-  mutate(nice.symptom = factor(nice.symptom, levels = rev.symptom.order)) %>%
-  mutate(agegp10 = factor(agegp10, levels = age.levels)) %>%
-  as_tibble()
+  mutate(nice.symptom = factor(nice.symptom, levels = rev.symptom.order)) 
 
 
 
@@ -167,16 +138,13 @@ symptom.prevalence.input <- symptom.prevalence.input %>%
 #
 # write_csv(comorbidity.prevalence.input, "comorbidity_prevalence_input.csv")
 
-comorbidity.prevalence.input <- fread("comorbidity_prevalence_input.csv")
+load("comorbidity_prevalence_input.rda")
 
 
 rev.comorbidity.order <- comorbidity.prevalence.input %>% pull(nice.comorbidity) %>% unique() %>% sort(decreasing = TRUE)
 
 comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
-  lazy_dt(immutable = FALSE) %>%
-  mutate(nice.comorbidity = factor(nice.comorbidity, levels = rev.comorbidity.order)) %>%
-  mutate(agegp10 = factor(agegp10, levels = age.levels)) %>%
-  as_tibble()
+  mutate(nice.comorbidity = factor(nice.comorbidity, levels = rev.comorbidity.order))
 
 
 
@@ -198,31 +166,25 @@ comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
 #   left_join(age.bound.lookup, by="agegp10")
 #
 # write_csv(treatment.prevalence.input, "treatment_prevalence_input.csv")
-treatment.use.proportion.input <- fread("treatment_use_proportion_input.csv")
+load("treatment_use_proportion_input.rda")
 
 
 rev.treatment.order <- treatment.use.proportion.input %>% pull(nice.treatment) %>% unique() %>% sort(decreasing = TRUE)
 
 treatment.use.proportion.input <- treatment.use.proportion.input %>%
-  lazy_dt(immutable = FALSE) %>%
-  mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order)) %>%
-  mutate(agegp10 = factor(agegp10, levels = age.levels)) %>%
-  as_tibble()
+  mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order))
 
 countries <- age.pyramid.input %>% pull(country) %>% unique %>% sort
 
 
 
-icu.treatment.use.proportion.input <- fread("icu_treatment_use_proportion_input.csv")
+load("icu_treatment_use_proportion_input.rda")
 
 
 rev.treatment.order <- icu.treatment.use.proportion.input %>% pull(nice.treatment) %>% unique() %>% sort(decreasing = TRUE)
 
 icu.treatment.use.proportion.input <- icu.treatment.use.proportion.input %>%
-  lazy_dt(immutable = FALSE) %>%
-  mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order)) %>%
-  mutate(agegp10 = factor(agegp10, levels = age.levels)) %>%
-  as_tibble()
+  mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order))
 
 countries <- age.pyramid.input %>% pull(country) %>% unique %>% sort
 
