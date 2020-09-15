@@ -51,10 +51,10 @@ dashboardPage(skin = "black",
                  .skin-black .main-header .navbar .nav > li > a:hover { background-color: #FFFFEA;}
                  .skin-black .main-header .navbar .sidebar-toggle:hover {color: #999999; background: #f7b538;}
                  .skin-black .main-sidebar {color: #df0442; border-left-color: #df0442; background-color: #4f6272; font-family: Roboto Condensed}
-                 .skin-black .main-sidebar .sidebar .sidebar-menu .active > a {color: #9e145f; border-left-color: #9e145f; background-color: #009cad;}
+                 .skin-black .main-sidebar .sidebar .sidebar-menu .active > a {color: #ffffff; border-left-color: #9e145f; background-color: #009cad;}
                  .skin-black .main-sidebar .sidebar .sidebar-menu li:hover  > a {color: #df0442; border-left-color: #df0442; background-color: #f7b538;}
                  .irs-bar, .irs-bar-edge, .irs-single, .irs-to, .irs-from, .irs-grid-pol {background: #df0442; border-color: #df0442;}
-                 .content-wrapper, .right-side { background-color: #FFFFEA;}
+                 .content-wrapper, .right-side { background-color: #FFFFFF;}
                  .box-header h3.box-title {font-family: Roboto},
                  .box {font-family: Roboto}'
                   ))),
