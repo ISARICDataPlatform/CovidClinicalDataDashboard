@@ -41,14 +41,14 @@ outcome.remap <- function(oc, od){
 
 source("plot_functions.R")
 
-age.bound.lookup <- tibble(agegp10 = cut(1:100, right = FALSE, breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 120)) %>% unique()) %>%
-  mutate(lower.age.bound  = map_dbl(agegp10, extract.age.boundaries, TRUE)) %>%
-  mutate(upper.age.bound  = map_dbl(agegp10, extract.age.boundaries, FALSE)) %>%
-  mutate(agegp10t = fct_relabel(agegp10, prettify.age.labels)) %>%
-  select(lower.age.bound, upper.age.bound, agegp10t) %>%
-  rename(agegp10 = agegp10t)
+age.bound.lookup <- tibble(slider_agegp10 = cut(1:100, right = FALSE, breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 120)) %>% unique()) %>%
+  mutate(lower.age.bound  = map_dbl(slider_agegp10, extract.age.boundaries, TRUE)) %>%
+  mutate(upper.age.bound  = map_dbl(slider_agegp10, extract.age.boundaries, FALSE)) %>%
+  mutate(slider_agegp10t = fct_relabel(slider_agegp10, prettify.age.labels)) %>%
+  select(lower.age.bound, upper.age.bound, slider_agegp10t) %>%
+  rename(slider_agegp10 = slider_agegp10t)
 
-age.levels <- age.bound.lookup %>% pull(agegp10) %>% levels
+age.levels <- age.bound.lookup %>% pull(slider_agegp10) %>% levels
 
 # example.data <- example.data %>%
 #   mutate(year.epiweek.admit = factor(year.epiweek.admit, levels = epiweek.order))
@@ -174,7 +174,7 @@ rev.treatment.order <- treatment.use.proportion.input %>% pull(nice.treatment) %
 treatment.use.proportion.input <- treatment.use.proportion.input %>%
   mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order))
 
-countries <- age.pyramid.input %>% pull(country) %>% unique %>% sort
+countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
 
 
 
@@ -186,7 +186,7 @@ rev.treatment.order <- icu.treatment.use.proportion.input %>% pull(nice.treatmen
 icu.treatment.use.proportion.input <- icu.treatment.use.proportion.input %>%
   mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order))
 
-countries <- age.pyramid.input %>% pull(country) %>% unique %>% sort
+countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
 
 current.year <- year(today())
 current.month <- month(today())
