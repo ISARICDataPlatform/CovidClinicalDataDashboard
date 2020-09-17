@@ -54,7 +54,7 @@ age.pyramid.plot <- function(aggregated.tbl, ...){
 outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
   
   peak.cases <- aggregated.tbl %>% group_by(year.epiweek.admit) %>% summarise(count = sum(cum.count)) %>% pull(count) %>% max()
-
+  
   plt <- ggplot(aggregated.tbl) +
     geom_col(aes(x = year.epiweek.admit, y=cum.count, fill = slider_outcome), width = 0.95) +
     theme_bw() +
@@ -135,4 +135,33 @@ treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
   
 }
 
+upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
+  
+  colour = case_when(which.plot == "comorbidity" ~ "indianred3",
+                     which.plot == "symptom" ~ "deepskyblue3")
+  
+  unspun.table <- aggregated.tbl %>% nest(data = c(slider_sex,
+                                                   slider_country,
+                                                   slider_icu_ever,
+                                                   slider_outcome,
+                                                   slider_monthyear,
+                                                   slider_agegp10,
+                                                   conditions.present,
+                                                   lower.age.bound,
+                                                   upper.age.bound)) %>%
+    mutate(repdata = map2(count, data, function(c,d){
+      d %>% slice(rep(1:nrow(d), c))
+    })) %>%
+    select(-data) %>%
+    unnest(repdata) %>%
+    select(-count)
+  
+  
+  ggplot(unspun.table, aes(x = conditions.present)) +
+    geom_bar(aes(y=..count../sum(..count..)), fill = colour) +
+    theme_bw() +
+    xlab("Conditions present at admission") +
+    ylab("Proportion of patients") +
+    scale_x_upset()
+}
 

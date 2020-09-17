@@ -120,14 +120,18 @@ dashboardPage(skin = "black",
                           fluidRow(
                             box(plotOutput("symptomPrevalence", height = "500px"),
                                 "Bars are labelled with the fraction of patients presenting with the symptom to the number of patients with data on the symptom recorded",
-                                width = 6, height = 600, solidHeader = T, title = 'Prevalance of symptoms at admission')
+                                width = 6, height = 600, solidHeader = T, title = 'Prevalance of symptoms at admission'),
+                            box(plotOutput("symptomUpset", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common symptoms upon admission')
                           )
                   ),
                   tabItem(tabName = "comorbidities",
                           fluidRow(
                             box(plotOutput("comorbidityPrevalence", height = "500px"),
                                 "Bars are labelled with the fraction of patients presenting with the comorbidity to the number of patients with data on the comorbidity recorded",
-                                width = 6, height = 600, solidHeader = T, title = 'Prevalance of comorbidities')
+                                width = 6, height = 600, solidHeader = T, title = 'Prevalance of comorbidities'),
+                            box(plotOutput("comorbidityUpset", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common comorbidities')
                           )
                   ),
                   tabItem(tabName = "treatment",
