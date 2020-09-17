@@ -194,6 +194,21 @@ server <- function(input, output) {
     renderPlot(confidentiality.check(treatment.prevalence.reactive(), treatment.prevalence.plot, icu = FALSE), height = 500)
   }
   
+  
+  output$treatmentUpset <- {
+    
+    treatment.upset.reactive <- reactive({
+      
+      fd <- treatment.upset.input %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(treatment.upset.reactive(), upset.plot, which.plot = "treatment"), height = 500)
+  }
+  
+  
   output$icuTreatmentPrevalence <- {
     
     icu.treatment.prevalence.reactive <- reactive({
@@ -213,6 +228,19 @@ server <- function(input, output) {
         mutate(label = glue("{times.present} / {times.recorded}"))
     })
     renderPlot(confidentiality.check(icu.treatment.prevalence.reactive(), treatment.prevalence.plot, icu = TRUE), height = 500)
+  }
+  
+  output$icuTreatmentUpset <- {
+    
+    icu.treatment.upset.reactive <- reactive({
+      
+      fd <- icu.treatment.upset.input %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(icu.treatment.upset.reactive(), upset.plot, which.plot = "icu.treatment"), height = 500)
   }
   
 }

@@ -138,7 +138,9 @@ treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
 upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
   
   colour = case_when(which.plot == "comorbidity" ~ "indianred3",
-                     which.plot == "symptom" ~ "deepskyblue3")
+                     which.plot == "symptom" ~ "deepskyblue3",
+                     which.plot == "treatment" ~ "chartreuse3",
+                     which.plot == "icu.treatment" ~ "darkorchid4")
   
   unspun.table <- aggregated.tbl %>% nest(data = c(slider_sex,
                                                    slider_country,
@@ -146,7 +148,7 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
                                                    slider_outcome,
                                                    slider_monthyear,
                                                    slider_agegp10,
-                                                   conditions.present,
+                                                   which.present,
                                                    lower.age.bound,
                                                    upper.age.bound)) %>%
     mutate(repdata = map2(count, data, function(c,d){
@@ -157,7 +159,7 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
     select(-count)
   
   
-  ggplot(unspun.table, aes(x = conditions.present)) +
+  ggplot(unspun.table, aes(x = which.present)) +
     geom_bar(aes(y=..count../sum(..count..)), fill = colour) +
     theme_bw() +
     xlab("Conditions present at admission") +
