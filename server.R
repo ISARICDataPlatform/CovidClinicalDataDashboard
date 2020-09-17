@@ -34,11 +34,11 @@ slider.filters <- function(tbl, input){
   out <- tbl %>% 
     as.data.table() %>%
     lazy_dt(immutable = FALSE) %>%
-    filter(country %in% input$country) %>%
-    filter(outcome %in% input$outcome) %>%
-    filter(sex %in% input$sex) %>%
-    filter(icu_ever %in% input$icu_ever) %>%
-    filter(monthyear %in% selected.my) %>%
+    filter(slider_country %in% input$country) %>%
+    filter(slider_outcome %in% input$outcome) %>%
+    filter(slider_sex %in% input$sex) %>%
+    filter(slider_icu_ever %in% input$icu_ever) %>%
+    filter(slider_monthyear %in% selected.my) %>%
     filter(lower.age.bound >= input$agegp10[1] & upper.age.bound <= input$agegp10[2]) %>%
     as.data.table() %>%
     lazy_dt(immutable = FALSE)
@@ -56,7 +56,7 @@ server <- function(input, output) {
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
         slider.filters(input) %>%
-        group_by(agegp10, sex, outcome) %>%
+        group_by(slider_agegp10, slider_sex, slider_outcome) %>%
         summarise(count = sum(count)) %>%
         as_tibble()
     })
@@ -70,29 +70,29 @@ server <- function(input, output) {
       fd <- outcome.admission.date.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
+        # slider.filters(input) %>%
         group_by(year.epiweek.admit) %>%
         filter(calendar.year.admit == max(calendar.year.admit)) %>%
         filter(calendar.month.admit == max(calendar.month.admit)) %>%
         ungroup() %>%
         as.tibble() %>%
-        complete(sex, 
-                 nesting(agegp10, lower.age.bound, upper.age.bound), 
-                 country, 
+        complete(slider_sex, 
+                 nesting(slider_agegp10, lower.age.bound, upper.age.bound), 
+                 slider_country, 
                  nesting(calendar.year.admit, calendar.month.admit, year.epiweek.admit), 
-                 outcome, 
-                 icu_ever, 
+                 slider_outcome, 
+                 slider_icu_ever, 
                  fill = list(count = 0)) %>%
         arrange(year.epiweek.admit) %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        group_by(sex, outcome, country, agegp10, lower.age.bound, upper.age.bound, icu_ever) %>%
+        group_by(slider_sex, slider_outcome, slider_country, slider_agegp10, lower.age.bound, upper.age.bound, slider_icu_ever) %>%
         mutate(cum.count = cumsum(count)) %>% 
         ungroup() %>%
         filter(cum.count > 0) %>%
         mutate(temp.cum.count = cum.count) %>%
         select(-cum.count) %>%
-        group_by(year.epiweek.admit, outcome) %>%
+        group_by(year.epiweek.admit, slider_outcome) %>%
         summarise(cum.count = sum(temp.cum.count)) %>%
         as_tibble()
     })
