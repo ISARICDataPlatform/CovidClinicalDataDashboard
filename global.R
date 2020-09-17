@@ -15,6 +15,7 @@ library(lubridate)
 library(glue)
 library(data.table)
 library(tidyfast)
+library(ggupset)
 
 
 epiweek.year <- function(date){
@@ -185,6 +186,8 @@ rev.treatment.order <- icu.treatment.use.proportion.input %>% pull(nice.treatmen
 
 icu.treatment.use.proportion.input <- icu.treatment.use.proportion.input %>%
   mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order))
+
+load("comorbidity_upset_input.rda")
 
 countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
 

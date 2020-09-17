@@ -146,6 +146,32 @@ server <- function(input, output) {
     renderPlot(confidentiality.check(comorbidity.prevalence.reactive(), comorbidity.prevalence.plot), height = 500)
   }
   
+  output$comorbidityUpset <- {
+    
+    comorbidity.upset.reactive <- reactive({
+      
+      fd <- comorbidity.upset.input %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(comorbidity.upset.reactive(), upset.plot, which.plot = "comorbidity"), height = 500)
+  }
+  
+  output$symptomUpset <- {
+    
+   symptom.upset.reactive <- reactive({
+      
+      fd <- symptom.upset.input %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(symptom.upset.reactive(), upset.plot, which.plot = "symptom"), height = 500)
+  }
+  
   
   output$treatmentPrevalence <- {
     
