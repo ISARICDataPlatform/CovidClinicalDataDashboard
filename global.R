@@ -3,7 +3,7 @@ library(devtools)
 # if this keeps failing, try turning off caching in shinyapps (the web interface). And then deploy _twice_. The first time the browser will open with an error message. That's expected.
 # Then comment out the following line for the second deployment. It's mad, but there you go.
 
-# devtools::install_github("ISARICDataPlatform/CovidClinicalDataProcessor")
+devtools::install_github("ISARICDataPlatform/CovidClinicalDataProcessor")
 library(CovidClinicalDataProcessor)
 library(shinydashboard)
 library(shinyWidgets)
