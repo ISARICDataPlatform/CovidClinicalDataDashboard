@@ -188,6 +188,10 @@ icu.treatment.use.proportion.input <- icu.treatment.use.proportion.input %>%
   mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order))
 
 load("comorbidity_upset_input.rda")
+load("symptom_upset_input.rda")
+load("treatment_upset_input.rda")
+load("icu_treatment_upset_input.rda")
+
 
 countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
 
