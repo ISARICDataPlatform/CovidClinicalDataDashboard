@@ -138,14 +138,18 @@ dashboardPage(skin = "black",
                           fluidRow(
                             box(plotOutput("treatmentPrevalence", height = "500px"),
                                 "Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
-                                width = 6, height = 600, solidHeader = T, title = 'Treatments given')
+                                width = 6, height = 600, solidHeader = T, title = 'Treatments given'),
+                            box(plotOutput("treatmentUpset", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given')
                           )
                   ),
                   tabItem(tabName = "icu_treatment",
                           fluidRow(
                             box(plotOutput("icuTreatmentPrevalence", height = "500px"),
                                 "Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
-                                width = 6, height = 600, solidHeader = T, title = 'Treatments given')
+                                width = 6, height = 600, solidHeader = T, title = 'Treatments given'),
+                            box(plotOutput("icuTreatmentUpset", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given in the ICU')
                           )
                   )
                   
