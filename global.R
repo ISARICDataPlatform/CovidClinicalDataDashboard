@@ -1,8 +1,8 @@
 library(devtools)
-library(renv)
+# library(renv)
 # if this keeps failing, try turning off caching in shinyapps (the web interface). And then deploy _twice_. The first time the browser will open with an error message. That's expected.
 # Then comment out the following line for the second deployment. It's mad, but there you go.
-devtools::install_github("ISARICDataPlatform/CovidClinicalDataProcessor")
+# devtools::install_github("ISARICDataPlatform/CovidClinicalDataProcessor")
 library(CovidClinicalDataProcessor)
 library(shinydashboard)
 library(shinyWidgets)
@@ -62,7 +62,7 @@ age.levels <- age.bound.lookup %>% pull(slider_agegp10) %>% levels
 #
 # write_csv(age.pyramid.input, "age_pyramid_input.csv")
 
-load("age_pyramid_input.rda")  
+base::load("age_pyramid_input.rda")  
      
 
 
@@ -81,7 +81,7 @@ load("age_pyramid_input.rda")
 #   left_join(age.bound.lookup, by="agegp10")
 #
 # write_csv(outcome.admission.date.input, "outcome_admission_date_input.csv")
-load("outcome_admission_date_input.rda")
+base::load("outcome_admission_date_input.rda")
 
 # symptom.prevalence.input <- example.data %>%
 #   select(sex, agegp10, country, year.epiweek.admit, outcome, any_of(starts_with("symptoms")), lower.age.bound, upper.age.bound) %>%
@@ -107,7 +107,7 @@ load("outcome_admission_date_input.rda")
 #   left_join(age.bound.lookup, by="agegp10")
 #
 # write_csv(symptom.prevalence.input, "symptom_prevalence_input.csv")
-load("symptom_prevalence_input.rda")
+base::load("symptom_prevalence_input.rda")
 
 rev.symptom.order <- symptom.prevalence.input %>% pull(nice.symptom) %>% unique() %>% sort(decreasing = TRUE)
 
@@ -138,7 +138,7 @@ symptom.prevalence.input <- symptom.prevalence.input %>%
 #
 # write_csv(comorbidity.prevalence.input, "comorbidity_prevalence_input.csv")
 
-load("comorbidity_prevalence_input.rda")
+base::load("comorbidity_prevalence_input.rda")
 
 
 rev.comorbidity.order <- comorbidity.prevalence.input %>% pull(nice.comorbidity) %>% unique() %>% sort(decreasing = TRUE)
@@ -166,7 +166,7 @@ comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
 #   left_join(age.bound.lookup, by="agegp10")
 #
 # write_csv(treatment.prevalence.input, "treatment_prevalence_input.csv")
-load("treatment_use_proportion_input.rda")
+base::load("treatment_use_proportion_input.rda")
 
 
 rev.treatment.order <- treatment.use.proportion.input %>% pull(nice.treatment) %>% unique() %>% sort(decreasing = TRUE)
@@ -178,7 +178,7 @@ countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
 
 
 
-load("icu_treatment_use_proportion_input.rda")
+base::load("icu_treatment_use_proportion_input.rda")
 
 
 rev.treatment.order <- icu.treatment.use.proportion.input %>% pull(nice.treatment) %>% unique() %>% sort(decreasing = TRUE)
@@ -186,10 +186,10 @@ rev.treatment.order <- icu.treatment.use.proportion.input %>% pull(nice.treatmen
 icu.treatment.use.proportion.input <- icu.treatment.use.proportion.input %>%
   mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order))
 
-load("comorbidity_upset_input.rda")
-load("symptom_upset_input.rda")
-load("treatment_upset_input.rda")
-load("icu_treatment_upset_input.rda")
+base::load("comorbidity_upset_input.rda")
+base::load("symptom_upset_input.rda")
+base::load("treatment_upset_input.rda")
+base::load("icu_treatment_upset_input.rda")
 
 
 countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
