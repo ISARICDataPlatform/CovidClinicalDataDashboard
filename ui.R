@@ -34,7 +34,8 @@ dashboardPage(skin = "black",
                   menuItem("Symptoms at admission", tabName = "symptoms", icon = icon("stethoscope")),
                   menuItem("Comorbidities", tabName = "comorbidities", icon = icon("notes-medical")),
                   menuItem("Treatment", tabName = "treatment", icon = icon("pills")),
-                  menuItem("ICU Treatment", tabName = "icu_treatment", icon = icon("heartbeat"))
+                  menuItem("ICU Treatment", tabName = "icu_treatment", icon = icon("heartbeat")),
+                  menuItem("Hospital stays", tabName = "hospital_stays", icon = icon("hospital"))
                 ),
                 
                 hr(),
@@ -151,8 +152,22 @@ dashboardPage(skin = "black",
                             box(plotOutput("icuTreatmentUpset", height = "500px"),
                                 width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given in the ICU')
                           )
+                  ),
+                  tabItem(tabName = "hospital_stays",
+                          fluidRow(
+                            box(plotOutput("lengthofstaySex", height = "500px"),
+                                "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                                width = 6, height=620, solidHeader = T, title = "Distribution of length of hospital stay, according to sex"),
+                            box(plotOutput("lengthofstayAge", height = "500px"),
+                                "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                                width = 6, height=620, solidHeader = T, title = "Distribution of length of hospital stay, according to patient age group")
+                          ),
+                          fluidRow(
+                            box(plotOutput("admissiontoICU", height = "500px"),
+                                "The figure displays data on only those cases with a reported ICU start date",
+                                width = 6, height = 600, solidHeader = T, title = "Distribution of time (in days) from hospital admission to ICU admission")
+                          )
                   )
-                  
                   
                 ))
 )
