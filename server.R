@@ -18,7 +18,6 @@ confidentiality.check <- function(data, fn, min.rows = 5, ...){
   }
 }
 
-
 slider.filters <- function(tbl, input){
 
   formatted.dates <- parse_date_time(input$admission_date, orders = "my")
@@ -243,4 +242,36 @@ server <- function(input, output) {
     renderPlot(confidentiality.check(icu.treatment.upset.reactive(), upset.plot, which.plot = "icu.treatment"), height = 500)
   }
   
+  output$lengthofstaySex <- {
+    length.of.stay.sex.reactive <- reactive({ 
+      fd <- length.of.stay.sex.input %>% 
+        as.data.table() %>% 
+        lazy_dt(immutable = FALSE) %>% 
+        slider.filters(input) %>% 
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(length.of.stay.sex.reactive(), length.of.stay.sex.plot), height = 500)
+  }
+  
+  output$lengthofstayAge <- {
+    length.of.stay.age.reactive <- reactive({
+      fd <- length.of.stay.age.input %>% 
+        as.data.table() %>% 
+        lazy_dt(immutable = FALSE) %>% 
+        slider.filters(input) %>% 
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(length.of.stay.age.reactive(), length.of.stay.age.plot), height = 500)
+  }
+  
+  output$admissiontoICU <- {
+    admission.to.icu.reactive <- reactive({
+      fd <- admission.to.icu.input %>% 
+        as.data.table() %>% 
+        lazy_dt(immutable = FALSE) %>% 
+        slider.filters(input) %>% 
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(admission.to.icu.reactive(), admission.to.icu.plot), height = 500)
+  }
 }
