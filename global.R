@@ -15,7 +15,7 @@ library(glue)
 library(data.table)
 library(tidyfast)
 library(ggupset)
-
+library(viridis)  #using scale_fill_viridis
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -200,4 +200,7 @@ months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"
 month.options <- c("Dec 2019", glue("{months} {2020}") )
 
 
-
+#################load data for hospital stays
+base::load("length_of_stay_sex_input.rda")
+base::load("length_of_stay_age_input.rda")
+base::load("admission_to_icu_input.rda")
