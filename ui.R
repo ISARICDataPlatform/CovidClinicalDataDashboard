@@ -165,7 +165,9 @@ dashboardPage(skin = "black",
                           fluidRow(
                             box(plotOutput("admissiontoICU", height = "500px"),
                                 "The figure displays data on only those cases with a reported ICU start date",
-                                width = 6, height = 600, solidHeader = T, title = "Distribution of time (in days) from hospital admission to ICU admission")
+                                width = 6, height = 600, solidHeader = T, title = "Distribution of time (in days) from hospital admission to ICU admission"),
+                            box(plotOutput("StatusbyTime", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = "Distribution of patient status by number of days after admission")
                           )
                   )
                   
