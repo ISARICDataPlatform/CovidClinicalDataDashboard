@@ -274,4 +274,16 @@ server <- function(input, output) {
     })
     renderPlot(confidentiality.check(admission.to.icu.reactive(), admission.to.icu.plot), height = 500)
   }
+  
+  output$StatusbyTime <- {
+    status.by.time.after.admission.reactive <- reactive({
+      fd <- status.by.time.after.admission.input %>% 
+        as.data.table() %>% 
+        lazy_dt(immutable = FALSE) %>% 
+        slider.filters(input) %>% 
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(status.by.time.after.admission.reactive(), status.by.time.after.admission.plot), height = 500)
+    
+  }
 }
