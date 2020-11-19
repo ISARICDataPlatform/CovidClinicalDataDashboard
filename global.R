@@ -15,7 +15,10 @@ library(glue)
 library(data.table)
 library(tidyfast)
 library(ggupset)
-
+library(ggmap)
+library(leaflet)
+library(mapview) 
+library(collaborator)
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -197,7 +200,10 @@ countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
 current.year <- year(today())
 current.month <- month(today())
 months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
-month.options <- c("Dec 2019", glue("{months} {2020}") )
+month.options <- c("Dec 2019", glue("{months} {2020}"))
 
 
 
+map.data <- read_rds(here::here("map_data.rds"))
+
+knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")

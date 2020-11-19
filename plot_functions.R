@@ -44,7 +44,7 @@ age.pyramid.plot <- function(aggregated.tbl, ...){
       xmin = length(levels(aggregated.tbl$slider_agegp10))+1.5,
       xmax = length(levels(aggregated.tbl$slider_agegp10))+1.5) +
     theme(plot.margin=unit(c(30,5,5,5.5,5.5),"pt"),
-          axis.text.x=element_text(angle = -90, vjust = 0.5))
+          axis.text.x=element_text(angle = 90, vjust = 0.5))
   
   plt
   

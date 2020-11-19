@@ -1,0 +1,27 @@
+---
+title: "ISARIC COVID-19 Clinical Data Report Contributors"
+output: html_document
+knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = encoding, output_dir = here::here(paste0("contributers/output/")))})
+                                         
+---
+
+*Please note that this page features contributing sites only. If you would are registered and would like to contribute, contact ncov@isaric.org*
+
+We extend our thanks to all of the staff at our partner sites collecting data from across the globe:
+
+```{r, list, eval=T, echo = FALSE}
+map.data %>%
+  arrange(country) %>%
+  dplyr::mutate(country = paste0("**", country, "**")) %>%
+  collaborator::report_auth(name = "address_half",
+                            subdivision = "country", name_sep = "; ") %>%
+    stringr::str_replace(": ", "\n ") %>% 
+    stringr::str_replace(",;", ";") %>% 
+  knitr::kable(col.names ="")
+```
+
+&nbsp;
+
+&nbsp;
+
+&nbsp;

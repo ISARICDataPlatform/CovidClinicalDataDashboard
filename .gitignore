@@ -5,3 +5,13 @@
 CovidClinicalDataDashboard.Rproj
 .DS_Store
 rsconnect
+age_pyramid_input.rda
+comorbidity_prevalence_input.rda
+comorbidity_upset_input.rda
+icu_treatment_upset_input.rda
+icu_treatment_use_proportion_input.rda
+outcome_admission_date_input.rda
+symptom_prevalence_input.rda
+symptom_upset_input.rda
+treatment_upset_input.rda
+treatment_use_proportion_input.rda

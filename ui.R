@@ -34,7 +34,8 @@ dashboardPage(skin = "black",
                   menuItem("Symptoms at admission", tabName = "symptoms", icon = icon("stethoscope")),
                   menuItem("Comorbidities", tabName = "comorbidities", icon = icon("notes-medical")),
                   menuItem("Treatment", tabName = "treatment", icon = icon("pills")),
-                  menuItem("ICU Treatment", tabName = "icu_treatment", icon = icon("heartbeat"))
+                  menuItem("ICU Treatment", tabName = "icu_treatment", icon = icon("heartbeat")),
+                  menuItem("Contributors", tabName = "contributors", icon = icon("users"))
                 ),
                 
                 hr(),
@@ -151,9 +152,22 @@ dashboardPage(skin = "black",
                             box(plotOutput("icuTreatmentUpset", height = "500px"),
                                 width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given in the ICU')
                           )
-                  )
+                  ),
+                  tabItem(tabName = "contributors",
+                          fluidRow(
+                            box(leafletOutput("contributorsMap"), title = "Contributors Map", width = 12)
+                          ),
+                          fluidRow(
+                            box(includeMarkdown("markdown/Contributor_listmap.md"), title = "Contributing Site List", width = 12)
+                          ),
+                          
+                          
                   
                   
-                ))
+                  
+                )
+                
+                
+              ))
 )
 

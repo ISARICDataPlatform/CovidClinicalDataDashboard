@@ -243,4 +243,19 @@ server <- function(input, output) {
     renderPlot(confidentiality.check(icu.treatment.upset.reactive(), upset.plot, which.plot = "icu.treatment"), height = 500)
   }
   
+  output$contributorsMap <- renderLeaflet({
+    
+    map.data %>%
+      # What sites have valid geolocation?
+      dplyr::filter(is.na(location_lat)==F&is.na(location_long)==F) %>%
+      leaflet::leaflet() %>%
+      leaflet::addTiles() %>%
+      leaflet::addCircleMarkers(lat=~location_lat,
+                                lng=~location_long,
+                                radius = ~2,
+                                popup= ~address_half,
+                                fillOpacity = 0.5) %>%
+      leaflet::setView(lng = 1, lat = 7.9, zoom=1.7)
+  })
+  
 }
