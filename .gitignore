@@ -5,3 +5,7 @@
 CovidClinicalDataDashboard.Rproj
 .DS_Store
 rsconnect
+status_by_time_after_admission_input.rda
+length_of_stay_age_input.rda
+length_of_stay_sex_input.rda
+admission_to_icu_input.rda
