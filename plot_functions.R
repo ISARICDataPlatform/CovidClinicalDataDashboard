@@ -61,10 +61,7 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
     scale_fill_brewer(palette = 'Set2', name = "Outcome", drop="F") +
     xlab("Epidemiological week of admission/symptom onset") +
     ylab("Cumulative patient records") +
-    ylim(c(0, 1.05*peak.cases)) +
     scale_x_discrete(drop = F) +
-    annotate(geom = "text", label = "*", x = length(levels(aggregated.tbl$year.epiweek.admit)),
-             y = peak.cases, size =15) +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
   
   return(plt)

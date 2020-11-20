@@ -13,7 +13,7 @@ We extend our thanks to all of the staff at our partner sites collecting data fr
 map.data %>%
   arrange(country) %>%
   dplyr::mutate(country = paste0("**", country, "**")) %>%
-  collaborator::report_auth(name = "address_half",
+  report_auth(name = "address_half",
                             subdivision = "country", name_sep = "; ") %>%
     stringr::str_replace(": ", "\n ") %>% 
     stringr::str_replace(",;", ";") %>% 

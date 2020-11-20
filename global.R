@@ -1,8 +1,9 @@
 library(devtools)
-# library(renv)
+library(renv)
 # if this keeps failing, try turning off caching in shinyapps (the web interface). And then deploy _twice_. The first time the browser will open with an error message. That's expected.
 # Then comment out the following line for the second deployment. It's mad, but there you go.
 # devtools::install_github("ISARICDataPlatform/CovidClinicalDataProcessor")
+# devtools::install_github("kamclean/collaborator")
 library(CovidClinicalDataProcessor)
 library(shinydashboard)
 library(shinyWidgets)
@@ -18,7 +19,7 @@ library(ggupset)
 library(ggmap)
 library(leaflet)
 library(mapview) 
-library(collaborator)
+# library(collaborator)
 library(knitr)
 library(viridis)  #using scale_fill_viridis
 
@@ -101,5 +102,86 @@ base::load("length_of_stay_age_input.rda")
 base::load("admission_to_icu_input.rda")
 base::load("status_by_time_after_admission_input.rda")
 
+report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
+                        name_sep = ", ", group_brachet = "()",group_sep = "; "){
+  
+  require(stringr);require(readr);require(dplyr)
+  
+  
+  if(is.null(group)==FALSE&length(group)>1){group <- head(group,1)
+  print("More than 1 group supplied - only first value used as group")}
+  
+  if(is.null(subdivision)==FALSE&length(subdivision)>1){subdivision <- head(subdivision,1)
+  print("More than 1 subdivision supplied - only first value used as subdivision")}
+  
+  group_brachet_L = stringr::str_sub(group_brachet, 1, 1)
+  group_brachet_R = stringr::str_sub(group_brachet, 2, 2)
+  
+  df <- df %>% dplyr::mutate(name = dplyr::pull(., name))
+  
+  
+  # No groups / subdivisions
+  if(is.null(group)==TRUE&is.null(subdivision)==TRUE){
+    output <- df %>%
+      dplyr::summarise(auth_out = paste(name, collapse=name_sep) %>% paste0("."))
+    
+    if(is.null(path)==F){readr::write_file(output$auth_out, path=path)}}
+  
+  # Just groups
+  if(is.null(group)==FALSE&is.null(subdivision)==TRUE){
+    output <- df %>%
+      dplyr::mutate(group = dplyr::pull(., group)) %>%
+      
+      dplyr::group_by(group) %>%
+      
+      dplyr::summarise(name_list = paste(name, collapse=name_sep)) %>%
+      
+      dplyr::mutate(name_group = paste0(name_list, " ",group_brachet_L, group, group_brachet_R)) %>%
+      
+      dplyr::summarise(auth_out = paste(name_group, collapse = group_sep) %>% paste0("."))
+    
+    if(is.null(path)==F){readr::write_file(output$auth_out, path=path)}}
+  
+  # Just subdivisions
+  if(is.null(group)==TRUE&is.null(subdivision)==FALSE){
+    output <- df %>%
+      dplyr::mutate(subdivision = dplyr::pull(., subdivision)) %>%
+      
+      dplyr::group_by(subdivision) %>%
+      
+      dplyr::summarise(name_list = paste(name, collapse=name_sep) %>% paste0(".")) %>%
+      
+      dplyr::mutate(auth_out = paste0(subdivision, ": ", name_list)) %>%
+      
+      dplyr::select(auth_out)
+    
+    if(is.null(path)==F){readr::write_file(output$auth_out, path=path)}}
+  
+  
+  # Groups and subdivisions
+  if(is.null(group)==FALSE&is.null(subdivision)==FALSE){
+    output <- df %>%
+      dplyr::mutate(group = dplyr::pull(., group),
+                    subdivision = dplyr::pull(., subdivision)) %>%
+      
+      dplyr::select(subdivision, group, name) %>%
+      
+      dplyr::group_by(subdivision, group) %>%
+      dplyr::summarise(name_list = paste(name, collapse=name_sep)) %>%
+      
+      # add group characteristics
+      dplyr::mutate(name_group = paste0(name_list, " ",group_brachet_L, group, group_brachet_R)) %>%
+      
+      # combine groups (by subdivision)
+      dplyr::summarise(auth_out = paste(name_group, collapse = group_sep) %>% paste0(".")) %>%
+      
+      dplyr::mutate(auth_out = paste0(subdivision, ": ", auth_out)) %>%
+      
+      dplyr::select(auth_out)
+    
+    if(is.null(path)==F){readr::write_file(output$auth_out, path=path)}}
+  
+  
+  return(gsub("\n\n", " ", output$auth_out))}
 
 

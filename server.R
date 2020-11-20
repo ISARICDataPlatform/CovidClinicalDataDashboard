@@ -69,7 +69,7 @@ server <- function(input, output) {
       fd <- outcome.admission.date.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        # slider.filters(input) %>%
+        slider.filters(input) %>%
         group_by(year.epiweek.admit) %>%
         filter(calendar.year.admit == max(calendar.year.admit)) %>%
         filter(calendar.month.admit == max(calendar.month.admit)) %>%
@@ -262,6 +262,7 @@ server <- function(input, output) {
         lazy_dt(immutable = FALSE) %>% 
         slider.filters(input) %>% 
         as_tibble()
+      
     })
     renderPlot(confidentiality.check(length.of.stay.sex.reactive(), length.of.stay.sex.plot), height = 500)
   }
