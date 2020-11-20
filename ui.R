@@ -34,7 +34,9 @@ dashboardPage(skin = "black",
                   menuItem("Symptoms at admission", tabName = "symptoms", icon = icon("stethoscope")),
                   menuItem("Comorbidities", tabName = "comorbidities", icon = icon("notes-medical")),
                   menuItem("Treatment", tabName = "treatment", icon = icon("pills")),
-                  menuItem("ICU Treatment", tabName = "icu_treatment", icon = icon("heartbeat"))
+                  menuItem("ICU Treatment", tabName = "icu_treatment", icon = icon("heartbeat")),
+                  menuItem("Vital signs", tabName = "vital_signs", icon = icon("file-medical-alt")),
+                  menuItem("Laboratory results", tabName = "lab_results", icon = icon("vial"))
                 ),
                 
                 hr(),
@@ -73,7 +75,7 @@ dashboardPage(skin = "black",
                     selected = c("Male","Female",NA)
                   ),
                   sliderInput(inputId = "agegp10", label = "Age group",
-                              min = 0, max = 90, step = 10, value = c(0,120), dragRange = T),
+                              min = 0, max = 120, step = 10, value = c(0,120), dragRange = T),
                   
                   pickerInput(
                     inputId = "country",
@@ -152,7 +154,46 @@ dashboardPage(skin = "black",
                                 width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given in the ICU')
                           )
                   )
-                  
+                  ,
+                  tabItem(tabName = "vital_signs",
+                          fluidRow(
+                            box(plotOutput("clinical_signs_vs_resp", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Respiratory rate (min)'),
+                            box(plotOutput("clinical_signs_vs_hr", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Heart rate (min)'),
+                            box(plotOutput("clinical_signs_vs_temp", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Temperature (Celsius)'),
+                            box(plotOutput("clinical_signs_vs_sysbp", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Systolic blood pressure (mmHg)'),
+                            box(plotOutput("clinical_signs_vs_oxysat", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Oxygen saturation in room air (%)')
+                          )
+                  )
+                  ,
+                  tabItem(tabName = "lab_results",
+                          fluidRow(
+                            box(plotOutput("lab_results_lab_crp", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'CRP (mg/L)'),
+                            box(plotOutput("lab_results_lab_lym", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Lymphocytes (10^9/L)'),
+                            box(plotOutput("lab_results_lab_neut", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Neutrophils (10^9/L)'),
+                            box(plotOutput("lab_results_lab_wbc", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'WBC (10^9/L)'),
+                            box(plotOutput("lab_results_lab_urean", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Urea (mmol/L)'),
+                            box(plotOutput("lab_results_lab_pt", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Protrombin time (s)'),
+                            box(plotOutput("lab_results_lab_alt", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'ALT (units/L)'),
+                            box(plotOutput("lab_results_lab_aptt", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'APTT (s)'),
+                            box(plotOutput("lab_results_lab_bili", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Bilirubin (mmol/L)'),
+                            box(plotOutput("lab_results_lab_ast", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'AST (units/L)')
+                          )
+                  )
                   
                 ))
 )

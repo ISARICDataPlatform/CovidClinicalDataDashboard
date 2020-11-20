@@ -28,7 +28,6 @@ epiweek.year <- function(date){
   }
 }
 
-
 outcome.remap <- function(oc, od){
   if(is.na(od) & is.na(oc)){
     "censored"
@@ -116,6 +115,7 @@ symptom.prevalence.input <- symptom.prevalence.input %>%
 
 
 
+
 # comorbidity.prevalence.input <- example.data %>%
 #   select(sex, agegp10, country, year.epiweek.admit, outcome, any_of(starts_with("comorb")), lower.age.bound, upper.age.bound) %>%
 #   pivot_longer(any_of(starts_with("comorb")), names_to = "comorbidity", values_to = "present") %>%
@@ -198,6 +198,44 @@ current.year <- year(today())
 current.month <- month(today())
 months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
 month.options <- c("Dec 2019", glue("{months} {2020}") )
+
+
+
+#Load the vs data
+base::load("data_plot_vs_resp.rda")
+base::load("data_plot_vs_hr.rda")
+base::load("data_plot_vs_temp.rda")
+base::load("data_plot_vs_sysbp.rda")
+base::load("data_plot_vs_oxysat.rda")
+#Load the laboratory data
+base::load("data_plot_lab_crp.rda")
+base::load("data_plot_lab_lym.rda")
+base::load("data_plot_lab_neut.rda")
+base::load("data_plot_lab_wbc.rda")
+base::load("data_plot_lab_urean.rda")
+base::load("data_plot_lab_pt.rda")
+base::load("data_plot_lab_alt.rda")
+base::load("data_plot_lab_aptt.rda")
+base::load("data_plot_lab_ast.rda")
+base::load("data_plot_lab_bili.rda")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
