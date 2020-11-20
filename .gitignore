@@ -5,7 +5,6 @@
 CovidClinicalDataDashboard.Rproj
 .DS_Store
 rsconnect
-<<<<<<< HEAD
 age_pyramid_input.rda
 comorbidity_prevalence_input.rda
 comorbidity_upset_input.rda
@@ -27,9 +26,3 @@ length_of_stay_sex_input.rda
 status_by_time_after_admission_input.rda
 treatment.upset.input.rda
 treatment.use.proportion.input.rda
-=======
-status_by_time_after_admission_input.rda
-length_of_stay_age_input.rda
-length_of_stay_sex_input.rda
-admission_to_icu_input.rda
->>>>>>> origin/jiawei

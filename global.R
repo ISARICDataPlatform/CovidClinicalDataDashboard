@@ -22,27 +22,6 @@ library(collaborator)
 library(knitr)
 library(viridis)  #using scale_fill_viridis
 
-epiweek.year <- function(date){
-  if(is.na(date)){
-    return(NA)
-  }
-  if(year(date)==2019 & date > ymd("2019-12-28")){
-    2020
-  } else {
-    year(date)
-  }
-}
-
-
-outcome.remap <- function(oc, od){
-  if(is.na(od) & is.na(oc)){
-    "censored"
-  } else {
-    out <- case_when(is.na(oc) ~ NA_character_,
-                     oc == "Death" ~ "death",
-                     oc == "Discharged Alive" ~ "discharge")
-  }
-}
 
 source("plot_functions.R")
 
@@ -55,9 +34,11 @@ age.bound.lookup <- tibble(slider_agegp10 = cut(1:100, right = FALSE, breaks = c
 
 age.levels <- age.bound.lookup %>% pull(slider_agegp10) %>% levels
 
-
 base::load("age_pyramid_input.rda")  
+     
+
 base::load("outcome_admission_date_input.rda")
+
 base::load("symptom_prevalence_input.rda")
 
 rev.symptom.order <- symptom.prevalence.input %>% pull(nice.symptom) %>% unique() %>% sort(decreasing = TRUE)
@@ -73,7 +54,6 @@ rev.comorbidity.order <- comorbidity.prevalence.input %>% pull(nice.comorbidity)
 
 comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
   mutate(nice.comorbidity = factor(nice.comorbidity, levels = rev.comorbidity.order))
-
 
 base::load("treatment_use_proportion_input.rda")
 
@@ -106,6 +86,7 @@ countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
 current.year <- year(today())
 current.month <- month(today())
 months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec")
+
 month.options <- c("Dec 2019", glue("{months} {2020}"))
 
 
@@ -119,4 +100,6 @@ base::load("length_of_stay_sex_input.rda")
 base::load("length_of_stay_age_input.rda")
 base::load("admission_to_icu_input.rda")
 base::load("status_by_time_after_admission_input.rda")
+
+
 

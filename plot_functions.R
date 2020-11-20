@@ -167,8 +167,6 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
     scale_x_upset()
 }
 
-###################
-
 length.of.stay.sex.plot <- function(aggregated.tbl, ...){
   plt <- ggplot(aggregated.tbl, aes(x = sex, y = length.of.stay, fill=sex)) +
     geom_violin(trim=F)+
