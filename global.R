@@ -20,6 +20,7 @@ library(leaflet)
 library(mapview) 
 library(collaborator)
 library(knitr)
+library(viridis)  #using scale_fill_viridis
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -111,3 +112,9 @@ month.options <- c("Dec 2019", glue("{months} {2020}"))
 map.data <- read_rds(here::here("map_data.rds"))
 
 knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")
+
+#################load data for hospital stays
+base::load("length_of_stay_sex_input.rda")
+base::load("length_of_stay_age_input.rda")
+base::load("admission_to_icu_input.rda")
+base::load("status_by_time_after_admission_input.rda")

@@ -167,3 +167,67 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
     scale_x_upset()
 }
 
+###################
+
+length.of.stay.sex.plot <- function(aggregated.tbl, ...){
+  plt <- ggplot(aggregated.tbl, aes(x = sex, y = length.of.stay, fill=sex)) +
+    geom_violin(trim=F)+
+    geom_boxplot(width=0.1, fill="white", outlier.shape = NA)  +
+    scale_fill_viridis(drop = F, discrete = "true", option = "magma", begin = 0.25, end = 0.75) +
+    labs(title=" ", x="Sex", y = "Length of hospital stay", fill="Sex") +
+    theme(
+      plot.title = element_text( size=14, face="bold", hjust = 0.5),
+      axis.title.x = element_text( size=12),
+      axis.title.y = element_text( size=12)
+    ) +  ylim(c(0,max(aggregated.tbl$length.of.stay))) + xlim(c("Male","Female"))+
+    theme(panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                          colour = "grey"), panel.background = element_rect(fill = 'white', colour = 'white'), panel.grid.major = element_line(size = 0.5, linetype = 'solid',colour = "grey"),  axis.line = element_line(colour = "black"), panel.border = element_rect(colour = 'black', fill = NA, size=1) )
+  
+  plt
+}
+
+
+length.of.stay.age.plot <- function(aggregated.tbl, ...){
+  plt <- ggplot(aggregated.tbl, aes(x = agegp10, y = length.of.stay, fill=agegp10)) +
+    geom_violin(trim=F) +
+    geom_boxplot(width=0.05, fill="white", outlier.shape = NA)  +
+    labs(title="  ", x="Age group", y = "Length of hospital stay", fill="Age") +
+    theme(
+      plot.title = element_text( size=14, face="bold", hjust = 0.5),
+      axis.title.x = element_text( size=12),
+      axis.title.y = element_text( size=12)
+    ) + #ylim(0, length(0, max(aggregated.tbl$length.of.stay))+5) +
+    scale_fill_viridis(option = "magma", discrete = T, drop = F, begin = 0.4, end = 1) +
+    scale_x_discrete(drop = F) +
+    ylim(c(0,max(aggregated.tbl$length.of.stay))) +xlim(unique(length.of.stay.age.input$agegp10) %>% sort())+
+    theme(panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
+                                          colour = "grey"), panel.background = element_rect(fill = 'white', colour = 'white'), panel.grid.major = element_line(size = 0.5, linetype = 'solid',colour = "grey"),  axis.line = element_line(colour = "black"), panel.border = element_rect(colour = 'black', fill = NA, size=1) )
+  
+  plt
+}
+
+admission.to.icu.plot <- function(aggregated.tbl,...){
+  plt <-  ggplot(aggregated.tbl, aes(x = admission.to.icu)) +
+    geom_histogram(aes(y=..density..), fill="lightblue", binwidth = 1)  +
+    labs(title="  ", x="Time (in days) from admission to ICU", y = "Density") +
+    theme_bw() + 
+    theme(
+      plot.title = element_text( size=14, face="bold", hjust = 0.5),
+      axis.title.x = element_text( size=12),
+      axis.title.y = element_text( size=12)
+    ) +
+    scale_x_continuous(limits = c(-1,20), breaks =  seq(0,20,1)) 
+
+  plt
+}
+
+status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
+  plt <-  ggplot(aggregated.tbl)+ geom_bar(aes(x = day, fill = status), position = "fill") +
+    scale_fill_brewer(palette = "Dark2", name  = "Status", drop = F, labels = c("Discharged", "Transferred","Unknown", "Ongoing care", "Ward", "ICU", "Death")) +
+    theme_bw() +
+    xlab("Days relative to admission") +
+    annotate(geom = "segment", x = 14.5, xend = 14.5, y = 0, yend = 1) +
+    ylab("Proportion")
+  
+  plt
+}
