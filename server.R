@@ -67,7 +67,7 @@ server <- function(input, output) {
  
     outcomes.by.admission.date.reactive <- reactive({
       
-      fd <- outcome_admission_date_input %>%
+      fd <- outcome.admission.date.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
         # slider.filters(input) %>%
