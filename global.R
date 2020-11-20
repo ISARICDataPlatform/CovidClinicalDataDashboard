@@ -55,16 +55,16 @@ age.bound.lookup <- tibble(slider_agegp10 = cut(1:100, right = FALSE, breaks = c
 
 age.levels <- age.bound.lookup %>% pull(slider_agegp10) %>% levels
 
-base::load("age_pyramid_input.rda")  
-     
-base::load("outcome_admission_date_input.rda")
 
+base::load("age_pyramid_input.rda")  
+base::load("outcome_admission_date_input.rda")
 base::load("symptom_prevalence_input.rda")
 
 rev.symptom.order <- symptom.prevalence.input %>% pull(nice.symptom) %>% unique() %>% sort(decreasing = TRUE)
 
 symptom.prevalence.input <- symptom.prevalence.input %>%
   mutate(nice.symptom = factor(nice.symptom, levels = rev.symptom.order)) 
+
 
 base::load("comorbidity_prevalence_input.rda")
 
@@ -73,6 +73,7 @@ rev.comorbidity.order <- comorbidity.prevalence.input %>% pull(nice.comorbidity)
 
 comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
   mutate(nice.comorbidity = factor(nice.comorbidity, levels = rev.comorbidity.order))
+
 
 base::load("treatment_use_proportion_input.rda")
 
@@ -118,3 +119,4 @@ base::load("length_of_stay_sex_input.rda")
 base::load("length_of_stay_age_input.rda")
 base::load("admission_to_icu_input.rda")
 base::load("status_by_time_after_admission_input.rda")
+

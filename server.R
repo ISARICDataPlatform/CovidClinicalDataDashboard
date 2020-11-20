@@ -241,7 +241,6 @@ server <- function(input, output) {
     })
     renderPlot(confidentiality.check(icu.treatment.upset.reactive(), upset.plot, which.plot = "icu.treatment"), height = 500)
   }
-
   output$contributorsMap <- renderLeaflet({
     
     map.data %>%
@@ -256,7 +255,6 @@ server <- function(input, output) {
                                 fillOpacity = 0.5) %>%
       leaflet::setView(lng = 1, lat = 7.9, zoom=1.7)
   })
-  
   output$lengthofstaySex <- {
     length.of.stay.sex.reactive <- reactive({ 
       fd <- length.of.stay.sex.input %>% 
