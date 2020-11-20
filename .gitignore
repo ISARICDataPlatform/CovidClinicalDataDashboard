@@ -15,3 +15,14 @@ symptom_prevalence_input.rda
 symptom_upset_input.rda
 treatment_upset_input.rda
 treatment_use_proportion_input.rda
+ExampleDataPreprocessing.R
+admission_to_icu_input.rda
+comorbidity.prevalence.input.rda
+comorbidity.upset.input.rda
+icu.treatment.upset.input.rda
+length_of_stay_age_input.rda
+icu.treatment.use.proportion.input.rda
+length_of_stay_sex_input.rda
+status_by_time_after_admission_input.rda
+treatment.upset.input.rda
+treatment.use.proportion.input.rda
