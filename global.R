@@ -24,6 +24,27 @@ library(knitr)
 library(viridis)  #using scale_fill_viridis
 
 
+epiweek.year <- function(date){
+  if(is.na(date)){
+    return(NA)
+  }
+  if(year(date)==2019 & date > ymd("2019-12-28")){
+    2020
+  } else {
+    year(date)
+  }
+}
+
+outcome.remap <- function(oc, od){
+  if(is.na(od) & is.na(oc)){
+    "censored"
+  } else {
+    out <- case_when(is.na(oc) ~ NA_character_,
+                     oc == "Death" ~ "death",
+                     oc == "Discharged Alive" ~ "discharge")
+  }
+}
+
 source("plot_functions.R")
 
 age.bound.lookup <- tibble(slider_agegp10 = cut(1:100, right = FALSE, breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 120)) %>% unique()) %>%
@@ -46,7 +67,6 @@ rev.symptom.order <- symptom.prevalence.input %>% pull(nice.symptom) %>% unique(
 
 symptom.prevalence.input <- symptom.prevalence.input %>%
   mutate(nice.symptom = factor(nice.symptom, levels = rev.symptom.order)) 
-
 
 base::load("comorbidity_prevalence_input.rda")
 
@@ -183,5 +203,43 @@ report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
   
   
   return(gsub("\n\n", " ", output$auth_out))}
+
+
+#Load the vs data
+base::load("data_plot_vs_resp.rda")
+base::load("data_plot_vs_hr.rda")
+base::load("data_plot_vs_temp.rda")
+base::load("data_plot_vs_sysbp.rda")
+base::load("data_plot_vs_oxysat.rda")
+#Load the laboratory data
+base::load("data_plot_lab_crp.rda")
+base::load("data_plot_lab_lym.rda")
+base::load("data_plot_lab_neut.rda")
+base::load("data_plot_lab_wbc.rda")
+base::load("data_plot_lab_urean.rda")
+base::load("data_plot_lab_pt.rda")
+base::load("data_plot_lab_alt.rda")
+base::load("data_plot_lab_aptt.rda")
+base::load("data_plot_lab_ast.rda")
+base::load("data_plot_lab_bili.rda")
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 

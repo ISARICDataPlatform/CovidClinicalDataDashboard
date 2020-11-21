@@ -1,3 +1,11 @@
+
+
+
+
+
+
+
+
 age.pyramid.plot <- function(aggregated.tbl, ...){
   
   # print(nrow(aggregated.tbl))
@@ -162,6 +170,102 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
     xlab("Conditions present at admission") +
     ylab("Proportion of patients") +
     scale_x_upset()
+}
+######Plots for the vs data############
+
+
+p_resp <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Respiratory rate (min)") + 
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_hr <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Heart rate (min)") + 
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_temp <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Temperature (Celsius)") + 
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_sysbp <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + 
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_oxysat <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
+  geom_text(aes(label=..count..), y=0, stat='count', colour="red", size=4)+
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+######Plots for the lab data############
+
+
+p_lab_crp <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("CRP (mg/L)") + 
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_lym <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Lymphocytes (10^9/L)") + 
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_neut <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Neutrophils (10^9/L)") + 
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_wbc <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("WBC (10^9/L)") + 
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_urean <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Urea (mmol/L)") +
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_pt <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Protrombin time (s)") +
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_alt <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("ALT (units/L)") +
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_aptt <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("APTT (s)") +
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_bili <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Bilirubin (mmol/L)") +
+  guides(fill=guide_legend(title="Age groups"))
+}
+
+p_lab_ast <- function(aggregated.tbl){
+  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("AST (units/L)") +
+  guides(fill=guide_legend(title="Age groups"))
 }
 
 length.of.stay.sex.plot <- function(aggregated.tbl, ...){

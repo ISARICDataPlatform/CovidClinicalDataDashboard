@@ -300,4 +300,199 @@ server <- function(input, output) {
     renderPlot(confidentiality.check(status.by.time.after.admission.reactive(), status.by.time.after.admission.plot), height = 500)
     
   }
+
+
+  output$lab_results_lab_crp <- {
+    
+    data_plot_lab_crp.reactive <- reactive({   
+      
+    fd <- data_plot_lab_crp %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_crp.reactive(), p_lab_crp), height = 500)
+  }
+  
+  output$lab_results_lab_lym <- {
+    
+    data_plot_lab_lym.reactive <- reactive({   
+      
+      fd <- data_plot_lab_lym %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_lym.reactive(), p_lab_lym), height = 500)
+  }
+  
+  output$lab_results_lab_neut <- {
+    
+    data_plot_lab_neut.reactive <- reactive({   
+      
+      fd <- data_plot_lab_neut %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_neut.reactive(), p_lab_neut), height = 500)
+  }
+  
+  output$lab_results_lab_wbc <- {
+    
+    data_plot_lab_wbc.reactive <- reactive({   
+      
+      fd <- data_plot_lab_wbc %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_wbc.reactive(), p_lab_wbc), height = 500)
+  }
+  
+  output$lab_results_lab_urean <- {
+    
+    data_plot_lab_urean.reactive <- reactive({   
+      
+      fd <- data_plot_lab_urean %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_urean.reactive(), p_lab_urean), height = 500)
+  }
+  
+  output$lab_results_lab_pt <- {
+    
+    data_plot_lab_pt.reactive <- reactive({   
+      
+      fd <- data_plot_lab_pt %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_pt.reactive(), p_lab_pt), height = 500)
+  }
+  
+  output$lab_results_lab_alt <- {
+    
+    data_plot_lab_alt.reactive <- reactive({   
+      
+      fd <- data_plot_lab_alt %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_alt.reactive(), p_lab_alt), height = 500)
+  }
+  output$lab_results_lab_aptt <- {
+    
+    data_plot_lab_aptt.reactive <- reactive({   
+      
+      fd <- data_plot_lab_aptt %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_aptt.reactive(), p_lab_aptt), height = 500)
+  }
+  output$lab_results_lab_bili <- {
+    
+    data_plot_lab_bili.reactive <- reactive({   
+      
+      fd <- data_plot_lab_bili %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_bili.reactive(), p_lab_bili), height = 500)
+  }
+  output$lab_results_lab_ast <- {
+    
+    data_plot_lab_ast.reactive <- reactive({   
+      
+      fd <- data_plot_lab_ast %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_lab_ast.reactive(), p_lab_ast), height = 500)
+  }
+  output$clinical_signs_vs_resp <- {
+    
+    data_plot_vs_resp.reactive <- reactive({   
+      
+      fd <- data_plot_vs_resp %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_vs_resp.reactive(), p_resp), height = 500)
+  }
+  
+  output$clinical_signs_vs_hr <- {
+    
+    data_plot_vs_hr.reactive <- reactive({   
+      
+      fd <- data_plot_vs_hr %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_vs_hr.reactive(), p_hr), height = 500)
+  }
+  
+  output$clinical_signs_vs_temp <- {
+    
+    data_plot_vs_temp.reactive <- reactive({   
+      
+      fd <- data_plot_vs_temp %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_vs_temp.reactive(), p_temp), height = 500)
+  }
+  
+  output$clinical_signs_vs_sysbp <- {
+    
+    data_plot_vs_sysbp.reactive <- reactive({   
+      
+      fd <- data_plot_vs_sysbp %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_vs_sysbp.reactive(), p_sysbp), height = 500)
+  }
+  
+  output$clinical_signs_vs_oxysat <- {
+    
+    data_plot_vs_oxysat.reactive <- reactive({   
+      
+      fd <- data_plot_vs_oxysat %>%
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(data_plot_vs_oxysat.reactive(), p_oxysat), height = 500)
+  }
+  
+
+
 }
