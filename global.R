@@ -22,7 +22,7 @@ library(mapview)
 # library(collaborator)
 library(knitr)
 library(viridis)  #using scale_fill_viridis
-
+library(scales)
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -121,6 +121,7 @@ base::load("length_of_stay_sex_input.rda")
 base::load("length_of_stay_age_input.rda")
 base::load("admission_to_icu_input.rda")
 base::load("status_by_time_after_admission_input.rda")
+base::load("length_of_stay_icu_input.rda")
 
 report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
                         name_sep = ", ", group_brachet = "()",group_sep = "; "){
@@ -223,7 +224,8 @@ base::load("data_plot_lab_aptt.rda")
 base::load("data_plot_lab_ast.rda")
 base::load("data_plot_lab_bili.rda")
 
-
+#load patient by country data
+base::load("patient_by_country_input.rda")
 
 
 
