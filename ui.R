@@ -38,6 +38,7 @@ dashboardPage(skin = "black",
                   menuItem("Hospital stays", tabName = "hospital_stays", icon = icon("hospital")),
                   menuItem("Vital signs", tabName = "vital_signs", icon = icon("file-medical-alt")),
                   menuItem("Laboratory results", tabName = "lab_results", icon = icon("vial")),
+                  menuItem("Country Comparison", tabName = "country", icon = icon("globe")),
                   menuItem("Contributors", tabName = "contributors", icon = icon("users"))
                 ),
                 
@@ -153,7 +154,10 @@ dashboardPage(skin = "black",
                                 "Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
                                 width = 6, height = 600, solidHeader = T, title = 'Treatments given'),
                             box(plotOutput("icuTreatmentUpset", height = "500px"),
-                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given in the ICU')
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given in the ICU'),
+                            box(plotOutput("lengthofstayICU", height = "500px"),
+                                "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                                width = 6, height = 600, solidHeader = T, title = 'Distribution of length of stay for patients admitted into Intensive Care Unit (ICU)')
                           )
                   ),
                   
@@ -219,6 +223,13 @@ dashboardPage(skin = "black",
                                 width = 6, height = 600, solidHeader = T, title = 'Bilirubin (mmol/L)'),
                             box(plotOutput("lab_results_lab_ast", height = "500px"),
                                 width = 6, height = 600, solidHeader = T, title = 'AST (units/L)')
+                          )
+                  ),
+                  tabItem(tabName = "country",
+                          fluidRow(
+                            box(plotOutput("PatientbyCountry", height = "500px"),
+                                "This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section.",
+                                width = 6, height = 600, solidHeader = T, title = "Distribution of patients by country")
                           )
                   )
                   
