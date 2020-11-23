@@ -330,3 +330,35 @@ status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
   
   plt
 }
+
+length.of.stay.icu.plot <- function(aggregated.tbl,...){
+  plt <- ggplot(data = aggregated.tbl, aes(x = type, y = dur, fill = type)) +
+    geom_violin(trim = TRUE, show.legend = FALSE) +
+    scale_fill_manual(values = c("darkorchid2", "darkorchid4")) +
+    geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA)  +
+    labs(title = " ", x = "Location", y = "Length of stay (days)") +
+    theme(
+      axis.title.x = element_text(size = 12),
+      axis.title.y = element_text(size = 12),
+      panel.grid.minor = element_line(size = 0.25, linetype = "solid",
+                                      colour = "grey"),
+      panel.background = element_rect(fill = "white", colour = "white"),
+      panel.grid.major = element_line(size = 0.5, linetype = "solid",
+                                      colour = "grey"),
+      axis.line = element_line(colour = "black"),
+      panel.border = element_rect(colour = "black", fill = NA, size = 1)
+    )
+  plt
+}
+
+patient.by.country.plot <- function(aggregated.tbl,...){
+  plt <- ggplot(data=aggregated.tbl) +
+    geom_col(aes(x = Country, y=count), fill="turquoise4") +
+    geom_text(aes(x=Country, y= 0.95*(count), label=count), size=3, angle = 90, hjust = 1, col ="white") +
+    theme_bw() +
+    scale_x_discrete(expand = c(0,1.5))+
+    ylab("Patient records (pseudo log scale)") +
+    theme(axis.text.x = element_text(angle = 45, hjust=1, size = 10), axis.title.x=element_blank()) +
+    scale_y_continuous( trans = pseudo_log_trans(), expand = c(0,0.1), breaks = c(0,1, 10, 100, 1000, 10000, 100000), minor_breaks = NULL)
+  plt
+}
