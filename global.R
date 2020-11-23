@@ -114,7 +114,6 @@ month.options <- c("Dec 2019", glue("{months} {2020}"))
 
 map.data <- read_rds(here::here("map_data.rds"))
 
-knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")
 
 #################load data for hospital stays
 base::load("length_of_stay_sex_input.rda")
@@ -203,6 +202,8 @@ report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
   
   
   return(gsub("\n\n", " ", output$auth_out))}
+
+knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")
 
 
 #Load the vs data
