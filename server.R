@@ -241,6 +241,18 @@ server <- function(input, output) {
     })
     renderPlot(confidentiality.check(icu.treatment.upset.reactive(), upset.plot, which.plot = "icu.treatment"), height = 500)
   }
+  
+  output$lengthofstayICU <- {
+    length.of.stay.icu.reactive <- reactive({
+      fd <- length.of.stay.icu.input %>% 
+        as.data.table() %>% 
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(length.of.stay.icu.reactive(), length.of.stay.icu.plot), height = 500)
+  }
+  
   output$contributorsMap <- renderLeaflet({
     
     map.data %>%
@@ -493,6 +505,21 @@ server <- function(input, output) {
     renderPlot(confidentiality.check(data_plot_vs_oxysat.reactive(), p_oxysat), height = 500)
   }
   
+  output$PatientbyCountry <- {
+    
+    patient.by.country.reactive <- reactive({
+      
+      fd <- patient.by.country.input %>% 
+        as.data.table() %>%
+        lazy_dt(immutable = FALSE) %>%
+        slider.filters(input) %>%
+        mutate(Country=slider_country) %>% 
+        group_by(Country) %>%
+        summarise(count = n()) %>%
+        as_tibble()
+    })
+    renderPlot(confidentiality.check(patient.by.country.reactive(), patient.by.country.plot), height = 500)
+  }
 
 
 }
