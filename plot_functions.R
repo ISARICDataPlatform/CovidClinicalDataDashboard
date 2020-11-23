@@ -321,7 +321,7 @@ admission.to.icu.plot <- function(aggregated.tbl,...){
 }
 
 status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
-  plt <-  ggplot(aggregated.tbl)+ geom_bar(aes(x = day, fill = status), position = "fill") +
+  plt <-  ggplot(aggregated.tbl)+ geom_bar(aes(x = day, fill = status), position = "fill", stat = 'count') +
     scale_fill_brewer(palette = "Dark2", name  = "Status", drop = F, labels = c("Discharged", "Transferred","Unknown", "Ongoing care", "Ward", "ICU", "Death")) +
     theme_bw() +
     xlab("Days relative to admission") +
