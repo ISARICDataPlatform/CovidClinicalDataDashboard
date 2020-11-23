@@ -41,3 +41,5 @@ data_plot_vs_oxysat.rda
 data_plot_vs_resp.rda
 data_plot_vs_sysbp.rda
 data_plot_vs_temp.rda
+length_of_stay_icu_input.rda
+patient_by_country_input.rda
