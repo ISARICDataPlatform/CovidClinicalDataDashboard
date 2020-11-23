@@ -307,6 +307,8 @@ server <- function(input, output) {
         as.data.table() %>% 
         lazy_dt(immutable = FALSE) %>% 
         slider.filters(input) %>% 
+        group_by(day, status, slider_sex, slider_agegp10, slider_country, slider_monthyear) %>% 
+        summarise(count=n()) %>% 
         as_tibble()
     })
     renderPlot(confidentiality.check(status.by.time.after.admission.reactive(), status.by.time.after.admission.plot), height = 500)
