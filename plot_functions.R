@@ -177,24 +177,28 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
 p_resp <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Respiratory rate (min)") + 
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_hr <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Heart rate (min)") + 
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_temp <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Temperature (Celsius)") + 
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_sysbp <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + 
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
@@ -202,6 +206,7 @@ p_oxysat <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
   geom_text(aes(label=..count..), y=0, stat='count', colour="red", size=4)+
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
@@ -211,60 +216,70 @@ p_oxysat <- function(aggregated.tbl){
 p_lab_crp <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("CRP (mg/L)") + 
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_lym <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Lymphocytes (10^9/L)") + 
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_neut <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Neutrophils (10^9/L)") + 
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_wbc <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("WBC (10^9/L)") + 
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_urean <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Urea (mmol/L)") +
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_pt <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Protrombin time (s)") +
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_alt <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("ALT (units/L)") +
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_aptt <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("APTT (s)") +
+  theme_bw() +  
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_bili <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Bilirubin (mmol/L)") +
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
 p_lab_ast <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
   geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("AST (units/L)") +
+  theme_bw() +
   guides(fill=guide_legend(title="Age groups"))
 }
 
@@ -321,6 +336,7 @@ admission.to.icu.plot <- function(aggregated.tbl,...){
 }
 
 status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
+
   plt <-  ggplot(aggregated.tbl)+ 
     geom_bar(aes(x = day, fill = status), position = "fill") +
     scale_fill_brewer(palette = "Dark2", name  = "Status", drop = F, labels = c("Discharged", "Transferred","Unknown", "Ongoing care", "Ward", "ICU", "Death")) +
@@ -329,5 +345,37 @@ status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
     annotate(geom = "segment", x = 14.5, xend = 14.5, y = 0, yend = 1) +
     ylab("Proportion")
   
+  plt
+}
+
+length.of.stay.icu.plot <- function(aggregated.tbl,...){
+  plt <- ggplot(data = aggregated.tbl, aes(x = type, y = dur, fill = type)) +
+    geom_violin(trim = TRUE, show.legend = FALSE) +
+    scale_fill_manual(values = c("darkorchid2", "darkorchid4")) +
+    geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA)  +
+    labs(title = " ", x = "Location", y = "Length of stay (days)") +
+    theme(
+      axis.title.x = element_text(size = 12),
+      axis.title.y = element_text(size = 12),
+      panel.grid.minor = element_line(size = 0.25, linetype = "solid",
+                                      colour = "grey"),
+      panel.background = element_rect(fill = "white", colour = "white"),
+      panel.grid.major = element_line(size = 0.5, linetype = "solid",
+                                      colour = "grey"),
+      axis.line = element_line(colour = "black"),
+      panel.border = element_rect(colour = "black", fill = NA, size = 1)
+    )
+  plt
+}
+
+patient.by.country.plot <- function(aggregated.tbl,...){
+  plt <- ggplot(data=aggregated.tbl) +
+    geom_col(aes(x = Country, y=count), fill="turquoise4") +
+    geom_text(aes(x=Country, y= 0.95*(count), label=count), size=3, angle = 90, hjust = 1, col ="white") +
+    theme_bw() +
+    scale_x_discrete(expand = c(0,1.5))+
+    ylab("Patient records (pseudo log scale)") +
+    theme(axis.text.x = element_text(angle = 45, hjust=1, size = 10), axis.title.x=element_blank()) +
+    scale_y_continuous( trans = pseudo_log_trans(), expand = c(0,0.1), breaks = c(0,1, 10, 100, 1000, 10000, 100000), minor_breaks = NULL)
   plt
 }
