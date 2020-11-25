@@ -9,7 +9,7 @@ knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = e
 
 We extend our thanks to all of the staff at our partner sites collecting data from across the globe:
 
-```{r, list, eval=T, echo = FALSE}
+```{r, list, eval=T, echo = FALSE, warning=FALSE, message=FALSE}
 map.data %>%
   arrange(country) %>%
   dplyr::mutate(country = paste0("**", country, "**")) %>%
@@ -20,8 +20,3 @@ map.data %>%
   knitr::kable(col.names ="")
 ```
 
-&nbsp;
-
-&nbsp;
-
-&nbsp;
