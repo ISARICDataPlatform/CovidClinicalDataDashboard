@@ -36,7 +36,9 @@ dashboardPage(skin = "black",
                   menuItem("Treatment", tabName = "treatment", icon = icon("pills")),
                   menuItem("ICU Treatment", tabName = "icu_treatment", icon = icon("heartbeat")),
                   menuItem("Vital signs", tabName = "vital_signs", icon = icon("file-medical-alt")),
-                  menuItem("Laboratory results", tabName = "lab_results", icon = icon("vial"))
+                  menuItem("Laboratory results", tabName = "lab_results", icon = icon("vial")),
+                  menuItem("Comorbidities by age", tabName = "comorbidities_by_age", icon = icon("chart-bar")),
+                  menuItem("Symptoms by age", tabName = "symptoms_by_age", icon = icon("chart-bar"))
                 ),
                 
                 hr(),
@@ -124,7 +126,10 @@ dashboardPage(skin = "black",
                                 "Bars are labelled with the fraction of patients presenting with the symptom to the number of patients with data on the symptom recorded",
                                 width = 6, height = 600, solidHeader = T, title = 'Prevalance of symptoms at admission'),
                             box(plotOutput("symptomUpset", height = "500px"),
-                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common symptoms upon admission')
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common symptoms upon admission'),
+                            box(plotOutput("symptomHeatmap", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Heatmap of symptoms at admission')
+                            
                           )
                   ),
                   tabItem(tabName = "comorbidities",
@@ -153,8 +158,7 @@ dashboardPage(skin = "black",
                             box(plotOutput("icuTreatmentUpset", height = "500px"),
                                 width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given in the ICU')
                           )
-                  )
-                  ,
+                  ),
                   tabItem(tabName = "vital_signs",
                           fluidRow(
                             box(plotOutput("clinical_signs_vs_resp", height = "500px"),
@@ -168,8 +172,7 @@ dashboardPage(skin = "black",
                             box(plotOutput("clinical_signs_vs_oxysat", height = "500px"),
                                 width = 6, height = 600, solidHeader = T, title = 'Oxygen saturation in room air (%)')
                           )
-                  )
-                  ,
+                  ),
                   tabItem(tabName = "lab_results",
                           fluidRow(
                             box(plotOutput("lab_results_lab_crp", height = "500px"),
@@ -193,8 +196,51 @@ dashboardPage(skin = "black",
                             box(plotOutput("lab_results_lab_ast", height = "500px"),
                                 width = 6, height = 600, solidHeader = T, title = 'AST (units/L)')
                           )
+                  ),
+                  tabItem(tabName = "comorbidities_by_age",
+                          fluidRow(
+                            box(plotOutput("age_comorbid_asthma", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_comorbid_malignant_neoplasm", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_comorbid_obesity", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_comorbid_diabetes", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_comorbid_dementia", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_comorbid_smoking", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_comorbid_hypertension", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            )
+                  ),
+                  tabItem(tabName = "symptoms_by_age",
+                          fluidRow(
+                            box(plotOutput("age_symptoms_history_of_fever", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_cough", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_cough_fever", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_shortness_of_breath", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_cought_fever_shortness_of_breath", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_upper_respiratory_tract_symptoms", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_altered_consciousness_confusion", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_vomiting_nausea", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_diarrhoea", height = "500px"),
+                                width = 6, height = 600, solidHeader = T),
+                            box(plotOutput("age_symptoms_abdominal_pain", height = "500px"),
+                                width = 6, height = 600, solidHeader = T)
+                          )
                   )
                   
                 ))
 )
+
 
