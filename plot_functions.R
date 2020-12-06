@@ -337,7 +337,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, ...) {
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = 12)) +
+    theme_bw() + theme(axis.text = element_text(size = 8)) +
     labs(title = N)
   
   return(p)
@@ -416,6 +416,11 @@ plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms <-  function(data_plo
 plot.prop.by.age_symptoms_altered_consciousness_confusion <-  function(data_plot_symptoms_altered_consciousness_confusion){
   plot.prop.by.age(data_plot_symptoms_altered_consciousness_confusion, data_plot_symptoms_altered_consciousness_confusion$value,
                                                                   "Proportion with confusion")
+}
+#data_plot_symptoms_constitutional
+plot.prop.by.age_symptoms_constitutional <-  function(data_plot_symptoms_constitutional){
+  plot.prop.by.age(data_plot_symptoms_constitutional, data_plot_symptoms_constitutional$value,
+                   "Proportion with constitutional symptoms")
 }
 #data_plot_symptoms_vomiting_nausea
 plot.prop.by.age_symptoms_vomiting_nausea <-  function(data_plot_symptoms_vomiting_nausea){
