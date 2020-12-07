@@ -24,6 +24,8 @@ library(knitr)
 library(viridis)  #using scale_fill_viridis
 library(scales)
 library(binom)
+library(DiagrammeR)
+library(magrittr)
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -228,6 +230,9 @@ base::load("data_plot_lab_bili.rda")
 
 #load patient by country data
 base::load("patient_by_country_input.rda")
+
+#load flowchart data
+base::load("flowchart_input.rda")
 
 
 #Load the comorbidty by age plots

@@ -32,11 +32,13 @@ month.option.list <- as.list(c(NA, month.options))
 names(month.option.list) <- c("Unknown", month.options)
 
 # Define UI for application that draws a histogram
+<<<<<<< HEAD
 dashboardPage(
   skin = "black",
   dbHeader,
   dashboardSidebar(
     sidebarMenu(
+      menuItem("Overview", tabName = "flowchart", icon = icon("book")),
       menuItem(
         "Patient Characteristics",
         tabName = "patients",
@@ -99,8 +101,7 @@ dashboardPage(
       tags$link(rel = "stylesheet", type = "text/css", href = "custom.css"),
       tags$style(
         HTML(
-          '
-                 .btn-custom {background-color: #df0442; color:  #FFFFFF;}
+          '.btn-custom {background-color: #df0442; color:  #FFFFFF;}
                  .skin-black .main-header .logo {color: #df0442; font-weight: bold; background-color: #FFFFEA;}
                  .skin-black .main-header .logo:hover {color: #df0442; font-weight: bold; background-color: #FFFFEA;}
                  .skin-black .main-header .navbar { background-color: #FFFFEA;}
@@ -464,14 +465,75 @@ dashboardPage(
                   solidHeader = T,
                   title = "Distribution of patients by country"
                 ),
+
                 tabItem(tabName = "comorbidities_by_age",
                         fluidRow(
                           box(
                             plotOutput("age_comorbid_asthma", height = "500px"),
                             width = 4,
                             height = 400,
-                            solidHeader = T
-                          ),
+                            solidHeader = T)
+                        ),
+
+                  tabItem(tabName = "flowchart",
+                          fluidRow(
+                            box(grVizOutput("flowchart", height = "500px"),
+                                width = 10, height = 600, solidHeader = T, title = 'Overview of cohort and outcomes'),
+                           )
+                  ),
+                  tabItem(tabName = "patients",
+                          fluidRow(
+                            box(plotOutput("agePyramid", height = "300px"),
+                                "Bar fills are outcome (death/discharge/censored) at the time of report.",
+                                width = 6, height = 400, solidHeader = T, title = 'Age and sex distribution of patients'),
+                            box(plotOutput("outcomesByAdmissionDate", height = "300px"),
+                                "Bar fills are outcome (death/discharge/censored) at the time of report.",
+                                width = 6, height = 400, solidHeader = T, title = 'Cumulative patient count by admission date')
+                          )
+                  ),
+                  tabItem(tabName = "symptoms",
+                          fluidRow(
+                            box(plotOutput("symptomPrevalence", height = "500px"),
+                                "Bars are labelled with the fraction of patients presenting with the symptom to the number of patients with data on the symptom recorded",
+                                width = 6, height = 600, solidHeader = T, title = 'Prevalance of symptoms at admission'),
+                            box(plotOutput("symptomUpset", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common symptoms upon admission')
+                          )
+                  ),
+                  tabItem(tabName = "comorbidities",
+                          fluidRow(
+                            box(plotOutput("comorbidityPrevalence", height = "500px"),
+                                "Bars are labelled with the fraction of patients presenting with the comorbidity to the number of patients with data on the comorbidity recorded",
+                                width = 6, height = 600, solidHeader = T, title = 'Prevalance of comorbidities'),
+                            box(plotOutput("comorbidityUpset", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common comorbidities')
+                          )
+                  ),
+                  tabItem(tabName = "treatment",
+                          fluidRow(
+                            box(plotOutput("treatmentPrevalence", height = "500px"),
+                                "Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
+                                width = 6, height = 600, solidHeader = T, title = 'Treatments given'),
+                            box(plotOutput("treatmentUpset", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given')
+                          )
+                  ),
+                  tabItem(tabName = "icu_treatment",
+                          fluidRow(
+                            box(plotOutput("icuTreatmentPrevalence", height = "500px"),
+                                "Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
+                                width = 6, height = 600, solidHeader = T, title = 'Treatments given'),
+                            box(plotOutput("icuTreatmentUpset", height = "500px"),
+                                width = 6, height = 600, solidHeader = T, title = 'Combinations of the five most common treatments given in the ICU'),
+                            box(plotOutput("lengthofstayICU", height = "500px"),
+                                "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                                width = 6, height = 600, solidHeader = T, title = 'Distribution of length of stay for patients admitted into Intensive Care Unit (ICU)')
+                          )
+                  ),
+                  
+                  tabItem(tabName = "contributors",
+                          fluidRow(
+                            box(leafletOutput("contributorsMap"), title = "Contributors Map", width = 12)),
                           box(
                             plotOutput("age_comorbid_malignant_neoplasm", height = "500px"),
                             width = 4,
