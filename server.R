@@ -69,6 +69,7 @@ server <- function(input, output) {
         summarise(count = sum(count)) %>%
         as_tibble()
     })
+
     renderPlot(confidentiality.check(age.pyramid.reactive(), age.pyramid.plot),
                height = 300)
   }
@@ -920,4 +921,3 @@ server <- function(input, output) {
   }
 }
 
-}

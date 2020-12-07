@@ -77,7 +77,7 @@ diagram <- "digraph flowchart {
 
       "
 age.pyramid.plot <- function(aggregated.tbl, ...){
-  
+  print("hi")
   # print(nrow(aggregated.tbl))
   
   max.count = aggregated.tbl %>% group_by(slider_agegp10, slider_sex) %>% summarise(sac = sum(abs(count))) %>% pull(sac) %>% max()
