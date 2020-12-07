@@ -32,7 +32,6 @@ month.option.list <- as.list(c(NA, month.options))
 names(month.option.list) <- c("Unknown", month.options)
 
 # Define UI for application that draws a histogram
-<<<<<<< HEAD
 dashboardPage(
   skin = "black",
   dbHeader,
