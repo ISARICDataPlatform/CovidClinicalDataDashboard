@@ -23,6 +23,8 @@ library(mapview)
 library(knitr)
 library(viridis)  #using scale_fill_viridis
 library(scales)
+library(DiagrammeR)
+library(magrittr)
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -114,7 +116,6 @@ month.options <- c("Dec 2019", glue("{months} {2020}"))
 
 map.data <- read_rds(here::here("map_data.rds"))
 
-knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")
 
 #################load data for hospital stays
 base::load("length_of_stay_sex_input.rda")
@@ -205,6 +206,8 @@ report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
   
   return(gsub("\n\n", " ", output$auth_out))}
 
+knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")
+
 
 #Load the vs data
 base::load("data_plot_vs_resp.rda")
@@ -226,6 +229,9 @@ base::load("data_plot_lab_bili.rda")
 
 #load patient by country data
 base::load("patient_by_country_input.rda")
+
+#load flowchart data
+base::load("flowchart_input.rda")
 
 
 
