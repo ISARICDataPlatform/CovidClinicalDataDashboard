@@ -46,6 +46,12 @@ slider.filters <- function(tbl, input){
 }
 
 server <- function(input, output) {
+  
+  output$flowchart <- renderGrViz({
+    grViz({
+      diagram
+    })
+  })
 
   output$agePyramid <- {
     
