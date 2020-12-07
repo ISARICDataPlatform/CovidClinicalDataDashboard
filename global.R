@@ -23,6 +23,7 @@ library(mapview)
 library(knitr)
 library(viridis)  #using scale_fill_viridis
 library(scales)
+library(binom)
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -229,6 +230,28 @@ base::load("data_plot_lab_bili.rda")
 base::load("patient_by_country_input.rda")
 
 
+#Load the comorbidty by age plots
+base::load("data_plot_comorbid_asthma.rda")
+base::load("data_plot_comorbid_malignant_neoplasm.rda")
+base::load("data_plot_comorbid_obesity.rda")
+base::load("data_plot_comorbid_diabetes.rda")
+base::load("data_plot_comorbid_dementia.rda")
+base::load("data_plot_comorbid_smoking.rda")
+base::load("data_plot_comorbid_hypertension.rda")
+#Load the symptoms by age plots
+base::load("data_plot_symptoms_history_of_fever.rda")
+base::load("data_plot_symptoms_cough.rda")
+base::load("data_plot_symptoms_cough_fever.rda")
+base::load("data_plot_symptoms_shortness_of_breath.rda")
+base::load("data_plot_symptoms_cought_fever_shortness_of_breath.rda")
+base::load("data_plot_symptoms_upper_respiratory_tract_symptoms.rda")
+base::load("data_plot_symptoms_altered_consciousness_confusion.rda")
+base::load("data_plot_symptoms_constitutional.rda")
+base::load("data_plot_symptoms_vomiting_nausea.rda")
+base::load("data_plot_symptoms_diarrhoea.rda")
+base::load("data_plot_symptoms_abdominal_pain.rda")
+#Load the heatmap data
+base::load("data_plot_heatmap.rda")
 
 
 

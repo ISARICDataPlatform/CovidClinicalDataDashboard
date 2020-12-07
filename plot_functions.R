@@ -1,11 +1,4 @@
 
-
-
-
-
-
-
-
 age.pyramid.plot <- function(aggregated.tbl, ...){
   
   # print(nrow(aggregated.tbl))
@@ -378,4 +371,187 @@ patient.by.country.plot <- function(aggregated.tbl,...){
     theme(axis.text.x = element_text(angle = 45, hjust=1, size = 10), axis.title.x=element_blank()) +
     scale_y_continuous( trans = pseudo_log_trans(), expand = c(0,0.1), breaks = c(0,1, 10, 100, 1000, 10000, 100000), minor_breaks = NULL)
   plt
+}
+
+############################################
+#' @export plot.prop.by.age
+#' @keywords internal
+############################################
+plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, ...) {
+  data2 <- data
+  summ <- data2 %>%
+    add_column(All = 1)%>%
+    add_column(a = var) %>%
+    filter(!is.na(a)) %>%
+    group_by(slider_agegp10) %>%
+    dplyr::summarise(
+      All = sum(All, na.rm = TRUE),
+      v = sum(a, na.rm = TRUE)
+    )
+  d <- binom.confint(summ$v, summ$All, conf.level = .95, method = "exact")
+  d$X <- summ$slider_agegp10
+  d$lbl <- paste(d$x, d$n, sep = "/\n", collapse = NULL)
+  censored.lbl <- paste("-", d$n, sep = "/\n", collapse = NULL)
+  d$lbl[d$x <= 5] <- censored.lbl[d$x <= 5]
+  d$size <- d$n / sz
+  #xlabs <- c(
+  #  "<10",
+  # "10-",
+  #  "20-",
+  # "30-",
+  #  "40-",
+  #  "50-",
+  #  "60-",
+  #  "70-",
+  #  "80-",
+  #  expression(phantom(x) >= 90)
+  #)
+  N <- paste("N = ", sum(summ$All), sep = "", collapse = NULL)
+  pts <- geom_point(
+    data = d,
+    aes(x = d$X, y = mean),
+    shape = "square",
+    size = d$size,
+    colour = "navy"
+  )
+  lines <- geom_linerange(
+    data = d,
+    aes(x = X, ymin = lower, ymax = upper),
+    colour = "#000000",
+    show.legend = FALSE
+  )
+  xa <- scale_x_discrete(
+    name = "Age group (years)"#,
+    #labels = xlabs
+  )
+  ya <- scale_y_continuous(
+    name = name,
+    limits = c(0, ymax)
+  )
+  #  lbls <- geom_text(
+  #    data = d,
+  #    aes(x = X, y = ymax, label = lbl),
+  #    size = 2
+  #  )
+  p <- ggplot() +
+    pts +
+    lines +
+    #    lbls +
+    xa + ya +
+    theme_bw() + theme(axis.text = element_text(size = 8)) +
+    labs(title = N)
+  
+  return(p)
+  
+}
+#data_plot_comorbid_asthma
+plot.prop.by.age_comorbid_asthma <- function(data_plot_comorbid_asthma){
+  plot.prop.by.age(data_plot_comorbid_asthma, data_plot_comorbid_asthma$value,
+                   "Proportion with asthma")
+}
+#data_plot_comorbid_malignant_neoplasm
+plot.prop.by.age_comorbid_malignant_neoplasm <- function(data_plot_comorbid_malignant_neoplasm){
+  plot.prop.by.age(data_plot_comorbid_malignant_neoplasm, data_plot_comorbid_malignant_neoplasm$value,
+                                            "Proportion with malignancy")
+}
+#data_plot_comorbid_obesity
+plot.prop.by.age_comorbid_obesity <- function(data_plot_comorbid_obesity){
+  plot.prop.by.age(data_plot_comorbid_obesity, data_plot_comorbid_obesity$value,
+                                          "Proportion with obesity")
+}
+#data_plot_comorbid_diabetes
+plot.prop.by.age_comorbid_diabetes <- function(data_plot_comorbid_diabetes){
+  plot.prop.by.age(data_plot_comorbid_diabetes, data_plot_comorbid_diabetes$value,
+                                           "Proportion with diabetes mellitus")
+}
+#data_plot_comorbid_dementia
+plot.prop.by.age_comorbid_dementia <- function(data_plot_comorbid_dementia){
+  plot.prop.by.age(data_plot_comorbid_dementia, data_plot_comorbid_dementia$value,
+                                           "Proportion with dementia")
+}
+#data_plot_comorbid_smoking
+plot.prop.by.age_comorbid_smoking <- function(data_plot_comorbid_smoking){
+  plot.prop.by.age(data_plot_comorbid_smoking, data_plot_comorbid_smoking$value,
+                                          "Proportion with currently smoke")
+}
+#data_plot_comorbid_hypertension
+plot.prop.by.age_comorbid_hypertension <- function(data_plot_comorbid_hypertension){
+  plot.prop.by.age(data_plot_comorbid_hypertension, data_plot_comorbid_hypertension$value,
+                                               "Proportion with hypertension")
+}
+
+
+
+#data_plot_symptoms_history_of_fever
+plot.prop.by.age_symptoms_history_of_fever <-  function(data_plot_symptoms_history_of_fever){
+  plot.prop.by.age(data_plot_symptoms_history_of_fever, data_plot_symptoms_history_of_fever$value,
+                                                   "Proportion with fever")
+}
+#data_plot_symptoms_cough
+plot.prop.by.age_symptoms_cough <-  function(data_plot_symptoms_cough){
+  plot.prop.by.age(data_plot_symptoms_cough, data_plot_symptoms_cough$value,
+                                        "Proportion with cough")
+}
+#data_plot_symptoms_cough_fever
+plot.prop.by.age_symptoms_cough_fever <-  function(data_plot_symptoms_cough_fever){
+  plot.prop.by.age(data_plot_symptoms_cough_fever, data_plot_symptoms_cough_fever$value,
+                                              "Proportion with fever or cough")
+}
+#symptoms_symptoms_shortness_of_breath
+plot.prop.by.age_symptoms_shortness_of_breath <-  function(data_plot_symptoms_shortness_of_breath){
+  plot.prop.by.age(data_plot_symptoms_shortness_of_breath, data_plot_symptoms_shortness_of_breath$value,
+                                                       "Proportion with shortness of breath")
+}
+#data_plot_symptoms_cought_fever_shortness_of_breath
+plot.prop.by.age_symptoms_cought_fever_shortness_of_breath <-  function(data_plot_symptoms_cought_fever_shortness_of_breath){
+  plot.prop.by.age(data_plot_symptoms_cought_fever_shortness_of_breath, 
+                                                                   data_plot_symptoms_cought_fever_shortness_of_breath$value,
+                                                                   "Proportion with cough, fever, or shortness of breath")
+}
+#data_plot_symptoms_upper_respiratory_tract_symptoms
+plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms <-  function(data_plot_symptoms_upper_respiratory_tract_symptoms){
+  plot.prop.by.age(data_plot_symptoms_upper_respiratory_tract_symptoms, data_plot_symptoms_upper_respiratory_tract_symptoms$value,
+                                                                   "Proportion with upper respiratory tract symptoms")
+}
+#data_plot_symptoms_altered_consciousness_confusion
+plot.prop.by.age_symptoms_altered_consciousness_confusion <-  function(data_plot_symptoms_altered_consciousness_confusion){
+  plot.prop.by.age(data_plot_symptoms_altered_consciousness_confusion, data_plot_symptoms_altered_consciousness_confusion$value,
+                                                                  "Proportion with confusion")
+}
+#data_plot_symptoms_constitutional
+plot.prop.by.age_symptoms_constitutional <-  function(data_plot_symptoms_constitutional){
+  plot.prop.by.age(data_plot_symptoms_constitutional, data_plot_symptoms_constitutional$value,
+                   "Proportion with constitutional symptoms")
+}
+#data_plot_symptoms_vomiting_nausea
+plot.prop.by.age_symptoms_vomiting_nausea <-  function(data_plot_symptoms_vomiting_nausea){
+  plot.prop.by.age(data_plot_symptoms_vomiting_nausea, data_plot_symptoms_vomiting_nausea$value,
+                                          "Proportion with nausea or vomiting")
+}
+#data_plot_symptoms_diarrhoea
+plot.prop.by.age_symptoms_diarrhoea <-  function(data_plot_symptoms_diarrhoea){
+  plot.prop.by.age(data_plot_symptoms_diarrhoea, data_plot_symptoms_diarrhoea$value,
+                                            "Proportion with diarrhoea")
+}
+#data_plot_symptoms_abdominal_pain
+plot.prop.by.age_symptoms_abdominal_pain <-  function(data_plot_symptoms_abdominal_pain){
+  plot.prop.by.age(data_plot_symptoms_abdominal_pain, data_plot_symptoms_abdominal_pain$value,
+                                                 "Proportion with abdominal pain")
+}
+######################
+#######Heatmap graph
+######################
+heatmap_plot <- function(data_plot_heatmap){
+  heatmap_plot <- ggplot(data_plot_heatmap) +
+    geom_tile(aes(x=label.x, y=label.y, fill=phi.correlation)) +
+    scale_fill_gradient2(low = "deepskyblue3", mid = "white", high = "indianred3",
+                         name = "phi coefficient", limits = c(-1,1)) +
+    theme_bw() +
+    theme(panel.grid.major = element_blank(),
+          panel.grid.minor = element_blank(),
+          axis.title.x=element_blank(),
+          axis.title.y=element_blank(),
+          text = element_text(size=9),
+          axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
+    coord_fixed()
 }
