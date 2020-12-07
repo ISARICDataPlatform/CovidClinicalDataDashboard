@@ -30,6 +30,7 @@ dashboardPage(skin = "black",
               dbHeader,
               dashboardSidebar(
                 sidebarMenu(
+                  menuItem("Overview", tabName = "flowchart", icon = icon("book")),
                   menuItem("Patient Characteristics", tabName = "patients", icon = icon("bed")),
                   menuItem("Symptoms at admission", tabName = "symptoms", icon = icon("stethoscope")),
                   menuItem("Comorbidities", tabName = "comorbidities", icon = icon("notes-medical")),
@@ -111,6 +112,12 @@ dashboardPage(skin = "black",
                 ),
                 hr(),
                 tabItems(
+                  tabItem(tabName = "flowchart",
+                          fluidRow(
+                            box(grVizOutput("flowchart", height = "500px"),
+                                width = 10, height = 600, solidHeader = T, title = 'Overview of cohort and outcomes'),
+                           )
+                  ),
                   tabItem(tabName = "patients",
                           fluidRow(
                             box(plotOutput("agePyramid", height = "300px"),
