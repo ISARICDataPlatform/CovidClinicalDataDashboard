@@ -231,9 +231,8 @@ base::load("data_plot_lab_bili.rda")
 #load patient by country data
 base::load("patient_by_country_input.rda")
 
-#load flowchart data
-base::load("flowchart_input.rda")
-
+#load summary & flowchart data
+base::load("summary_input.rda")
 
 #Load the comorbidty by age plots
 base::load("data_plot_comorbid_asthma.rda")
