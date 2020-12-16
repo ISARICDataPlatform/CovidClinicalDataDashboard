@@ -478,14 +478,9 @@ dashboardPage(
       ),
       tabItem(tabName = "flowchart",
               fluidRow(
-                box(
-                  grVizOutput("flowchart", height = "500px"),
-                  width = 10,
-                  height = 600,
-                  solidHeader = T,
-                  title = 'Overview of cohort and outcomes'
-                ),
-              )),
+                  includeHTML("markdown/Summary.html")
+              )
+      ),
       tabItem(tabName = "comorbidities_by_age",
               fluidRow(
                 box(
