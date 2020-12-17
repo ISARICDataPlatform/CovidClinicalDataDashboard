@@ -13,7 +13,7 @@ base::load(here::here("symptom_prevalence_input.rda"))
 
 ```
 # COVID-19 Report
-Containing data extracted `28 September 2020`
+Containing data extracted `XX December 2020`
 
 ## Summary
 The results in this report have been produced using data from the ISARIC COVID-19 database. For information, or to contribute to the collaboration, please contact ncov@isaric.org.  
@@ -25,12 +25,12 @@ Please note the following caveats. This is a dynamic report which captures new v
 Up to the date of this report, data have been entered for **`r nrow(summary_input)`** individuals from **`r length(unique(summary_input$siteid_final))`** sites across **`r length(unique(summary_input$slider_country))`** countries.  
 
 The analysis detailed in this report only includes individuals: 
-  1. for whom data collection commenced on or before `14 September 2020`. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes. However, this limits our focus to a restricted cohort despite the much larger volumes of data held in the database.)  
+  1. for whom data collection commenced on or before `XX December 2020`. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes. However, this limits our focus to a restricted cohort despite the much larger volumes of data held in the database.)  
 **AND**  
   2. who have laboratory-confirmed or clinically-diagnosed SARS-COV-2 infection.
   
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases (`X` are laboratory-confirmed for SARS-COV-2 infection).
-The below flow chart gives an overview of the cohort and outcomes as of `28 September 2020`.
+The below flow chart gives an overview of the cohort and outcomes as of `XX December 2020`.
 
 ```{r echo=FALSE}
 grViz("digraph flowchart {
@@ -116,16 +116,16 @@ grViz("digraph flowchart {
 
 
 ## Demographics and presenting features
-Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)))` cases. The minimum and maximum observed ages were `r min(summary_input$age, na.rm=T)` and `r max(summary_input$age, na.rm=T)` years respectively. The median age is `r median(summary_input$age, na.rm=T)` years.  
+Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The minimum and maximum observed ages were `r min(summary_input$age, na.rm=T)` and `r max(summary_input$age, na.rm=T)` years respectively. The median age is `r median(summary_input$age, na.rm=T)` years.  
 
-The observed mean number of days from (first) symptom onset to hospital admission was `r round(mean(summary_input$t_son_ad, na.rm=T),1)`, with a standard deviation (SD) of `r round(sd(summary_input$t_son_ad, na.rm=T),1)` days and a median of `r median(summary_input$t_son_ad, na.rm=T)` days. For all time-to-event variables, `values greater than 120 days were treated as outliers and were excluded prior to any analysis`.  
+The observed mean number of days from (first) symptom onset to hospital admission was `r round(mean(summary_input$t_son_ad, na.rm=T),1)`, with a standard deviation (SD) of `r round(sd(summary_input$t_son_ad, na.rm=T),1)` days and a median of `r median(summary_input$t_son_ad, na.rm=T)` days. For all time-to-event variables, values greater than `75% quantile+1.5*interquartile range (IQR)` days were treated as outliers and were excluded prior to any analysis`.  
 
-The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was `r round(mean(summary_input$ho_dur, na.rm=T),1)`, with SD `r round(sd(summary_input$ho_dur, na.rm=T),1)` days and a median of `r median(summary_input$ho_dur, na.rm=T)` days. These estimates are based on all cases which have complete records on length of hospital stay (N = `r nrow(summary_input %>% filter(is.na(ho_dur)==F))`).  
+The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was `r round(mean(summary_input$dur_ho, na.rm=T),1)`, with SD `r round(sd(summary_input$dur_ho, na.rm=T),1)` days and a median of `r median(summary_input$dur_ho, na.rm=T)` days. These estimates are based on all cases which have complete records on length of hospital stay (N = `r nrow(summary_input %>% filter(is.na(dur_ho)==F))`).  
 
 The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were `r glue_collapse(symptom.prevalence.input %>% group_by(nice.symptom) %>% summarise(F=sum(times.present)) %>% ungroup() %>% arrange(desc(F)) %>% slice(1:5) %>% pull(nice.symptom) %>% str_to_lower(), sep = ', ', last=', and ')`. Frequencies of symptom prevalence vary with age. `r paste0(nrow(summary_input %>% filter(vs_oxysat<94)),'/',nrow(summary_input %>% filter(is.na(vs_oxysat)==F)))` (`r round(nrow(summary_input %>% filter(vs_oxysat<94))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients presented with oxygen saturations <94%.  
 
 ## Outcomes
-Outcomes have been recorded for `r sum(is.na(summary_input$outcome)==F)` patients, consisting of `r length(which(summary_input$outcome=='discharge'))` recoveries and `r length(which(summary_input$outcome=='death'))` deaths. Follow-up is ongoing for `r length(which(summary_input$outcome=='ongoing care'))` patients. Outcome records are unavailable for `r sum(is.na(summary_input$outcome))` patients.  
+Outcomes have been recorded for `r sum(is.na(summary_input$outcome)==F)` patients, consisting of `r length(which(summary_input$outcome=='discharge'))` recoveries and `r length(which(summary_input$outcome=='death'))` deaths. Follow-up is ongoing for `r length(which(summary_input$outcome=='ongoing care'))` patients. Outcome records are unavailable for `r sum(is.na(summary_input$outcome)| summary_input$outcome=="")` patients.  
 
 **ICU/HDU**: A total of `r length(which(summary_input$ICU==T))` (`r round(length(which(summary_input$ICU==T))/nrow(summary_input)*100,0)`%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU). Of these, `r nrow(summary_input %>% filter(ICU==T & group=='Death'))` died, `r nrow(summary_input %>% filter(ICU==T & group=='In hospital'))` are still in hospital and `r nrow(summary_input %>% filter(ICU==T & group=='Discharge'))` have recovered and been discharged. Outcome records are unavailable for `r nrow(summary_input %>% filter(ICU==T & group=='LFTU'))` cases.
 
