@@ -38,7 +38,8 @@ dashboardPage(skin = "black",
                   menuItem("Vital signs", tabName = "vital_signs", icon = icon("file-medical-alt")),
                   menuItem("Laboratory results", tabName = "lab_results", icon = icon("vial")),
                   menuItem("Comorbidities by age", tabName = "comorbidities_by_age", icon = icon("chart-bar")),
-                  menuItem("Symptoms by age", tabName = "symptoms_by_age", icon = icon("chart-bar"))
+                  menuItem("Symptoms by age", tabName = "symptoms_by_age", icon = icon("chart-bar")),
+                  menuItem("Supplementary tables", tabName = "table_try", icon = icon("table"))
                 ),
                 
                 hr(),
@@ -90,8 +91,8 @@ dashboardPage(skin = "black",
                   ),
                   awesomeCheckboxGroup(
                     inputId = "outcome", label = "Outcome", status = 'custom',
-                    choices = list("Death" = "death", "Censored" = "censored", "Discharge" = "discharge"),
-                    selected = c("death","censored","discharge")
+                    choices = list("Death" = "Death", "LFTU" = "LFTU", "Discharge" = "Discharge", "Ongoing care" = "Ongoing care"),
+                    selected = c("Death","LFTU","Discharge", "Ongoing care")
                   ),
                   awesomeCheckboxGroup(
                     inputId = "icu_ever", label = "ICU admission", status = 'custom',
@@ -200,49 +201,62 @@ dashboardPage(skin = "black",
                   tabItem(tabName = "comorbidities_by_age",
                           fluidRow(
                             box(plotOutput("age_comorbid_asthma", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with asthma, by age'),
                             box(plotOutput("age_comorbid_malignant_neoplasm", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with malignant neoplasma, by age'),
                             box(plotOutput("age_comorbid_obesity", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with obesity, by age'),
                             box(plotOutput("age_comorbid_diabetes", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with diabetes, by age'),
                             box(plotOutput("age_comorbid_dementia", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with dementia, by age'),
                             box(plotOutput("age_comorbid_smoking", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases who smoke, by age'),
                             box(plotOutput("age_comorbid_hypertension", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with hypertension, by age'),
                             )
                   ),
                   tabItem(tabName = "symptoms_by_age",
                           fluidRow(
                             box(plotOutput("age_symptoms_history_of_fever", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with history of fever, by age'),
                             box(plotOutput("age_symptoms_cough", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with cough, by age'),
                             box(plotOutput("age_symptoms_cough_fever", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with cough or fever, by age'),
                             box(plotOutput("age_symptoms_shortness_of_breath", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with shortness of breath, by age'),
                             box(plotOutput("age_symptoms_cought_fever_shortness_of_breath", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with cought, fever, or shortness of breath, by age'),
                             box(plotOutput("age_symptoms_upper_respiratory_tract_symptoms", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with upper respiratory tract symptoms, by age'),
                             box(plotOutput("age_symptoms_altered_consciousness_confusion", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with confusion, by age'),
                             box(plotOutput("age_symptoms_constitutional", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with constitutional symptoms, by age'),
                             box(plotOutput("age_symptoms_vomiting_nausea", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with vomiting or nausea, by age'),
                             box(plotOutput("age_symptoms_diarrhoea", height = "500px"),
-                                width = 4, height = 400, solidHeader = T),
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with diarrhoea, by age'),
                             box(plotOutput("age_symptoms_abdominal_pain", height = "500px"),
-                                width = 4, height = 400, solidHeader = T)
+                                width = 4, height = 400, solidHeader = T, title = 'Counts of cases with abdominal pain, by age')
                           )
+                  ),
+                  tabItem(tabName = "table_try",
+                          fluidRow(
+                          box(uiOutput("table_patient_characteristic"), height = 670),
+                          box(uiOutput("table_outcome_age_sex"), height = 670),
+                          box(uiOutput("table_symptoms"), height = 920),
+                          box(uiOutput("table_comorbidity"), height = 920),
+                          box(uiOutput("table_treatment")),
+                          box(uiOutput("table_key_times"))
+                          
+                          )
+                          
+                  
                   )
                   
                 ))
 )
 
-
+         

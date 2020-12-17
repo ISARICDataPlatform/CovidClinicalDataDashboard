@@ -310,7 +310,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, ...) {
     data = d,
     aes(x = d$X, y = mean),
     shape = "square",
-    size = d$size,
+    size = (d$size)/5,
     colour = "navy"
   )
   lines <- geom_linerange(
@@ -337,7 +337,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, ...) {
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = 8)) +
+    theme_bw() + theme(axis.text = element_text(size = 11, angle = 90, hjust = 1)) + 
     labs(title = N)
   
   return(p)
@@ -457,7 +457,14 @@ heatmap_plot <- function(data_plot_heatmap){
 
 
 
-
+tables_suplementary <- function(table_sup, title_table_1, title_table_2){
+  table_exapmle <- flextable(table_sup)
+  table_exapmle <- autofit(table_exapmle, add_w = 0.1, add_h = 0.1, part = c("body", "header"))
+  table_exapmle <- fontsize(table_exapmle, i = NULL, j = NULL, size = 10, part = "body")
+  table_exapmle <- add_header_lines(table_exapmle, values = title_table_2, top = TRUE)
+  table_exapmle <- add_header_lines(table_exapmle, values = title_table_1, top = TRUE)
+  table_exapmle
+}
 
 
 

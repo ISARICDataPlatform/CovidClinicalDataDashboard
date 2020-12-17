@@ -678,5 +678,44 @@ server <- function(input, output) {
     })
     renderPlot(confidentiality.check(data_plot_symptoms_abdominal_pain.reactive(), plot.prop.by.age_symptoms_abdominal_pain), height = 350)
   }
+  output$table_patient_characteristic <- renderUI({
+    return(tables_suplementary(table_sup = patient.characteristic.table, title_table_1 = "Table 1: Patient Characteristics.",
+                               title_table_2 = "Proportions are presented in parentheses. Proportions have been rounded to two decimal places.")%>%
+             htmltools_value() 
+)
+   
+  })
+  output$table_outcome_age_sex <- renderUI({
+    return(tables_suplementary(table_sup = outcome.age.sex.table, title_table_1 = "Table 2: Outcome by age and sex.",
+                               title_table_2 = "Proportions are calculated using the column total as the denominator.")%>%
+             htmltools_value() 
+    )
+    
+  })
+  output$table_symptoms <- renderUI({
+    return(tables_suplementary(table_sup = symptoms.table, title_table_1 = "Table 3: Prevalence of Symptoms.", title_table_2 = "")%>%
+             htmltools_value() 
+    )
+    
+  })
+  output$table_comorbidity <- renderUI({
+    return(tables_suplementary(table_sup = comorbidity.table, title_table_1 = "Table 4: Prevalence of Comorbidities.", title_table_2 = "")%>%
+             htmltools_value() 
+    )
+   
+  })
+  output$table_treatment <- renderUI({
+    return(tables_suplementary(table_sup = treatments.table, title_table_1 = "Table 5: Prevalence of Treatments.",
+                               title_table_2 ="The counts presented for treatments include all cases, not only cases with complete details of treatments (as expressed in the summary).")%>%
+             htmltools_value() 
+    )
+    
+  })
+  output$table_key_times <- renderUI({
+    return(tables_suplementary(table_sup = key.times.table, title_table_1 = "Table 6: Key time variables.",
+                               title_table_2 = "SD: Standard deviation; IQR: Interquartile range. Outliers (values greater than 120) were excluded prior to the computation of estimates.")%>%
+             htmltools_value() 
+    )
+    
+  })
 }
-
