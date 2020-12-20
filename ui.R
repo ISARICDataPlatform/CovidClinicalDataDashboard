@@ -236,8 +236,6 @@ dashboardPage(
                   solidHeader = T,
                   title = 'Heatmap of symptoms at admission'
                 )
-                
-                <<<<<<< HEAD
               )),
       tabItem(tabName = "comorbidities",
               fluidRow(
@@ -614,7 +612,7 @@ dashboardPage(
       )
     )
   )
-  
+)  
   
   
   
