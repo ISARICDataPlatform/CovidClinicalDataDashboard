@@ -237,6 +237,7 @@ dashboardPage(
                   title = 'Heatmap of symptoms at admission'
                 )
                 
+                <<<<<<< HEAD
               )),
       tabItem(tabName = "comorbidities",
               fluidRow(
@@ -478,7 +479,7 @@ dashboardPage(
       ),
       tabItem(tabName = "flowchart",
               fluidRow(
-                  includeHTML("markdown/Summary.html")
+                includeHTML("markdown/Summary.html")
               )
       ),
       tabItem(tabName = "comorbidities_by_age",
@@ -597,8 +598,25 @@ dashboardPage(
             solidHeader = T
           )
         )
+      ),
+      tabItem(tabName = "table_try",
+              fluidRow(
+                box(uiOutput("table_patient_characteristic"), height = 670),
+                box(uiOutput("table_outcome_age_sex"), height = 670),
+                box(uiOutput("table_symptoms"), height = 920),
+                box(uiOutput("table_comorbidity"), height = 920),
+                box(uiOutput("table_treatment")),
+                box(uiOutput("table_key_times"))
+                
+              )
+              
+              
       )
     )
   )
-)
-
+  
+  
+  
+  
+  
+  
