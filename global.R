@@ -131,61 +131,6 @@ base::load("age_pyramid_input.rda")
 base::load("outcome_admission_date_input.rda")
 
 base::load("symptom_prevalence_input.rda")
-# example.data <- example.data %>%
-#   mutate(year.epiweek.admit = factor(year.epiweek.admit, levels = epiweek.order))
-
-# age.pyramid.input <- example.data %>%
-#   lazy_dt(immutable = TRUE) %>%
-#   select(sex, agegp10, country, year.epiweek.admit, outcome, lower.age.bound, upper.age.bound) %>%
-#   group_by(sex, outcome, country, year.epiweek.admit, agegp10, lower.age.bound, upper.age.bound) %>%
-#   summarise(count = n()) %>%
-#   as_tibble()
-#
-# write_csv(age.pyramid.input, "age_pyramid_input.csv")
-
-     
-
-
-
-# outcome.admission.date.input <- example.data %>%
-#   lazy_dt(immutable = TRUE) %>%
-#   filter(!is.na(year.epiweek.admit) & !is.na(outcome)) %>%
-#   select(sex, agegp10, country, year.epiweek.admit, outcome) %>%
-#   group_by(sex, outcome, country, year.epiweek.admit, agegp10) %>%
-#   summarise(count = n()) %>%
-#   as_tibble() %>%
-#   complete(sex, agegp10, country, year.epiweek.admit, outcome, fill = list(count = 0)) %>%
-#   arrange(year.epiweek.admit) %>%
-#   group_by(sex, outcome, country, agegp10) %>%
-#   mutate(cum.count = cumsum(count)) %>%
-#   left_join(age.bound.lookup, by="agegp10")
-#
-# write_csv(outcome.admission.date.input, "outcome_admission_date_input.csv")
-
-# symptom.prevalence.input <- example.data %>%
-#   select(sex, agegp10, country, year.epiweek.admit, outcome, any_of(starts_with("symptoms")), lower.age.bound, upper.age.bound) %>%
-#   select(-`symptoms_covid-19_symptoms`) %>%
-#   pivot_longer(any_of(starts_with("symptoms")), names_to = "symptom", values_to = "present") %>%
-#   group_by(sex, agegp10, country,year.epiweek.admit,outcome, symptom, lower.age.bound, upper.age.bound) %>%
-#   summarise(times.present = sum(present, na.rm = TRUE), times.recorded = sum(!is.na(present)))
-#
-# nice.symptom.mapper <- tibble(symptom = unique(symptom.prevalence.input$symptom)) %>%
-#   mutate(nice.symptom = map_chr(symptom, function(st){
-#     temp <- substr(st, 10, nchar(st)) %>% str_replace_all("_", " ")
-#     temp2 <- glue("{toupper(substr(temp, 1, 1))}{substr(temp, 2, nchar(temp))}")
-#     temp2
-#   })) %>%
-#   mutate(nice.symptom = case_when(nice.symptom=="Altered consciousness confusion" ~ "Altered consciousness/confusion",
-#                                   nice.symptom=="Cough" ~ "Cough (no sputum)",
-#                                   nice.symptom=="Cough bloody sputum haemoptysis" ~ "Cough with bloody sputum/haemoptysis",
-#                                   nice.symptom=="Fatigue malaise" ~ "Fatigue/malaise",
-#                                   TRUE ~ nice.symptom))
-#
-# symptom.prevalence.input <- symptom.prevalence.input %>%
-#   left_join(nice.symptom.mapper) %>%
-#   left_join(age.bound.lookup, by="agegp10")
-#
-# write_csv(symptom.prevalence.input, "symptom_prevalence_input.csv")
 
 rev.symptom.order <- symptom.prevalence.input %>% pull(nice.symptom) %>% unique() %>% sort(decreasing = TRUE)
 
@@ -193,31 +138,6 @@ symptom.prevalence.input <- symptom.prevalence.input %>%
   mutate(nice.symptom = factor(nice.symptom, levels = rev.symptom.order)) 
 
 base::load("comorbidity_prevalence_input.rda")
-
-
-
-# comorbidity.prevalence.input <- example.data %>%
-#   select(sex, agegp10, country, year.epiweek.admit, outcome, any_of(starts_with("comorb")), lower.age.bound, upper.age.bound) %>%
-#   pivot_longer(any_of(starts_with("comorb")), names_to = "comorbidity", values_to = "present") %>%
-#   group_by(sex, agegp10, country,year.epiweek.admit,outcome, comorbidity, lower.age.bound, upper.age.bound) %>%
-#   summarise(times.present = sum(present, na.rm = TRUE), times.recorded = sum(!is.na(present)))
-#
-# nice.comorbidity.mapper <- tibble(comorbidity = unique(comorbidity.prevalence.input$comorbidity)) %>%
-#   mutate(nice.comorbidity = map_chr(comorbidity, function(st){
-#     temp <- substr(st, 10, nchar(st)) %>% str_replace_all("_", " ")
-#     temp2 <- glue("{toupper(substr(temp, 1, 1))}{substr(temp, 2, nchar(temp))}")
-#     temp2
-#   })) %>%
-#   mutate(nice.comorbidity = case_when(comorbidity=="Aids hiv" ~ "HIV/AIDS",
-#                                   TRUE ~ nice.comorbidity))
-#
-# comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
-#   left_join(nice.comorbidity.mapper) %>%
-#   left_join(age.bound.lookup, by="agegp10")
-#
-#
-# write_csv(comorbidity.prevalence.input, "comorbidity_prevalence_input.csv")
-
 
 rev.comorbidity.order <- comorbidity.prevalence.input %>% pull(nice.comorbidity) %>% unique() %>% sort(decreasing = TRUE)
 
@@ -227,37 +147,12 @@ comorbidity.prevalence.input <- comorbidity.prevalence.input %>%
 
 base::load("treatment_use_proportion_input.rda")
 
-
-
-# treatment.prevalence.input <- example.data %>%
-#   select(sex, agegp10, country, year.epiweek.admit, outcome, any_of(starts_with("treat")), lower.age.bound, upper.age.bound) %>%
-#   pivot_longer(any_of(starts_with("treat")), names_to = "treatment", values_to = "present") %>%
-#   group_by(sex, agegp10, country,year.epiweek.admit,outcome, treatment, lower.age.bound, upper.age.bound) %>%
-#   summarise(times.present = sum(present, na.rm = TRUE), times.recorded = sum(!is.na(present)))
-#
-# nice.treatment.mapper <- tibble(treatment = unique(treatment.prevalence.input$treatment)) %>%
-#   mutate(nice.treatment = map_chr(treatment, function(st){
-#     temp <- substr(st, 7, nchar(st)) %>% str_replace_all("_", " ")
-#     temp2 <- glue("{toupper(substr(temp, 1, 1))}{substr(temp, 2, nchar(temp))}")
-#     temp2
-#   }))
-#
-# treatment.prevalence.input <- treatment.prevalence.input %>%
-#   left_join(nice.treatment.mapper) %>%
-#   left_join(age.bound.lookup, by="agegp10")
-#
-# write_csv(treatment.prevalence.input, "treatment_prevalence_input.csv")
-
 rev.treatment.order <- treatment.use.proportion.input %>% pull(nice.treatment) %>% unique() %>% sort(decreasing = TRUE)
 
 treatment.use.proportion.input <- treatment.use.proportion.input %>%
   mutate(nice.treatment = factor(nice.treatment, levels = rev.treatment.order))
 
 countries <- age.pyramid.input %>% pull(slider_country) %>% unique %>% sort
-
-
-
-
 
 rev.treatment.order <- icu.treatment.use.proportion.input %>% pull(nice.treatment) %>% unique() %>% sort(decreasing = TRUE)
 
