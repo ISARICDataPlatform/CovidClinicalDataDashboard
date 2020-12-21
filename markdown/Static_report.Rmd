@@ -1,0 +1,195 @@
+---
+title: "ISARIC (International Severe Acute Respiratory and Emerging Infections Consortium)"
+output:
+  pdf_document:
+    toc: no
+    fig_caption: true
+    extra_dependencies: "subfig"
+    includes:
+      in_header: header.tex
+  html_document:
+    df_print: paged
+    number_sections: yes
+    toc: yes
+    toc_depth: 2
+    toc_float:
+      collapsed: no
+urlcolor: blue
+---
+
+```{r setup, include = FALSE}
+knitr::opts_knit$set(root.dir = "/Users/mdhall/CovidClinicalDataDashboard/")
+
+knitr::opts_chunk$set(echo = FALSE, 
+                      warning = FALSE, 
+                      message = FALSE, 
+                      options(scipen=999))
+
+###### THIS NEEDS AUTOMATION #####
+
+
+
+
+```
+
+```{r loading, include = FALSE}
+source("global.R")
+
+source("plot_functions.R")
+
+pub.date <- today()
+ref.date <- ymd("2020-12-18")
+
+#captions...
+
+
+
+```
+
+*A global federation of clinical research networks, providing a proficient, coordinated, and agile research response to outbreak-prone infectious diseases*
+
+
+# COVID-19 Report: `r format(pub.date, "%d %B %Y")` {-}
+Containing data extracted `r format(ref.date, "%d %B %Y")`
+
+## Summary
+
+```{r child = 'markdown/Summary.Rmd'}
+```
+
+\newpage
+
+**Figure 1**: Overview of cohort and outcomes as of `r format(ref.date, "%d %B %Y")`.
+
+
+```{r cohortoverview,  out.width = "100%", fig.align="center", fig.cap=glue("Overview of cohort and outcomes as of {format(ref.date, '%d %B %Y')}")}
+
+flowchart()
+
+```
+
+
+
+\newpage
+## Patient Characteristics
+
+```{r agepyramid, echo = FALSE, fig.align="center", fig.cap=glue("Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up/ongoing care) at the time of report.")}
+
+age.pyramid.plot(age.pyramid.input)
+
+```
+
+
+\newpage
+(a)
+```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE}
+symptom.prevalence.plot(symptom.prevalence.input)
+```
+
+(b)
+```{r symptomupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
+upset.plot(symptom.upset.input, which.plot = "symptom")
+```
+\newpage
+(c)
+```{r symptomheatmap, echo=FALSE, out.width= "100%", message=FALSE, fig.cap='(a) Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded. (b) The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity. (c) Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.'}
+heatmap_plot(data_plot_heatmap)
+```
+
+\newpage
+
+(a)
+```{r comorbprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE}
+comorbidity.prevalence.plot(comorbidity.prevalence.input)
+```
+
+(b)
+
+```{r comorbupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE,fig.cap = "(a) Frequency of comorbidities or other concomitant conditions seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this comorbidity over the number of patients for whom presence or absence of this comorbidity was recorded.  (b) The distribution of combinations of the five most common such conditions, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity."}
+upset.plot(comorbidity.upset.input, which.plot = "comorbidity")
+```
+
+\newpage
+
+## Variables by age
+
+```{r comorbbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.cap = "Comorbidities stratified by age group. Boxes show the proportion of individuals with each comorbidity, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)", fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking")}
+
+plot.prop.by.age_comorbid_asthma(data_plot_comorbid_asthma, FALSE)
+plot.prop.by.age_comorbid_dementia(data_plot_comorbid_dementia, FALSE)
+plot.prop.by.age_comorbid_diabetes(data_plot_comorbid_diabetes, FALSE)
+plot.prop.by.age_comorbid_hypertension(data_plot_comorbid_hypertension, FALSE)
+plot.prop.by.age_comorbid_malignant_neoplasm(data_plot_comorbid_malignant_neoplasm, FALSE)
+plot.prop.by.age_comorbid_obesity(data_plot_comorbid_obesity, FALSE)
+plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)
+
+```
+
+
+```{r sympbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.cap = "Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)", fig.subcap=c("Abdominal pain", "Altered consciousness/confusion", "Constitutional symptoms (myalgia, joint pain, fatigue or headache)", "Cough", "Cough or fever", "Cough, fever or shortness of breath", "Diarrhoea", "History of fever", "Shortness of breath", "Upper respiratory tract symptoms (runny nose, sore throat or ear pain)", "Vomiting or nausea")}
+
+plot.prop.by.age_symptoms_abdominal_pain(data_plot_symptoms_abdominal_pain, FALSE)
+plot.prop.by.age_symptoms_altered_consciousness_confusion(data_plot_symptoms_altered_consciousness_confusion, FALSE)
+plot.prop.by.age_symptoms_constitutional(data_plot_symptoms_constitutional, FALSE)
+plot.prop.by.age_symptoms_cough(data_plot_symptoms_cough, FALSE)
+plot.prop.by.age_symptoms_cough_fever(data_plot_symptoms_cough_fever, FALSE)
+plot.prop.by.age_symptoms_cought_fever_shortness_of_breath(data_plot_symptoms_cought_fever_shortness_of_breath, FALSE)
+plot.prop.by.age_symptoms_diarrhoea(data_plot_symptoms_diarrhoea, FALSE)
+plot.prop.by.age_symptoms_history_of_fever(data_plot_symptoms_history_of_fever, FALSE)
+plot.prop.by.age_symptoms_shortness_of_breath(data_plot_symptoms_shortness_of_breath, FALSE)
+plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms(data_plot_symptoms_upper_respiratory_tract_symptoms, FALSE)
+plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE)
+
+
+
+```
+
+
+```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2, fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted.  N is the number of individuals included in the plot (this varies between plots due to data completeness). ALT, Alanine transaminase; APTT, Activated partial thromboplastin time; AST, Aspartate transaminase; CRP, C-reactive protein; WCC, white cell count", fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation in room air.")}
+
+p_resp(data_plot_vs_resp)
+p_hr(data_plot_vs_hr)
+p_temp(data_plot_vs_temp)
+p_sysbp(data_plot_vs_sysbp)
+p_oxysat(data_plot_vs_oxysat)
+
+```
+
+```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3, fig.ncol = 2, fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness).", fig.subcap=c("Alanine transaminase (ALT)", "Activated partial thromboplastin time (APTT)", "Aspartate transaminase (AST)", "Bilirubin",  "C-reactive protein (CRP)", "Lymphocytes", "Neutrophils", "Protrombin time", "Urea", "White blood cell count (WCC)")}
+
+p_lab_alt(data_plot_lab_alt)
+p_lab_aptt(data_plot_lab_aptt)
+p_lab_ast(data_plot_lab_ast)
+p_lab_bili(data_plot_lab_bili)
+p_lab_crp(data_plot_lab_crp)
+p_lab_lym(data_plot_lab_lym)
+p_lab_neut(data_plot_lab_neut)
+p_lab_pt(data_plot_lab_pt)
+p_lab_urean(data_plot_lab_urean)
+p_lab_wbc(data_plot_lab_wbc)
+
+```
+
+
+\newpage
+## Hospital stays and outcomes
+
+```{r  staybysex, out.width= "80%", fig.height=4, fig.cap = "Distribution of length of hospital stay, according to sex. This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+
+length.of.stay.sex.plot(length.of.stay.sex.input)
+```
+
+```{r  staybyage, out.width= "80%", fig.height=4, fig.cap = "Distribution of length of hospital stay, according to patient age group. This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+
+length.of.stay.age.plot(length.of.stay.age.input)
+```
+
+```{r  admissiontoICUoverall, out.width= "100%", fig.cap = "Distribution of time (in days) from hospital admission to ICU admission. The figure displays data on only those cases with a reported ICU start date (N=XX)."}
+admission.to.icu.plot(admission.to.icu.input)
+```
+
+```{r  timeline, out.width= "100%", fig.cap = "The distribution of patient status by number of days after admission. Patients with 'unknown' status have left the site at the time of report but have unknown outcomes due to missing data. Patients still on site at the time of report appear in the 'ongoing care' category for days which are in the future at that time. (For example, a patient admitted 7 days before the date of report and still on site by the date of the report would be categorised as 'ongoing care' for days 8 and later.) The black line marks the end of 14 days."}
+
+status.by.time.after.admission.plot(status.by.time.after.admission.input)
+```
+

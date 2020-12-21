@@ -29,7 +29,7 @@ library(DiagrammeR)
 library(magrittr)
 library(flextable)
 library(htmltools)
-
+library(bookdown)
 
 
 
@@ -64,14 +64,13 @@ source("plot_functions.R")
 base::load("age_pyramid_input.rda")  
 base::load("outcome_admission_date_input.rda")
 base::load("symptom_prevalence_input.rda")
-base::load("comorbidity_prevalence_input.rda")
+base::load("comorbidity.prevalence.input.rda")
 base::load("treatment_use_proportion_input.rda")
 base::load("icu_treatment_use_proportion_input.rda")
-base::load("comorbidity_upset_input.rda")
+base::load("comorbidity.upset.input.rda")
 base::load("symptom_upset_input.rda")
 base::load("treatment_upset_input.rda")
 base::load("icu_treatment_upset_input.rda")
-
 #Load the vs data
 base::load("data_plot_vs_resp.rda")
 base::load("data_plot_vs_hr.rda")
@@ -118,7 +117,14 @@ base::load("comorbidity.table.rda")
 base::load("symptoms.table.rda")
 base::load("patient.characteristic.table.rda")
 base::load("outcome.age.sex.table.rda")
-
+#load summary & flowchart data
+base::load("summary_input.rda")
+#################load data for hospital stays
+base::load("length_of_stay_sex_input.rda")
+base::load("length_of_stay_age_input.rda")
+base::load("admission_to_icu_input.rda")
+base::load("status_by_time_after_admission_input.rda")
+base::load("length_of_stay_icu_input.rda")
 
 
 
@@ -134,7 +140,7 @@ age.levels <- age.bound.lookup %>% pull(slider_agegp10) %>% levels
 rev.symptom.order <- symptom.prevalence.input %>% pull(nice.symptom) %>% unique() %>% sort(decreasing = TRUE)
 
 symptom.prevalence.input <- symptom.prevalence.input %>%
-  mutate(nice.symptom = factor(nice.symptom, levels = rev.symptom.order)) 
+  mutate(nice.symptom = factor(nice.symptom, levels = rev.symptom.order))
 
 rev.comorbidity.order <- comorbidity.prevalence.input %>% pull(nice.comorbidity) %>% unique() %>% sort(decreasing = TRUE)
 
@@ -169,84 +175,84 @@ map.data <- read_rds(here::here("map_data.rds"))
 
 report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
                         name_sep = ", ", group_brachet = "()",group_sep = "; "){
-  
+
   require(stringr);require(readr);require(dplyr)
-  
-  
+
+
   if(is.null(group)==FALSE&length(group)>1){group <- head(group,1)
   print("More than 1 group supplied - only first value used as group")}
-  
+
   if(is.null(subdivision)==FALSE&length(subdivision)>1){subdivision <- head(subdivision,1)
   print("More than 1 subdivision supplied - only first value used as subdivision")}
-  
+
   group_brachet_L = stringr::str_sub(group_brachet, 1, 1)
   group_brachet_R = stringr::str_sub(group_brachet, 2, 2)
-  
+
   df <- df %>% dplyr::mutate(name = dplyr::pull(., name))
-  
-  
+
+
   # No groups / subdivisions
   if(is.null(group)==TRUE&is.null(subdivision)==TRUE){
     output <- df %>%
       dplyr::summarise(auth_out = paste(name, collapse=name_sep) %>% paste0("."))
-    
+
     if(is.null(path)==F){readr::write_file(output$auth_out, path=path)}}
-  
+
   # Just groups
   if(is.null(group)==FALSE&is.null(subdivision)==TRUE){
     output <- df %>%
       dplyr::mutate(group = dplyr::pull(., group)) %>%
-      
+
       dplyr::group_by(group) %>%
-      
+
       dplyr::summarise(name_list = paste(name, collapse=name_sep)) %>%
-      
+
       dplyr::mutate(name_group = paste0(name_list, " ",group_brachet_L, group, group_brachet_R)) %>%
-      
+
       dplyr::summarise(auth_out = paste(name_group, collapse = group_sep) %>% paste0("."))
-    
+
     if(is.null(path)==F){readr::write_file(output$auth_out, path=path)}}
-  
+
   # Just subdivisions
   if(is.null(group)==TRUE&is.null(subdivision)==FALSE){
     output <- df %>%
       dplyr::mutate(subdivision = dplyr::pull(., subdivision)) %>%
-      
+
       dplyr::group_by(subdivision) %>%
-      
+
       dplyr::summarise(name_list = paste(name, collapse=name_sep) %>% paste0(".")) %>%
-      
+
       dplyr::mutate(auth_out = paste0(subdivision, ": ", name_list)) %>%
-      
+
       dplyr::select(auth_out)
-    
+
     if(is.null(path)==F){readr::write_file(output$auth_out, path=path)}}
-  
-  
+
+
   # Groups and subdivisions
   if(is.null(group)==FALSE&is.null(subdivision)==FALSE){
     output <- df %>%
       dplyr::mutate(group = dplyr::pull(., group),
                     subdivision = dplyr::pull(., subdivision)) %>%
-      
+
       dplyr::select(subdivision, group, name) %>%
-      
+
       dplyr::group_by(subdivision, group) %>%
       dplyr::summarise(name_list = paste(name, collapse=name_sep)) %>%
-      
+
       # add group characteristics
       dplyr::mutate(name_group = paste0(name_list, " ",group_brachet_L, group, group_brachet_R)) %>%
-      
+
       # combine groups (by subdivision)
       dplyr::summarise(auth_out = paste(name_group, collapse = group_sep) %>% paste0(".")) %>%
-      
+
       dplyr::mutate(auth_out = paste0(subdivision, ": ", auth_out)) %>%
-      
+
       dplyr::select(auth_out)
-    
+
     if(is.null(path)==F){readr::write_file(output$auth_out, path=path)}}
-  
-  
+
+
   return(gsub("\n\n", " ", output$auth_out))}
 
 knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")

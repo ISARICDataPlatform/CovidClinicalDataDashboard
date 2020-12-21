@@ -1,7 +1,11 @@
 ---
-title: "Summary"
+title: ""
 output: html_document
+
 ---
+
+# COVID-19 Report
+Containing data extracted `r format(ref.date, "%d %B %Y")`
 
 ## Summary
 The results in this report have been produced using data from the ISARIC COVID-19 database. For information, or to contribute to the collaboration, please contact ncov@isaric.org.  
@@ -19,6 +23,89 @@ The analysis detailed in this report only includes individuals:
   
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases (`X` are laboratory-confirmed for SARS-COV-2 infection).
 The below flow chart gives an overview of the cohort and outcomes as of `r format(ref.date, "%d %B %Y")`.
+
+```{r echo=FALSE}
+grViz("digraph flowchart {
+      graph [layout=dot, fontsize=12, fontname=Arial]
+      
+      # node definitions with substituted label text
+      node [shape = rectangle, style = filled, fontname=Arial]        
+      tab1 [label = '@@1', fillcolor=Navy, fontcolor=white]
+      
+      node [shape = plaintext, fillcolor=white] 
+      tab2 [label = '@@2']
+      tab3 [label = '@@3']
+      
+      node [shape = diamond, fillcolor=white]
+      tab4 [label = '@@4', height=2, width=2]
+      tab5 [label = '@@5', height=2, width=2]
+      tab6 [label = '@@6', height=2, width=2]
+      
+      node [shape = rectangle, fillcolor= lightCoral] 
+      tab7 [label = '@@7',height=1, width=2]
+      tab8 [label = '@@8',height=0.8, width=1.5]
+      tab9 [label = '@@9',height=0.8, width=1.5]
+      tab10 [label = '@@10',height=0.8, width=1.5]
+      tab11 [label = '@@11',height=0.8, width=1.5]
+
+      node [shape = rectangle, fillcolor= lightSalmon] 
+      tab12 [label = '@@12',height=1, width=2]
+      tab13 [label = '@@13',height=0.8, width=1.5]
+      tab14 [label = '@@14',height=0.8, width=1.5]
+      tab15 [label = '@@15',height=0.8, width=1.5]
+      tab16 [label = '@@16',height=0.8, width=1.5]
+      
+      # edge definitions with the node IDs
+      tab1 -> tab2 [tailport=e, headport=w, constraint=false]
+      tab1 -> tab3 [tailport=s]
+      tab2 -> tab4 [headport=n]
+      tab2 -> tab5 [headport=n]
+      tab3 -> tab6
+      tab6 -> tab7 [label = '@@19']
+      tab6 -> tab12 [label = '@@20']
+      tab7 -> tab8 [label = '@@21']
+      tab7 -> tab9 [label = '@@22']
+      tab7 -> tab10 [label = '@@23']
+      tab7 -> tab11 [label = '@@24']
+      tab12 -> tab13 [label = '@@25']
+      tab12 -> tab14 [label = '@@26']
+      tab12 -> tab15 [label = '@@27']
+      tab12 -> tab16 [label = '@@28']
+      }
+
+      [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input), ')')
+      [2]: paste0('EXCLUDED X%')
+      [3]: paste0('ANALYSED X%')
+      [4]: paste0('<14-days follow-up\\n (N=XXX)')
+      [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=XXX)')
+      [6]: paste0('>14-days\\n follow-up and\\n positive for COVID-19 \\n (N=', nrow(summary_input), ')')
+      [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(ICU==T)), ')')
+      [8]: paste0('In hospital\\n (N=', nrow(summary_input %>% filter(ICU==T & group=='In hospital')),')')
+      [9]: paste0('Deceased\\n (N=', nrow(summary_input %>% filter(ICU==T & group=='Death')), ')')
+      [10]: paste0('Discharged\\n alive (N=', nrow(summary_input %>% filter(ICU==T & group=='Discharge')), ')')
+      [11]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(ICU==T & group=='LFTU')), ')')
+      [12]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(ICU==F)),')')
+      [13]: paste0('In hospital\\n (N=', nrow(summary_input %>% filter(ICU==F & group=='In hospital')),')')
+      [14]: paste0('Deceased\\n (N=', nrow(summary_input %>% filter(ICU==F & group=='Death')), ')')
+      [15]: paste0('Discharged\\n alive (N=', nrow(summary_input %>% filter(ICU==F & group=='Discharge')), ')')
+      [16]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(ICU==F & group=='LFTU')), ')')
+      [17]: 'X%'
+      [18]: 'X%'
+      [19]: paste0(round(prop.table(table(summary_input$ICU))[2]*100,0), '%')
+      [20]: paste0(round(prop.table(table(summary_input$ICU))[1]*100,0), '%')
+      [21]: paste0(round(prop.table(summary_input %>% filter(ICU==T) %$% table(group))[3]*100,0), '%')
+      [22]: paste0(round(prop.table(summary_input %>% filter(ICU==T) %$% table(group))[1]*100,0), '%')
+      [23]: paste0(round(prop.table(summary_input %>% filter(ICU==T) %$% table(group))[2]*100,0), '%')
+      [24]: paste0(round(prop.table(summary_input %>% filter(ICU==T) %$% table(group))[4]*100,0), '%')
+      [25]: paste0(round(prop.table(summary_input %>% filter(ICU==F) %$% table(group))[3]*100,0), '%')
+      [26]: paste0(round(prop.table(summary_input %>% filter(ICU==F) %$% table(group))[1]*100,0), '%')
+      [27]: paste0(round(prop.table(summary_input %>% filter(ICU==F) %$% table(group))[2]*100,0), '%')
+      [28]: paste0(round(prop.table(summary_input %>% filter(ICU==F) %$% table(group))[4]*100,0), '%')
+
+      "
+)
+```
+
 
 ## Demographics and presenting features
 Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The minimum and maximum observed ages were `r min(summary_input$age, na.rm=T)` and `r max(summary_input$age, na.rm=T)` years respectively. The median age is `r median(summary_input$age, na.rm=T)` years.  
@@ -48,3 +135,39 @@ A total of `r length(which(summary_input$treat_non_invasive_ventilation==T))` pa
 A total of `r length(which(summary_input$treat_invasive_ventilation==T))` patients received invasive mechanical ventilation (IMV). The mean and median durations from admission to receiving IMV were `r round(mean(summary_input$t_ad_imv, na.rm=T),1)` days and `r median(summary_input$t_ad_imv, na.rm=T)` days respectively (SD: `r round(sd(summary_input$t_ad_imv, na.rm=T),1)` days) – estimated from records on cases with complete records on dates of hospital admission and IMV onset (N = `r sum(is.na(summary_input$t_ad_imv)==F)`). The mean, median and SD for the duration of IMV – estimated based on all `r sum(is.na(summary_input$imv_dur)==F)` cases with complete records on IMV stays – were `r round(mean(summary_input$imv_dur, na.rm=T),1)` days, `r median(summary_input$imv_dur, na.rm=T)` days and `r round(sd(summary_input$imv_dur, na.rm=T),1)` days respectively.  
 
 Corticosteroids were administered to `r paste0(length(which(summary_input$treat_corticosteroids==T)),'/',sum(is.na(summary_input$treat_corticosteroids)==F))` (`r round(length(which(summary_input$treat_corticosteroids==T))/sum(is.na(summary_input$treat_corticosteroids)==F)*100,1)`%) patients. This includes `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T)),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T)))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T))*100,1)`%) of those who received IMV, `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==F & oxygen_therapy==T)),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==F & oxygen_therapy==T)))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==F & oxygen_therapy==T))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==F & oxygen_therapy==T))*100,1)`%) of those who had oxygen therapy but not IMV, and `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F)),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F)))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F))*100,1)`%) of those who had no oxygen therapy. On 16 June, results for dexamethasone were released for the RECOVERY randomized controlled trial (RECOVERY, 2020; RECOVERY Collaborative Group, 2020). This trial found that dexamethasone reduced deaths for patients receiving IMV and oxygen therapy, but not among patients not receiving respiratory support. Of patients admitted since 16 June, corticosteroids were received by `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T & date_admit>'2020-06-16')),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T & date_admit>'2020-06-16')))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T & date_admit>'2020-06-16'))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T & date_admit>'2020-06-16'))*100,1)`%) of those who received IMV, `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==F & oxygen_therapy==T & date_admit>'2020-06-16')),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==F & oxygen_therapy==T & date_admit>'2020-06-16')))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==F & oxygen_therapy==T & date_admit>'2020-06-16'))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==F & oxygen_therapy==T & date_admit>'2020-06-16'))*100,1)`%) of those who had oxygen therapy but not IMV, and `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F & date_admit>'2020-06-16')),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F & date_admit>'2020-06-16')))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F & date_admit>'2020-06-16'))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F & date_admit>'2020-06-16'))*100,1)`%) of those who had no oxygen therapy.
+
+
+## Background  
+
+In response to the emergence of novel coronavirus (COVID-19), ISARIC launched a portfolio of resources to accelerate outbreak research and response. These include data collection, analysis and presentation tools which are freely available to all sites which have requested access to these resources. All data collection tools are designed to address the most critical public health questions, have undergone extensive review by international clinical experts, and are free for all to use. Resources are available on the ISARIC website.  
+
+The ISARIC-WHO COVID-19 Case Record Form (CRF) enables the collection of standardised clinical data to inform patient management and public health response. These forms should be used to collect data on suspected or confirmed cases of COVID-19. The CRF is available in multiple languages and is now in use across dozens of countries and research consortia, who are contributing data to these reports.   
+
+To support researchers to retain control of the data and samples they collect, ISARIC also hosts a data platform, where data can be entered to a web-based REDCap data management system, securely stored, and used to produce regular reports on their sites as above. Data contributors are invited to input on the methods and contents of the reports, and can also contribute to the aggregated data platform which aggregates site-specific data from all other sites across the world who are using this system. For more information, visit the ISARIC website.   
+
+All decisions regarding data use are made by the institutions that enter the data. ISARIC keeps contributors informed of any plans and welcomes their input to promote the best science and the interests of patients, institutions and public health authorities. Feedback and suggestions are welcome at ncov@isaric.org.  
+
+## Methods 
+
+Patient details were submitted electronically by participating sites to the ISARIC database. Relevant background and presenting symptoms were recorded on the day of study recruitment. Daily follow-up was then completed until recovery or death. A final form was completed with details of treatments received and outcomes. All categories that represent fewer than five individuals have been suppressed to avoid the potential for identification of participants.   
+
+Graphs have been used to represent the age distribution of patients by sex and status (dead, recovered & still in hospital), the prevalence of individual symptoms on admission, comorbidities on admission, the length of hospital stay by sex and age group and the distribution of patient statuses by time since admission. In addition, the number of cases recruited by country and site, as well as the case count by status, has been represented.   
+
+Using a non-parametric Kaplan-Meier-based method (Ghani et al., 2005), the case- fatality ratio (CFR) was estimated, as well as probabilities for death and recovery. This method estimates the CFR with the formula a/(a+b), where a and b are the values of the cumulative incidence function for deaths and recoveries respectively, estimated at the last observed time point. In a competing risk context (i.e. where there are multiple endpoints), the cumulative incidence function for an endpoint is equal to the product of the hazard function for that endpoint and the survival function assuming a composite endpoint. It is worth noting that this method assumes that future deaths and recoveries will occur with the same relative probabilities as have been observed so far. Binomial confidence intervals for the CFR were obtained by a normal approximation (See Ghani et al., (2005)).   
+
+To obtain estimates for the distributions of time from symptom onset to hospital admission and the time from admission to outcome (death or recovery), Gamma distributions were fitted to the observed data, accounting for unobserved outcomes. Parameters were estimated by a maximum likelihood procedure and confidence intervals for the means and variances were obtained by bootstrap.   
+
+All analysis were performed using the R statistical software (R Core Team, 2019). 
+
+
+### References  
+
+Docherty, A.B., E.M. Harrison, C.A. Green, H.E. Hardwick, R. Pius, L. Norman, et al.. (2020). Features of 20 133 UK patients in hospital with COVID-19 using the ISARIC WHO Clinical Characterisation Protocol: prospective observational cohort study. BMJ, 369: m1985. doi: 10.1136/bmj.m1985  
+
+Ghani, A.C., C.A. Donnelly, D.R. Cox, J.T. Griffin, C. Fraser, T.H. Lam, et al. (2005). Methods for Estimating the Case Fatality Ratio for a Novel, Emerging Infectious Disease, American Journal of Epidemiology, 162(5): 479 - 486. doi: 10.1093/aje/kwi230.  
+
+R Core Team (2019). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.  
+
+RECOVERY (2020, 16 June). Low-cost dexamethasone reduces death by up to one third in hospitalised patients with severe respiratory complications of COVID-19. https://www.recoverytrial.net/news/lowcost-dexamethasone-reduces-death-by-up-to-one-third-in-hospitalised-patients-with-severe-respiratorycomplications-of-covid-19  
+
+RECOVERY Collaborative Group (2020). Dexamethasone in hospitalized patients with Covid-19 — preliminary report. New England Journal of Medicine doi: 10.1056/NEJMoa2021436

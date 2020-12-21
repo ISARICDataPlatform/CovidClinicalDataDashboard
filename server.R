@@ -60,8 +60,6 @@ server <- function(input, output) {
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
         slider.filters(input) %>%
-        group_by(slider_agegp10, slider_sex, slider_outcome) %>%
-        summarise(count = sum(count)) %>%
         as_tibble()
     })
     
@@ -128,23 +126,7 @@ server <- function(input, output) {
       fd <- symptom.prevalence.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        group_by(nice.symptom) %>%
-        summarise(
-          times.present = sum(times.present),
-          times.recorded = sum(times.recorded)
-        ) %>%
-        mutate(p.present = times.present / times.recorded) %>%
-        mutate(p.absent = 1 - p.present) %>%
-        as.data.table() %>%
-        dt_pivot_longer(c(p.present, p.absent),
-                        names_to = "affected",
-                        values_to = "proportion") %>%
-        lazy_dt(immutable = FALSE) %>%
-        mutate(affected = affected == "p.present") %>%
-        filter(!is.nan(proportion)) %>%
-        as_tibble() %>%
-        mutate(label = glue("{times.present} / {times.recorded}"))
+        slider.filters(input)
       
     })
     renderPlot(
@@ -178,23 +160,7 @@ server <- function(input, output) {
       fd <- comorbidity.prevalence.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        group_by(nice.comorbidity) %>%
-        summarise(
-          times.present = sum(times.present),
-          times.recorded = sum(times.recorded)
-        ) %>%
-        mutate(p.present = times.present / times.recorded) %>%
-        mutate(p.absent = 1 - p.present) %>%
-        as.data.table() %>%
-        dt_pivot_longer(c(p.present, p.absent),
-                        names_to = "affected",
-                        values_to = "proportion") %>%
-        lazy_dt(immutable = FALSE) %>%
-        mutate(affected = affected == "p.present") %>%
-        filter(!is.nan(proportion)) %>%
-        as_tibble() %>%
-        mutate(label = glue("{times.present} / {times.recorded}"))
+        slider.filters(input) 
     })
     renderPlot(
       confidentiality.check(
@@ -223,23 +189,7 @@ server <- function(input, output) {
   output$treatmentPrevalence <- {
     treatment.prevalence.reactive <- reactive({
       fd <- treatment.use.proportion.input %>%
-        slider.filters(input) %>%
-        group_by(nice.treatment) %>%
-        summarise(
-          times.present = sum(times.present),
-          times.recorded = sum(times.recorded)
-        ) %>%
-        mutate(p.present = times.present / times.recorded) %>%
-        mutate(p.absent = 1 - p.present) %>%
-        as.data.table() %>%
-        dt_pivot_longer(c(p.present, p.absent),
-                        names_to = "affected",
-                        values_to = "proportion") %>%
-        lazy_dt(immutable = FALSE) %>%
-        mutate(affected = affected == "p.present") %>%
-        filter(!is.nan(proportion)) %>%
-        as_tibble() %>%
-        mutate(label = glue("{times.present} / {times.recorded}"))
+        slider.filters(input)
     })
     renderPlot(
       confidentiality.check(
@@ -270,23 +220,7 @@ server <- function(input, output) {
   output$icuTreatmentPrevalence <- {
     icu.treatment.prevalence.reactive <- reactive({
       fd <- icu.treatment.use.proportion.input %>%
-        slider.filters(input) %>%
-        group_by(nice.treatment) %>%
-        summarise(
-          times.present = sum(times.present),
-          times.recorded = sum(times.recorded)
-        ) %>%
-        mutate(p.present = times.present / times.recorded) %>%
-        mutate(p.absent = 1 - p.present) %>%
-        as.data.table() %>%
-        dt_pivot_longer(c(p.present, p.absent),
-                        names_to = "affected",
-                        values_to = "proportion") %>%
-        lazy_dt(immutable = FALSE) %>%
-        mutate(affected = affected == "p.present") %>%
-        filter(!is.nan(proportion)) %>%
-        as_tibble() %>%
-        mutate(label = glue("{times.present} / {times.recorded}"))
+        slider.filters(input) 
     })
     renderPlot(
       confidentiality.check(
