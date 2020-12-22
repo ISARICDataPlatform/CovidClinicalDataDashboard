@@ -38,7 +38,7 @@ source("global.R")
 source("plot_functions.R")
 
 pub.date <- today()
-ref.date <- ymd("2020-12-18")
+ref.date <- ymd("2020-11-30")
 
 #captions...
 
