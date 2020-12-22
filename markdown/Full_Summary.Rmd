@@ -5,7 +5,7 @@ output: html_document
 ---
 
 # COVID-19 Report
-Containing data extracted `r format(ref.date, "%d %B %Y")`
+Containing data extracted 11 December 2020
 
 ## Summary
 The results in this report have been produced using data from the ISARIC COVID-19 database. For information, or to contribute to the collaboration, please contact ncov@isaric.org.  
