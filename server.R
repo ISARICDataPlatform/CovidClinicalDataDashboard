@@ -72,45 +72,7 @@ server <- function(input, output) {
       fd <- outcome.admission.date.input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        group_by(year.epiweek.admit) %>%
-        filter(calendar.year.admit == max(calendar.year.admit)) %>%
-        filter(calendar.month.admit == max(calendar.month.admit)) %>%
-        ungroup() %>%
-        as.tibble() %>%
-        complete(
-          slider_sex,
-          nesting(slider_agegp10, lower.age.bound, upper.age.bound),
-          slider_country,
-          nesting(
-            calendar.year.admit,
-            calendar.month.admit,
-            year.epiweek.admit
-          ),
-          slider_outcome,
-          slider_icu_ever,
-          fill = list(count = 0)
-        ) %>%
-        arrange(year.epiweek.admit) %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        group_by(
-          slider_sex,
-          slider_outcome,
-          slider_country,
-          slider_agegp10,
-          lower.age.bound,
-          upper.age.bound,
-          slider_icu_ever
-        ) %>%
-        mutate(cum.count = cumsum(count)) %>%
-        ungroup() %>%
-        filter(cum.count > 0) %>%
-        mutate(temp.cum.count = cum.count) %>%
-        select(-cum.count) %>%
-        group_by(year.epiweek.admit, slider_outcome) %>%
-        summarise(cum.count = sum(temp.cum.count)) %>%
-        as_tibble()
+        slider.filters(input) 
     })
     renderPlot(
       confidentiality.check(
@@ -529,9 +491,6 @@ server <- function(input, output) {
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
         slider.filters(input) %>%
-        mutate(Country = slider_country) %>%
-        group_by(Country) %>%
-        summarise(count = n()) %>%
         as_tibble()
     })
     renderPlot(

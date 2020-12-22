@@ -65,12 +65,12 @@ base::load("age_pyramid_input.rda")
 base::load("outcome_admission_date_input.rda")
 base::load("symptom_prevalence_input.rda")
 base::load("comorbidity.prevalence.input.rda")
-base::load("treatment_use_proportion_input.rda")
-base::load("icu_treatment_use_proportion_input.rda")
+base::load("treatment.use.proportion.input.rda")
+base::load("icu.treatment.use.proportion.input.rda")
 base::load("comorbidity.upset.input.rda")
 base::load("symptom_upset_input.rda")
-base::load("treatment_upset_input.rda")
-base::load("icu_treatment_upset_input.rda")
+base::load("treatment.upset.input.rda")
+base::load("icu.treatment.upset.input.rda")
 #Load the vs data
 base::load("data_plot_vs_resp.rda")
 base::load("data_plot_vs_hr.rda")
@@ -126,6 +126,7 @@ base::load("admission_to_icu_input.rda")
 base::load("status_by_time_after_admission_input.rda")
 base::load("length_of_stay_icu_input.rda")
 
+base::load("patient_by_country_input.rda")
 
 
 age.bound.lookup <- tibble(slider_agegp10 = cut(1:100, right = FALSE, breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 120)) %>% unique()) %>%

@@ -1,0 +1,16 @@
+---
+title: "References"
+output: html_document
+---
+
+
+Docherty, A.B., E.M. Harrison, C.A. Green, H.E. Hardwick, R. Pius, L. Norman, *et al.*. (2020). Features of 20 133 UK patients in hospital with COVID-19 using the ISARIC WHO Clinical Characterisation Protocol: prospective observational cohort study. *BMJ*, 369: m1985. [doi: 10.1136/bmj.m1985](https://doi.org/10.1136/bmj.m1985)
+
+R Core Team (2019). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.
+
+RECOVERY (2020, 16 June). Low-cost dexamethasone reduces death by up to one third in hospitalised patients with severe respiratory complications of COVID-19. https://www.recoverytrial.net/news/low-cost-dexamethasone-reduces-death-by-up-to-one-third-in-hospitalised-patients-with-severe-respiratory-complications-of-covid-19
+
+RECOVERY Collaborative Group (2020). Dexamethasone in hospitalized patients with Covid-19 — preliminary report. *New England Journal of Medicine* [doi: 10.1056/NEJMoa2021436](https://doi.org/10.1056/NEJMoa2021436)
+
+
+

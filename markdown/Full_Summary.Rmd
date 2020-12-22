@@ -153,18 +153,12 @@ Patient details were submitted electronically by participating sites to the ISAR
 
 Graphs have been used to represent the age distribution of patients by sex and status (dead, recovered & still in hospital), the prevalence of individual symptoms on admission, comorbidities on admission, the length of hospital stay by sex and age group and the distribution of patient statuses by time since admission. In addition, the number of cases recruited by country and site, as well as the case count by status, has been represented.   
 
-Using a non-parametric Kaplan-Meier-based method (Ghani et al., 2005), the case- fatality ratio (CFR) was estimated, as well as probabilities for death and recovery. This method estimates the CFR with the formula a/(a+b), where a and b are the values of the cumulative incidence function for deaths and recoveries respectively, estimated at the last observed time point. In a competing risk context (i.e. where there are multiple endpoints), the cumulative incidence function for an endpoint is equal to the product of the hazard function for that endpoint and the survival function assuming a composite endpoint. It is worth noting that this method assumes that future deaths and recoveries will occur with the same relative probabilities as have been observed so far. Binomial confidence intervals for the CFR were obtained by a normal approximation (See Ghani et al., (2005)).   
-
-To obtain estimates for the distributions of time from symptom onset to hospital admission and the time from admission to outcome (death or recovery), Gamma distributions were fitted to the observed data, accounting for unobserved outcomes. Parameters were estimated by a maximum likelihood procedure and confidence intervals for the means and variances were obtained by bootstrap.   
-
 All analysis were performed using the R statistical software (R Core Team, 2019). 
 
 
 ### References  
 
 Docherty, A.B., E.M. Harrison, C.A. Green, H.E. Hardwick, R. Pius, L. Norman, et al.. (2020). Features of 20 133 UK patients in hospital with COVID-19 using the ISARIC WHO Clinical Characterisation Protocol: prospective observational cohort study. BMJ, 369: m1985. doi: 10.1136/bmj.m1985  
-
-Ghani, A.C., C.A. Donnelly, D.R. Cox, J.T. Griffin, C. Fraser, T.H. Lam, et al. (2005). Methods for Estimating the Case Fatality Ratio for a Novel, Emerging Infectious Disease, American Journal of Epidemiology, 162(5): 479 - 486. doi: 10.1093/aje/kwi230.  
 
 R Core Team (2019). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.  
 

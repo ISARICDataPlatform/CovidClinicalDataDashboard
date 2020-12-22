@@ -61,6 +61,48 @@ age.pyramid.plot <- function(aggregated.tbl, ...){
 
 outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
   
+  aggregated.tbl <- aggregated.tbl %>%
+    group_by(year.epiweek.admit) %>%
+    filter(calendar.year.admit == max(calendar.year.admit)) %>%
+    filter(calendar.month.admit == max(calendar.month.admit)) %>%
+    ungroup() %>%
+    as.tibble() %>%
+    complete(
+      slider_sex,
+      nesting(slider_agegp10, lower.age.bound, upper.age.bound),
+      slider_country,
+      nesting(
+        calendar.year.admit,
+        calendar.month.admit,
+        year.epiweek.admit
+      ),
+      slider_outcome,
+      slider_icu_ever,
+      fill = list(count = 0)
+    ) %>%
+    arrange(year.epiweek.admit) %>%
+    as.data.table() %>%
+    lazy_dt(immutable = FALSE) %>%
+    group_by(
+      slider_sex,
+      slider_outcome,
+      slider_country,
+      slider_agegp10,
+      lower.age.bound,
+      upper.age.bound,
+      slider_icu_ever
+    ) %>%
+    mutate(cum.count = cumsum(count)) %>%
+    ungroup() %>%
+    filter(cum.count > 0) %>%
+    mutate(temp.cum.count = cum.count) %>%
+    select(-cum.count) %>%
+    group_by(year.epiweek.admit, slider_outcome) %>%
+    summarise(cum.count = sum(temp.cum.count)) %>%
+    as_tibble()
+  
+  
+  
   peak.cases <- aggregated.tbl %>% group_by(year.epiweek.admit) %>% summarise(count = sum(cum.count)) %>% pull(count) %>% max()
   
   plt <- ggplot(aggregated.tbl) +
@@ -391,6 +433,11 @@ length.of.stay.icu.plot <- function(aggregated.tbl,...){
 }
 
 patient.by.country.plot <- function(aggregated.tbl,...){
+  
+  aggregated.tbl <- aggregated.tbl %>%   mutate(Country = slider_country) %>%
+    group_by(Country) %>%
+    summarise(count = n()) 
+  
   plt <- ggplot(data=aggregated.tbl) +
     geom_col(aes(x = Country, y=count), fill="turquoise4") +
     geom_text(aes(x=Country, y= 0.95*(count), label=count), size=3, angle = 90, hjust = 1, col ="white") +
@@ -589,13 +636,19 @@ heatmap_plot <- function(data_plot_heatmap){
 
 
 
-tables_suplementary <- function(table_sup, title_table_1, title_table_2){
-  table_exapmle <- flextable(table_sup)
-  table_exapmle <- autofit(table_exapmle, add_w = 0.1, add_h = 0.1, part = c("body", "header"))
-  table_exapmle <- fontsize(table_exapmle, i = NULL, j = NULL, size = 10, part = "body")
-  table_exapmle <- add_header_lines(table_exapmle, values = title_table_2, top = TRUE)
-  table_exapmle <- add_header_lines(table_exapmle, values = title_table_1, top = TRUE)
-  table_exapmle
+tables_supplementary <- function(table_sup, title_table_1 = NA, title_table_2 = NA){
+  table_example <- flextable(table_sup)
+  table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "header")
+  table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "body")
+  if(!is.na(title_table_2)){
+    table_example <- add_header_lines(table_example, values = title_table_2, top = TRUE)
+  }
+  if(!is.na(title_table_1)){
+    table_example <- add_header_lines(table_example, values = title_table_1, top = TRUE)
+  }
+  table_example <- autofit(table_example, add_w = 0.1, add_h = 0.1, part = c("body", "header"))
+
+  table_example
 }
 
 

@@ -1,0 +1,9 @@
+---
+title: "Acknowledgements"
+output: html_document
+---
+
+
+## Acknowledgements
+
+This report is made possible through the efforts and expertise of the staff collecting data at our partner institutions across the globe, and the ISARIC Team. For a list of partners and team members, please visit [https://isaric.tghn.org/covid-19-data-management-hosting-contributors/](https://isaric.tghn.org/covid-19-data-management-hosting-contributors/).
