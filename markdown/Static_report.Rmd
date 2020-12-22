@@ -18,7 +18,7 @@ urlcolor: blue
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir = "/Users/mdhall/CovidClinicalDataDashboard/")
+knitr::opts_knit$set(root.dir = "C:/Users/jbaruch/Desktop/working_R/oxford/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -37,6 +37,7 @@ source("global.R")
 
 source("plot_functions.R")
 
+source("summary_input")
 pub.date <- today()
 ref.date <- ymd("2020-11-30")
 
@@ -50,7 +51,7 @@ ref.date <- ymd("2020-11-30")
 
 
 # COVID-19 Report: `r format(pub.date, "%d %B %Y")` {-}
-Containing data extracted `r format(ref.date, "%d %B %Y")`
+Containing data extracted 11 December 2020
 
 ## Summary
 
@@ -59,10 +60,10 @@ Containing data extracted `r format(ref.date, "%d %B %Y")`
 
 \newpage
 
-**Figure 1**: Overview of cohort and outcomes as of `r format(ref.date, "%d %B %Y")`.
+**Figure 1**: Overview of cohort and outcomes as of 11 December 2020.
 
 
-```{r cohortoverview,  out.width = "100%", fig.align="center", fig.cap=glue("Overview of cohort and outcomes as of {format(ref.date, '%d %B %Y')}")}
+```{r cohortoverview,  out.width = "100%", fig.align="center"}
 
 flowchart()
 
