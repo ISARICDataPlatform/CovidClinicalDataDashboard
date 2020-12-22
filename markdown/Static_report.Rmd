@@ -255,7 +255,7 @@ tables_supplementary(table_sup = patient.characteristic.table)
 
 \newpage
 
-```{r table2, tab.cap = "Table 2: Outcome by age and sex. Proportions are calculated using the column total as the denominator."}
+```{r table2, tab.cap = "Outcome by age and sex. Proportions are calculated using the column total as the denominator."}
 tables_supplementary(table_sup = outcome.age.sex.table)
 ```
 
