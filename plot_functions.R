@@ -110,6 +110,7 @@ symptom.prevalence.plot <- function(aggregated.tbl, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
+    aes(x = fct_reorder(nice.symptom, proportion, .desc = TRUE)) +
     scale_fill_manual(values = c("deepskyblue1", "deepskyblue4"), name = "Symptom\npresent", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
   
