@@ -1,3 +1,89 @@
+flowchart <- function(){
+  
+  summary_input<-summary_input%>%
+    mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE))
+  
+  grViz("digraph flowchart {
+      graph [layout=dot, fontsize=12, fontname=Arial]
+      
+      # node definitions with substituted label text
+      node [shape = rectangle, style = filled, fontname=Arial]        
+      tab1 [label = '@@1', fillcolor=Navy, fontcolor=white]
+      
+      node [shape = plaintext, fillcolor=white] 
+      tab2 [label = '@@2']
+      tab3 [label = '@@3']
+      
+      node [shape = diamond, fillcolor=white]
+      tab4 [label = '@@4', height=2, width=2]
+      tab5 [label = '@@5', height=2, width=2]
+      tab6 [label = '@@6', height=2, width=2]
+      
+      node [shape = rectangle, fillcolor= lightCoral] 
+      tab7 [label = '@@7',height=1, width=2]
+      tab8 [label = '@@8',height=0.8, width=1.5]
+      tab9 [label = '@@9',height=0.8, width=1.5]
+      tab10 [label = '@@10',height=0.8, width=1.5]
+      tab11 [label = '@@11',height=0.8, width=1.5]
+
+      node [shape = rectangle, fillcolor= lightSalmon] 
+      tab12 [label = '@@12',height=1, width=2]
+      tab13 [label = '@@13',height=0.8, width=1.5]
+      tab14 [label = '@@14',height=0.8, width=1.5]
+      tab15 [label = '@@15',height=0.8, width=1.5]
+      tab16 [label = '@@16',height=0.8, width=1.5]
+      
+      # edge definitions with the node IDs
+      tab1 -> tab2 [tailport=e, headport=w, constraint=false]
+      tab1 -> tab3 [tailport=s]
+      tab2 -> tab4 [headport=n]
+      tab2 -> tab5 [headport=n]
+      tab3 -> tab6
+      tab6 -> tab7 [label = '@@19']
+      tab6 -> tab12 [label = '@@20']
+      tab7 -> tab8 [label = '@@21']
+      tab7 -> tab9 [label = '@@22']
+      tab7 -> tab10 [label = '@@23']
+      tab7 -> tab11 [label = '@@24']
+      tab12 -> tab13 [label = '@@25']
+      tab12 -> tab14 [label = '@@26']
+      tab12 -> tab15 [label = '@@27']
+      tab12 -> tab16 [label = '@@28']
+      }
+
+      [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input), ')')
+      [2]: paste0('EXCLUDED 0%')
+      [3]: paste0('ANALYSED 100%')
+      [4]: paste0('<14-days follow-up\\n (N=0)')
+      [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=0)')
+      [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed or\\n clinically-diagnosed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
+      [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
+      [8]: paste0('In hospital\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care')),')')
+      [9]: paste0('Deceased\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
+      [10]: paste0('Discharged\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
+      [11]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU')), ')')
+      [12]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE)),')')
+      [13]: paste0('In hospital\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE & slider_outcome=='Ongoing care')),')')
+      [14]: paste0('Deceased\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE & slider_outcome=='Death')), ')')
+      [15]: paste0('Discharged\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE  & slider_outcome=='Discharge')), ')')
+      [16]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE & slider_outcome=='LTFU')), ')')
+      [17]: 'X%'
+      [18]: 'X%'
+      [19]: paste0(round(prop.table(table(summary_input$slider_icu_ever))[2]*100,0), '%')
+      [20]: paste0(round(prop.table(table(summary_input$slider_icu_ever))[1]*100,0), '%')
+      [21]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[4]*100,0), '%')
+      [22]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[1]*100,0), '%')
+      [23]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[2]*100,0), '%')
+      [24]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[3]*100,0), '%')
+      [25]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE) %$% table(slider_outcome))[4]*100,0), '%')
+      [26]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE) %$% table(slider_outcome))[1]*100,0), '%')
+      [27]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE) %$% table(slider_outcome))[2]*100,0), '%')
+      [28]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE) %$% table(slider_outcome))[3]*100,0), '%')
+
+      "
+  )
+}
+
 
 age.pyramid.plot <- function(aggregated.tbl, ...){
   # print(nrow(aggregated.tbl))
