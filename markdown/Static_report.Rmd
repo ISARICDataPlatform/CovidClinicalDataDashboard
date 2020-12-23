@@ -37,7 +37,6 @@ source("global.R")
 
 source("plot_functions.R")
 
-source("summary_input")
 pub.date <- today()
 ref.date <- ymd("2020-11-30")
 
