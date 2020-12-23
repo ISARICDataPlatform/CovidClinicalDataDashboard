@@ -284,38 +284,48 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
 
 
 p_resp <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Respiratory rate (min)") + 
-    theme_bw() +
+    theme_bw() + labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_hr <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Heart rate (min)") + 
-    theme_bw() +
+    theme_bw() + labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_temp <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Temperature (Celsius)") + 
-    theme_bw() +
+    theme_bw() + labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F)
 }
 
 p_sysbp <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + 
-    theme_bw() +
+    theme_bw() + labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_oxysat <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
     geom_text(aes(label=..count..), y=0, stat='count', colour="red", size=4)+
-    theme_bw() +
+    theme_bw() + labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
@@ -323,75 +333,97 @@ p_oxysat <- function(aggregated.tbl){
 
 
 p_lab_crp <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("CRP (mg/L)") + 
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_lym <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Lymphocytes (10^9/L)") + 
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_neut <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Neutrophils (10^9/L)") + 
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_wbc <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("WCC (10^9/L)") + 
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_urean <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Urea (mmol/L)") +
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_pt <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Protrombin time (s)") +
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_alt <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("ALT (units/L)") +
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_aptt <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("APTT (s)") +
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_bili <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Bilirubin (mmol/L)") +
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
 p_lab_ast <- function(aggregated.tbl){
+  N = nrow(aggregated.tbl)
+  
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("AST (units/L)") +
-    theme_bw() +
+    theme_bw() +labs(title = N) + 
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
+
+###########################################################
 length.of.stay.sex.plot <- function(aggregated.tbl, ...){
   plt <- ggplot(aggregated.tbl, aes(x = sex, y = length.of.stay, fill=sex)) +
     geom_violin(trim=F)+
@@ -489,7 +521,6 @@ patient.by.country.plot <- function(aggregated.tbl,...){
   plt
 }
 
-
 ############################################
 #' @export plot.prop.by.age
 #' @keywords internal
@@ -555,7 +586,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = 11, angle = 90, hjust = 1)) + 
+    theme_bw() + theme(axis.text = element_text(size = 13, angle = 90, hjust = 1)) + 
     labs(title = N)
   
   return(p)
@@ -564,37 +595,37 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
 #data_plot_comorbid_asthma
 plot.prop.by.age_comorbid_asthma <- function(data_plot_comorbid_asthma, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_asthma, data_plot_comorbid_asthma$value,
-                   ifelse(full.label, "Proportion with asthma", "Proportion" ))
+                   ifelse(full.label, "Proportion with asthma", "Proportion" ), ymax = 0.7)
 }
 #data_plot_comorbid_malignant_neoplasm
 plot.prop.by.age_comorbid_malignant_neoplasm <- function(data_plot_comorbid_malignant_neoplasm, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_malignant_neoplasm, data_plot_comorbid_malignant_neoplasm$value,
-                   ifelse(full.label, "Proportion with malignancy", "Proportion" ))
+                   ifelse(full.label, "Proportion with malignancy", "Proportion" ), ymax = 0.7)
 }
 #data_plot_comorbid_obesity
 plot.prop.by.age_comorbid_obesity <- function(data_plot_comorbid_obesity, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_obesity, data_plot_comorbid_obesity$value,
-                   ifelse(full.label, "Proportion with obesity", "Proportion" ))
+                   ifelse(full.label, "Proportion with obesity", "Proportion" ), ymax = 0.7)
 }
 #data_plot_comorbid_diabetes
 plot.prop.by.age_comorbid_diabetes <- function(data_plot_comorbid_diabetes, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_diabetes, data_plot_comorbid_diabetes$value,
-                   ifelse(full.label, "Proportion with diabetes mellitus", "Proportion" ))
+                   ifelse(full.label, "Proportion with diabetes mellitus", "Proportion" ), ymax = 0.7)
 }
 #data_plot_comorbid_dementia
 plot.prop.by.age_comorbid_dementia <- function(data_plot_comorbid_dementia, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_dementia, data_plot_comorbid_dementia$value,
-                   ifelse(full.label, "Proportion with dementia", "Proportion" ))
+                   ifelse(full.label, "Proportion with dementia", "Proportion" ), ymax = 0.7)
 }
 #data_plot_comorbid_smoking
 plot.prop.by.age_comorbid_smoking <- function(data_plot_comorbid_smoking, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_smoking, data_plot_comorbid_smoking$value,
-                   ifelse(full.label, "Proportion with currently smoke", "Proportion" ))
+                   ifelse(full.label, "Proportion with currently smoke", "Proportion" ), ymax = 0.7)
 }
 #data_plot_comorbid_hypertension
 plot.prop.by.age_comorbid_hypertension <- function(data_plot_comorbid_hypertension, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_hypertension, data_plot_comorbid_hypertension$value,
-                   ifelse(full.label, "Proportion with hypertension", "Proportion" ))
+                   ifelse(full.label, "Proportion with hypertension", "Proportion" ), ymax = 0.7)
 }
 
 
