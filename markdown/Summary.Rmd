@@ -13,7 +13,9 @@ Please note the following caveats. This is a dynamic report which captures new v
 Up to the date of this report, data have been entered for **`r nrow(summary_input)`** individuals from **`r length(unique(summary_input$siteid_final))`** sites across **`r length(unique(summary_input$slider_country))`** countries.  
 
 The analysis detailed in this report only includes individuals: 
-  1. for whom data collection commenced on or before 16 November 2020. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes. 
+
+  1. for whom data collection commenced on or before 16 November 2020. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
+  
 **AND**  
   2. who have laboratory-confirmed or clinically-diagnosed SARS-COV-2 infection.
   
