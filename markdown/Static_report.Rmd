@@ -73,8 +73,9 @@ flowchart()
 
 \newpage
 ## Patient Characteristics
+**Figure 2**: Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up(LTFU)/ongoing care) at the time of report.
 
-```{r agepyramid, echo = FALSE, fig.align="center", fig.cap=glue("Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up(LTFU)/ongoing care) at the time of report.")}
+```{r agepyramid, echo = FALSE, fig.align="center"}
 
 age.pyramid.plot(age.pyramid.input)
 
@@ -82,6 +83,9 @@ age.pyramid.plot(age.pyramid.input)
 
 
 \newpage
+
+**Figure 3**: (a) Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded. (b) The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity. (c) Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.
+
 (a)
 ```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE}
 symptom.prevalence.plot(symptom.prevalence.input)
@@ -93,11 +97,13 @@ upset.plot(symptom.upset.input, which.plot = "symptom")
 ```
 \newpage
 (c)
-```{r symptomheatmap, echo=FALSE, out.width= "100%", message=FALSE, fig.cap='(a) Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded. (b) The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity. (c) Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.'}
+```{r symptomheatmap, echo=FALSE, out.width= "100%", message=FALSE}
 heatmap_plot(data_plot_heatmap)
 ```
 
 \newpage
+
+**Figure 4**:(a) Frequency of comorbidities or other concomitant conditions seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this comorbidity over the number of patients for whom presence or absence of this comorbidity was recorded.  (b) The distribution of combinations of the five most common such conditions, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity.
 
 (a)
 ```{r comorbprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE}
@@ -106,15 +112,15 @@ comorbidity.prevalence.plot(comorbidity.prevalence.input)
 
 (b)
 
-```{r comorbupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE,fig.cap = "(a) Frequency of comorbidities or other concomitant conditions seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this comorbidity over the number of patients for whom presence or absence of this comorbidity was recorded.  (b) The distribution of combinations of the five most common such conditions, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity."}
+```{r comorbupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
 upset.plot(comorbidity.upset.input, which.plot = "comorbidity")
 ```
 
 \newpage
 
 ## Variables by age
-
-```{r comorbbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.cap = "Comorbidities stratified by age group. Boxes show the proportion of individuals with each comorbidity, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)", fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking")}
+**Figure 5**:Comorbidities stratified by age group. Boxes show the proportion of individuals with each comorbidity, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness).
+```{r comorbbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking")}
 
 plot.prop.by.age_comorbid_asthma(data_plot_comorbid_asthma, FALSE)
 plot.prop.by.age_comorbid_dementia(data_plot_comorbid_dementia, FALSE)
@@ -126,8 +132,8 @@ plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)
 
 ```
 
-
-```{r sympbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.cap = "Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)", fig.subcap=c("Abdominal pain", "Altered consciousness/confusion", "Constitutional symptoms (myalgia, joint pain, fatigue or headache)", "Cough", "Cough or fever", "Cough, fever or shortness of breath", "Diarrhoea", "History of fever", "Shortness of breath", "Upper respiratory tract symptoms (runny nose, sore throat or ear pain)", "Vomiting or nausea")}
+**Figure 6**:Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness).
+```{r sympbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Abdominal pain", "Altered consciousness/confusion", "Constitutional symptoms (myalgia, joint pain, fatigue or headache)", "Cough", "Cough or fever", "Cough, fever or shortness of breath", "Diarrhoea", "History of fever", "Shortness of breath", "Upper respiratory tract symptoms (runny nose, sore throat or ear pain)", "Vomiting or nausea")}
 
 plot.prop.by.age_symptoms_abdominal_pain(data_plot_symptoms_abdominal_pain, FALSE)
 plot.prop.by.age_symptoms_altered_consciousness_confusion(data_plot_symptoms_altered_consciousness_confusion, FALSE)
@@ -145,8 +151,8 @@ plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FA
 
 ```
 
-
-```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2, fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted.  N is the number of individuals included in the plot (this varies between plots due to data completeness). ALT, Alanine transaminase; APTT, Activated partial thromboplastin time; AST, Aspartate transaminase; CRP, C-reactive protein; WCC, white cell count", fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation in room air.")}
+**Figure 7**: Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness).
+```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation in room air.")}
 
 p_resp(data_plot_vs_resp)
 p_hr(data_plot_vs_hr)
@@ -155,8 +161,8 @@ p_sysbp(data_plot_vs_sysbp)
 p_oxysat(data_plot_vs_oxysat)
 
 ```
-
-```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3, fig.ncol = 2, fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness).", fig.subcap=c("Alanine transaminase (ALT)", "Activated partial thromboplastin time (APTT)", "Aspartate transaminase (AST)", "Bilirubin",  "C-reactive protein (CRP)", "Lymphocytes", "Neutrophils", "Protrombin time", "Urea", "White blood cell count (WCC)")}
+**Figure 8**: Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness).
+```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Activated partial thromboplastin time (APTT)", "Aspartate transaminase (AST)", "Bilirubin",  "C-reactive protein (CRP)", "Lymphocytes", "Neutrophils", "Protrombin time", "Urea", "White blood cell count (WCC)")}
 
 p_lab_alt(data_plot_lab_alt)
 p_lab_aptt(data_plot_lab_aptt)
@@ -174,23 +180,26 @@ p_lab_wbc(data_plot_lab_wbc)
 
 \newpage
 ## Hospital stays and outcomes
-
-```{r  staybysex, out.width= "80%", fig.height=4, fig.cap = "Distribution of length of hospital stay, according to sex. This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+**Figure 9**: Distribution of length of hospital stay, according to sex. This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.
+```{r  staybysex, out.width= "80%", fig.height=4}
 
 length.of.stay.sex.plot(length.of.stay.sex.input)
 ```
 
-```{r  staybyage, out.width= "80%", fig.height=4, fig.cap = "Distribution of length of hospital stay, according to patient age group. This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+**Figure 10**: Distribution of length of hospital stay, according to patient age group. This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.
+```{r  staybyage, out.width= "80%", fig.height=4}
 
 length.of.stay.age.plot(length.of.stay.age.input)
 ```
 
-#```{r  admissiontoICUoverall, out.width= "100%", fig.cap = "Distribution of time (in days) from #hospital admission to ICU admission. The figure displays data on only those cases with a reported #ICU start date (N=XX)."}
-#admission.to.icu.plot(admission.to.icu.input)
-#```
+**Figure 11**: Distribution of time (in days) from #hospital admission to ICU admission. The figure displays data on only those cases with a reported ICU start date.
+```{r  admissiontoICUoverall, out.width= "100%"}
+admission.to.icu.plot(admission.to.icu.input)
+```
 
-#```{r  timeline, out.width= "100%", fig.cap = "The distribution of patient status by number of #days after admission. Patients with 'unknown' status have left the site at the time of report but #have unknown outcomes due to missing data. Patients still on site at the time of report appear in #the 'ongoing care' category for days which are in the future at that time. (For example, a #patient admitted 7 days before the date of report and still on site by the date of the report #would be categorised as 'ongoing care' for days 8 and later.) The black line marks the end of 14 #days."}
+**Figure 12**: The distribution of patient status by number of #days after admission. Patients with 'unknown' status have left the site at the time of report but #have unknown outcomes due to missing data. Patients still on site at the time of report appear in #the 'ongoing care' category for days which are in the future at that time. (For example, a #patient admitted 7 days before the date of report and still on site by the date of the report #would be categorised as 'ongoing care' for days 8 and later.) The black line marks the end of 14 #days.
+```{r  timeline, out.width= "100%"}
 
-#status.by.time.after.admission.plot(status.by.time.after.admission.input)
-#```
+status.by.time.after.admission.plot(status.by.time.after.admission.input)
+```
 
