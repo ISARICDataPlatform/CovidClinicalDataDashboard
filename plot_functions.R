@@ -67,8 +67,8 @@ flowchart <- function(){
       [14]: paste0('Deceased\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE & slider_outcome=='Death')), ')')
       [15]: paste0('Discharged\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE  & slider_outcome=='Discharge')), ')')
       [16]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE & slider_outcome=='LTFU')), ')')
-      [17]: 'X%'
-      [18]: 'X%'
+      [17]: '0%'
+      [18]: '0%'
       [19]: paste0(round(prop.table(table(summary_input$slider_icu_ever))[2]*100,0), '%')
       [20]: paste0(round(prop.table(table(summary_input$slider_icu_ever))[1]*100,0), '%')
       [21]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[4]*100,0), '%')
