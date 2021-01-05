@@ -3,7 +3,7 @@ title: "ISARIC (International Severe Acute Respiratory and Emerging Infections C
 output:
   pdf_document:
     toc: no
-    fig_caption: true
+    fig_caption: TRUE
     extra_dependencies: "subfig"
     includes:
       in_header: header.tex
@@ -18,7 +18,7 @@ urlcolor: blue
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir = "C:/Users/jbaruch/Desktop/working_R/oxford/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir = "C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
