@@ -71,7 +71,7 @@ flowchart()
 \newpage
 ## Patient Characteristics
 
-```{r agepyramid, echo = FALSE, fig.align="center", fig.cap = "Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up(LTFU)/ongoing care) at the time of report."}
+```{r agepyramid, echo = FALSE, fig.align="center", fig.cap = "Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up (LTFU)/ongoing care) at the time of report."}
 
 age.pyramid.plot(age.pyramid.input)
 
