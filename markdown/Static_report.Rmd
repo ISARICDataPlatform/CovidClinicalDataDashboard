@@ -61,7 +61,7 @@ Containing data extracted 30 November 2020
 
 
 ```{r cohortoverview,  out.width = "100%", fig.align="center"}
-writeLines(getwd(), "aardvark.txt")
+
 flowchart()
 
 ```
