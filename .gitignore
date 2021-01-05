@@ -65,3 +65,11 @@ data_plot_symptoms_upper_respiratory_tract_symptoms.rda
 Static_report.pdf
 age_pyramid_input.rda
 patient.site.time.map.input.rda
+comorbidity.table.rda
+key.times.rda
+outcome.age.sex.table.rda
+patient.characteristic.table.rda
+summary_input.rda
+symptom.prevalence.input.rda
+symptoms.table.rda
+treatment.table.rda
