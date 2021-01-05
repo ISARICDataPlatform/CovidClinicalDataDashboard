@@ -73,3 +73,5 @@ summary_input.rda
 symptom.prevalence.input.rda
 symptoms.table.rda
 treatment.table.rda
+outcome_admission_date_input.rda
+symptom.upset.input.rda
