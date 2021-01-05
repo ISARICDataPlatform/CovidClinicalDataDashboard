@@ -152,7 +152,7 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
     filter(calendar.year.admit == max(calendar.year.admit)) %>%
     filter(calendar.month.admit == max(calendar.month.admit)) %>%
     ungroup() %>%
-    as.tibble() %>%
+    as_tibble() %>%
     complete(
       slider_sex,
       nesting(slider_agegp10, lower.age.bound, upper.age.bound),

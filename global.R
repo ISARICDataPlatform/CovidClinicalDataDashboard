@@ -68,7 +68,7 @@ base::load("comorbidity.prevalence.input.rda")
 base::load("treatment.use.proportion.input.rda")
 base::load("icu.treatment.use.proportion.input.rda")
 base::load("comorbidity.upset.input.rda")
-base::load("symptom_upset_input.rda")
+base::load("symptom.upset.input.rda")
 base::load("treatment.upset.input.rda")
 base::load("icu.treatment.upset.input.rda")
 #Load the vs data
