@@ -4,7 +4,7 @@ output:
   pdf_document:
     toc: no
     fig_caption: true
-    extra_dependencies: "subfig"
+    extra_dependencies: ["subfig"]
     latex_engine: xelatex
     includes:
       in_header: header.tex
@@ -54,7 +54,6 @@ ref.date <- ymd("2020-11-30")
 Containing data extracted 21 December 2020
 
 
-
 ```{r child ='markdown/Summary.Rmd'}
 ```
 
@@ -80,32 +79,30 @@ age.pyramid.plot(age.pyramid.input)
 
 \newpage
 
-(a)
 ```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE, fig.cap='(a) Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded. (b) The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity. (c) Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.'}
-symptom.prevalence.plot(symptom.prevalence.input)
+
+symptom.prevalence.plot(symptom.prevalence.input) + ggtitle("(a)")
 ```
 
-(b)
 ```{r symptomupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
-upset.plot(symptom.upset.input, which.plot = "symptom")
+
+upset.plot(symptom.upset.input, which.plot = "symptom") + ggtitle("(b)")
 ```
 \newpage
-(c)
+
 ```{r symptomheatmap, echo=FALSE, out.width= "100%", message=FALSE}
-heatmap_plot(data_plot_heatmap)
+
+heatmap_plot(data_plot_heatmap) + ggtitle("(c)")
 ```
 
 \newpage
 
-(a)
 ```{r comorbprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Frequency of comorbidities or other concomitant conditions seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this comorbidity over the number of patients for whom presence or absence of this comorbidity was recorded.  (b) The distribution of combinations of the five most common such conditions, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity."}
-comorbidity.prevalence.plot(comorbidity.prevalence.input)
+comorbidity.prevalence.plot(comorbidity.prevalence.input) + ggtitle("(a)")
 ```
-
-(b)
 
 ```{r comorbupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
-upset.plot(comorbidity.upset.input, which.plot = "comorbidity")
+upset.plot(comorbidity.upset.input, which.plot = "comorbidity") + ggtitle("(b)")
 ```
 
 \newpage
@@ -202,32 +199,29 @@ outcomes.by.admission.date.plot(outcome_admission_date_input)
 \newpage
 ## Treatment
 
-(a)
-```{r treatprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE}
-treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE)
+```{r treatprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data. Filled and empty circles below the x-axis indicate treatments that were and were not administered."}
+
+treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE) + ggtitle("(a)")
 ```
 
-(b)
-```{r treatupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE,fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data. Filled and empty circles below the x-axis indicate treatments that were and were not administered."}
-upset.plot(treatment.upset.input, which.plot = "treatment")
+```{r treatupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
+
+upset.plot(treatment.upset.input, which.plot = "treatment") + ggtitle("(b)")
 ```
 
 
 # Intensive Care and High Dependency Unit Treatments
 
-(a)
-```{r treaticuprev,  out.width= "100%", fig.height=3.3, message=FALSE}
-treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE)
+```{r treaticuprev,  out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Treatments used amongst patients admitted to the ICU. This only includes patients for whom this information was recorded. (b) The distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. (c) Distribution of lengths of stay for patients who were admitted to ICU/HDU: total length of stay for this group and length of stay within intensive care. This only includes cases with reported completed stays. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE) + ggtitle("(a)")
 ```
 
-(b)
 ```{r treaticuupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
-upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment")
+upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(b)")
 ```
 
-(c)
-```{r icu_los,  out.width = '80%', echo=FALSE, fig.cap = "(a) Treatments used amongst patients admitted to the ICU. This only includes patients for whom this information was recorded. (b) The distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. (c) Distribution of lengths of stay for patients who were admitted to ICU/HDU: total length of stay for this group and length of stay within intensive care. This only includes cases with reported completed stays. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
-length.of.stay.icu.plot(length.of.stay.icu.input)
+```{r icu_los,  out.width = '80%', echo=FALSE}
+length.of.stay.icu.plot(length.of.stay.icu.input) + ggtitle("(c)")
 ```
 \newpage
 ## Country Comparisons
@@ -250,6 +244,13 @@ patient.by.country.plot(patient.by.country.input)
 ```{r child = 'markdown/Caveats.Rmd'}
 ```
 
+```{r child = 'markdown/Teammembers.Rmd'}
+```
+
+```{r child = 'markdown/References.Rmd'}
+```
+
+
 \newpage
 
 ## Summary tables
@@ -265,7 +266,7 @@ tables_supplementary(table_sup = outcome.age.sex.table)
 
 \newpage
 
-```{r table3, tab.cap = " Prevalence of symptoms."}
+```{r table3, tab.cap = "Prevalence of symptoms."}
 tables_supplementary(table_sup = symptoms.table)
 ```
 
@@ -287,12 +288,5 @@ tables_supplementary(table_sup = key.times.table)
 
 ```
 
-\newpage
 
-```{r child = 'markdown/Teammembers.Rmd'}
-```
-
-
-```{r child = 'markdown/References.Rmd'}
-```
 
