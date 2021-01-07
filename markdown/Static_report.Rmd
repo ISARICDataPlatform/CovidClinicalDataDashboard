@@ -59,7 +59,7 @@ Containing data extracted 21 December 2020
 
 
 
-```{r cohortoverview,  out.width = "300%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 21 December 2020."}
+```{r cohortoverview,  out.width = "100%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 21 December 2020."}
 
 flowchart()
 
