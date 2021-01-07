@@ -298,6 +298,13 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
                      which.plot == "treatment" ~ "chartreuse3",
                      which.plot == "icu.treatment" ~ "darkorchid4")
   
+  xlab = case_when(which.plot == "comorbidity" ~ "Conditions present at admission",
+                     which.plot == "symptom" ~ "Symptoms present at admission",
+                     which.plot == "treatment" ~ "Treatments used during hospital admission",
+                     which.plot == "icu.treatment" ~ "Treatments used")
+  
+  
+  
   unspun.table <- aggregated.tbl %>% nest(data = c(slider_sex,
                                                    slider_country,
                                                    slider_icu_ever,
@@ -318,10 +325,14 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
   ggplot(unspun.table, aes(x = which.present)) +
     geom_bar(aes(y=..count../sum(..count..)), fill = colour) +
     theme_bw() +
-    xlab("Conditions present at admission") +
+    xlab(xlab) +
     ylab("Proportion of patients") +
     scale_x_upset()
 }
+
+
+
+
 ######Plots for the vs data############
 
 
