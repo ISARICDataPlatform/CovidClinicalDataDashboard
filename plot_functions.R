@@ -4,7 +4,7 @@ flowchart <- function(){
     mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE))
   
   grViz("digraph flowchart {
-      graph [layout=dot, fontsize=12, fontname=Arial]
+      graph [layout=dot, fontsize=14, fontname=Arial]
       
       # node definitions with substituted label text
       node [shape = rectangle, style = filled, fontname=Arial]        
@@ -58,14 +58,14 @@ flowchart <- function(){
       [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=0)')
       [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed or\\n clinically-diagnosed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
       [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
-      [8]: paste0('In hospital\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care')),')')
-      [9]: paste0('Deceased\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
-      [10]: paste0('Discharged\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
+      [8]: paste0('Ongoing care\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care')),')')
+      [9]: paste0('Death\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
+      [10]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
       [11]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU')), ')')
       [12]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever))),')')
       [13]: paste0('In hospital\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Ongoing care')),')')
-      [14]: paste0('Deceased\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Death')), ')')
-      [15]: paste0('Discharged\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
+      [14]: paste0('Death\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Death')), ')')
+      [15]: paste0('Ongoing care\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
       [16]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever)) & slider_outcome=='LTFU')), ')')
       [17]: '0%'
       [18]: '0%'
