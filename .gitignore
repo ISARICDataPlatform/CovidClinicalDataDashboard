@@ -77,3 +77,7 @@ outcome_admission_date_input.rda
 symptom.upset.input.rda
 Static_report.log
 Static_report_files
+Static_report.aux
+Static_report.tex
+Static_report.knit.md
+Static_report.utf8.md
