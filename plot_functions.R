@@ -238,7 +238,7 @@ symptom.prevalence.plot <- function(aggregated.tbl, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
-    aes(x = fct_reorder(nice.symptom, proportion, .desc = TRUE)) +
+    #aes(x = fct_reorder(nice.symptom, proportion, .desc = TRUE)) +
     scale_fill_manual(values = c("deepskyblue1", "deepskyblue4"), name = "Symptom\npresent", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
   
@@ -326,7 +326,7 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
 
 
 p_resp <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Respiratory rate (min)") + 
@@ -335,7 +335,7 @@ p_resp <- function(aggregated.tbl){
 }
 
 p_hr <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Heart rate (min)") + 
@@ -344,7 +344,7 @@ p_hr <- function(aggregated.tbl){
 }
 
 p_temp <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Temperature (Celsius)") + 
@@ -353,7 +353,7 @@ p_temp <- function(aggregated.tbl){
 }
 
 p_sysbp <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + 
@@ -362,7 +362,7 @@ p_sysbp <- function(aggregated.tbl){
 }
 
 p_oxysat <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
@@ -375,7 +375,7 @@ p_oxysat <- function(aggregated.tbl){
 
 
 p_lab_crp <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("CRP (mg/L)") + 
@@ -384,7 +384,7 @@ p_lab_crp <- function(aggregated.tbl){
 }
 
 p_lab_lym <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("Lymphocytes (10^9/L)") + 
@@ -393,7 +393,7 @@ p_lab_lym <- function(aggregated.tbl){
 }
 
 p_lab_neut <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10)) +xlab("Age groups") + ylab("Neutrophils (10^9/L)") + 
@@ -402,7 +402,7 @@ p_lab_neut <- function(aggregated.tbl){
 }
 
 p_lab_wbc <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))+xlab("Age groups") + ylab("WCC (10^9/L)") + 
@@ -411,7 +411,7 @@ p_lab_wbc <- function(aggregated.tbl){
 }
 
 p_lab_urean <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Urea (mmol/L)") +
@@ -420,7 +420,7 @@ p_lab_urean <- function(aggregated.tbl){
 }
 
 p_lab_pt <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Protrombin time (s)") +
@@ -429,7 +429,7 @@ p_lab_pt <- function(aggregated.tbl){
 }
 
 p_lab_alt <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("ALT (units/L)") +
@@ -438,7 +438,7 @@ p_lab_alt <- function(aggregated.tbl){
 }
 
 p_lab_aptt <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("APTT (s)") +
@@ -447,7 +447,7 @@ p_lab_aptt <- function(aggregated.tbl){
 }
 
 p_lab_bili <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Bilirubin (mmol/L)") +
@@ -456,7 +456,7 @@ p_lab_bili <- function(aggregated.tbl){
 }
 
 p_lab_ast <- function(aggregated.tbl){
-  N = nrow(aggregated.tbl)
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("AST (units/L)") +
@@ -633,7 +633,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = 13, angle = 90, hjust = 1)) + 
+    theme_bw() + theme(axis.text = element_text(size = 13)) + 
     labs(title = N)
   
   return(p)
