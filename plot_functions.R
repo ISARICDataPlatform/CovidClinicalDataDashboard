@@ -198,7 +198,7 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
     xlab("Epidemiological week of admission/symptom onset") +
     ylab("Cumulative patient records") +
     scale_x_discrete(drop = F) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 7)) 
   
   return(plt)
 }

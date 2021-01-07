@@ -22,7 +22,7 @@ header-includes:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/marti/OneDrive/Documents/ISARIC/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="~/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
