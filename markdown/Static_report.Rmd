@@ -191,7 +191,7 @@ admission.to.icu.plot(admission.to.icu.input)
 status.by.time.after.admission.plot(status.by.time.after.admission.input)
 ```
 
-```{r  statusafteradmission, out.width= "100%", fig.cap = "Cumulative patient numbers and outcomes by epidemiological week (of 2020) of admission (or, for patients infected in hospital, of symptom onset). The rightmost bar, marked with an asterisk, represents an incomplete week (due to the 14-day cutoff)."}
+```{r  statusafteradmission, out.width= "100%", fig.cap = "Cumulative patient numbers and outcomes by epidemiological week (of 2020) of admission (or, for patients infected in hospital, of symptom onset)."}
 
 outcomes.by.admission.date.plot(outcome_admission_date_input)
 ```
@@ -199,7 +199,7 @@ outcomes.by.admission.date.plot(outcome_admission_date_input)
 \newpage
 ## Treatment
 
-```{r treatprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data. Filled and empty circles below the x-axis indicate treatments that were and were not administered."}
+```{r treatprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data."}
 
 treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE) + ggtitle("(a)")
 ```
