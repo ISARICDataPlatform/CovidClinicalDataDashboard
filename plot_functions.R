@@ -198,7 +198,7 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
     xlab("Epidemiological week of admission/symptom onset") +
     ylab("Cumulative patient records") +
     scale_x_discrete(drop = F) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) 
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 8)) 
   
   return(plt)
 }
@@ -574,7 +574,7 @@ patient.by.country.plot <- function(aggregated.tbl,...){
     theme_bw() +
     scale_x_discrete(expand = c(0,1.5))+
     ylab("Patient records (pseudo log scale)") +
-    theme(axis.text.x = element_text(angle = 45, hjust=1, size = 10), axis.title.x=element_blank()) +
+    theme(axis.text.x = element_text(angle = 45, hjust=1, size = 8), axis.title.x=element_blank()) +
     scale_y_continuous( trans = pseudo_log_trans(), expand = c(0,0.1), breaks = c(0,1, 10, 100, 1000, 10000, 100000), minor_breaks = NULL)
   plt
 }
