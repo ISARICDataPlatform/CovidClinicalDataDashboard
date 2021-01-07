@@ -2,6 +2,8 @@
 title: "Summary"
 output: html_document
 ---
+
+
 ## Summary
 The results in this report have been produced using data from the ISARIC COVID-19 database. For information, or to contribute to the collaboration, please contact ncov@isaric.org.  
 
@@ -15,7 +17,8 @@ The analysis detailed in this report only includes individuals:
 
   1. for whom data collection commenced on or before 16 November 2020. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
   
-**AND**  
+**AND**
+
   2. who have laboratory-confirmed or clinically-diagnosed SARS-COV-2 infection.
   
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases (`r nrow(summary_input %>% filter(cov_det_id=='POSITIVE'))` are laboratory-confirmed for SARS-COV-2 infection).
@@ -24,14 +27,14 @@ The below flow chart gives an overview of the cohort and outcomes as of 30 Novem
 ## Demographics and presenting features
 Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The minimum and maximum observed ages were `r min(summary_input$age, na.rm=T)` and `r max(summary_input$age, na.rm=T)` years respectively. The median age is `r median(summary_input$age, na.rm=T)` years.  
 
-The observed mean number of days from (first) symptom onset to hospital admission was `r round(mean(summary_input$t_son_ad, na.rm=T),1)`, with a standard deviation (SD) of `r round(sd(summary_input$t_son_ad, na.rm=T),1)` days and a median of `r median(summary_input$t_son_ad, na.rm=T)` days. 
+The observed mean number of days from (first) symptom onset to hospital admission was `r round(mean((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T),1)`, with a standard deviation (SD) of `r round(sd((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T),1)` days and a median of `r median((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T)` days. 
 
-The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was `r round(mean(summary_input$dur_ho, na.rm=T),1)`, with SD `r round(sd(summary_input$dur_ho, na.rm=T),1)` days and a median of `r median(summary_input$dur_ho, na.rm=T)` days. These estimates are based on all cases which have complete records on length of hospital stay (N = `r nrow(summary_input %>% filter(is.na(dur_ho)==F))`).  
+The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was `r round(mean((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)`, with SD `r round(sd((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)` days and a median of `r median((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T)` days. These estimates are based on all cases which have complete records on length of hospital stay (N = `r nrow(summary_input %>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")&! is.na(dur_ho)))`).  
 
 The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were `r glue_collapse(symptom.prevalence.input %>% group_by(nice.symptom) %>% summarise(F=sum(times.present)) %>% ungroup() %>% arrange(desc(F)) %>% slice(1:5) %>% pull(nice.symptom) %>% str_to_lower(), sep = ', ', last=', and ')`. Frequencies of symptom prevalence vary with age. `r paste0(nrow(summary_input %>% filter(vs_oxysat<94)),'/',nrow(summary_input %>% filter(is.na(vs_oxysat)==F)))` (`r round(nrow(summary_input %>% filter(vs_oxysat<94))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients presented with oxygen saturations <94%.  
 
 ## Outcomes
-Outcomes have been recorded for `r sum(is.na(summary_input$outcome)==F)` patients, consisting of `r length(which(summary_input$outcome=='discharge'))` recoveries and `r length(which(summary_input$outcome=='death'))` deaths. Follow-up is ongoing for `r length(which(summary_input$outcome=='ongoing care'))` patients. Outcome records are unavailable for `r sum(is.na(summary_input$outcome)| summary_input$outcome=="LTFU")` patients.  
+Outcomes have been recorded for `r nrow(summary_input%>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")))` patients, consisting of `r nrow(summary_input%>%filter((slider_outcome=="Discharge")))` recoveries and `r nrow(summary_input%>%filter((slider_outcome=="Death")))` deaths. Follow-up is ongoing for `r nrow(summary_input%>%filter((slider_outcome=="Ongoing care")))` patients. Outcome records are unavailable for `r nrow(summary_input%>%filter((slider_outcome=="LTFU")))` patients.  
 
 **ICU/HDU**: A total of `r length(which(summary_input$slider_icu_ever==TRUE))` (`r round(length(which(summary_input$slider_icu_ever==TRUE))/nrow(summary_input)*100,0)`%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU). Of these, `r nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death'))` died, `r nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))` are still in hospital and `r nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge'))` have recovered and been discharged. Outcome records are unavailable for `r nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU'))` cases.
 
