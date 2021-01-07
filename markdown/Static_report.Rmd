@@ -22,7 +22,7 @@ header-includes:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir = "/Users/mdhall/CovidClinicalDataDashboard/")
+knitr::opts_knit$set(root.dir="C:/Users/marti/OneDrive/Documents/ISARIC/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -209,10 +209,11 @@ treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE) + ggtitle
 upset.plot(treatment.upset.input, which.plot = "treatment") + ggtitle("(b)")
 ```
 
-
+\newpage
 # Intensive Care and High Dependency Unit Treatments
 
 ```{r treaticuprev,  out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Treatments used amongst patients admitted to the ICU. This only includes patients for whom this information was recorded. (b) The distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. (c) Distribution of lengths of stay for patients who were admitted to ICU/HDU: total length of stay for this group and length of stay within intensive care. This only includes cases with reported completed stays. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+
 treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE) + ggtitle("(a)")
 ```
 
@@ -224,8 +225,7 @@ upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(
 length.of.stay.icu.plot(length.of.stay.icu.input) + ggtitle("(c)")
 ```
 \newpage
-## Country Comparisons
-
+# Country Comparisons
 ```{r country_recruitment,out.width = '80%', echo=FALSE,fig.cap = "Distribution of patients by country. This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section."}
 
 patient.by.country.plot(patient.by.country.input)
