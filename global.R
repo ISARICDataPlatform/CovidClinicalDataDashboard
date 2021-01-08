@@ -26,6 +26,16 @@ library(scales)
 library(binom)
 library(DiagrammeR)
 library(magrittr)
+library(magick)
+
+# !!! absolute file paths
+DIR_BASE <- '/Users/samualmacdonald/Documents/causality_ra_work' # !!! to specify by user
+DIR_DATA_SENSITIVE <- paste(DIR_BASE, 'data/isaric/plotting_tables', sep = '/')
+DIR_DATA_REPO <- paste(DIR_BASE, 'repositories/CovidClinicalDataDashboard', sep = '/')
+FILE_MAP_RDS <- paste(DIR_DATA_REPO, 'map_data.rds', sep = '/')
+DIR_DATA <- paste(DIR_BASE, 'data', sep = '/')
+FILE_VIDEO <- 'contributions.mp4'
+FILE_GIF_IMAGE <- paste(DIR_DATA, 'isaric/results/gifs/outcomes_by_age_gender_from_march2020.gif', sep='/')
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -114,16 +124,22 @@ months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"
 month.options <- c("Dec 2019", glue("{months} {2020}"))
 
 
-
-map.data <- read_rds(here::here("map_data.rds"))
-
+# !!! use absolute file path instead of "here::here" to avoid requirement of having R project inside repo
+map.data <- read_rds(FILE_MAP_RDS)
+# map.data <- read_rds(here::here("map_data.rds")) # !!! superseded line for line above
 
 #################load data for hospital stays
-base::load("length_of_stay_sex_input.rda")
-base::load("length_of_stay_age_input.rda")
-base::load("admission_to_icu_input.rda")
-base::load("status_by_time_after_admission_input.rda")
-base::load("length_of_stay_icu_input.rda")
+# !!! use absolute file path instead of base::load to avoid requirement of having to dump sensitive data in repo
+base::load(paste(DIR_DATA_SENSITIVE, "length_of_stay_sex_input.rda", sep = '/')) 
+base::load(paste(DIR_DATA_SENSITIVE, "length_of_stay_age_input.rda", sep = '/'))
+base::load(paste(DIR_DATA_SENSITIVE, "admission_to_icu_input.rda", sep = '/'))
+base::load(paste(DIR_DATA_SENSITIVE, "status_by_time_after_admission_input.rda", sep = '/'))
+base::load(paste(DIR_DATA_SENSITIVE, "length_of_stay_icu_input.rda", sep = '/'))
+# base::load("length_of_stay_sex_input.rda") 
+# base::load("length_of_stay_age_input.rda")
+# base::load("admission_to_icu_input.rda")
+# base::load("status_by_time_after_admission_input.rda")
+# base::load("length_of_stay_icu_input.rda")
 
 report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
                         name_sep = ", ", group_brachet = "()",group_sep = "; "){
@@ -211,58 +227,111 @@ knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.
 
 
 #Load the vs data
-base::load("data_plot_vs_resp.rda")
-base::load("data_plot_vs_hr.rda")
-base::load("data_plot_vs_temp.rda")
-base::load("data_plot_vs_sysbp.rda")
-base::load("data_plot_vs_oxysat.rda")
+# !!! use absolute file path instead of base::load to avoid requirement of having to dump sensitive data in repo
+list_file_names_vs <- c(
+  "data_plot_vs_resp.rda", 
+  "data_plot_vs_hr.rda", 
+  "data_plot_vs_temp.rda", 
+  "data_plot_vs_sysbp.rda", 
+  "data_plot_vs_oxysat.rda"
+  )
+for (f in list_file_names_vs) {
+  base::load(paste(DIR_DATA_SENSITIVE, f, sep = "/"))
+}
+# base::load("data_plot_vs_resp.rda")
+# base::load("data_plot_vs_hr.rda")
+# base::load("data_plot_vs_temp.rda")
+# base::load("data_plot_vs_sysbp.rda")
+# base::load("data_plot_vs_oxysat.rda")
+
 #Load the laboratory data
-base::load("data_plot_lab_crp.rda")
-base::load("data_plot_lab_lym.rda")
-base::load("data_plot_lab_neut.rda")
-base::load("data_plot_lab_wbc.rda")
-base::load("data_plot_lab_urean.rda")
-base::load("data_plot_lab_pt.rda")
-base::load("data_plot_lab_alt.rda")
-base::load("data_plot_lab_aptt.rda")
-base::load("data_plot_lab_ast.rda")
-base::load("data_plot_lab_bili.rda")
+# !!! use absolute file path instead of base::load to avoid requirement of having to dump sensitive data in repo
+list_file_names_lab <- c(
+  "data_plot_lab_crp.rda",
+  "data_plot_lab_lym.rda",
+  "data_plot_lab_neut.rda",
+  "data_plot_lab_wbc.rda",
+  "data_plot_lab_urean.rda",
+  "data_plot_lab_pt.rda",
+  "data_plot_lab_alt.rda",
+  "data_plot_lab_aptt.rda",
+  "data_plot_lab_ast.rda",
+  "data_plot_lab_bili.rda"
+)
+for (f in list_file_names_lab) {
+  base::load(paste(DIR_DATA_SENSITIVE, f, sep = "/"))
+}
+# base::load("data_plot_lab_crp.rda")
+# base::load("data_plot_lab_lym.rda")
+# base::load("data_plot_lab_neut.rda")
+# base::load("data_plot_lab_wbc.rda")
+# base::load("data_plot_lab_urean.rda")
+# base::load("data_plot_lab_pt.rda")
+# base::load("data_plot_lab_alt.rda")
+# base::load("data_plot_lab_aptt.rda")
+# base::load("data_plot_lab_ast.rda")
+# base::load("data_plot_lab_bili.rda")
 
-#load patient by country data
-base::load("patient_by_country_input.rda")
-
-#load flowchart data
-base::load("flowchart_input.rda")
+# load patient by country data AND flowchart data
+list_file_names_other <- c("patient_by_country_input.rda", "flowchart_input.rda")
+for (f in list_file_names_other) {
+  base::load(paste(DIR_DATA_SENSITIVE, f, sep = "/"))
+}
+# base::load("patient_by_country_input.rda")
+# #load flowchart data
+# base::load("flowchart_input.rda")
 
 
 #Load the comorbidty by age plots
-base::load("data_plot_comorbid_asthma.rda")
-base::load("data_plot_comorbid_malignant_neoplasm.rda")
-base::load("data_plot_comorbid_obesity.rda")
-base::load("data_plot_comorbid_diabetes.rda")
-base::load("data_plot_comorbid_dementia.rda")
-base::load("data_plot_comorbid_smoking.rda")
-base::load("data_plot_comorbid_hypertension.rda")
+list_file_names_comorbid <- c(
+  "data_plot_comorbid_asthma.rda", 
+  "data_plot_comorbid_malignant_neoplasm.rda",
+  "data_plot_comorbid_obesity.rda",
+  "data_plot_comorbid_diabetes.rda",
+  "data_plot_comorbid_dementia.rda",
+  "data_plot_comorbid_smoking.rda",
+  "data_plot_comorbid_hypertension.rda"
+  )
+for (f in list_file_names_comorbid) {
+  base::load(paste(DIR_DATA_SENSITIVE, f, sep = "/"))
+}
+# base::load("data_plot_comorbid_asthma.rda")
+# base::load("data_plot_comorbid_malignant_neoplasm.rda")
+# base::load("data_plot_comorbid_obesity.rda")
+# base::load("data_plot_comorbid_diabetes.rda")
+# base::load("data_plot_comorbid_dementia.rda")
+# base::load("data_plot_comorbid_smoking.rda")
+# base::load("data_plot_comorbid_hypertension.rda")
+
 #Load the symptoms by age plots
-base::load("data_plot_symptoms_history_of_fever.rda")
-base::load("data_plot_symptoms_cough.rda")
-base::load("data_plot_symptoms_cough_fever.rda")
-base::load("data_plot_symptoms_shortness_of_breath.rda")
-base::load("data_plot_symptoms_cought_fever_shortness_of_breath.rda")
-base::load("data_plot_symptoms_upper_respiratory_tract_symptoms.rda")
-base::load("data_plot_symptoms_altered_consciousness_confusion.rda")
-base::load("data_plot_symptoms_constitutional.rda")
-base::load("data_plot_symptoms_vomiting_nausea.rda")
-base::load("data_plot_symptoms_diarrhoea.rda")
-base::load("data_plot_symptoms_abdominal_pain.rda")
+list_file_names_symptoms <- c(
+  "data_plot_symptoms_history_of_fever.rda",
+  "data_plot_symptoms_cough.rda",
+  "data_plot_symptoms_cough_fever.rda",
+  "data_plot_symptoms_shortness_of_breath.rda",
+  "data_plot_symptoms_cought_fever_shortness_of_breath.rda",
+  "data_plot_symptoms_upper_respiratory_tract_symptoms.rda",
+  "data_plot_symptoms_altered_consciousness_confusion.rda",
+  "data_plot_symptoms_constitutional.rda",
+  "data_plot_symptoms_vomiting_nausea.rda",
+  "data_plot_symptoms_diarrhoea.rda",
+  "data_plot_symptoms_abdominal_pain.rda"
+)
+for (f in list_file_names_symptoms) {
+  base::load(paste(DIR_DATA_SENSITIVE, f, sep = "/"))
+}
+# base::load("data_plot_symptoms_history_of_fever.rda")
+# base::load("data_plot_symptoms_cough.rda")
+# base::load("data_plot_symptoms_cough_fever.rda")
+# base::load("data_plot_symptoms_shortness_of_breath.rda")
+# base::load("data_plot_symptoms_cought_fever_shortness_of_breath.rda")
+# base::load("data_plot_symptoms_upper_respiratory_tract_symptoms.rda")
+# base::load("data_plot_symptoms_altered_consciousness_confusion.rda")
+# base::load("data_plot_symptoms_constitutional.rda")
+# base::load("data_plot_symptoms_vomiting_nausea.rda")
+# base::load("data_plot_symptoms_diarrhoea.rda")
+# base::load("data_plot_symptoms_abdominal_pain.rda")
+
 #Load the heatmap data
-base::load("data_plot_heatmap.rda")
-
-
-
-
-
-
-
-
-
+base::load(paste(DIR_DATA_SENSITIVE, "data_plot_heatmap.rda", sep = '/'))
+# base::load("data_plot_heatmap.rda")

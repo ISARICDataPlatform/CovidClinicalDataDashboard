@@ -53,6 +53,31 @@ slider.filters <- function(tbl, input) {
 }
 
 server <- function(input, output) {
+  output$video <- renderUI({
+    tags$video(
+      src=FILE_VIDEO, 
+      width='600px',
+      height='360px',
+      type="video/mp4",
+      controls = "controls"
+    )
+    # !!! the following commented out lines might be useful later if the video fails upon returning to parent tab... 
+    # else
+    #   tabsetPanel(tabPanel("About file", tableOutput("filedf")), tabPanel("Data", tableOutput("table")),tabPanel("Summary", tableOutput("sum")))
+  })
+  
+  output$gif <- renderImage({
+    # load gif
+    gif_image <- image_read(FILE_GIF_IMAGE)
+    # write to temp file
+    tmpfile <- gif_image %>%
+      image_scale("600x360!") %>%
+      image_write(tempfile(fileext = 'gif'), format = 'gif')
+    # return temp file as list object with specified features to be read by ui
+    list(src = tmpfile, contentType = "image/gif")
+  }, deleteFile = TRUE
+  )
+  
   output$flowchart <- renderGrViz({
     grViz({
       diagram

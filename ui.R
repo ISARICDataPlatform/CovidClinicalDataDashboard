@@ -37,6 +37,11 @@ dashboardPage(
   dbHeader,
   dashboardSidebar(
     sidebarMenu(
+      menuItem( # !!!
+        "Home", 
+        tabName = "home", 
+        icon = icon("home")
+      ),
       menuItem(
         "Overview", 
         tabName = "flowchart", 
@@ -193,6 +198,12 @@ dashboardPage(
     ),
     hr(),
     tabItems(
+      tabItem(tabName = "home", # !!!
+              fluidRow(
+                box(column(8, uiOutput("video", align = "center"))), 
+                box(column(4, imageOutput("gif")))
+              )
+      ),
       tabItem(tabName = "patients",
               fluidRow(
                 box(
