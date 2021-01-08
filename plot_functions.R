@@ -214,6 +214,7 @@ prevalence.plot.preparation <- function(aggregated.tbl, variable.name){
     ) %>%
     mutate(p.present = times.present / times.recorded) %>%
     mutate(p.absent = 1 - p.present) %>%
+    mutate(order=p.present)%>%
     as.data.table() %>%
     dt_pivot_longer(c(p.present, p.absent),
                     names_to = "affected",
@@ -230,8 +231,14 @@ symptom.prevalence.plot <- function(aggregated.tbl, ...){
   aggregated.tbl <- aggregated.tbl %>%
     prevalence.plot.preparation(variable.name = "nice.symptom")
   
+  aggregated.tbl$order=as.numeric(aggregated.tbl$order)
+  aggregated.tbl$nice.symptom<- 
+    factor(aggregated.tbl$nice.symptom, 
+           levels = unique(aggregated.tbl$nice.symptom
+                           [order(aggregated.tbl$order)]))
+  
   plt <- ggplot(aggregated.tbl) +
-    geom_col(aes(x = nice.symptom, y = proportion, fill = affected)) +
+    geom_col(aes(x = factor(nice.symptom), y = proportion, fill = affected)) +
     geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.symptom, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
     theme_bw() +
     xlab("Symptom") +
@@ -250,8 +257,14 @@ comorbidity.prevalence.plot <- function(aggregated.tbl, ...){
   aggregated.tbl <- aggregated.tbl %>%
     prevalence.plot.preparation(variable.name = "nice.comorbidity")
   
+  aggregated.tbl$order=as.numeric(aggregated.tbl$order)
+  aggregated.tbl$nice.comorbidity<- 
+    factor(aggregated.tbl$nice.comorbidity, 
+           levels = unique(aggregated.tbl$nice.comorbidity
+                           [order(aggregated.tbl$order)]))
+  
   plt <- ggplot(aggregated.tbl) +
-    geom_col(aes(x = nice.comorbidity, y = proportion, fill = affected)) +
+    geom_col(aes(x = factor(nice.comorbidity), y = proportion, fill = affected)) +
     geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.comorbidity, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
     theme_bw() +
     xlab("Comorbidity") +
@@ -275,9 +288,15 @@ treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
   } else {
     colours <- c("chartreuse2", "chartreuse4")
   }
+
+  aggregated.tbl$order=as.numeric(aggregated.tbl$order)
+  aggregated.tbl$nice.treatment<- 
+    factor(aggregated.tbl$nice.treatment, 
+           levels = unique(aggregated.tbl$nice.treatment
+                           [order(aggregated.tbl$order)]))
   
   plt <- ggplot(aggregated.tbl) +
-    geom_col(aes(x = nice.treatment, y = proportion, fill = affected)) +
+    geom_col(aes(x = factor(nice.treatment), y = proportion, fill = affected)) +
     geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.treatment, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
     theme_bw() +
     xlab("Treatment") +
