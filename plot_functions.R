@@ -51,11 +51,11 @@ flowchart <- function(){
       tab12 -> tab16 [label = '@@28']
       }
 
-      [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input), ')')
-      [2]: paste0('EXCLUDED 0%')
-      [3]: paste0('ANALYSED 100%')
-      [4]: paste0('<14-days follow-up\\n (N=0)')
-      [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=0)')
+      [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input_overall), ')')
+      [2]: paste0('EXCLUDED ', round(nrow(summary_input_overall%>%filter(cov_det_id!='POSITIVE' | embargo_length==TRUE))/nrow(summary_input_overall)*100,1),'%')
+      [3]: paste0('ANALYSED ', round(nrow(summary_input_overall%>%filter(cov_det_id=='POSITIVE' & embargo_length!=TRUE))/nrow(summary_input_overall)*100,1),'%')
+      [4]: paste0('<14-days follow-up\\n (N=',nrow(summary_input_overall%>% filter(embargo_length==TRUE)),')')
+      [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=',nrow(summary_input_overall%>% filter(embargo_length!=TRUE & cov_det_id!='POSITIVE')),')')
       [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed or\\n clinically-diagnosed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
       [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
       [8]: paste0('Ongoing care\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care')),')')
