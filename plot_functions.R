@@ -71,11 +71,11 @@ flowchart <- function(){
       [18]: '0%'
       [19]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table (slider_icu_ever))[2]*100,0), '%')
       [20]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$%table(slider_icu_ever))[1]*100,0), '%')
-      [21]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[4]*100,0), '%')
+      [21]: paste0(ifelse(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))!=0,(round(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))/nrow(summary_input %>% filter(slider_icu_ever==TRUE))*100,0)),0),'%') 
       [22]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[1]*100,0), '%')
       [23]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[2]*100,0), '%')
       [24]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[3]*100,0), '%')
-      [25]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[4]*100,0), '%')
+      [25]: paste0(ifelse(nrow(summary_input %>% filter(slider_icu_ever!=TRUE & slider_outcome=='Ongoing care'))!=0,(round(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))/nrow(summary_input %>% filter(slider_icu_ever==TRUE))*100,0)),0),'%')
       [26]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[1]*100,0), '%')
       [27]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[2]*100,0), '%')
       [28]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[3]*100,0), '%')
