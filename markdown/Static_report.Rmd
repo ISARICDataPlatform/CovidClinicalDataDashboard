@@ -22,7 +22,7 @@ header-includes:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="~/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="~/CovidClinicalDataDashboard/")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -186,7 +186,7 @@ admission.to.icu.plot(admission.to.icu.input)
 ```
 
 
-```{r  timeline, out.width= "100%", fig.cap = "The distribution of patient status by number of days after admission. Patients with 'unknown' status have left the site at the time of report but have unknown outcomes due to missing data. Patients still on site at the time of report appear in the 'ongoing care' category for days which are in the future at that time. (For example, a patient admitted 7 days before the date of report and still on site by the date of the report would be categorised as 'ongoing care' for days 8 and later.) The black line marks the end of 14 days."}
+```{r  timeline, out.width= "100%", fig.cap = "The distribution of patient status by number of days after admission. Patients with 'unknown' status have left the site at the time of report but have unknown outcomes due to missing data. The black line marks the end of 14 days."}
 
 status.by.time.after.admission.plot(status.by.time.after.admission.input)
 ```

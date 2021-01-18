@@ -243,6 +243,7 @@ symptom.prevalence.plot <- function(aggregated.tbl, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
+    scale_y_continuous(expand = c(0, 0)) +
     #aes(x = fct_reorder(nice.symptom, proportion, .desc = TRUE)) +
     scale_fill_manual(values = c("deepskyblue1", "deepskyblue4"), name = "Symptom\npresent", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
@@ -269,6 +270,7 @@ comorbidity.prevalence.plot <- function(aggregated.tbl, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
+    scale_y_continuous(expand = c(0, 0)) +
     scale_fill_manual(values = c("indianred1", "indianred4"), name = "Condition\npresent", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
   
@@ -301,6 +303,7 @@ treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
+    scale_y_continuous(expand = c(0, 0)) +
     scale_fill_manual(values = colours, name = "Treatment\nreceived", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
   
@@ -395,7 +398,7 @@ p_oxysat <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
     geom_text(aes(label=..count..), y=0, stat='count', colour="red", size=4)+
-    theme_bw() + labs(title = N) + 
+    theme_bw() + labs(title = N) + scale_y_continuous(breaks = c(86, 88, 90,92, 94, 96, 98, 100)) +
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
