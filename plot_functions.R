@@ -1,8 +1,5 @@
 flowchart <- function(){
   
-  summary_input<-summary_input%>%
-    mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE))
-  
   grViz("digraph flowchart {
       graph [layout=dot, fontsize=14, fontname=Arial]
       
@@ -33,6 +30,7 @@ flowchart <- function(){
       tab15 [label = '@@15',height=0.8, width=1.5]
       tab16 [label = '@@16',height=0.8, width=1.5]
       
+      
       # edge definitions with the node IDs
       tab1 -> tab2 [tailport=e, headport=w, constraint=false]
       tab1 -> tab3 [tailport=s]
@@ -56,7 +54,7 @@ flowchart <- function(){
       [3]: paste0('ANALYSED ', round(nrow(summary_input_overall%>%filter(cov_det_id=='POSITIVE' & embargo_length!=TRUE))/nrow(summary_input_overall)*100,1),'%')
       [4]: paste0('<14-days follow-up\\n (N=',nrow(summary_input_overall%>% filter(embargo_length==TRUE)),')')
       [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=',nrow(summary_input_overall%>% filter(embargo_length!=TRUE & cov_det_id!='POSITIVE')),')')
-      [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed or\\n clinically-diagnosed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
+      [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
       [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
       [8]: paste0('Ongoing care\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care')),')')
       [9]: paste0('Death\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
@@ -79,9 +77,9 @@ flowchart <- function(){
       [26]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[1]*100,0), '%')
       [27]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[2]*100,0), '%')
       [28]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[3]*100,0), '%')
-
       "
   )
+ 
 }
 
 
