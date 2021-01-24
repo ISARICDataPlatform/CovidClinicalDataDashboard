@@ -118,6 +118,7 @@ base::load("symptoms.table.rda")
 base::load("patient.characteristic.table.rda")
 base::load("outcome.age.sex.table.rda")
 #load summary & flowchart data
+base::load("summary_input_overall.rda")
 base::load("summary_input.rda")
 #################load data for hospital stays
 base::load("length_of_stay_sex_input.rda")

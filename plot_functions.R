@@ -1,8 +1,5 @@
 flowchart <- function(){
   
-  summary_input<-summary_input%>%
-    mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE))
-  
   grViz("digraph flowchart {
       graph [layout=dot, fontsize=14, fontname=Arial]
       
@@ -33,6 +30,7 @@ flowchart <- function(){
       tab15 [label = '@@15',height=0.8, width=1.5]
       tab16 [label = '@@16',height=0.8, width=1.5]
       
+      
       # edge definitions with the node IDs
       tab1 -> tab2 [tailport=e, headport=w, constraint=false]
       tab1 -> tab3 [tailport=s]
@@ -51,12 +49,12 @@ flowchart <- function(){
       tab12 -> tab16 [label = '@@28']
       }
 
-      [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input), ')')
-      [2]: paste0('EXCLUDED 0%')
-      [3]: paste0('ANALYSED 100%')
-      [4]: paste0('<14-days follow-up\\n (N=0)')
-      [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=0)')
-      [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed or\\n clinically-diagnosed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
+      [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input_overall), ')')
+      [2]: paste0('EXCLUDED ', round(nrow(summary_input_overall%>%filter(cov_det_id!='POSITIVE' | (embargo_length==TRUE) | is.na(embargo_length)))/nrow(summary_input_overall)*100,1),'%')
+      [3]: paste0('ANALYSED ', round(nrow(summary_input)/nrow(summary_input_overall)*100,1),'%')
+      [4]: paste0('<14-days follow-up\\n (N=',nrow(summary_input_overall%>% filter(embargo_length==TRUE | is.na(embargo_length))),')')
+      [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=',nrow(summary_input_overall%>% filter(embargo_length==FALSE & cov_det_id!='POSITIVE')),')')
+      [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
       [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
       [8]: paste0('Ongoing care\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care')),')')
       [9]: paste0('Death\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
@@ -71,17 +69,17 @@ flowchart <- function(){
       [18]: '0%'
       [19]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table (slider_icu_ever))[2]*100,0), '%')
       [20]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$%table(slider_icu_ever))[1]*100,0), '%')
-      [21]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[4]*100,0), '%')
+      [21]: paste0(ifelse(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))!=0,(round(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))/nrow(summary_input %>% filter(slider_icu_ever==TRUE))*100,0)),0),'%') 
       [22]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[1]*100,0), '%')
       [23]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[2]*100,0), '%')
       [24]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[3]*100,0), '%')
-      [25]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[4]*100,0), '%')
+      [25]: paste0(ifelse(nrow(summary_input %>% filter(slider_icu_ever!=TRUE & slider_outcome=='Ongoing care'))!=0,(round(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))/nrow(summary_input %>% filter(slider_icu_ever==TRUE))*100,0)),0),'%')
       [26]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[1]*100,0), '%')
       [27]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[2]*100,0), '%')
       [28]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[3]*100,0), '%')
-
       "
   )
+ 
 }
 
 
@@ -245,6 +243,7 @@ symptom.prevalence.plot <- function(aggregated.tbl, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
+    scale_y_continuous(expand = c(0, 0)) +
     #aes(x = fct_reorder(nice.symptom, proportion, .desc = TRUE)) +
     scale_fill_manual(values = c("deepskyblue1", "deepskyblue4"), name = "Symptom\npresent", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
@@ -271,6 +270,7 @@ comorbidity.prevalence.plot <- function(aggregated.tbl, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
+    scale_y_continuous(expand = c(0, 0)) +
     scale_fill_manual(values = c("indianred1", "indianred4"), name = "Condition\npresent", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
   
@@ -303,6 +303,7 @@ treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
     ylab("Proportion") +
     coord_flip() +
     ylim(0, 1) +
+    scale_y_continuous(expand = c(0, 0)) +
     scale_fill_manual(values = colours, name = "Treatment\nreceived", labels = c("No", "Yes")) +
     theme(axis.text.y = element_text(size = 7))
   
@@ -397,7 +398,7 @@ p_oxysat <- function(aggregated.tbl){
   ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(aes(fill=slider_agegp10))  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
     geom_text(aes(label=..count..), y=0, stat='count', colour="red", size=4)+
-    theme_bw() + labs(title = N) + 
+    theme_bw() + labs(title = N) + scale_y_continuous(breaks = c(86, 88, 90,92, 94, 96, 98, 100)) +
     scale_fill_brewer(palette = "Set3", guide = F) 
 }
 
