@@ -533,7 +533,7 @@ length.of.stay.age.plot <- function(aggregated.tbl, ...){
   plt
 }
 
-admission.to.icu.plot <- function(aggregated.tbl,...){
+admission.to.icu.plot <- function(aggregated.tbl, ...){
   plt <-  ggplot(aggregated.tbl, aes(x = admission.to.icu)) +
     geom_histogram(aes(y=..density..), fill="lightblue", binwidth = 1)  +
     labs(title="  ", x="Time (in days) from admission to ICU", y = "Density") +
