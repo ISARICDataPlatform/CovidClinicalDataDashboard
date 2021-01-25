@@ -61,9 +61,9 @@ flowchart <- function(){
       [10]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
       [11]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU')), ')')
       [12]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever))),')')
-      [13]: paste0('In hospital\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Ongoing care')),')')
+      [13]: paste0('Ongoing care\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Ongoing care')),')')
       [14]: paste0('Death\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Death')), ')')
-      [15]: paste0('Ongoing care\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
+      [15]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
       [16]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever)) & slider_outcome=='LTFU')), ')')
       [17]: '0%'
       [18]: '0%'
@@ -534,7 +534,7 @@ length.of.stay.age.plot <- function(aggregated.tbl, ...){
   plt
 }
 
-admission.to.icu.plot <- function(aggregated.tbl,...){
+admission.to.icu.plot <- function(aggregated.tbl, ...){
   plt <-  ggplot(aggregated.tbl, aes(x = admission.to.icu)) +
     geom_histogram(aes(y=..density..), fill="lightblue", binwidth = 1)  +
     labs(title="  ", x="Time (in days) from admission to ICU", y = "Density") +

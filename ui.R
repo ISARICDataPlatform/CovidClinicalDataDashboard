@@ -610,16 +610,12 @@ dashboardPage(
                 box(uiOutput("table_comorbidity"), height = 920),
                 box(uiOutput("table_treatment")),
                 box(uiOutput("table_key_times"))
-                
               )
-              
-              
       )
     )
   )
 )  
-  
-  
-  
-  
-  
+
+
+
+
