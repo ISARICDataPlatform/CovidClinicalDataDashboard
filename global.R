@@ -30,7 +30,7 @@ library(magrittr)
 library(flextable)
 library(htmltools)
 library(bookdown)
-
+library(xml2)
 
 
 epiweek.year <- function(date){
@@ -258,6 +258,8 @@ report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
   return(gsub("\n\n", " ", output$auth_out))}
 
 knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")
+
+
 
 
 

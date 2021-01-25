@@ -313,7 +313,7 @@ dashboardPage(
                   title = "Contributing Site List",
                   width = 12
                 )
-              ),),
+              )),
       tabItem(tabName = "hospital_stays",
               fluidRow(
                 box(
@@ -477,7 +477,7 @@ dashboardPage(
       ),
       tabItem(tabName = "flowchart",
               fluidRow(
-                includeHTML("markdown/Summary.html")
+                includeMarkdown("markdown/Summary.html")
               )
       ),
       tabItem(tabName = "comorbidities_by_age",
@@ -605,10 +605,7 @@ dashboardPage(
                 box(uiOutput("table_comorbidity"), height = 920),
                 box(uiOutput("table_treatment")),
                 box(uiOutput("table_key_times"))
-                
               )
-              
-              
       )
     )
   )
