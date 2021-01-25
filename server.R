@@ -54,6 +54,28 @@ slider.filters <- function(tbl, input) {
 
 server <- function(input, output) {
   
+  output$contributions_video <- renderUI({
+    tags$contributions_video(
+      src=FILE_CONTRIBUTIONS_VIDEO,
+      width='600px',
+      height='360px',
+      type='video/mp4',
+      controls="controls"
+    )
+  })
+  
+  output$age_pyramid_gif <- renderImage({
+    # load gif
+    gif_image <- image_read(FILE_GIF_IMAGE)
+    # write to tmp file
+    tmpfile <- gif_image %>%
+      image_scale("600x360!") %>%
+      image_write(tempfile(fileext = 'gif'), format = 'gif')
+    # return temp file as list object with specified features to be read by ui
+    list(src = tmpfile, contentType = "image/gif")
+  }, deleteFile = TRUE
+  )
+  
   output$agePyramid <- {
     age.pyramid.reactive <- reactive({
       fd <- age.pyramid.input %>%

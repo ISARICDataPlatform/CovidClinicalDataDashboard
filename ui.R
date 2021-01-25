@@ -38,6 +38,11 @@ dashboardPage(
   dashboardSidebar(
     sidebarMenu(
       menuItem(
+        "Home",
+        tabName = "home",
+        icon = icon("home")
+      ),
+      menuItem(
         "Overview", 
         tabName = "flowchart", 
         icon = icon("book")),
@@ -193,6 +198,12 @@ dashboardPage(
     ),
     hr(),
     tabItems(
+      tabItem(tabName = "home", # !!!
+              fluidRow(
+                box(column(8, uiOutput("contributions_video", align = "center"))),
+                box(column(4, imageOutput("age_pyramid_gif")))
+              )
+      ),
       tabItem(tabName = "patients",
               fluidRow(
                 box(

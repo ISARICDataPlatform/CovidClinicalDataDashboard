@@ -5,6 +5,10 @@
 CovidClinicalDataDashboard.Rproj
 .DS_Store
 rsconnect
+sensitive_data/*
+!sensitive_data/README.md
+
+
 comorbidity_prevalence_input.rda
 comorbidity_upset_input.rda
 icu_treatment_upset_input.rda
