@@ -101,9 +101,10 @@ dashboardPage(
         icon = icon("users")
       )
     ),
-    
+  
     hr(),
-    fluidRow(column(3, verbatimTextOutput("value")))
+    fluidRow(column(3, verbatimTextOutput("value"))),
+    fluidRow(column(3), downloadButton("downloadReport", "Generate report"))
   ),
   dashboardBody(
     tags$head(
@@ -313,7 +314,7 @@ dashboardPage(
                   title = "Contributing Site List",
                   width = 12
                 )
-              ),),
+              )),
       tabItem(tabName = "hospital_stays",
               fluidRow(
                 box(
@@ -477,7 +478,11 @@ dashboardPage(
       ),
       tabItem(tabName = "flowchart",
               fluidRow(
-                includeHTML("markdown/Summary.html")
+                box(
+                  includeMarkdown("markdown/Summary_dashboard.md"),
+                  title = "ISARIC (International Severe Acute Respiratory and Emerging Infections Consortium)",
+                  width = 14
+                )
               )
       ),
       tabItem(tabName = "comorbidities_by_age",
