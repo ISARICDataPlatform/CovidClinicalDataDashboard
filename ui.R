@@ -170,11 +170,11 @@ dashboardPage(
         label = "Outcome",
         status = 'custom',
         choices = list(
-          "Death" = "death",
-          "Censored" = "censored",
-          "Discharge" = "discharge"
+          "Death" = "Death",
+          "LTFU" = "LTFU",
+          "Discharge" = "Discharge"
         ),
-        selected = c("death", "censored", "discharge")
+        selected = c("Death", "LTFU", "Discharge")
       ),
       awesomeCheckboxGroup(
         inputId = "icu_ever",
