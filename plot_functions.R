@@ -603,7 +603,7 @@ patient.by.country.plot <- function(aggregated.tbl,...){
 #' @export plot.prop.by.age
 #' @keywords internal
 ############################################
-plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, ...) {
+plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, dashboard = TRUE, ...) {
   data2 <- data
   summ <- data2 %>%
     add_column(All = 1)%>%
@@ -659,17 +659,24 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   #    aes(x = X, y = ymax, label = lbl),
   #    size = 2
   #  )
+  if (dashboard = TRUE) {
+    font_size_dash = 11
+  } else {
+    font_size_dash = 13
+  }
+  
   p <- ggplot() +
     pts +
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = 13)) + 
+    theme_bw() + theme(axis.text = element_text(size = font_size_dash)) + 
     labs(title = N)
   
   return(p)
   
 }
+
 #data_plot_comorbid_asthma
 plot.prop.by.age_comorbid_asthma <- function(data_plot_comorbid_asthma, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_asthma, data_plot_comorbid_asthma$value,
