@@ -660,7 +660,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   #    size = 2
   #  )
   if (dashboard == TRUE) {
-    font_size_dash = 11
+    font_size_dash = 9
   } else {
     font_size_dash = 13
   }
