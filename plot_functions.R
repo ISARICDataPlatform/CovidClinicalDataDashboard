@@ -665,21 +665,30 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   #    size = 2
   #  )
   if (dashboard == TRUE) {
-    font_size_dash = 9
+    font_size_dash = 11
   } else {
     font_size_dash = 13
   }
+  
   if (dashboard == TRUE) {
     angle_dash = 90
   } else {
     angle_dash = 0
   }
+  
+  if (dashboard == TRUE) {
+    hjust_dash = 1
+  } else {
+    hjust_dash = 0
+  }
+  
   p <- ggplot() +
     pts +
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = font_size_dash)) + 
+    theme_bw() + theme(axis.text = element_text(size = font_size_dash, 
+                                                angle = angle_dash, hjust = hjust_dash)) + 
     labs(title = N)
   
   return(p)
