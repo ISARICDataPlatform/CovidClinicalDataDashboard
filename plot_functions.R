@@ -1,3 +1,8 @@
+###############################
+#' @usage If running dashboard, leave dashboard_equal = TRUE, 
+#' if running report,dashboard_equal = FALSE
+dashboard_equal = TRUE
+
 flowchart <- function(){
   
   grViz("digraph flowchart {
@@ -603,7 +608,7 @@ patient.by.country.plot <- function(aggregated.tbl,...){
 #' @export plot.prop.by.age
 #' @keywords internal
 ############################################
-plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, dashboard = TRUE, ...) {
+plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, dashboard = dashboard_equal, ...) {
   data2 <- data
   summ <- data2 %>%
     add_column(All = 1)%>%
@@ -664,7 +669,11 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   } else {
     font_size_dash = 13
   }
-  
+  if (dashboard == TRUE) {
+    angle_dash = 90
+  } else {
+    angle_dash = 0
+  }
   p <- ggplot() +
     pts +
     lines +
