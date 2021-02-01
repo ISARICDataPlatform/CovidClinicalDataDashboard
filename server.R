@@ -12,7 +12,7 @@ privacy.text <-
 
 confidentiality.check <- function(data, fn, min.rows = 5, ...) {
   args <- list(...)
-  if (nrow(data) >= min.rows) {
+  if (nrow(data) >= min.rows | sum(data$count)>= min.rows) {
     exec(fn, data,!!!args)
   } else {
     ggplot() + annotate(
@@ -91,7 +91,7 @@ server <- function(input, output) {
   
   output$outcomesByAdmissionDate <- {
     outcomes.by.admission.date.reactive <- reactive({
-      fd <- outcome.admission.date.input %>%
+      fd <- outcome_admission_date_input %>%
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
         slider.filters(input) 
@@ -311,13 +311,6 @@ server <- function(input, output) {
         as.data.table() %>%
         lazy_dt(immutable = FALSE) %>%
         slider.filters(input) %>%
-        group_by(day,
-                 status,
-                 slider_sex,
-                 slider_agegp10,
-                 slider_country,
-                 slider_monthyear) %>%
-        summarise(count = n()) %>%
         as_tibble()
     })
     renderPlot(

@@ -4,6 +4,8 @@ output: html_document
 ---
 
 
+## References 
+
 Docherty, A.B., E.M. Harrison, C.A. Green, H.E. Hardwick, R. Pius, L. Norman, *et al.*. (2020). Features of 20 133 UK patients in hospital with COVID-19 using the ISARIC WHO Clinical Characterisation Protocol: prospective observational cohort study. *BMJ*, 369: m1985. [doi: 10.1136/bmj.m1985](https://doi.org/10.1136/bmj.m1985)
 
 R Core Team (2019). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria.

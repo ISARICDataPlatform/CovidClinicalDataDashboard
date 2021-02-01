@@ -22,7 +22,7 @@ header-includes:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/marti/OneDrive/Documents/ISARIC/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -58,8 +58,8 @@ Containing data extracted 30 November 2020
 ```
 
 
-
-```{r cohortoverview,  out.width = "250%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 30 November 2020."}
+\newpage
+```{r cohortoverview,  out.width = "140%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 30 November 2020."}
 
 flowchart()
 

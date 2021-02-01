@@ -106,9 +106,10 @@ dashboardPage(
         icon = icon("users")
       )
     ),
-    
+  
     hr(),
-    fluidRow(column(3, verbatimTextOutput("value")))
+    fluidRow(column(3, verbatimTextOutput("value"))),
+    fluidRow(column(3), downloadButton("downloadReport", "Generate report"))
   ),
   dashboardBody(
     tags$head(
@@ -174,11 +175,11 @@ dashboardPage(
         label = "Outcome",
         status = 'custom',
         choices = list(
-          "Death" = "death",
-          "Censored" = "censored",
-          "Discharge" = "discharge"
+          "Death" = "Death",
+          "LTFU" = "LTFU",
+          "Discharge" = "Discharge"
         ),
-        selected = c("death", "censored", "discharge")
+        selected = c("Death", "LTFU", "Discharge")
       ),
       awesomeCheckboxGroup(
         inputId = "icu_ever",
@@ -324,7 +325,7 @@ dashboardPage(
                   title = "Contributing Site List",
                   width = 12
                 )
-              ),),
+              )),
       tabItem(tabName = "hospital_stays",
               fluidRow(
                 box(
@@ -488,7 +489,11 @@ dashboardPage(
       ),
       tabItem(tabName = "flowchart",
               fluidRow(
-                includeHTML("markdown/Summary.html")
+                box(
+                  includeMarkdown("markdown/Summary_dashboard.md"),
+                  title = "ISARIC (International Severe Acute Respiratory and Emerging Infections Consortium)",
+                  width = 14
+                )
               )
       ),
       tabItem(tabName = "comorbidities_by_age",
@@ -616,16 +621,12 @@ dashboardPage(
                 box(uiOutput("table_comorbidity"), height = 920),
                 box(uiOutput("table_treatment")),
                 box(uiOutput("table_key_times"))
-                
               )
-              
-              
       )
     )
   )
 )  
-  
-  
-  
-  
-  
+
+
+
+

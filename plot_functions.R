@@ -1,3 +1,8 @@
+###############################
+#' @usage If running dashboard, leave dashboard_equal = TRUE, 
+#' if running report,dashboard_equal = FALSE
+dashboard_equal = TRUE
+
 flowchart <- function(){
   
   grViz("digraph flowchart {
@@ -61,9 +66,9 @@ flowchart <- function(){
       [10]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
       [11]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU')), ')')
       [12]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever))),')')
-      [13]: paste0('In hospital\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Ongoing care')),')')
+      [13]: paste0('Ongoing care\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Ongoing care')),')')
       [14]: paste0('Death\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Death')), ')')
-      [15]: paste0('Ongoing care\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
+      [15]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
       [16]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever)) & slider_outcome=='LTFU')), ')')
       [17]: '0%'
       [18]: '0%'
@@ -552,7 +557,7 @@ admission.to.icu.plot <- function(aggregated.tbl, ...){
 status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
   
   plt <-  ggplot(aggregated.tbl)+ 
-    geom_bar(aes(x = day, fill = status), position = "fill") +
+    geom_bar(aes(x = day, y=count, fill = status), position = "fill", stat = "identity") +
     scale_fill_brewer(palette = "Dark2", name  = "Status", drop = F, labels = c("Discharged", "Unknown", "Ward", "ICU", "Death")) +
     theme_bw() +
     xlab("Days relative to admission") +
@@ -603,7 +608,7 @@ patient.by.country.plot <- function(aggregated.tbl,...){
 #' @export plot.prop.by.age
 #' @keywords internal
 ############################################
-plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, ...) {
+plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, dashboard = dashboard_equal, ...) {
   data2 <- data
   summ <- data2 %>%
     add_column(All = 1)%>%
@@ -659,17 +664,37 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   #    aes(x = X, y = ymax, label = lbl),
   #    size = 2
   #  )
+  if (dashboard == TRUE) {
+    font_size_dash = 11
+  } else {
+    font_size_dash = 13
+  }
+  
+  if (dashboard == TRUE) {
+    angle_dash = 90
+  } else {
+    angle_dash = 0
+  }
+  
+  if (dashboard == TRUE) {
+    hjust_dash = 1
+  } else {
+    hjust_dash = 0
+  }
+  
   p <- ggplot() +
     pts +
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = 13)) + 
+    theme_bw() + theme(axis.text = element_text(size = font_size_dash, 
+                                                angle = angle_dash, hjust = hjust_dash)) + 
     labs(title = N)
   
   return(p)
   
 }
+
 #data_plot_comorbid_asthma
 plot.prop.by.age_comorbid_asthma <- function(data_plot_comorbid_asthma, full.label = TRUE){
   plot.prop.by.age(data_plot_comorbid_asthma, data_plot_comorbid_asthma$value,

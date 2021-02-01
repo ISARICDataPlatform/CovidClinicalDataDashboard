@@ -31,7 +31,8 @@ library(flextable)
 library(htmltools)
 library(bookdown)
 
-# !!! pre-processing functions (might consider moving elsewhere)
+library(xml2)
+
 epiweek.year <- function(date){
   if(is.na(date)){
     return(NA)
@@ -284,6 +285,10 @@ report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
   return(gsub("\n\n", " ", output$auth_out))}
 
 knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")
+
+knit("markdown/Summary_dashboard.Rmd", output = "markdown/Summary_dashboard.md")
+
+
 
 
 
