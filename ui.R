@@ -40,8 +40,7 @@ dashboardPage(
       menuItem(
         "Home",
         tabName = "home",
-        icon = icon("home")
-      ),
+        icon = icon("home")),
       menuItem(
         "Overview", 
         tabName = "flowchart", 
@@ -199,10 +198,18 @@ dashboardPage(
     ),
     hr(),
     tabItems(
-      tabItem(tabName = "home", # !!!
+      tabItem(tabName = "home", 
               fluidRow(
-                box(column(8, uiOutput("contributions_video", align = "center"))),
-                box(column(4, imageOutput("age_pyramid_gif")))
+                box(
+                  uiOutput("contributions_video", align = "center"),
+                  solidHeader = T,
+                  title = "Conributions of patient records"
+                  ),
+                box(
+                  imageOutput("age_pyramid_gif"),
+                  solidHeader = T,
+                  title = "Outcomes by age and gender"
+                  )
               )
       ),
       tabItem(tabName = "patients",

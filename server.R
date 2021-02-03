@@ -55,7 +55,7 @@ slider.filters <- function(tbl, input) {
 server <- function(input, output) {
   
   output$contributions_video <- renderUI({
-    tags$contributions_video(
+    tags$video(
       src=FILE_CONTRIBUTIONS_VIDEO,
       width='600px',
       height='360px',
