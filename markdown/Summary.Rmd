@@ -15,14 +15,14 @@ Up to the date of this report, data have been entered for **`r nrow(summary_inpu
 
 The analysis detailed in this report only includes individuals: 
 
-  1. for whom data collection commenced on or before 16 November 2020. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
+  1. for whom data collection commenced on or before 3 January 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
   
 **AND**
 
   2. who have laboratory-confirmed SARS-COV-2 infection.
   
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases.
-The below flow chart gives an overview of the cohort and outcomes as of 30 November 2020.
+The below flow chart gives an overview of the cohort and outcomes as of 17 January 2021.
 
 ## Demographics and presenting features
 Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The minimum and maximum observed ages were `r min(summary_input$age, na.rm=T)` and `r max(summary_input$age, na.rm=T)` years respectively. The median age is `r median(summary_input$age, na.rm=T)` years.  
