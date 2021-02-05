@@ -44,7 +44,11 @@ The observed mean number of days from (first) symptom onset to hospital admissio
 
 The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was 9.5, with SD 8.6 days and a median of 7 days. These estimates are based on all cases which have complete records on length of hospital stay (N = 182080).  
 
+<<<<<<< HEAD
 The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were cough (no sputum), history of fever, shortness of breath, fatigue/malaise, and altered consciousness/confusion. Frequencies of symptom prevalence vary with age. 20829/90153 (23.1%) patients presented with oxygen saturations <94%.  
+=======
+The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were cough, history of fever, shortness of breath, fatigue/malaise, and altered consciousness/confusion. Frequencies of symptom prevalence vary with age. 20829/90153 (23.1%) patients presented with oxygen saturations <94%.  
+>>>>>>> 81ff175f6317992bbcb1e6a23fede448f56a931d
 
 ## Outcomes
 Outcomes have been recorded for 188849 patients (91.4%), consisting of 145422 recoveries and 43427 deaths. Outcome records are unavailable for 17709 patients.  
@@ -67,7 +71,14 @@ Corticosteroids were administered to 25145/97596 (25.8%) patients. This includes
 
 
 
+<<<<<<< HEAD
 <img src="Figs/unnamed-chunk-3-1.png" title="Overview of cohort and outcomes as of 30 November 2020." alt="Overview of cohort and outcomes as of 30 November 2020." width="100%" style="display: block; margin: auto;" />
+=======
+
+```
+## Error in file(con, "rb"): cannot open the connection
+```
+>>>>>>> 81ff175f6317992bbcb1e6a23fede448f56a931d
 
 
 
