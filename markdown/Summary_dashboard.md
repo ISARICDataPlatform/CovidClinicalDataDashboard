@@ -24,61 +24,57 @@ We thank all of the data contributors for collecting standardised data during th
 
 Please note the following caveats. This is a dynamic report which captures new variables and information as our understanding of COVID-19 evolves. Please observe the total number of patients of each result to note variables with fewer data points. Information is incomplete for the patients who are still being treated. Furthermore, it is likely that that we received more cases of severely ill individuals than those with relatively less severe illness; outcomes from these data, such as the proportion dying, must therefore not be used to infer outcomes for the entire population of people who might become infected. Some patients may be participants in clinical trials of experimental interventions. Note the variation in patient numbers per country. Additional caveats are provided in the in the ‘Caveats’ section below.  
 
-Up to the date of this report, data have been entered for **251407** individuals from **744** sites across **57** countries.  
+Up to the date of this report, data have been entered for **305241** individuals from **1736** sites across **64** countries.  
 
 The analysis detailed in this report only includes individuals: 
 
-  1. for whom data collection commenced on or before 16 November 2020. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
+  1. for whom data collection commenced on or before 3 January 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
   
 **AND**
 
   2. who have laboratory-confirmed SARS-COV-2 infection.
   
-The cohort satisfying the above criteria has **206558** cases.
-The below flow chart gives an overview of the cohort and outcomes as of 30 November 2020.
+The cohort satisfying the above criteria has **240149** cases.
+The below flow chart gives an overview of the cohort and outcomes as of 17 January 2021.
 
 ## Demographics and presenting features
-Of these 206558 cases, 105024 are males and 101192 are females – sex is unreported for 342 cases. The minimum and maximum observed ages were 0 and 120 years respectively. The median age is 59 years.  
+Of these 240149 cases, 122993 are males and 116597 are females – sex is unreported for 559 cases. The minimum and maximum observed ages were 0 and 120 years respectively. The median age is 60 years.  
 
 The observed mean number of days from (first) symptom onset to hospital admission was 5.2, with a standard deviation (SD) of 5 days and a median of 4 days. 
 
-The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was 9.5, with SD 8.6 days and a median of 7 days. These estimates are based on all cases which have complete records on length of hospital stay (N = 182080).  
+The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was 9.8, with SD 8.9 days and a median of 7 days. These estimates are based on all cases which have complete records on length of hospital stay (N = 209510).  
 
-<<<<<<< HEAD
-The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were cough (no sputum), history of fever, shortness of breath, fatigue/malaise, and altered consciousness/confusion. Frequencies of symptom prevalence vary with age. 20829/90153 (23.1%) patients presented with oxygen saturations <94%.  
-=======
-The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were cough, history of fever, shortness of breath, fatigue/malaise, and altered consciousness/confusion. Frequencies of symptom prevalence vary with age. 20829/90153 (23.1%) patients presented with oxygen saturations <94%.  
->>>>>>> 81ff175f6317992bbcb1e6a23fede448f56a931d
+The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were cough, shortness of breath, history of fever, fatigue/malaise, and altered consciousness/confusion. Frequencies of symptom prevalence vary with age. 26838/115892 (23.2%) patients presented with oxygen saturations <94%.  
 
 ## Outcomes
-Outcomes have been recorded for 188849 patients (91.4%), consisting of 145422 recoveries and 43427 deaths. Outcome records are unavailable for 17709 patients.  
+Outcomes have been recorded for 217885 patients (90.7%), consisting of 167796 recoveries and 50089 deaths. Outcome records are unavailable for 22264 patients.  
 
-**ICU/HDU**: A total of 19551 (9%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU), 53.5% on the day of admission. Of these, 6580 died, and 8962 have recovered and been discharged. Outcome records are unavailable for 4009 cases.
+**ICU/HDU**: A total of 26160 (11%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU), 51.1% on the day of admission. Of these, 8368 died, and 12818 have recovered and been discharged. Outcome records are unavailable for 4974 cases.
 
 
-Approximately 54% of patients with complete records on ICU admission dates were admitted to ICU within the first day of hospital admission. The distribution of the number of days from admission to ICU admission is shown in Figure 11. The duration of stay in ICU/HDU had a mean of 10.9 days and a median of 7 (SD: 10.4 days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = 16934). 
+The distribution of the number of days from admission to ICU admission is shown in Figure 11. The duration of stay in ICU/HDU had a mean of 10.8 days and a median of 7 (SD: 10.1 days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = 20607). 
 
 ## Treatment
-Antibiotics were received by 75845/92542 (82%) patients, and 13202/92444 (14.3%) received antivirals. These treatment categories are not mutually exclusive since some patients received multiple treatments. (The denominators differ due to data completeness). 64277/103288 (62.2%) patients received some degree of oxygen supplementation: of these, 14361/100773 (14.3%) received NIV and 12878/102609 (12.6%) IMV.  
+Antibiotics were received by 98865/122526 (80.7%) patients, and 17479/122191 (14.3%) received antivirals. These treatment categories are not mutually exclusive since some patients received multiple treatments. (The denominators differ due to data completeness). 82304/134330 (61.3%) patients received some degree of oxygen supplementation: of these, 17118/127627 (13.4%) received NIV and 15163/133557 (11.4%) IMV.  
 
-Of the patients admitted into ICU/HDU, 16228/17242 (94.1%) received antibiotics and 5600/17121 (32.7%) antivirals. 17252/18062 (95.5%) received some degree of oxygen supplementation, of which, 8294/17916 (46.3%) received NIV and 11558/17999 (64.2%) IMV.  
+Of the patients admitted into ICU/HDU, 19641/20993 (93.6%) received antibiotics and 6841/20476 (33.4%) antivirals. 20743/22080 (93.9%) received some degree of oxygen supplementation, of which, 10084/21112 (47.8%) received NIV and 13341/21991 (60.7%) IMV.  
 
-A total of 14361 patients received non-invasive mechanical ventilation (NIV). The mean and median durations from admission to receiving NIV were 5.5 days and 2 days respectively (SD: 8.1 days) – estimated from records on cases with complete records on dates of hospital admission and NIV onset (N = 13624). The mean and median durations for NIV were 7.2 days and 4 days respectively (SD: 9.2 days) – estimated based on only those cases which have complete NIV duration records (N = 13860).  
+A total of 17118 patients received non-invasive mechanical ventilation (NIV). The mean and median durations from admission to receiving NIV were 13.3 days and 10 days respectively (SD: 11.2 days) – estimated from records on cases with complete records on dates of hospital admission and NIV onset (N = 15983). The mean and median durations for NIV were 0.8 days and 0 days respectively (SD: 3.1 days) – estimated based on only those cases which have complete NIV duration records (N = 16233).  
 
-A total of 12878 patients received invasive mechanical ventilation (IMV). The mean and median durations from admission to receiving IMV were 4.3 days and 2 days respectively (SD: 6.3 days) – estimated from records on cases with complete records on dates of hospital admission and IMV onset (N = 12108). The mean, median and SD for the duration of IMV – estimated based on all 12374 cases with complete records on IMV stays – were 12.9 days, 7 days and 15.3 days respectively.  
+A total of 15163 patients received invasive mechanical ventilation (IMV). The mean and median durations from admission to receiving IMV were 4.8 days and 2 days respectively (SD: 7 days) – estimated from records on cases with complete records on dates of hospital admission and IMV onset (N = 14040). The mean, median and SD for the duration of IMV – estimated based on all 14551 cases with complete records on IMV stays – were 12.6 days, 7 days and 15.2 days respectively.  
 
-Corticosteroids were administered to 25145/97596 (25.8%) patients. This includes 6027/12321 (48.9%) of those who received IMV, 14645/49281 (29.7%) of those who had oxygen therapy but not IMV, and 4264/35346 (12.1%) of those who had no oxygen therapy. On 16 June, results for dexamethasone were released for the RECOVERY randomized controlled trial (RECOVERY, 2020; RECOVERY Collaborative Group, 2020). This trial found that dexamethasone reduced deaths for patients receiving IMV and oxygen therapy, but not among patients not receiving respiratory support. Of patients admitted since 16 June, corticosteroids were received by 2140/2825 (75.8%) of those who received IMV, 7468/9513 (78.5%) of those who had oxygen therapy but not IMV, and 1937/8178 (23.7%) of those who had no oxygen therapy.
+Corticosteroids were administered to 41581/127488 (32.6%) patients. This includes 7638/14542 (52.5%) of those who received IMV, 25912/64702 (40%) of those who had oxygen therapy but not IMV, and 7730/47405 (16.3%) of those who had no oxygen therapy. On 16 June, results for dexamethasone were released for the RECOVERY randomized controlled trial (RECOVERY, 2020; RECOVERY Collaborative Group, 2020). This trial found that dexamethasone reduced deaths for patients receiving IMV and oxygen therapy, but not among patients not receiving respiratory support. Of patients admitted since 16 June, corticosteroids were received by 3198/4007 (79.8%) of those who received IMV, 17575/22197 (79.2%) of those who had oxygen therapy but not IMV, and 5095/18374 (27.7%) of those who had no oxygen therapy.
 
 
 
-<<<<<<< HEAD
-<img src="Figs/unnamed-chunk-3-1.png" title="Overview of cohort and outcomes as of 30 November 2020." alt="Overview of cohort and outcomes as of 30 November 2020." width="100%" style="display: block; margin: auto;" />
-=======
+\begin{figure}
 
-```
-## Error in file(con, "rb"): cannot open the connection
-```
->>>>>>> 81ff175f6317992bbcb1e6a23fede448f56a931d
+{\centering \includegraphics[width=1\linewidth]{Figs/unnamed-chunk-3-1} 
+
+}
+
+\caption{Overview of cohort and outcomes as of 30 November 2020.}\label{fig:unnamed-chunk-3}
+\end{figure}
 
 
 
