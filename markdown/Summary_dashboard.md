@@ -49,7 +49,7 @@ The observed symptoms on admission partly represent case definitions and policie
 ## Outcomes
 Outcomes have been recorded for 217885 patients (90.7%), consisting of 167796 recoveries and 50089 deaths. Outcome records are unavailable for 22264 patients.  
 
-**ICU/HDU**: A total of 26160 (11%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU), 51.1% on the day of admission. Of these, 8368 died, and 12818 have recovered and been discharged. Outcome records are unavailable for 4974 cases.
+**ICU/HDU**: A total of 26160 (19%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU), 51.1% on the day of admission. Of these, 8368 died, and 12818 have recovered and been discharged. Outcome records are unavailable for 4974 cases.
 
 
 The distribution of the number of days from admission to ICU admission is shown in Figure 11. The duration of stay in ICU/HDU had a mean of 10.8 days and a median of 7 (SD: 10.1 days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = 20607). 
