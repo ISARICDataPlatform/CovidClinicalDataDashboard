@@ -54,6 +54,23 @@ slider.filters <- function(tbl, input) {
 
 server <- function(input, output) {
   
+  output$downloadReport <- downloadHandler(
+    filename =  'Report.pdf',
+    content = function(file) {
+      
+      withProgress(message = 'Rendering, please wait!', {
+        tempReport <- file.path(tempdir(), "Static_report.Rmd")
+        file.copy("markdown/Static_report.Rmd", tempReport, overwrite = TRUE)
+        
+        params <- list(rendered_by_shiny = TRUE)
+        
+        rmarkdown::render("markdown/Static_report.Rmd", output_file = file,
+                          envir = new.env(parent = globalenv())
+        )
+      })
+    }
+  )
+  
   output$contributions_video <- renderUI({
     tags$video(
       src=FILE_CONTRIBUTIONS_VIDEO,
