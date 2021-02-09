@@ -19,10 +19,12 @@ urlcolor: blue
 header-includes:
    - \usepackage{floatrow}
    - \floatsetup[figure]{capposition=top}
+params:
+  rendered_by_shiny: FALSE
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -30,6 +32,12 @@ knitr::opts_chunk$set(echo = FALSE,
                       options(scipen=999))
 
 
+
+```
+
+```{r progress1}
+if (params$rendered_by_shiny)
+  shiny::setProgress(0.2)
 
 ```
 
@@ -65,6 +73,10 @@ flowchart()
 
 ```
 
+```{r progress2}
+if (params$rendered_by_shiny)
+  shiny::setProgress(0.4)
+```
 
 
 \newpage
@@ -166,6 +178,11 @@ p_lab_wbc(data_plot_lab_wbc)
 
 ```
 
+```{r progress3}
+if (params$rendered_by_shiny)
+  shiny::setProgress(0.6)
+```
+
 
 \newpage
 ## Hospital stays and outcomes
@@ -232,6 +249,10 @@ patient.by.country.plot(patient.by.country.input)
 
 ```
 
+```{r progress4}
+if (params$rendered_by_shiny)
+  shiny::setProgress(0.8)
+```
 
 ```{r child = 'markdown/Background.Rmd'}
 ```
