@@ -24,7 +24,7 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -241,8 +241,10 @@ upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(
 ```{r icu_los,  out.width = '80%', echo=FALSE}
 length.of.stay.icu.plot(length.of.stay.icu.input) + ggtitle("(c)")
 ```
+
 \newpage
 # Country Comparisons
+
 ```{r country_recruitment,out.width = '80%', echo=FALSE,fig.cap = "Distribution of patients by country. This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section."}
 
 patient.by.country.plot(patient.by.country.input)
@@ -272,37 +274,34 @@ if (params$rendered_by_shiny)
 ```
 
 
-\newpage
-
 ## Summary tables
-```{r table1, tab.cap = "Patient Characteristics. Proportions are presented in parentheses. Proportions have been rounded to two decimal places."}
+
+```{r table1, tab.cap = "Patient Characteristics. Proportions are presented in parentheses, and have been rounded to two decimal places."}
 tables_supplementary(table_sup = patient.characteristic.table) 
 ```
 
-\newpage
 
 ```{r table2, tab.cap = "Outcome by age and sex. Proportions are calculated using the column total as the denominator."}
 tables_supplementary(table_sup = outcome.age.sex.table)
 ```
 
-\newpage
 
 ```{r table3, tab.cap = "Prevalence of symptoms."}
 tables_supplementary(table_sup = symptoms.table)
 ```
 
-\newpage
+
 
 ```{r table4, tab.cap = "Prevalence of comorbidities."}
 tables_supplementary(table_sup = comorbidity.table)
 ```
 
-\newpage
+
 
 ```{r table5, tab.cap = "Treatment use. The counts presented for treatments include all cases, not only cases with complete details of treatments (as expressed in the summary)."}
 tables_supplementary(table_sup = treatments.table)
 ```
-\newpage
+
 
 ```{r table6, tab.cap = "Key time variables. SD: Standard deviation; IQR: Interquartile range. Outliers (values greater than 120) were excluded prior to the computation of estimates."}
 tables_supplementary(table_sup = key.times.table)
