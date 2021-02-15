@@ -509,43 +509,50 @@ dashboardPage(
                   plotOutput("age_comorbid_asthma", height = "500px"),
                   width = 4,
                   height = 400,
-                  solidHeader = T
+                  solidHeader = T,
+                  title = "Proportion with asthma"
                 ),
                 box(
                   plotOutput("age_comorbid_malignant_neoplasm", height = "500px"),
                   width = 4,
                   height = 400,
-                  solidHeader = T
+                  solidHeader = T,
+                  title = "Proportion with malignant neoplasma"
                 ),
                 box(
                   plotOutput("age_comorbid_obesity", height = "500px"),
                   width = 4,
                   height = 400,
-                  solidHeader = T
+                  solidHeader = T,
+                  title = "Proportion with obesity"
                 ),
                 box(
                   plotOutput("age_comorbid_diabetes", height = "500px"),
                   width = 4,
                   height = 400,
-                  solidHeader = T
+                  solidHeader = T,
+                  title = "Proportion with diabetes"
                 ),
                 box(
                   plotOutput("age_comorbid_dementia", height = "500px"),
                   width = 4,
                   height = 400,
-                  solidHeader = T
+                  solidHeader = T,
+                  title = "Proportion with dementia"
                 ),
                 box(
                   plotOutput("age_comorbid_smoking", height = "500px"),
                   width = 4,
                   height = 400,
-                  solidHeader = T
+                  solidHeader = T,
+                  title = "Proportion of smokers"
                 ),
                 box(
                   plotOutput("age_comorbid_hypertension", height = "500px"),
                   width = 4,
                   height = 400,
-                  solidHeader = T
+                  solidHeader = T,
+                  title = "Proportion with hypertension"
                 )
               )
       ),
@@ -556,67 +563,78 @@ dashboardPage(
             plotOutput("age_symptoms_history_of_fever", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with fever"
           ),
           box(
             plotOutput("age_symptoms_cough", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with cough"
           ),
           box(
             plotOutput("age_symptoms_cough_fever", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with cough or fever"
           ),
           box(
             plotOutput("age_symptoms_shortness_of_breath", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with shortness of breath"
           ),
           box(
             plotOutput("age_symptoms_cought_fever_shortness_of_breath", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with cough, fever, or shortness of breath"
           ),
           box(
             plotOutput("age_symptoms_upper_respiratory_tract_symptoms", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with upper respiratory tract symptoms"
           ),
           box(
             plotOutput("age_symptoms_altered_consciousness_confusion", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with confusion"
           ),
           box(
             plotOutput("age_symptoms_constitutional", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with constitutional symptoms"
           ),
           box(
             plotOutput("age_symptoms_vomiting_nausea", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with vomiting nausea"
           ),
           box(
             plotOutput("age_symptoms_diarrhoea", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with diarrhoea"
           ),
           box(
             plotOutput("age_symptoms_abdominal_pain", height = "500px"),
             width = 4,
             height = 400,
-            solidHeader = T
+            solidHeader = T,
+            title = "Proportion with abdominal pain"
           )
         )
       ),
