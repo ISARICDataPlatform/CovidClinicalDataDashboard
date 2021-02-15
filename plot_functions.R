@@ -1,3 +1,8 @@
+###############################
+#' @usage If running dashboard, leave dashboard_equal = TRUE, 
+#' if running report,dashboard_equal = FALSE
+dashboard_equal = TRUE
+
 flowchart <- function(){
   
   grViz("digraph flowchart {
@@ -21,14 +26,12 @@ flowchart <- function(){
       tab8 [label = '@@8',height=0.8, width=1.5]
       tab9 [label = '@@9',height=0.8, width=1.5]
       tab10 [label = '@@10',height=0.8, width=1.5]
-      tab11 [label = '@@11',height=0.8, width=1.5]
 
       node [shape = rectangle, fillcolor= lightSalmon] 
-      tab12 [label = '@@12',height=1, width=2]
+      tab11 [label = '@@11',height=1, width=2]
+      tab12 [label = '@@12',height=0.8, width=1.5]
       tab13 [label = '@@13',height=0.8, width=1.5]
       tab14 [label = '@@14',height=0.8, width=1.5]
-      tab15 [label = '@@15',height=0.8, width=1.5]
-      tab16 [label = '@@16',height=0.8, width=1.5]
       
       
       # edge definitions with the node IDs
@@ -37,16 +40,14 @@ flowchart <- function(){
       tab2 -> tab4 [headport=n]
       tab2 -> tab5 [headport=n]
       tab3 -> tab6
-      tab6 -> tab7 [label = '@@19']
-      tab6 -> tab12 [label = '@@20']
-      tab7 -> tab8 [label = '@@21']
-      tab7 -> tab9 [label = '@@22']
-      tab7 -> tab10 [label = '@@23']
-      tab7 -> tab11 [label = '@@24']
-      tab12 -> tab13 [label = '@@25']
-      tab12 -> tab14 [label = '@@26']
-      tab12 -> tab15 [label = '@@27']
-      tab12 -> tab16 [label = '@@28']
+      tab6 -> tab7 [label = '@@15']
+      tab6 -> tab11 [label = '@@16']
+      tab7 -> tab8 [label = '@@17']
+      tab7 -> tab9 [label = '@@18']
+      tab7 -> tab10 [label = '@@19']
+      tab11 -> tab12 [label = '@@20']
+      tab11 -> tab13 [label = '@@21']
+      tab11 -> tab14 [label = '@@22']
       }
 
       [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input_overall), ')')
@@ -56,27 +57,21 @@ flowchart <- function(){
       [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=',nrow(summary_input_overall%>% filter(embargo_length==FALSE & cov_det_id!='POSITIVE')),')')
       [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
       [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
-      [8]: paste0('Ongoing care\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care')),')')
-      [9]: paste0('Death\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
-      [10]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
-      [11]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU')), ')')
-      [12]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever))),')')
-      [13]: paste0('Ongoing care\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Ongoing care')),')')
-      [14]: paste0('Death\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Death')), ')')
-      [15]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
-      [16]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever)) & slider_outcome=='LTFU')), ')')
-      [17]: '0%'
-      [18]: '0%'
-      [19]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table (slider_icu_ever))[2]*100,0), '%')
-      [20]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$%table(slider_icu_ever))[1]*100,0), '%')
-      [21]: paste0(ifelse(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))!=0,(round(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))/nrow(summary_input %>% filter(slider_icu_ever==TRUE))*100,0)),0),'%') 
-      [22]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[1]*100,0), '%')
-      [23]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[2]*100,0), '%')
-      [24]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[3]*100,0), '%')
-      [25]: paste0(ifelse(nrow(summary_input %>% filter(slider_icu_ever!=TRUE & slider_outcome=='Ongoing care'))!=0,(round(nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Ongoing care'))/nrow(summary_input %>% filter(slider_icu_ever==TRUE))*100,0)),0),'%')
-      [26]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[1]*100,0), '%')
-      [27]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[2]*100,0), '%')
-      [28]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[3]*100,0), '%')
+      [8]: paste0('Death\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
+      [9]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
+      [10]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU')), ')')
+      [11]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever))),')')
+      [12]: paste0('Death\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Death')), ')')
+      [13]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
+      [14]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever)) & slider_outcome=='LTFU')), ')')
+      [15]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table (slider_icu_ever))[2]*100,0), '%')
+      [16]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table(slider_icu_ever))[1]*100,0), '%')
+      [17]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[1]*100,0), '%')
+      [18]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[2]*100,0), '%')
+      [19]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[3]*100,0), '%')
+      [20]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[1]*100,0), '%')
+      [21]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[2]*100,0), '%')
+      [22]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[3]*100,0), '%')
       "
   )
  
@@ -603,7 +598,7 @@ patient.by.country.plot <- function(aggregated.tbl,...){
 #' @export plot.prop.by.age
 #' @keywords internal
 ############################################
-plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, dashboard = TRUE, ...) {
+plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, dashboard = dashboard_equal, ...) {
   data2 <- data
   summ <- data2 %>%
     add_column(All = 1)%>%
@@ -660,9 +655,21 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   #    size = 2
   #  )
   if (dashboard == TRUE) {
-    font_size_dash = 9
+    font_size_dash = 11
   } else {
     font_size_dash = 13
+  }
+  
+  if (dashboard == TRUE) {
+    angle_dash = 90
+  } else {
+    angle_dash = 0
+  }
+  
+  if (dashboard == TRUE) {
+    hjust_dash = 1
+  } else {
+    hjust_dash = 0
   }
   
   p <- ggplot() +
@@ -670,7 +677,8 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = font_size_dash)) + 
+    theme_bw() + theme(axis.text = element_text(size = font_size_dash, 
+                                                angle = angle_dash, hjust = hjust_dash)) + 
     labs(title = N)
   
   return(p)

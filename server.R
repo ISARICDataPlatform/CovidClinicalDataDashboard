@@ -54,6 +54,45 @@ slider.filters <- function(tbl, input) {
 
 server <- function(input, output) {
   
+  output$downloadReport <- downloadHandler(
+    filename =  'Report.pdf',
+    content = function(file) {
+      
+      withProgress(message = 'Rendering, please wait!', {
+        tempReport <- file.path(tempdir(), "Static_report.Rmd")
+        file.copy("markdown/Static_report.Rmd", tempReport, overwrite = TRUE)
+        
+        params <- list(rendered_by_shiny = TRUE)
+        
+        rmarkdown::render("markdown/Static_report.Rmd", output_file = file,
+                          envir = new.env(parent = globalenv())
+        )
+      })
+    }
+  )
+  
+  output$contributions_video <- renderUI({
+    tags$video(
+      src=FILE_CONTRIBUTIONS_VIDEO,
+      width='600px',
+      height='360px',
+      type='video/mp4',
+      controls="controls"
+    )
+  })
+  
+  output$age_pyramid_gif <- renderImage({
+    # load gif
+    gif_image <- image_read(FILE_GIF_IMAGE)
+    # write to tmp file
+    tmpfile <- gif_image %>%
+      image_scale("600x360!") %>%
+      image_write(tempfile(fileext = 'gif'), format = 'gif')
+    # return temp file as list object with specified features to be read by ui
+    list(src = tmpfile, contentType = "image/gif")
+  }, deleteFile = TRUE
+  )
+  
   output$agePyramid <- {
     age.pyramid.reactive <- reactive({
       fd <- age.pyramid.input %>%

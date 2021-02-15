@@ -30,8 +30,9 @@ library(magrittr)
 library(flextable)
 library(htmltools)
 library(bookdown)
+library(magick)
 library(xml2)
-
+library(shiny)
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -58,76 +59,103 @@ outcome.remap <- function(oc, od){
 
 source("plot_functions.R")
 
+# specify path constants 
+DIR_SENSITIVE_DATA <- 'sensitive_data' # note all files here are ignored by git except README.md - see .gitignore
+FILE_CONTRIBUTIONS_VIDEO <- 'contributions.mp4' 
+FILE_GIF_IMAGE <- paste('figure/outcomes_by_age_gender_from_march2020.gif')
+FILE_MAP_RDS <- 'map_data.rds'
 
-#Load all the datasets
+# itemise all the data files
+list_data_files <- c(
+  "age_pyramid_input.rda",
+  "outcome_admission_date_input.rda",
+  "symptom_prevalence_input.rda",
+  "comorbidity.prevalence.input.rda",
+  "treatment.use.proportion.input.rda",
+  "icu.treatment.use.proportion.input.rda",
+  "comorbidity.upset.input.rda",
+  "symptom.upset.input.rda", 
+  # "symptom_upset_input.rda",
+  "treatment.upset.input.rda",
+  "icu.treatment.upset.input.rda",
+  # the vs data
+  "data_plot_vs_resp.rda",
+  "data_plot_vs_hr.rda",
+  "data_plot_vs_temp.rda",
+  "data_plot_vs_sysbp.rda",
+  "data_plot_vs_oxysat.rda",
+  #Load the laboratory data
+  "data_plot_lab_crp.rda",
+  "data_plot_lab_lym.rda",
+  "data_plot_lab_neut.rda",
+  "data_plot_lab_wbc.rda",
+  "data_plot_lab_urean.rda",
+  "data_plot_lab_pt.rda",
+  "data_plot_lab_alt.rda",
+  "data_plot_lab_aptt.rda",
+  "data_plot_lab_ast.rda",
+  "data_plot_lab_bili.rda",
+  #Load the comorbidty by age plots
+  "data_plot_comorbid_asthma.rda",
+  "data_plot_comorbid_malignant_neoplasm.rda",
+  "data_plot_comorbid_obesity.rda",
+  "data_plot_comorbid_diabetes.rda",
+  "data_plot_comorbid_dementia.rda",
+  "data_plot_comorbid_smoking.rda",
+  "data_plot_comorbid_hypertension.rda",
+  #Load the symptoms by age plots
+  "data_plot_symptoms_history_of_fever.rda",
+  "data_plot_symptoms_cough.rda",
+  "data_plot_symptoms_cough_fever.rda",
+  "data_plot_symptoms_shortness_of_breath.rda",
+  "data_plot_symptoms_cought_fever_shortness_of_breath.rda",
+  "data_plot_symptoms_upper_respiratory_tract_symptoms.rda",
+  "data_plot_symptoms_altered_consciousness_confusion.rda",
+  "data_plot_symptoms_constitutional.rda",
+  "data_plot_symptoms_vomiting_nausea.rda",
+  "data_plot_symptoms_diarrhoea.rda",
+  "data_plot_symptoms_abdominal_pain.rda",
+  #Load the heatmap data
+  "data_plot_heatmap.rda",
+  #Load the tables
+  "treatment.table.rda", # !!!
+  # "treatment_table.rda",
+  "key.times.rda", # !!!
+  # "key_times.rda",
+  "comorbidity.table.rda", # !!!
+  # "comorbidity_table.rda",
+  "symptoms.table.rda", # !!!
+  # "symptoms_table.rda",
+  "patient.characteristic.table.rda",
+  # "patient_characteristic_table.rda", # !!!
+  "outcome.age.sex.table.rda", # !!!
+  # "outcome_age_sex_table.rda",
+  #load summary & flowchart data
+  "summary_input_overall.rda",
+  "summary_input.rda",
+  #################load data for hospital stays
+  "length_of_stay_sex_input.rda",
+  "length_of_stay_age_input.rda",
+  "admission_to_icu_input.rda",
+  "status_by_time_after_admission_input.rda",
+  "length_of_stay_icu_input.rda",
+  "patient_by_country_input.rda"
+)
 
-base::load("age_pyramid_input.rda")  
-base::load("outcome_admission_date_input.rda")
-base::load("symptom_prevalence_input.rda")
-base::load("comorbidity.prevalence.input.rda")
-base::load("treatment.use.proportion.input.rda")
-base::load("icu.treatment.use.proportion.input.rda")
-base::load("comorbidity.upset.input.rda")
-base::load("symptom.upset.input.rda")
-base::load("treatment.upset.input.rda")
-base::load("icu.treatment.upset.input.rda")
-#Load the vs data
-base::load("data_plot_vs_resp.rda")
-base::load("data_plot_vs_hr.rda")
-base::load("data_plot_vs_temp.rda")
-base::load("data_plot_vs_sysbp.rda")
-base::load("data_plot_vs_oxysat.rda")
-#Load the laboratory data
-base::load("data_plot_lab_crp.rda")
-base::load("data_plot_lab_lym.rda")
-base::load("data_plot_lab_neut.rda")
-base::load("data_plot_lab_wbc.rda")
-base::load("data_plot_lab_urean.rda")
-base::load("data_plot_lab_pt.rda")
-base::load("data_plot_lab_alt.rda")
-base::load("data_plot_lab_aptt.rda")
-base::load("data_plot_lab_ast.rda")
-base::load("data_plot_lab_bili.rda")
-#Load the comorbidty by age plots
-base::load("data_plot_comorbid_asthma.rda")
-base::load("data_plot_comorbid_malignant_neoplasm.rda")
-base::load("data_plot_comorbid_obesity.rda")
-base::load("data_plot_comorbid_diabetes.rda")
-base::load("data_plot_comorbid_dementia.rda")
-base::load("data_plot_comorbid_smoking.rda")
-base::load("data_plot_comorbid_hypertension.rda")
-#Load the symptoms by age plots
-base::load("data_plot_symptoms_history_of_fever.rda")
-base::load("data_plot_symptoms_cough.rda")
-base::load("data_plot_symptoms_cough_fever.rda")
-base::load("data_plot_symptoms_shortness_of_breath.rda")
-base::load("data_plot_symptoms_cought_fever_shortness_of_breath.rda")
-base::load("data_plot_symptoms_upper_respiratory_tract_symptoms.rda")
-base::load("data_plot_symptoms_altered_consciousness_confusion.rda")
-base::load("data_plot_symptoms_constitutional.rda")
-base::load("data_plot_symptoms_vomiting_nausea.rda")
-base::load("data_plot_symptoms_diarrhoea.rda")
-base::load("data_plot_symptoms_abdominal_pain.rda")
-#Load the heatmap data
-base::load("data_plot_heatmap.rda")
-#Load the tables
-base::load("treatment.table.rda")
-base::load("key.times.rda")
-base::load("comorbidity.table.rda")
-base::load("symptoms.table.rda")
-base::load("patient.characteristic.table.rda")
-base::load("outcome.age.sex.table.rda")
-#load summary & flowchart data
-base::load("summary_input_overall.rda")
-base::load("summary_input.rda")
-#################load data for hospital stays
-base::load("length_of_stay_sex_input.rda")
-base::load("length_of_stay_age_input.rda")
-base::load("admission_to_icu_input.rda")
-base::load("status_by_time_after_admission_input.rda")
-base::load("length_of_stay_icu_input.rda")
+# check date (via file name) of contributions.mp4
+# if > 30 days old 
+# reproduce new video and save out to www 
 
-base::load("patient_by_country_input.rda")
+#Load all the datasets, print those that fail.
+for (f in list_data_files) {
+  f <- paste(DIR_SENSITIVE_DATA, f, sep = "/")
+  if (!file.exists(f)) {
+    print(paste("File missing from CovidClinicalDataDashboard/sensitive_data: ", f))
+  }
+  else {
+    base::load(f)
+  }
+}
 
 
 age.bound.lookup <- tibble(slider_agegp10 = cut(1:100, right = FALSE, breaks = c(0, 10, 20, 30, 40, 50, 60, 70, 80, 90, 120)) %>% unique()) %>%
@@ -171,9 +199,9 @@ months <- c("Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct"
 month.options <- c("Dec 2019", glue("{months} {2020}"))
 
 
-
-map.data <- read_rds(here::here("map_data.rds"))
-
+# keeping map data in repository # !!!
+# map.data <- read_rds(here::here("map_data.rds")) 
+map.data <- read_rds(FILE_MAP_RDS)
 
 report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
                         name_sep = ", ", group_brachet = "()",group_sep = "; "){
