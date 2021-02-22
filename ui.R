@@ -199,6 +199,8 @@ dashboardPage(
     hr(),
     tabItems(
       tabItem(tabName = "home", 
+                  includeMarkdown("markdown/welcome.md")
+              ,
               fluidRow(
                 box(
                   uiOutput("contributions_video", align = "center"),
@@ -495,13 +497,7 @@ dashboardPage(
               )
       ),
       tabItem(tabName = "flowchart",
-              fluidRow(
-                box(
-                  includeMarkdown("markdown/Summary_dashboard.md"),
-                  title = "ISARIC (International Severe Acute Respiratory and Emerging Infections Consortium)",
-                  width = 14
-                )
-              )
+                  includeMarkdown("markdown/Summary_dashboard.md")
       ),
       tabItem(tabName = "comorbidities_by_age",
               fluidRow(
