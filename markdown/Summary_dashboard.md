@@ -7,9 +7,6 @@ output: html_document
 
 
 
-*A global federation of clinical research networks, providing a proficient, coordinated, and agile research response to outbreak-prone infectious diseases*
-
-
 # COVID-19 Report
 Containing data extracted 30 November 2020
 

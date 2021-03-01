@@ -1,0 +1,17 @@
+---
+title: "welcome page"
+output: html_document
+---
+
+### Welcome to the ISARIC COVID-19 Dashboard
+
+This dashboard provides up to date representations of data on patients hospitalised with COVID-19, collected by the ISARIC network.
+
+The ISARIC (International Severe Acute Respiratory and emerging Infections Consortium) partnerships and outbreak preparedness initiatives enable the rapid launch of standardised clinical data collection during epidemics and pandemics. We began collecting data on COVID-19 in Jan 2020. Extensive global uptake of this resource has resulted in a large, standardised collection of comprehensive clinical data from hundreds of sites across dozens of countries. Data are analysed regularly and reported publicly to inform patient care and public health response. 
+
+This dashboard allows you to 
+- explore the data to understand the latest statistics of SARS-CoV-2 infection around the world.
+- manipulate data to visualize the statistics by age, sex, date, outcome, and country.
+- download a summary report containing all of the graphs and tables in the dashboard. 
+
+If you have any questions about the content on this page, or ISARIC, or would like to know how you can become involved in this network, please email ncov@isaric.org.
