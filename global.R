@@ -70,14 +70,14 @@ list_data_files <- c(
   "age_pyramid_input.rda",
   "outcome_admission_date_input.rda",
   "symptom_prevalence_input.rda",
-  "comorbidity.prevalence.input.rda",
-  "treatment.use.proportion.input.rda",
-  "icu.treatment.use.proportion.input.rda",
-  "comorbidity.upset.input.rda",
-  "symptom.upset.input.rda", 
+  "comorbidity_prevalence_input.rda",
+  "treatment_use_proportion_input.rda",
+  "icu_treatment_use_proportion_input.rda",
+  "comorbidity_upset_input.rda",
+  "symptom_upset_input.rda", 
   # "symptom_upset_input.rda",
-  "treatment.upset.input.rda",
-  "icu.treatment.upset.input.rda",
+  "treatment_upset_input.rda",
+  "icu_treatment_upset_input.rda",
   # the vs data
   "data_plot_vs_resp.rda",
   "data_plot_vs_hr.rda",
@@ -118,17 +118,17 @@ list_data_files <- c(
   #Load the heatmap data
   "data_plot_heatmap.rda",
   #Load the tables
-  "treatment.table.rda", # !!!
+  "treatment_table.rda", # !!!
   # "treatment_table.rda",
-  "key.times.rda", # !!!
+  "key_times.rda", # !!!
   # "key_times.rda",
-  "comorbidity.table.rda", # !!!
+  "comorbidity_table.rda", # !!!
   # "comorbidity_table.rda",
-  "symptoms.table.rda", # !!!
+  "symptoms_table.rda", # !!!
   # "symptoms_table.rda",
-  "patient.characteristic.table.rda",
+  "patient_characteristic_table.rda",
   # "patient_characteristic_table.rda", # !!!
-  "outcome.age.sex.table.rda", # !!!
+  "outcome_age_sex_table.rda", # !!!
   # "outcome_age_sex_table.rda",
   #load summary & flowchart data
   "summary_input_overall.rda",
