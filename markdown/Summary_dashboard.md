@@ -24,18 +24,18 @@ We thank all of the data contributors for collecting standardised data during th
 
 Please note the following caveats. This is a dynamic report which captures new variables and information as our understanding of COVID-19 evolves. Please observe the total number of patients of each result to note variables with fewer data points. Information is incomplete for the patients who are still being treated. Furthermore, it is likely that that we received more cases of severely ill individuals than those with relatively less severe illness; outcomes from these data, such as the proportion dying, must therefore not be used to infer outcomes for the entire population of people who might become infected. Some patients may be participants in clinical trials of experimental interventions. Note the variation in patient numbers per country. Additional caveats are provided in the in the ‘Caveats’ section below.  
 
-Up to the date of this report, data have been entered for **305241** individuals from **735** sites across **58** countries.  
+Up to the date of this report, data have been entered for **305241** individuals from **1736** sites across **64** countries.  
 
 The analysis detailed in this report only includes individuals: 
 
-  1. for whom data collection commenced on or before 16 November 2020. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
+  1. for whom data collection commenced on or before 3 January 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
   
 **AND**
 
   2. who have laboratory-confirmed SARS-COV-2 infection.
   
 The cohort satisfying the above criteria has **240149** cases.
-The below flow chart gives an overview of the cohort and outcomes as of 30 November 2020.
+The below flow chart gives an overview of the cohort and outcomes as of 17 January 2021.
 
 ## Demographics and presenting features
 Of these 240149 cases, 122993 are males and 116597 are females – sex is unreported for 559 cases. The minimum and maximum observed ages were 0 and 120 years respectively. The median age is 60 years.  
@@ -49,10 +49,10 @@ The observed symptoms on admission partly represent case definitions and policie
 ## Outcomes
 Outcomes have been recorded for 217885 patients (90.7%), consisting of 167796 recoveries and 50089 deaths. Outcome records are unavailable for 22264 patients.  
 
-**ICU/HDU**: A total of 26160 (11%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU), 51.1% on the day of admission. Of these, 8368 died, and 12818 have recovered and been discharged. Outcome records are unavailable for 4974 cases.
+**ICU/HDU**: Of the 136337 patients with data on ward admissions available, a total of 26160 (19%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU), 51.1% on the day of admission. Of these, 8368 died, and 12818 have recovered and been discharged. Outcome records are unavailable for 4974 cases.
 
 
-Approximately 51% of patients with complete records on ICU admission dates were admitted to ICU within the first day of hospital admission. The distribution of the number of days from admission to ICU admission is shown in Figure 11. The duration of stay in ICU/HDU had a mean of 10.8 days and a median of 7 (SD: 10.1 days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = 20607). 
+The distribution of the number of days from admission to ICU admission is shown in Figure 11. The duration of stay in ICU/HDU had a mean of 10.8 days and a median of 7 (SD: 10.1 days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = 20607). 
 
 ## Treatment
 Antibiotics were received by 98865/122526 (80.7%) patients, and 17479/122191 (14.3%) received antivirals. These treatment categories are not mutually exclusive since some patients received multiple treatments. (The denominators differ due to data completeness). 82304/134330 (61.3%) patients received some degree of oxygen supplementation: of these, 17118/127627 (13.4%) received NIV and 15163/133557 (11.4%) IMV.  
@@ -67,14 +67,7 @@ Corticosteroids were administered to 41581/127488 (32.6%) patients. This include
 
 
 
-\begin{figure}
-
-{\centering \includegraphics[width=1\linewidth]{Figs/unnamed-chunk-3-1} 
-
-}
-
-\caption{Overview of cohort and outcomes as of 30 November 2020.}\label{fig:unnamed-chunk-3}
-\end{figure}
+<img src="Figs/unnamed-chunk-3-1.png" title="Overview of cohort and outcomes as of 30 November 2020." alt="Overview of cohort and outcomes as of 30 November 2020." width="100%" style="display: block; margin: auto;" />
 
 
 
