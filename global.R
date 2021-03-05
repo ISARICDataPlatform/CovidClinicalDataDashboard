@@ -288,6 +288,7 @@ report_auth <- function(df, name, group = NULL, subdivision = NULL, path = NULL,
 knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.md")
 
 knit("markdown/Summary_dashboard.Rmd", output = "markdown/Summary_dashboard.md")
+knit("markdown/welcome.Rmd", output = "markdown/welcome.md")
 
 
 
