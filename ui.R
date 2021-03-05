@@ -313,7 +313,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("lengthofstayICU", height = "500px"),
-                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest. The upper value was truncated at 97.5%.",
                   width = 6,
                   height = 600,
                   solidHeader = T,
@@ -339,7 +339,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("lengthofstaySex", height = "500px"),
-                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest. The upper value was truncated at 97.5%.",
                   width = 6,
                   height = 620,
                   solidHeader = T,
@@ -347,7 +347,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("lengthofstayAge", height = "500px"),
-                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest. The upper value was truncated at 97.5%.",
                   width = 6,
                   height = 620,
                   solidHeader = T,
