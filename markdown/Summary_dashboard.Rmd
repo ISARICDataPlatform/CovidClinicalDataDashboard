@@ -13,9 +13,6 @@ knitr::opts_chunk$set(fig.path='Figs/')
 ```
 
 
-# COVID-19 Report
-Containing data extracted 30 November 2020
-
 
 ```{r child ='Summary.Rmd'}
 ```
@@ -27,15 +24,7 @@ flowchart()
 ```
 
 
-```{r child = 'Background.Rmd'}
-```
-
-
 ```{r child = 'Methods.Rmd'}
-```
-
-
-```{r child = 'Caveats.Rmd'}
 ```
 
 ```{r child = 'Teammembers.Rmd'}
