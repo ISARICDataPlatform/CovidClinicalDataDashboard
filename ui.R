@@ -494,7 +494,21 @@ dashboardPage(
               )
       ),
       tabItem(tabName = "flowchart",
-                  includeMarkdown("markdown/Summary_dashboard.md")
+              fluidRow(
+                box(includeMarkdown("markdown/Summary_dashboard_top.md"),
+                    width = 12
+                )
+              ),
+              fluidRow(
+                box(flowchart(),
+                    width = 12
+                )
+              ),
+              fluidRow(
+                box(includeMarkdown("markdown/Summary_dashboard_bottom.md"),
+                    width = 12
+                )
+              )
       ),
       tabItem(tabName = "comorbidities_by_age",
               fluidRow(
