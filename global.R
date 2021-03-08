@@ -290,7 +290,7 @@ knit("markdown/Contributor_listmap.Rmd", output = "markdown/Contributor_listmap.
 knit("markdown/Summary_dashboard_top.Rmd", output = "markdown/Summary_dashboard_top.md")
 knit("markdown/Summary_dashboard_bottom.Rmd", output = "markdown/Summary_dashboard_bottom.md")
 knit("markdown/welcome.Rmd", output = "markdown/welcome.md")
-
+knit("markdown/welcome_caveats.Rmd", output = "markdown/welcome_caveats.md")
 
 
 
