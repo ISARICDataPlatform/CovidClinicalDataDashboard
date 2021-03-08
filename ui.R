@@ -7,9 +7,6 @@
 #    http://shiny.rstudio.com/
 #
 
-
-
-
 dbHeader <- dashboardHeader(title = "COVID-19 Analysis Report",
                             tags$li(
                               a(
