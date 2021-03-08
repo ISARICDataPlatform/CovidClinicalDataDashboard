@@ -12,7 +12,6 @@ knitr::opts_chunk$set(echo = FALSE,
 knitr::opts_chunk$set(fig.path='Figs/')
 ```
 
-
 ```{r child = 'Methods.Rmd'}
 ```
 
