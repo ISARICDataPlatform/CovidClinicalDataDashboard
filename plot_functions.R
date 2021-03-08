@@ -546,6 +546,11 @@ admission.to.icu.plot <- function(aggregated.tbl, ...){
 
 status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
   
+  aggregated.tbl <- aggregated.tbl %>%
+    group_by(day, status) %>%
+    summarise(count = sum(count)) %>%
+    ungroup()
+  
   plt <-  ggplot(aggregated.tbl)+ 
     geom_bar(aes(x = day, y=count, fill = status), position = "fill", stat = "identity") +
     scale_fill_brewer(palette = "Dark2", name  = "Status", drop = F, labels = c("Discharged", "Unknown", "Ward", "ICU", "Death")) +
