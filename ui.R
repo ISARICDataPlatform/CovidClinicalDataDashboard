@@ -209,7 +209,8 @@ dashboardPage(
                   solidHeader = T,
                   title = "Outcomes by age and gender"
                   )
-              )
+              ),
+              includeMarkdown("markdown/welcome_caveats.md")
       ),
       tabItem(tabName = "patients",
               fluidRow(
