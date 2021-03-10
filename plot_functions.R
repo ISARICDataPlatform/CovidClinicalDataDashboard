@@ -694,6 +694,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     theme_bw() + theme(axis.text = element_text(size = font_size_dash, 
                                                 angle = angle_dash, hjust = hjust_dash)) + 
     geom_text(data=d, aes(x=X,y=-0.05,label=x))+
+    geom_hline(yintercept = -0.08, color="grey", size=0.5)+
     geom_text(data=d, aes(x=X,y=-0.1,label=n))+
     labs(title = N)
   
