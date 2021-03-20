@@ -33,6 +33,7 @@ library(bookdown)
 library(magick)
 library(xml2)
 library(shiny)
+library(plotly)
 
 epiweek.year <- function(date){
   if(is.na(date)){
