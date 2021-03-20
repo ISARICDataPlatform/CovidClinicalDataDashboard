@@ -644,7 +644,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   N <- paste("N = ", sum(summ$All), sep = "", collapse = NULL)
   pts <- geom_point(
     data = d,
-    aes(x = d$X, y = mean),
+    aes(x = d$X, y = mean, text=paste0(x,"/",n)),
     shape = "square",
     size = (d$size)/5,
     colour = "navy"
@@ -669,7 +669,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   #    size = 2
   #  )
   if (dashboard == TRUE) {
-    font_size_dash = 11
+    font_size_dash = 9
   } else {
     font_size_dash = 13
   }
@@ -692,11 +692,15 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     #    lbls +
     xa + ya +
     theme_bw() + theme(axis.text = element_text(size = font_size_dash, 
-                                                angle = angle_dash, hjust = hjust_dash)) + 
-    geom_text(data=d, aes(x=X,y=-0.05,label=x))+
-    geom_hline(yintercept = -0.08, color="grey", size=0.5)+
-    geom_text(data=d, aes(x=X,y=-0.1,label=n))+
+                                                angle = angle_dash, hjust = hjust_dash),
+                       axis.title.x = element_text(size = font_size_dash),
+                       axis.title.y = element_blank()) + 
+    #geom_text(data=d, aes(x=X,y=-0.05,label=x))+
+    #geom_hline(yintercept = -0.08, color="grey", size=0.5)+
+    #geom_text(data=d, aes(x=X,y=-0.1,label=n))+
     labs(title = N)
+  
+  p <- ggplotly(p,tooltip="text") %>% layout(height=350)
   
   return(p)
   
