@@ -24,7 +24,7 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="/Users/mdhall/CovidClinicalDataDashboard/")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -51,7 +51,8 @@ source("global.R")
 ###### THIS NEEDS AUTOMATION #####
 
 pub.date <- today()
-ref.date <- ymd("2021-01-17")
+ref.date <- ymd("2021-01-28")
+
 
 ```
 

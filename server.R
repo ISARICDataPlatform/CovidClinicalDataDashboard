@@ -539,12 +539,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_comorbid_asthma.reactive(),
         plot.prop.by.age_comorbid_asthma
-      ),
-      height = 350
+      )
     )
   }
   
@@ -556,12 +555,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_comorbid_malignant_neoplasm.reactive(),
         plot.prop.by.age_comorbid_malignant_neoplasm
-      ),
-      height = 350
+      )
     )
   }
   
@@ -573,12 +571,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_comorbid_obesity.reactive(),
         plot.prop.by.age_comorbid_obesity
-      ),
-      height = 350
+      )
     )
   }
   
@@ -590,12 +587,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_comorbid_diabetes.reactive(),
         plot.prop.by.age_comorbid_diabetes
-      ),
-      height = 350
+      )
     )
   }
   
@@ -607,12 +603,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_comorbid_dementia.reactive(),
         plot.prop.by.age_comorbid_dementia
-      ),
-      height = 350
+      )
     )
   }
   
@@ -624,12 +619,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_comorbid_smoking.reactive(),
         plot.prop.by.age_comorbid_smoking
-      ),
-      height = 350
+      )
     )
   }
   
@@ -641,12 +635,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_comorbid_hypertension.reactive(),
         plot.prop.by.age_comorbid_hypertension
-      ),
-      height = 350
+      )
     )
   }
   
@@ -658,12 +651,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_history_of_fever.reactive(),
         plot.prop.by.age_symptoms_history_of_fever
-      ),
-      height = 350
+      )
     )
   }
   
@@ -675,12 +667,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_cough.reactive(),
         plot.prop.by.age_symptoms_cough
-      ),
-      height = 350
+      )
     )
   }
   
@@ -692,12 +683,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_cough_fever.reactive(),
         plot.prop.by.age_symptoms_cough_fever
-      ),
-      height = 350
+      )
     )
   }
   
@@ -709,12 +699,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_shortness_of_breath.reactive(),
         plot.prop.by.age_symptoms_shortness_of_breath
-      ),
-      height = 350
+      )
     )
   }
   
@@ -727,12 +716,11 @@ server <- function(input, output) {
           slider.filters(input) %>%
           as_tibble()
       })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_cought_fever_shortness_of_breath.reactive(),
         plot.prop.by.age_symptoms_cought_fever_shortness_of_breath
-      ),
-      height = 350
+      )
     )
   }
   
@@ -745,12 +733,11 @@ server <- function(input, output) {
           slider.filters(input) %>%
           as_tibble()
       })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_upper_respiratory_tract_symptoms.reactive(),
         plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms
-      ),
-      height = 350
+      )
     )
   }
   
@@ -763,12 +750,11 @@ server <- function(input, output) {
           slider.filters(input) %>%
           as_tibble()
       })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_altered_consciousness_confusion.reactive(),
         plot.prop.by.age_symptoms_altered_consciousness_confusion
-      ),
-      height = 350
+      )
     )
   }
   
@@ -780,12 +766,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_constitutional.reactive(),
         plot.prop.by.age_symptoms_constitutional
-      ),
-      height = 350
+      )
     )
   }
   
@@ -797,12 +782,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_vomiting_nausea.reactive(),
         plot.prop.by.age_symptoms_vomiting_nausea
-      ),
-      height = 350
+      )
     )
   }
   
@@ -814,12 +798,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_diarrhoea.reactive(),
         plot.prop.by.age_symptoms_diarrhoea
-      ),
-      height = 350
+      )
     )
   }
   
@@ -831,12 +814,11 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(
+    renderPlotly(
       confidentiality.check(
         data_plot_symptoms_abdominal_pain.reactive(),
         plot.prop.by.age_symptoms_abdominal_pain
-      ),
-      height = 350
+      )
     )
   }
   

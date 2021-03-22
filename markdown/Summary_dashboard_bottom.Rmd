@@ -12,33 +12,7 @@ knitr::opts_chunk$set(echo = FALSE,
 knitr::opts_chunk$set(fig.path='Figs/')
 ```
 
-
-*A global federation of clinical research networks, providing a proficient, coordinated, and agile research response to outbreak-prone infectious diseases*
-
-
-# COVID-19 Report
-Containing data extracted 30 November 2020
-
-
-```{r child ='Summary.Rmd'}
-```
-
-
-
-```{r , out.width = "100%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 30 November 2020."}
-flowchart()
-```
-
-
-```{r child = 'Background.Rmd'}
-```
-
-
 ```{r child = 'Methods.Rmd'}
-```
-
-
-```{r child = 'Caveats.Rmd'}
 ```
 
 ```{r child = 'Teammembers.Rmd'}

@@ -7,9 +7,6 @@
 #    http://shiny.rstudio.com/
 #
 
-
-
-
 dbHeader <- dashboardHeader(title = "COVID-19 Analysis Report",
                             tags$li(
                               a(
@@ -199,6 +196,8 @@ dashboardPage(
     hr(),
     tabItems(
       tabItem(tabName = "home", 
+                  includeMarkdown("markdown/welcome.md")
+              ,
               fluidRow(
                 box(
                   uiOutput("contributions_video", align = "center"),
@@ -210,7 +209,8 @@ dashboardPage(
                   solidHeader = T,
                   title = "Outcomes by age and gender"
                   )
-              )
+              ),
+              includeMarkdown("markdown/welcome_caveats.md")
       ),
       tabItem(tabName = "patients",
               fluidRow(
@@ -311,7 +311,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("lengthofstayICU", height = "500px"),
-                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest. The upper value was truncated at 97.5%. The number below is the total number in each group.",
                   width = 6,
                   height = 600,
                   solidHeader = T,
@@ -337,7 +337,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("lengthofstaySex", height = "500px"),
-                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest. The upper value was truncated at 97.5%. The number below is the total number in each sex group.",
                   width = 6,
                   height = 620,
                   solidHeader = T,
@@ -345,7 +345,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("lengthofstayAge", height = "500px"),
-                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.",
+                  "This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest. The upper value was truncated at 97.5%. The number below is the total number in each age group.",
                   width = 6,
                   height = 620,
                   solidHeader = T,
@@ -496,59 +496,67 @@ dashboardPage(
       ),
       tabItem(tabName = "flowchart",
               fluidRow(
-                box(
-                  includeMarkdown("markdown/Summary_dashboard.md"),
-                  title = "ISARIC (International Severe Acute Respiratory and Emerging Infections Consortium)",
-                  width = 14
+                box(includeMarkdown("markdown/Summary_dashboard_top.md"),
+                    width = 12
+                )
+              ),
+              fluidRow(
+                box(flowchart(),
+                    width = 12
+                )
+              ),
+              fluidRow(
+                box(includeMarkdown("markdown/Summary_dashboard_bottom.md"),
+                    width = 12
                 )
               )
       ),
       tabItem(tabName = "comorbidities_by_age",
               fluidRow(
                 box(
-                  plotOutput("age_comorbid_asthma", height = "500px"),
+                  plotlyOutput("age_comorbid_asthma", height = "500px"),
                   width = 4,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with asthma"
                 ),
                 box(
-                  plotOutput("age_comorbid_malignant_neoplasm", height = "500px"),
+                  plotlyOutput("age_comorbid_malignant_neoplasm", height = "500px"),
                   width = 4,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with malignant neoplasma"
                 ),
                 box(
-                  plotOutput("age_comorbid_obesity", height = "500px"),
+                  plotlyOutput("age_comorbid_obesity", height = "500px"),
                   width = 4,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with obesity"
                 ),
                 box(
-                  plotOutput("age_comorbid_diabetes", height = "500px"),
+                  plotlyOutput("age_comorbid_diabetes", height = "500px"),
                   width = 4,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with diabetes"
                 ),
                 box(
-                  plotOutput("age_comorbid_dementia", height = "500px"),
+                  plotlyOutput("age_comorbid_dementia", height = "500px"),
                   width = 4,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with dementia"
                 ),
                 box(
-                  plotOutput("age_comorbid_smoking", height = "500px"),
+                  plotlyOutput("age_comorbid_smoking", height = "500px"),
                   width = 4,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion of smokers"
                 ),
                 box(
-                  plotOutput("age_comorbid_hypertension", height = "500px"),
+                  plotlyOutput("age_comorbid_hypertension", height = "500px"),
                   width = 4,
                   height = 400,
                   solidHeader = T,
@@ -560,77 +568,77 @@ dashboardPage(
         tabName = "symptoms_by_age",
         fluidRow(
           box(
-            plotOutput("age_symptoms_history_of_fever", height = "500px"),
+            plotlyOutput("age_symptoms_history_of_fever", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with fever"
           ),
           box(
-            plotOutput("age_symptoms_cough", height = "500px"),
+            plotlyOutput("age_symptoms_cough", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough"
           ),
           box(
-            plotOutput("age_symptoms_cough_fever", height = "500px"),
+            plotlyOutput("age_symptoms_cough_fever", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough or fever"
           ),
           box(
-            plotOutput("age_symptoms_shortness_of_breath", height = "500px"),
+            plotlyOutput("age_symptoms_shortness_of_breath", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with shortness of breath"
           ),
           box(
-            plotOutput("age_symptoms_cought_fever_shortness_of_breath", height = "500px"),
+            plotlyOutput("age_symptoms_cought_fever_shortness_of_breath", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough, fever, or shortness of breath"
           ),
           box(
-            plotOutput("age_symptoms_upper_respiratory_tract_symptoms", height = "500px"),
+            plotlyOutput("age_symptoms_upper_respiratory_tract_symptoms", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with upper respiratory tract symptoms"
           ),
           box(
-            plotOutput("age_symptoms_altered_consciousness_confusion", height = "500px"),
+            plotlyOutput("age_symptoms_altered_consciousness_confusion", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with confusion"
           ),
           box(
-            plotOutput("age_symptoms_constitutional", height = "500px"),
+            plotlyOutput("age_symptoms_constitutional", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with constitutional symptoms"
           ),
           box(
-            plotOutput("age_symptoms_vomiting_nausea", height = "500px"),
+            plotlyOutput("age_symptoms_vomiting_nausea", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with vomiting nausea"
           ),
           box(
-            plotOutput("age_symptoms_diarrhoea", height = "500px"),
+            plotlyOutput("age_symptoms_diarrhoea", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with diarrhoea"
           ),
           box(
-            plotOutput("age_symptoms_abdominal_pain", height = "500px"),
+            plotlyOutput("age_symptoms_abdominal_pain", height = "500px"),
             width = 4,
             height = 400,
             solidHeader = T,
