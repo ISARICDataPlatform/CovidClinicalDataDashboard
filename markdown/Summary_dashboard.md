@@ -67,14 +67,7 @@ Corticosteroids were administered to 41581/127488 (32.6%) patients. This include
 
 
 
-\begin{figure}
-
-{\centering \includegraphics[width=1\linewidth]{Figs/unnamed-chunk-3-1} 
-
-}
-
-\caption{Overview of cohort and outcomes as of 30 November 2020.}\label{fig:unnamed-chunk-3}
-\end{figure}
+<img src="Figs/unnamed-chunk-3-1.png" title="Overview of cohort and outcomes as of 30 November 2020." alt="Overview of cohort and outcomes as of 30 November 2020." width="100%" style="display: block; margin: auto;" />
 
 
 
