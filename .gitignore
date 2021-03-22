@@ -7,7 +7,7 @@ CovidClinicalDataDashboard.Rproj
 rsconnect
 sensitive_data/*
 !sensitive_data/README.md
-
+*pdf
 
 comorbidity_prevalence_input.rda
 comorbidity_upset_input.rda
@@ -86,3 +86,5 @@ Static_report.tex
 Static_report.knit.md
 Static_report.utf8.md
 summary_input_overall.rda
+markdown/Summary_dashboard.md
+Figs/*
