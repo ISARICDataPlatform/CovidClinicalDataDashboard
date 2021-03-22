@@ -372,6 +372,14 @@ dashboardPage(
       tabItem(tabName = "vital_signs",
               fluidRow(
                 box(
+                  img(src="example1.png",height=450),
+                  height=550,
+                  width = 8,
+                  title = 'Example'
+                )
+              ),
+              fluidRow(
+                box(
                   plotOutput("clinical_signs_vs_resp", height = "500px"),
                   width = 6,
                   height = 600,
@@ -409,6 +417,14 @@ dashboardPage(
               )),
       tabItem(
         tabName = "lab_results",
+        fluidRow(
+          box(
+            img(src="example1.png",height=450),
+            height=550,
+            width =8,
+            title = 'Example'
+          )
+        ),
         fluidRow(
           box(
             plotOutput("lab_results_lab_crp", height = "500px"),
@@ -514,6 +530,13 @@ dashboardPage(
       tabItem(tabName = "comorbidities_by_age",
               fluidRow(
                 box(
+                  img(src="example2.png",height=350),
+                  height=450,
+                  title = 'Example'
+                )
+              ),
+              fluidRow(
+                box(
                   plotlyOutput("age_comorbid_asthma", height = "500px"),
                   width = 4,
                   height = 400,
@@ -566,6 +589,13 @@ dashboardPage(
       ),
       tabItem(
         tabName = "symptoms_by_age",
+        fluidRow(
+          box(
+            img(src="example2.png",height=350),
+            height=450,
+            title = 'Example'
+          )
+        ),
         fluidRow(
           box(
             plotlyOutput("age_symptoms_history_of_fever", height = "500px"),
