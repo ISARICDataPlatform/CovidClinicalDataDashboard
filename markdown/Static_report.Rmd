@@ -24,7 +24,7 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="/Users/mdhall/CovidClinicalDataDashboard/")
+knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard/")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -147,7 +147,7 @@ plot.prop.by.age_symptoms_diarrhoea(data_plot_symptoms_diarrhoea, FALSE)
 plot.prop.by.age_symptoms_history_of_fever(data_plot_symptoms_history_of_fever, FALSE)
 plot.prop.by.age_symptoms_shortness_of_breath(data_plot_symptoms_shortness_of_breath, FALSE)
 plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms(data_plot_symptoms_upper_respiratory_tract_symptoms, FALSE)
-plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE)
+#plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE)
 
 
 
