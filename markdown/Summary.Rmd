@@ -11,18 +11,18 @@ We thank all of the data contributors for collecting standardised data during th
 
 Please note the following caveats. This is a dynamic report which captures new variables and information as our understanding of COVID-19 evolves. Please observe the total number of patients of each result to note variables with fewer data points. Information is incomplete for the patients who are still being treated. Furthermore, it is likely that that we received more cases of severely ill individuals than those with relatively less severe illness; outcomes from these data, such as the proportion dying, must therefore not be used to infer outcomes for the entire population of people who might become infected. Some patients may be participants in clinical trials of experimental interventions. Note the variation in patient numbers per country. Additional caveats are provided in the in the ‘Caveats’ section below.  
 
-Up to the date of this report, data have been entered for **`r nrow(summary_input_overall)`** individuals from **1736** sites across **64** countries.  
+Up to the date of this report, data have been entered for **`r nrow(summary_input_overall)`** individuals from **1609** sites across **54** countries.  
 
 The analysis detailed in this report only includes individuals: 
 
-  1. for whom data collection commenced on or before 3 January 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
+  1. for whom data collection commenced on or before 1 February 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes;
   
 **AND**
 
   2. who have laboratory-confirmed SARS-COV-2 infection.
   
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases.
-The below flow chart gives an overview of the cohort and outcomes as of 17 January 2021.
+The below flow chart gives an overview of the cohort and outcomes as of 15 February 2021.
 
 ## Demographics and presenting features
 Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The minimum and maximum observed ages were `r min(summary_input$age, na.rm=T)` and `r max(summary_input$age, na.rm=T)` years respectively. The median age is `r median(summary_input$age, na.rm=T)` years.  
