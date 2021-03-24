@@ -60,7 +60,7 @@ ref.date <- ymd("2021-01-28")
 
 
 # COVID-19 Report: `r format(pub.date, "%d %B %Y")`  {-}
-Containing data extracted 17 January 2021
+Containing data extracted 15 February 2021
 
 
 ```{r child ='markdown/Summary.Rmd'}
@@ -68,7 +68,7 @@ Containing data extracted 17 January 2021
 
 
 \newpage
-```{r cohortoverview,  out.width = "140%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 30 November 2020."}
+```{r cohortoverview,  out.width = "140%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 15 February 2020."}
 
 flowchart()
 
@@ -79,6 +79,14 @@ if (params$rendered_by_shiny)
   shiny::setProgress(0.4)
 ```
 
+\newpage
+# Country Comparisons
+
+```{r country_recruitment,out.width = '80%', echo=FALSE,fig.cap = "Distribution of patients by country. This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section."}
+
+patient.by.country.plot(patient.by.country.input)
+
+```
 
 \newpage
 ## Patient Characteristics
@@ -147,7 +155,7 @@ plot.prop.by.age_symptoms_diarrhoea(data_plot_symptoms_diarrhoea, FALSE)
 plot.prop.by.age_symptoms_history_of_fever(data_plot_symptoms_history_of_fever, FALSE)
 plot.prop.by.age_symptoms_shortness_of_breath(data_plot_symptoms_shortness_of_breath, FALSE)
 plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms(data_plot_symptoms_upper_respiratory_tract_symptoms, FALSE)
-#plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE)
+plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE)
 
 
 
@@ -243,20 +251,12 @@ upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(
 length.of.stay.icu.plot(length.of.stay.icu.input) + ggtitle("(c)")
 ```
 
-\newpage
-# Country Comparisons
-
-```{r country_recruitment,out.width = '80%', echo=FALSE,fig.cap = "Distribution of patients by country. This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section."}
-
-patient.by.country.plot(patient.by.country.input)
-
-```
 
 ```{r progress4}
 if (params$rendered_by_shiny)
   shiny::setProgress(0.8)
 ```
-
+\newpage
 ```{r child = 'markdown/Background.Rmd'}
 ```
 
