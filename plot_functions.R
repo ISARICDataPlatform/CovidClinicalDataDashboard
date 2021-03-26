@@ -51,10 +51,10 @@ flowchart <- function(){
       }
 
       [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input_overall), ')')
-      [2]: paste0('EXCLUDED ', round(nrow(summary_input_overall%>%filter(cov_det_id!='POSITIVE' | (embargo_length==TRUE) | is.na(embargo_length)))/nrow(summary_input_overall)*100,1),'%')
+      [2]: paste0('EXCLUDED ', round(nrow(summary_input_overall %>% filter(cov_det_id=='NEGATIVE'|is.na(cov_det_id)==T | embargo_length==TRUE))/nrow(summary_input_overall)*100,1),'%')
       [3]: paste0('ANALYSED ', round(nrow(summary_input)/nrow(summary_input_overall)*100,1),'%')
       [4]: paste0('<14 follow-up at time of report\\n (N=',nrow(summary_input_overall%>% filter(embargo_length==TRUE)),')')
-      [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=',nrow(summary_input_overall%>% filter((embargo_length==FALSE | is.na(embargo_length)) & (cov_det_id!='POSITIVE'| is.na(cov_det_id)))),')')
+      [5]: paste0('>14-days\\n follow-up and\\n negative or not\\n confirmed\\n (N=',nrow(summary_input_overall%>% filter(embargo_length==FALSE & (cov_det_id=='NEGATIVE'| is.na(cov_det_id)))),')')
       [6]: paste0('>14-days\\n follow-up and\\n  laboratory-confirmed \\n SARS-COV-2 infection \\n(N=', nrow(summary_input), ')')
       [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
       [8]: paste0('Death\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
