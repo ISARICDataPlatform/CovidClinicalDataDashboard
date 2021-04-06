@@ -143,7 +143,7 @@ plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)
 ```
 
 
-```{r sympbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Abdominal pain", "Altered consciousness/confusion", "Constitutional symptoms (myalgia, joint pain, fatigue or headache)", "Cough", "Cough or fever", "Cough, fever or shortness of breath", "Diarrhoea", "History of fever", "Shortness of breath", "Upper respiratory tract symptoms (runny nose, sore throat or ear pain)", "Vomiting or nausea"), fig.cap = 'Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness).'}
+```{r sympbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Abdominal pain", "Altered consciousness/confusion", "Constitutional symptoms (myalgia, joint pain, fatigue or headache)", "Cough", "Cough or fever", "Cough, fever or shortness of breath",  "History of fever", "Shortness of breath", "Upper respiratory tract symptoms (runny nose, sore throat or ear pain)","Diarrhoea", "Vomiting or nausea"), fig.cap = 'Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented. N is the number of individuals included in the plot (this varies between plots due to data completeness).'}
 
 plot.prop.by.age_symptoms_abdominal_pain(data_plot_symptoms_abdominal_pain, FALSE)
 plot.prop.by.age_symptoms_altered_consciousness_confusion(data_plot_symptoms_altered_consciousness_confusion, FALSE)
@@ -151,10 +151,10 @@ plot.prop.by.age_symptoms_constitutional(data_plot_symptoms_constitutional, FALS
 plot.prop.by.age_symptoms_cough(data_plot_symptoms_cough, FALSE)
 plot.prop.by.age_symptoms_cough_fever(data_plot_symptoms_cough_fever, FALSE)
 plot.prop.by.age_symptoms_cought_fever_shortness_of_breath(data_plot_symptoms_cought_fever_shortness_of_breath, FALSE)
-plot.prop.by.age_symptoms_diarrhoea(data_plot_symptoms_diarrhoea, FALSE)
 plot.prop.by.age_symptoms_history_of_fever(data_plot_symptoms_history_of_fever, FALSE)
 plot.prop.by.age_symptoms_shortness_of_breath(data_plot_symptoms_shortness_of_breath, FALSE)
 plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms(data_plot_symptoms_upper_respiratory_tract_symptoms, FALSE)
+plot.prop.by.age_symptoms_diarrhoea(data_plot_symptoms_diarrhoea, FALSE)
 plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE)
 
 
@@ -162,7 +162,7 @@ plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FA
 ```
 
 
-```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation in room air."), fig.cap = "Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
+```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation"), fig.cap = "Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
 p_resp(data_plot_vs_resp)
 p_hr(data_plot_vs_hr)
@@ -172,19 +172,18 @@ p_oxysat(data_plot_vs_oxysat)
 
 ```
 
-```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Activated partial thromboplastin time (APTT)", "Aspartate transaminase (AST)", "Bilirubin",  "C-reactive protein (CRP)", "Lymphocytes", "Neutrophils", "Protrombin time", "Urea", "White blood cell count (WCC)"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
+```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",   "Activated partial thromboplastin time (APTT)", "Protrombin time", "Urea",  "White blood cell count (WCC)", "Neutrophils", "Lymphocytes","C-reactive protein (CRP)"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
 p_lab_alt(data_plot_lab_alt)
-p_lab_aptt(data_plot_lab_aptt)
 p_lab_ast(data_plot_lab_ast)
 p_lab_bili(data_plot_lab_bili)
-p_lab_crp(data_plot_lab_crp)
-p_lab_lym(data_plot_lab_lym)
-p_lab_neut(data_plot_lab_neut)
+p_lab_aptt(data_plot_lab_aptt)
 p_lab_pt(data_plot_lab_pt)
 p_lab_urean(data_plot_lab_urean)
 p_lab_wbc(data_plot_lab_wbc)
-
+p_lab_neut(data_plot_lab_neut)
+p_lab_lym(data_plot_lab_lym)
+p_lab_crp(data_plot_lab_crp)
 ```
 
 ```{r progress3}
