@@ -92,6 +92,11 @@ dashboardPage(
         icon = icon("chart-bar")
       ),
       menuItem(
+        "Summary tables",
+        tabName = "tables",
+        icon = icon("table")
+      ),
+      menuItem(
         "Country Comparison",
         tabName = "country",
         icon = icon("globe")
@@ -676,12 +681,12 @@ dashboardPage(
           )
         )
       ),
-      tabItem(tabName = "table_try",
+      tabItem(tabName = "tables",
               fluidRow(
                 box(uiOutput("table_patient_characteristic"), height = 670),
                 box(uiOutput("table_outcome_age_sex"), height = 670),
-                box(uiOutput("table_symptoms"), height = 920),
-                box(uiOutput("table_comorbidity"), height = 920),
+                box(uiOutput("table_symptoms"), height = 700),
+                box(uiOutput("table_comorbidity"), height = 700),
                 box(uiOutput("table_treatment")),
                 box(uiOutput("table_key_times"))
               )
