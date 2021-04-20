@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = FALSE
+dashboard_equal = T
 
 flowchart <- function(){
   
@@ -350,149 +350,209 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
 
 ######Plots for the vs data############
 
-p_resp <- function(aggregated.tbl){
+p_resp <- function(aggregated.tbl, dashboard=dashboard_equal){
 
     N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
-  
-  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
-    geom_boxplot(fill="lightblue") +xlab("Age groups") + ylab("Respiratory rate (min)") + 
-    #geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.90 , stat='count')+
-    theme_bw() + labs(title = N) 
+    
+    p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+      geom_boxplot(fill="lightblue") +xlab("Age groups") + ylab("Respiratory rate (min)") + 
+      theme_bw() + labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.90 , stat='count')
+  }
+    p
 }
 
-p_hr <- function(aggregated.tbl){
+p_hr <- function(aggregated.tbl, dashboard=dashboard_equal){
 
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue")+xlab("Age groups") + ylab("Heart rate (min)") + 
-    #geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.95 , stat='count')+
     theme_bw() + labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.95 , stat='count')
+  }
+  p
 }
 
-p_temp <- function(aggregated.tbl){
+p_temp <- function(aggregated.tbl, dashboard=dashboard_equal){
 
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue") +xlab("Age groups") + ylab("Temperature (Celsius)") + 
-    #geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.995 , stat='count')+
     theme_bw() + labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.995 , stat='count')
+  }
+  p
 }
 
-p_sysbp <- function(aggregated.tbl){
+p_sysbp <- function(aggregated.tbl, dashboard=dashboard_equal){
 
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue")+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + 
-    #geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.95 , stat='count')+
     theme_bw() + labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.95 , stat='count')
+  }
+  p
 }
 
-p_oxysat <- function(aggregated.tbl){
+p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
 
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
-    #geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.995 , stat='count')+
-    theme_bw() + labs(title = N) + scale_y_continuous(breaks = c(86, 88, 90,92, 94, 96, 98, 100)) 
+    theme_bw() + labs(title = N) + scale_y_continuous(breaks = c(86, 88, 90, 92, 94, 96, 98, 100)) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.995 , stat='count')
+  }
+  p
 }
 
 ######Plots for the lab data############
 
 
-p_lab_crp <- function(aggregated.tbl){
+p_lab_crp <- function(aggregated.tbl, dashboard=dashboard_equal){
 
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue") +xlab("Age groups") + ylab("CRP (mg/L)") + 
-    #geom_text(aes(label=..count..),y=-8 , stat='count')+
     theme_bw() +labs(title = N)
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=-0.1 , stat='count')
+  }
+  p
 }
 
-p_lab_lym <- function(aggregated.tbl){
+p_lab_lym <- function(aggregated.tbl, dashboard=dashboard_equal){
 
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue")+xlab("Age groups") + ylab("Lymphocytes (10^9/L)") + 
-    #geom_text(aes(label=..count..),y=-0.05 , stat='count')+
     theme_bw() +labs(title = N)
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=-0.05 , stat='count')
+  }
+  p
 }
 
-p_lab_neut <- function(aggregated.tbl){
+p_lab_neut <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue") +xlab("Age groups") + ylab("Neutrophils (10^9/L)") + 
-    #geom_text(aes(label=..count..),y=-0.05 , stat='count')+
     theme_bw() +labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=-0.1 , stat='count')
+  }
+  p
 }
 
-p_lab_wbc <- function(aggregated.tbl){
+p_lab_wbc <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue")+xlab("Age groups") + ylab("WBC (10^9/L)") + 
-    #geom_text(aes(label=..count..),y=-0.05 , stat='count')+
     theme_bw() +labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=-0.1 , stat='count')
+  }
+  p
 }
 
-p_lab_urean <- function(aggregated.tbl){
+p_lab_urean <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("Urea (mmol/L)") +
-    #geom_text(aes(label=..count..),y=-1 , stat='count')+
     theme_bw() +labs(title = N)
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=-0.5 , stat='count')
+  }
+  p
 }
 
-p_lab_pt <- function(aggregated.tbl){
+p_lab_pt <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("Protrombin time (s)") +
-    #geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.98 , stat='count')+
     theme_bw() +labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.98 , stat='count')
+  }
+  p
 }
 
-p_lab_alt <- function(aggregated.tbl){
+p_lab_alt <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("ALT (units/L)") +
-    #geom_text(aes(label=..count..),y=-1 , stat='count')+
     theme_bw() +labs(title = N)
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=-1 , stat='count')
+  }
+  p
 }
 
-p_lab_aptt <- function(aggregated.tbl){
+p_lab_aptt <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("APTT (s)") +
-    #geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.98 , stat='count')+
     theme_bw() +labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.98 , stat='count')
+  }
+  p
 }
 
-p_lab_bili <- function(aggregated.tbl){
+p_lab_bili <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("Bilirubin (mmol/L)") +
-    #geom_text(aes(label=..count..),y=-0.05 , stat='count')+
     theme_bw() +labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=-0.1 , stat='count')
+  }
+  p
 }
 
-p_lab_ast <- function(aggregated.tbl){
+p_lab_ast <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
-  ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("AST (units/L)") +
-    #geom_text(aes(label=..count..),y=-1 , stat='count')+
     theme_bw() +labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=..count..),y=-2 , stat='count')
+  }
+  p
 }
 
 
@@ -502,7 +562,7 @@ length.of.stay.sex.plot <- function(aggregated.tbl, ...){
     geom_violin(trim=F)+
     geom_boxplot(width=0.1, fill="white", outlier.shape = NA)  +
     scale_fill_viridis(drop = F, discrete = "true", option = "magma", begin = 0.25, end = 0.75) +
-    #geom_text(stat="count", aes(label=..count..),y=-1)+
+    geom_text(stat="count", aes(label=..count..),y=-1)+
     labs(title=" ", x="Sex", y = "Length of hospital stay", fill="Sex") +
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
@@ -521,7 +581,7 @@ length.of.stay.age.plot <- function(aggregated.tbl, ...){
     geom_violin(trim=F) +
     geom_boxplot(width=0.05, fill="white", outlier.shape = NA)  +
     labs(title="  ", x="Age group", y = "Length of hospital stay", fill="Age") +
-    #geom_text(stat="count", aes(label=..count..),y=-1)+
+    geom_text(stat="count", aes(label=..count..),y=-1)+
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
       axis.title.x = element_text( size=12),
@@ -575,7 +635,7 @@ length.of.stay.icu.plot <- function(aggregated.tbl,...){
     scale_fill_manual(values = c("darkorchid2", "darkorchid4")) +
     geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA)  +
     labs(title = " ", x = "Location", y = "Length of stay (days)") +
-    #geom_text(stat="count", aes(label=..count..),y=0)+
+    geom_text(stat="count", aes(label=..count..),y=0)+
     #ylim(c(0,max(aggregated.tbl$dur)))+
     theme(
       axis.title.x = element_text(size = 12),
@@ -700,7 +760,9 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     #geom_text(data=d, aes(x=X,y=-0.1,label=n))+
     labs(title = N)
   
-  #p <- ggplotly(p,tooltip="text") %>% layout(height=350)
+  if (dashboard==T){
+    p <- ggplotly(p,tooltip="text") %>% layout(height=350)
+  }
   
   return(p)
   
