@@ -357,10 +357,11 @@ p_resp <- function(aggregated.tbl, dashboard=dashboard_equal){
     p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
       geom_boxplot(fill="lightblue") +xlab("Age groups") + ylab("Respiratory rate (min)") + 
       theme_bw() + labs(title = N) 
-  if (dashboard==T){
-    p <- p+
-      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.90 , stat='count')
-  }
+    if (dashboard==T){
+      p <- p+
+        geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+      p <- ggplotly(p, tooltip="text") %>% layout(height=500)
+    }
     p
 }
 
@@ -373,7 +374,8 @@ p_hr <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() + labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.95 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -387,7 +389,8 @@ p_temp <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() + labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.995 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.998 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -401,7 +404,8 @@ p_sysbp <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() + labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.95 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -415,7 +419,8 @@ p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() + labs(title = N) + scale_y_continuous(breaks = c(86, 88, 90, 92, 94, 96, 98, 100)) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.995 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.995 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -432,7 +437,8 @@ p_lab_crp <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N)
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=-0.1 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -446,7 +452,8 @@ p_lab_lym <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N)
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=-0.05 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -459,7 +466,8 @@ p_lab_neut <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=-0.1 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -472,7 +480,8 @@ p_lab_wbc <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=-0.1 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -485,7 +494,8 @@ p_lab_urean <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N)
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=-0.5 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -498,7 +508,8 @@ p_lab_pt <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.98 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -511,7 +522,8 @@ p_lab_alt <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N)
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=-1 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -524,7 +536,8 @@ p_lab_aptt <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=min(aggregated.tbl$value)*0.98 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -537,7 +550,8 @@ p_lab_bili <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=-0.1 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
@@ -550,11 +564,11 @@ p_lab_ast <- function(aggregated.tbl, dashboard=dashboard_equal){
     theme_bw() +labs(title = N) 
   if (dashboard==T){
     p <- p+
-      geom_text(aes(label=..count..),y=-2 , stat='count')
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.98 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
   }
   p
 }
-
 
 ###########################################################
 length.of.stay.sex.plot <- function(aggregated.tbl, ...){

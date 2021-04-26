@@ -349,8 +349,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_crp.reactive(), p_lab_crp),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_crp.reactive(), p_lab_crp))
   }
   
   output$lab_results_lab_lym <- {
@@ -361,8 +360,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_lym.reactive(), p_lab_lym),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_lym.reactive(), p_lab_lym))
   }
   
   output$lab_results_lab_neut <- {
@@ -373,8 +371,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_neut.reactive(), p_lab_neut),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_neut.reactive(), p_lab_neut))
   }
   
   output$lab_results_lab_wbc <- {
@@ -385,8 +382,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_wbc.reactive(), p_lab_wbc),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_wbc.reactive(), p_lab_wbc))
   }
   
   output$lab_results_lab_urean <- {
@@ -397,8 +393,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_urean.reactive(), p_lab_urean),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_urean.reactive(), p_lab_urean))
   }
   
   output$lab_results_lab_pt <- {
@@ -409,8 +404,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_pt.reactive(), p_lab_pt),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_pt.reactive(), p_lab_pt))
   }
   
   output$lab_results_lab_alt <- {
@@ -421,8 +415,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_alt.reactive(), p_lab_alt),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_alt.reactive(), p_lab_alt))
   }
   output$lab_results_lab_aptt <- {
     data_plot_lab_aptt.reactive <- reactive({
@@ -432,8 +425,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_aptt.reactive(), p_lab_aptt),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_aptt.reactive(), p_lab_aptt))
   }
   output$lab_results_lab_bili <- {
     data_plot_lab_bili.reactive <- reactive({
@@ -443,8 +435,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_bili.reactive(), p_lab_bili),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_bili.reactive(), p_lab_bili))
   }
   output$lab_results_lab_ast <- {
     data_plot_lab_ast.reactive <- reactive({
@@ -454,8 +445,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_lab_ast.reactive(), p_lab_ast),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_lab_ast.reactive(), p_lab_ast))
   }
   output$clinical_signs_vs_resp <- {
     data_plot_vs_resp.reactive <- reactive({
@@ -465,8 +455,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_vs_resp.reactive(), p_resp),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_vs_resp.reactive(), p_resp))
   }
   
   output$clinical_signs_vs_hr <- {
@@ -477,8 +466,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_vs_hr.reactive(), p_hr),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_vs_hr.reactive(), p_hr))
   }
   
   output$clinical_signs_vs_temp <- {
@@ -489,8 +477,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_vs_temp.reactive(), p_temp),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_vs_temp.reactive(), p_temp))
   }
   
   output$clinical_signs_vs_sysbp <- {
@@ -501,8 +488,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_vs_sysbp.reactive(), p_sysbp),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_vs_sysbp.reactive(), p_sysbp))
   }
   
   output$clinical_signs_vs_oxysat <- {
@@ -513,8 +499,7 @@ server <- function(input, output) {
         slider.filters(input) %>%
         as_tibble()
     })
-    renderPlot(confidentiality.check(data_plot_vs_oxysat.reactive(), p_oxysat),
-               height = 500)
+    renderPlotly(confidentiality.check(data_plot_vs_oxysat.reactive(), p_oxysat))
   }
   
   output$PatientbyCountry <- {
