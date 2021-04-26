@@ -220,7 +220,7 @@ prevalence.plot.preparation <- function(aggregated.tbl, variable.name){
   
 }
 
-symptom.prevalence.plot <- function(aggregated.tbl, ...){
+symptom.prevalence.plot <- function(aggregated.tbl, dashboard=dashboard_equal, ...){
   aggregated.tbl <- aggregated.tbl %>%
     prevalence.plot.preparation(variable.name = "nice.symptom")
   
@@ -230,9 +230,17 @@ symptom.prevalence.plot <- function(aggregated.tbl, ...){
            levels = unique(aggregated.tbl$nice.symptom
                            [order(aggregated.tbl$order)]))
   
+  if (dashboard == TRUE) {
+    text_size = 4
+    axis_size = 10
+  } else {
+    text_size = 2
+    axis_size = 7
+  }
+  
   plt <- ggplot(aggregated.tbl) +
     geom_col(aes(x = factor(nice.symptom), y = proportion, fill = affected)) +
-    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.symptom, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
+    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.symptom, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = text_size)+
     theme_bw() +
     xlab("Symptom") +
     ylab("Proportion") +
@@ -241,13 +249,13 @@ symptom.prevalence.plot <- function(aggregated.tbl, ...){
     scale_y_continuous(expand = c(0, 0)) +
     #aes(x = fct_reorder(nice.symptom, proportion, .desc = TRUE)) +
     scale_fill_manual(values = c("deepskyblue1", "deepskyblue4"), name = "Symptom\npresent", labels = c("No", "Yes")) +
-    theme(axis.text.y = element_text(size = 7))
+    theme(axis.text.y = element_text(size = axis_size))
   
   plt
   
 }
 
-comorbidity.prevalence.plot <- function(aggregated.tbl, ...){
+comorbidity.prevalence.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ...){
   aggregated.tbl <- aggregated.tbl %>%
     prevalence.plot.preparation(variable.name = "nice.comorbidity")
   
@@ -257,9 +265,17 @@ comorbidity.prevalence.plot <- function(aggregated.tbl, ...){
            levels = unique(aggregated.tbl$nice.comorbidity
                            [order(aggregated.tbl$order)]))
   
+  if (dashboard == TRUE) {
+    text_size = 4
+    axis_size = 10
+  } else {
+    text_size = 2
+    axis_size = 7
+  }
+  
   plt <- ggplot(aggregated.tbl) +
     geom_col(aes(x = factor(nice.comorbidity), y = proportion, fill = affected)) +
-    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.comorbidity, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
+    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.comorbidity, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = text_size)+
     theme_bw() +
     xlab("Comorbidity") +
     ylab("Proportion") +
@@ -267,14 +283,14 @@ comorbidity.prevalence.plot <- function(aggregated.tbl, ...){
     ylim(0, 1) +
     scale_y_continuous(expand = c(0, 0)) +
     scale_fill_manual(values = c("indianred1", "indianred4"), name = "Condition\npresent", labels = c("No", "Yes")) +
-    theme(axis.text.y = element_text(size = 7))
+    theme(axis.text.y = element_text(size = axis_size))
   
   plt
   
 }
 
 
-treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
+treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE,dashboard=dashboard_equal, ...){
   aggregated.tbl <- aggregated.tbl %>%
     prevalence.plot.preparation(variable.name = "nice.treatment")
   
@@ -290,9 +306,17 @@ treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
            levels = unique(aggregated.tbl$nice.treatment
                            [order(aggregated.tbl$order)]))
   
+  if (dashboard == TRUE) {
+    text_size = 4
+    axis_size = 10
+  } else {
+    text_size = 2
+    axis_size = 7
+  }
+  
   plt <- ggplot(aggregated.tbl) +
     geom_col(aes(x = factor(nice.treatment), y = proportion, fill = affected)) +
-    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.treatment, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = 2)+
+    geom_text(data = aggregated.tbl %>% filter(affected), aes(x=nice.treatment, y = 1, label = label), hjust = 1, nudge_y = -0.01, size = text_size)+
     theme_bw() +
     xlab("Treatment") +
     ylab("Proportion") +
@@ -300,7 +324,7 @@ treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE, ...){
     ylim(0, 1) +
     scale_y_continuous(expand = c(0, 0)) +
     scale_fill_manual(values = colours, name = "Treatment\nreceived", labels = c("No", "Yes")) +
-    theme(axis.text.y = element_text(size = 7))
+    theme(axis.text.y = element_text(size = axis_size))
   
   plt
   
@@ -665,20 +689,27 @@ length.of.stay.icu.plot <- function(aggregated.tbl,...){
   plt
 }
 
-patient.by.country.plot <- function(aggregated.tbl,...){
+patient.by.country.plot <- function(aggregated.tbl,dashboard = dashboard_equal,...){
   
   aggregated.tbl <- aggregated.tbl %>%   mutate(Country = slider_country) %>%
     group_by(Country) %>%
     summarise(count = n()) 
-  
+  if (dashboard == TRUE) {
+    text_size = 7
+    axis_size = 13
+  } else {
+    text_size = 3
+    axis_size = 6
+  }
   plt <- ggplot(data=aggregated.tbl) +
     geom_col(aes(x = Country, y=count), fill="turquoise4") +
-    geom_text(aes(x=Country, y= 0.95*(count), label=count), size=3, angle = 90, hjust = 1, col ="white") +
+    geom_text(aes(x=Country, y= 0.95*(count), label=count), size=text_size, angle = 90, hjust = 1, col ="white") +
     theme_bw() +
     scale_x_discrete(expand = c(0,1.5))+
     ylab("Patient records (pseudo log scale)") +
-    theme(axis.text.x = element_text(angle = 45, hjust=1, size = 6), axis.title.x=element_blank()) +
+    theme(axis.text.x = element_text(angle = 45, hjust=1, size = axis_size), axis.title.x=element_blank()) +
     scale_y_continuous( trans = pseudo_log_trans(), expand = c(0,0.1), breaks = c(0,1, 10, 100, 1000, 10000, 100000), minor_breaks = NULL)
+
   plt
 }
 

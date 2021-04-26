@@ -508,8 +508,8 @@ dashboardPage(
                 box(
                   plotOutput("PatientbyCountry", height = "500px"),
                   "This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section.",
-                  width = 6,
-                  height = 600,
+                  width = 10,
+                  height = 1000,
                   solidHeader = T,
                   title = "Distribution of patients by country"
                 )
