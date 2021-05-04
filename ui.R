@@ -377,7 +377,7 @@ dashboardPage(
       tabItem(tabName = "vital_signs",
               fluidRow(
                 box(
-                  img(src="example3.png",height=450),
+                  img(src="example3.PNG",height=450),
                   height=550,
                   width = 8,
                   title = 'Example'
@@ -424,7 +424,7 @@ dashboardPage(
         tabName = "lab_results",
         fluidRow(
           box(
-            img(src="example3.png",height=450),
+            img(src="example3.PNG",height=450),
             height=550,
             width =8,
             title = 'Example'
@@ -535,7 +535,7 @@ dashboardPage(
       tabItem(tabName = "comorbidities_by_age",
               fluidRow(
                 box(
-                  img(src="example2.png",height=350),
+                  img(src="example2.PNG",height=350),
                   height=450,
                   title = 'Example'
                 )
@@ -596,7 +596,7 @@ dashboardPage(
         tabName = "symptoms_by_age",
         fluidRow(
           box(
-            img(src="example2.png",height=350),
+            img(src="example2.PNG",height=350),
             height=450,
             title = 'Example'
           )
