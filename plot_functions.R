@@ -131,7 +131,7 @@ age.pyramid.plot <- function(aggregated.tbl, ...){
       xmin = length(levels(aggregated.tbl$slider_agegp10))+1.5,
       xmax = length(levels(aggregated.tbl$slider_agegp10))+1.5) +
     theme(plot.margin=unit(c(30,5,5,5.5,5.5),"pt"),
-          axis.text.x=element_text(angle = 90, vjust = 0.5))
+          axis.text.x=element_text(angle = 0, vjust = 0.5))
   
   plt
   
@@ -440,7 +440,7 @@ p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
-    theme_bw() + labs(title = N) + scale_y_continuous(breaks = c(86, 88, 90, 92, 94, 96, 98, 100)) 
+    theme_bw() + labs(title = N) 
   if (dashboard==T){
     p <- p+
       geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.995 , stat='count', alpha=0)
@@ -695,7 +695,7 @@ patient.by.country.plot <- function(aggregated.tbl,dashboard = dashboard_equal,.
     group_by(Country) %>%
     summarise(count = n()) 
   if (dashboard == TRUE) {
-    text_size = 7
+    text_size = 6
     axis_size = 13
   } else {
     text_size = 3
@@ -932,6 +932,7 @@ tables_supplementary <- function(table_sup, title_table_1 = NA, title_table_2 = 
   table_example <- flextable(table_sup)
   table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "header")
   table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "body")
+  table_example <- font(table_example, fontname="Roboto", part = "all")
   if(!is.na(title_table_2)){
     table_example <- add_header_lines(table_example, values = title_table_2, top = TRUE)
   }

@@ -43,7 +43,7 @@ dashboardPage(
         tabName = "flowchart", 
         icon = icon("book")),
       menuItem(
-        "Patient Characteristics",
+        "Patient characteristics",
         tabName = "patients",
         icon = icon("bed")
       ),
@@ -97,7 +97,7 @@ dashboardPage(
         icon = icon("table")
       ),
       menuItem(
-        "Country Comparison",
+        "Country distribution",
         tabName = "country",
         icon = icon("globe")
       ),
