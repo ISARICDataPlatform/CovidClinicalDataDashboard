@@ -8,7 +8,6 @@ output: html_document
 
 
 
-
 ## Methods 
 
 Patient details were submitted electronically by participating sites to the ISARIC database. Relevant background and presenting symptoms were recorded on the day of study recruitment. Daily follow-up was then completed until recovery or death. A final form was completed with details of treatments received and outcomes. All categories that represent fewer than five individuals have been suppressed to avoid the potential for identification of participants.   
