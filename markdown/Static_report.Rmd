@@ -24,7 +24,7 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/marti/OneDrive/Documents/ISARIC/CovidClinicalDataDashboard/")
+knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard/")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 

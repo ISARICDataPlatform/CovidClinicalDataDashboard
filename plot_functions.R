@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = T
+dashboard_equal = F
 
 flowchart <- function(){
   
@@ -932,7 +932,7 @@ tables_supplementary <- function(table_sup, title_table_1 = NA, title_table_2 = 
   table_example <- flextable(table_sup)
   table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "header")
   table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "body")
-  table_example <- font(table_example, fontname="Roboto", part = "all")
+  table_example <- font(table_example, fontname="Arial", part = "all")
   if(!is.na(title_table_2)){
     table_example <- add_header_lines(table_example, values = title_table_2, top = TRUE)
   }
