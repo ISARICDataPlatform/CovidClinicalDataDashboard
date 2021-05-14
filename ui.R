@@ -43,7 +43,7 @@ dashboardPage(
         tabName = "flowchart", 
         icon = icon("book")),
       menuItem(
-        "Patient Characteristics",
+        "Patient characteristics",
         tabName = "patients",
         icon = icon("bed")
       ),
@@ -92,7 +92,12 @@ dashboardPage(
         icon = icon("chart-bar")
       ),
       menuItem(
-        "Country Comparison",
+        "Summary tables",
+        tabName = "tables",
+        icon = icon("table")
+      ),
+      menuItem(
+        "Country distribution",
         tabName = "country",
         icon = icon("globe")
       ),
@@ -372,7 +377,7 @@ dashboardPage(
       tabItem(tabName = "vital_signs",
               fluidRow(
                 box(
-                  img(src="example1.png",height=450),
+                  img(src="example3.PNG",height=450),
                   height=550,
                   width = 8,
                   title = 'Example'
@@ -380,35 +385,35 @@ dashboardPage(
               ),
               fluidRow(
                 box(
-                  plotOutput("clinical_signs_vs_resp", height = "500px"),
+                  plotlyOutput("clinical_signs_vs_resp", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Respiratory rate (min)'
                 ),
                 box(
-                  plotOutput("clinical_signs_vs_hr", height = "500px"),
+                  plotlyOutput("clinical_signs_vs_hr", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Heart rate (min)'
                 ),
                 box(
-                  plotOutput("clinical_signs_vs_temp", height = "500px"),
+                  plotlyOutput("clinical_signs_vs_temp", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Temperature (Celsius)'
                 ),
                 box(
-                  plotOutput("clinical_signs_vs_sysbp", height = "500px"),
+                  plotlyOutput("clinical_signs_vs_sysbp", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Systolic blood pressure (mmHg)'
                 ),
                 box(
-                  plotOutput("clinical_signs_vs_oxysat", height = "500px"),
+                  plotlyOutput("clinical_signs_vs_oxysat", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
@@ -419,7 +424,7 @@ dashboardPage(
         tabName = "lab_results",
         fluidRow(
           box(
-            img(src="example1.png",height=450),
+            img(src="example3.PNG",height=450),
             height=550,
             width =8,
             title = 'Example'
@@ -427,70 +432,70 @@ dashboardPage(
         ),
         fluidRow(
           box(
-            plotOutput("lab_results_lab_crp", height = "500px"),
+            plotlyOutput("lab_results_lab_crp", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'CRP (mg/L)'
           ),
           box(
-            plotOutput("lab_results_lab_lym", height = "500px"),
+            plotlyOutput("lab_results_lab_lym", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Lymphocytes (10^9/L)'
           ),
           box(
-            plotOutput("lab_results_lab_neut", height = "500px"),
+            plotlyOutput("lab_results_lab_neut", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Neutrophils (10^9/L)'
           ),
           box(
-            plotOutput("lab_results_lab_wbc", height = "500px"),
+            plotlyOutput("lab_results_lab_wbc", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'WBC (10^9/L)'
           ),
           box(
-            plotOutput("lab_results_lab_urean", height = "500px"),
+            plotlyOutput("lab_results_lab_urean", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Urea (mmol/L)'
           ),
           box(
-            plotOutput("lab_results_lab_pt", height = "500px"),
+            plotlyOutput("lab_results_lab_pt", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Protrombin time (s)'
           ),
           box(
-            plotOutput("lab_results_lab_alt", height = "500px"),
+            plotlyOutput("lab_results_lab_alt", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'ALT (units/L)'
           ),
           box(
-            plotOutput("lab_results_lab_aptt", height = "500px"),
+            plotlyOutput("lab_results_lab_aptt", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'APTT (s)'
           ),
           box(
-            plotOutput("lab_results_lab_bili", height = "500px"),
+            plotlyOutput("lab_results_lab_bili", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Bilirubin (mmol/L)'
           ),
           box(
-            plotOutput("lab_results_lab_ast", height = "500px"),
+            plotlyOutput("lab_results_lab_ast", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
@@ -503,8 +508,8 @@ dashboardPage(
                 box(
                   plotOutput("PatientbyCountry", height = "500px"),
                   "This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section.",
-                  width = 6,
-                  height = 600,
+                  width = 10,
+                  height = 1000,
                   solidHeader = T,
                   title = "Distribution of patients by country"
                 )
@@ -530,7 +535,7 @@ dashboardPage(
       tabItem(tabName = "comorbidities_by_age",
               fluidRow(
                 box(
-                  img(src="example2.png",height=350),
+                  img(src="example2.PNG",height=350),
                   height=450,
                   title = 'Example'
                 )
@@ -591,7 +596,7 @@ dashboardPage(
         tabName = "symptoms_by_age",
         fluidRow(
           box(
-            img(src="example2.png",height=350),
+            img(src="example2.PNG",height=350),
             height=450,
             title = 'Example'
           )
@@ -676,12 +681,12 @@ dashboardPage(
           )
         )
       ),
-      tabItem(tabName = "table_try",
+      tabItem(tabName = "tables",
               fluidRow(
                 box(uiOutput("table_patient_characteristic"), height = 670),
                 box(uiOutput("table_outcome_age_sex"), height = 670),
-                box(uiOutput("table_symptoms"), height = 920),
-                box(uiOutput("table_comorbidity"), height = 920),
+                box(uiOutput("table_symptoms"), height = 700),
+                box(uiOutput("table_comorbidity"), height = 700),
                 box(uiOutput("table_treatment")),
                 box(uiOutput("table_key_times"))
               )
