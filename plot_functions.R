@@ -78,9 +78,13 @@ flowchart <- function(){
 }
 
 
-age.pyramid.plot <- function(aggregated.tbl, ...){
+age.pyramid.plot <- function(aggregated.tbl, dashboard=dashboard_equal, ...){
   # print(nrow(aggregated.tbl))
-
+  if (dashboard == TRUE) {
+    angle_dash = 0
+  } else {
+    angle_dash = 90
+  }
   # @todo get rid of this at the aggregation stage
   aggregated.tbl <- aggregated.tbl %>% filter(!is.na(slider_agegp10))
   
@@ -131,7 +135,7 @@ age.pyramid.plot <- function(aggregated.tbl, ...){
       xmin = length(levels(aggregated.tbl$slider_agegp10))+1.5,
       xmax = length(levels(aggregated.tbl$slider_agegp10))+1.5) +
     theme(plot.margin=unit(c(30,5,5,5.5,5.5),"pt"),
-          axis.text.x=element_text(angle = 0, vjust = 0.5))
+          axis.text.x=element_text(angle = angle_dash, vjust = 0.5))
   
   plt
   
@@ -695,7 +699,7 @@ patient.by.country.plot <- function(aggregated.tbl,dashboard = dashboard_equal,.
     group_by(Country) %>%
     summarise(count = n()) 
   if (dashboard == TRUE) {
-    text_size = 6
+    text_size = 5
     axis_size = 13
   } else {
     text_size = 3
@@ -776,19 +780,25 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
   if (dashboard == TRUE) {
     font_size_dash = 9
   } else {
-    font_size_dash = 13
+    font_size_dash = 15
   }
   
   if (dashboard == TRUE) {
     angle_dash = 90
   } else {
-    angle_dash = 0
+    angle_dash = 45
   }
   
   if (dashboard == TRUE) {
     hjust_dash = 1
   } else {
-    hjust_dash = 0
+    hjust_dash = 0.5
+  }
+  
+  if (dashboard == TRUE) {
+    vjust_dash = 0
+  } else {
+    vjust_dash = 0.5
   }
   
   p <- ggplot() +
@@ -796,8 +806,9 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     lines +
     #    lbls +
     xa + ya +
-    theme_bw() + theme(axis.text = element_text(size = font_size_dash, 
-                                                angle = angle_dash, hjust = hjust_dash),
+    theme_bw() + theme(axis.text.x = element_text(size = font_size_dash, 
+                                                angle = angle_dash, hjust = hjust_dash, vjust = vjust_dash),
+                       axis.text.y = element_text(size = font_size_dash),
                        axis.title.x = element_text(size = font_size_dash),
                        axis.title.y = element_blank()) + 
     #geom_text(data=d, aes(x=X,y=-0.05,label=x))+
