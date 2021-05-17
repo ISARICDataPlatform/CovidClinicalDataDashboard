@@ -523,7 +523,15 @@ dashboardPage(
               ),
               fluidRow(
                 box(flowchart(),
+                    title = "Patients inclusion flowchart",
                     width = 12
+                )
+              ),
+              fluidRow(
+                box(plotOutput("static_country"),
+                    title = "Disribution of patients by countries (all)",
+                    width = 12,
+                    height=550
                 )
               ),
               fluidRow(
@@ -682,6 +690,7 @@ dashboardPage(
         )
       ),
       tabItem(tabName = "tables",
+              fluidRow("Note: controls (red botton above) are not applied to the summary tables on this page"),
               fluidRow(
                 box(uiOutput("table_patient_characteristic"), height = 670),
                 box(uiOutput("table_outcome_age_sex"), height = 670),

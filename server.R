@@ -71,6 +71,13 @@ server <- function(input, output) {
     }
   )
   
+  output$static_country <- {
+    renderPlot({
+      p<-patient.by.country.plot(summary_input_overall)
+      plot(p)
+    },height=500)
+  }
+  
   output$contributions_video <- renderUI({
     tags$video(
       src=FILE_CONTRIBUTIONS_VIDEO,
