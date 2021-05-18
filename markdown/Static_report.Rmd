@@ -24,7 +24,7 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard/")
+knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard/")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -59,15 +59,15 @@ ref.date <- ymd("2021-02-15")
 *A global federation of clinical research networks, providing a proficient, coordinated, and agile research response to outbreak-prone infectious diseases*
 
 
-# COVID-19 Report: `08 April 2021`  {-}
-Containing data extracted 15 February 2021
+# COVID-19 Report: `17 May 2021`  {-}
+Containing data extracted 7 April 2021
 
 
 ```{r child ='markdown/Summary.Rmd'}
 ```
 
 
-```{r cohortoverview,  out.width = "200%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 15 February 2020."}
+```{r cohortoverview,  out.width = "200%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 7 April 2020."}
 
 flowchart()
 
@@ -91,7 +91,7 @@ if (params$rendered_by_shiny)
 
 ## Patient Characteristics
 
-```{r agepyramid, echo = FALSE, fig.align="center", fig.cap = "Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up (LTFU)/ongoing care) at the time of report."}
+```{r agepyramid, echo = FALSE, fig.align="center", fig.cap = "Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up (LTFU)) at the time of report."}
 
 age.pyramid.plot(age.pyramid.input)
 
@@ -100,12 +100,12 @@ age.pyramid.plot(age.pyramid.input)
 
 \newpage
 
-```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE, fig.cap='(a) Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded. (b) The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity. (c) Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.'}
+```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=4, message=FALSE, fig.cap='(a) Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded. (b) The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity. (c) Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.'}
 
 symptom.prevalence.plot(symptom.prevalence.input) + ggtitle("(a)")
 ```
 
-```{r symptomupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
+```{r symptomupset, echo=FALSE, out.width= "100%", fig.height = 3, message=FALSE}
 
 upset.plot(symptom.upset.input, which.plot = "symptom") + ggtitle("(b)")
 ```
@@ -118,11 +118,11 @@ heatmap_plot(data_plot_heatmap) + ggtitle("(c)")
 
 \newpage
 
-```{r comorbprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Frequency of comorbidities or other concomitant conditions seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this comorbidity over the number of patients for whom presence or absence of this comorbidity was recorded.  (b) The distribution of combinations of the five most common such conditions, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity."}
+```{r comorbprev, echo=FALSE, out.width= "100%", fig.height=4, message=FALSE, fig.cap = "(a) Frequency of comorbidities or other concomitant conditions seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this comorbidity over the number of patients for whom presence or absence of this comorbidity was recorded.  (b) The distribution of combinations of the five most common such conditions, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity."}
 comorbidity.prevalence.plot(comorbidity.prevalence.input) + ggtitle("(a)")
 ```
 
-```{r comorbupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
+```{r comorbupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
 upset.plot(comorbidity.upset.input, which.plot = "comorbidity") + ggtitle("(b)")
 ```
 
@@ -172,7 +172,7 @@ p_oxysat(data_plot_vs_oxysat)
 
 ```
 
-```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",   "Activated partial thromboplastin time (APTT)", "Protrombin time", "Urea",  "White blood cell count (WCC)", "Neutrophils", "Lymphocytes","C-reactive protein (CRP)"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
+```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",   "Activated partial thromboplastin time (APTT)", "Protrombin time", "Urea"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
 p_lab_alt(data_plot_lab_alt)
 p_lab_ast(data_plot_lab_ast)
@@ -180,11 +180,17 @@ p_lab_bili(data_plot_lab_bili)
 p_lab_aptt(data_plot_lab_aptt)
 p_lab_pt(data_plot_lab_pt)
 p_lab_urean(data_plot_lab_urean)
+
+```
+
+```{r labs3, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2,  fig.subcap=c("White blood cell count (WCC)", "Neutrophils", "Lymphocytes","C-reactive protein (CRP)"), fig.cap = "(continued) Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
+
 p_lab_wbc(data_plot_lab_wbc)
 p_lab_neut(data_plot_lab_neut)
 p_lab_lym(data_plot_lab_lym)
 p_lab_crp(data_plot_lab_crp)
 ```
+
 
 ```{r progress3}
 if (params$rendered_by_shiny)
@@ -224,25 +230,25 @@ outcomes.by.admission.date.plot(outcome_admission_date_input)
 \newpage
 ## Treatment
 
-```{r treatprev, echo=FALSE, out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data."}
+```{r treatprev, echo=FALSE, out.width= "100%", fig.height=4.5, message=FALSE, fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data."}
 
 treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE) + ggtitle("(a)")
 ```
 
-```{r treatupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
+```{r treatupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
 
 upset.plot(treatment.upset.input, which.plot = "treatment") + ggtitle("(b)")
 ```
 
 \newpage
-# Intensive Care and High Dependency Unit Treatments
+## Intensive Care and High Dependency Unit Treatments
 
-```{r treaticuprev,  out.width= "100%", fig.height=3.3, message=FALSE, fig.cap = "(a) Treatments used amongst patients admitted to the ICU. This only includes patients for whom this information was recorded. (b) The distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. (c) Distribution of lengths of stay for patients who were admitted to ICU/HDU: total length of stay for this group and length of stay within intensive care. This only includes cases with reported completed stays. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+```{r treaticuprev,  out.width= "100%", fig.height=4, message=FALSE, fig.cap = "(a) Treatments used amongst patients admitted to the ICU. This only includes patients for whom this information was recorded. (b) The distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. (c) Distribution of lengths of stay for patients who were admitted to ICU/HDU: total length of stay for this group and length of stay within intensive care. This only includes cases with reported completed stays. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
 
 treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE) + ggtitle("(a)")
 ```
 
-```{r treaticuupset, echo=FALSE, out.width= "100%", fig.height = 3.3, message=FALSE}
+```{r treaticuupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
 upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(b)")
 ```
 
