@@ -428,7 +428,7 @@ p_sysbp <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
-    geom_boxplot(fill="lightblue")+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + 
+    geom_boxplot(fill="lightblue")+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + ylim(30,NA)+
     theme_bw() + labs(title = N) 
   if (dashboard==T){
     p <- p+
