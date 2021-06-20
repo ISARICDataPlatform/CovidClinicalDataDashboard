@@ -34,6 +34,12 @@ library(magick)
 library(xml2)
 library(shiny)
 library(plotly)
+library(sf)
+library(rgeos)
+library(rnaturalearth)
+library(rnaturalearthdata)
+library(dplyr)
+
 
 epiweek.year <- function(date){
   if(is.na(date)){
@@ -140,7 +146,8 @@ list_data_files <- c(
   "admission_to_icu_input.rda",
   "status_by_time_after_admission_input.rda",
   "length_of_stay_icu_input.rda",
-  "patient_by_country_input.rda"
+  "patient_by_country_input.rda",
+  "data_map.rda"
 )
 
 # check date (via file name) of contributions.mp4

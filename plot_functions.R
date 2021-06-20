@@ -954,3 +954,38 @@ tables_supplementary <- function(table_sup, title_table_1 = NA, title_table_2 = 
 
   table_example
 }
+
+
+
+
+#############
+#World map
+#############
+# Get the world data
+plot_map_world <- function(data_map){
+world <- ne_countries(scale = "medium", returnclass = "sf")
+
+# check that country names are spelled in the same way to avoid some countries dropping out when merging
+unique(data_map$slider_country)[which(!(unique(data_map$slider_country) %in% world$name))]
+
+world[grep("Russia", world$name),]$name <- "Russian Federation"
+world[grep("Korea", world$name)[1],]$name <- "South Korea"
+world[grep("St. Vin. and Gren.", world$name),]$name <- "St. Vincent and the Grenadines"
+world[grep("Czech", world$name),]$name <- "Czech Republic"
+world[grep("Verde", world$name),]$name <- "Cabo Verde"
+world[grep("Dominican", world$name),]$name <- "Dominican Republic"
+world[grep("Principe", world$name),]$name <- "Sao Tome and Principe"
+
+data_map <- data_map %>%
+  mutate(name = slider_country)
+  
+world_plot_data <- merge(world, data_map, all.x = TRUE, all.y = TRUE, by = "name")
+
+
+ggplot(data = world_plot_data) +
+  geom_sf(aes(fill = Freq)) +
+  scale_fill_viridis_c(option = "magma", na.value = "white", direction = -1, label = scales::comma, breaks = c(10, 100, 10000, 100000), trans = "log10") + 
+  labs(fill = "Number of patients") +
+  theme_classic()
+}
+

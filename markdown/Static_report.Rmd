@@ -27,7 +27,7 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard/")
+knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard/")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -126,7 +126,7 @@ flowchart()
 These data have been contributed to by `r length(unique(summary_input_overall$siteid_final))` sites in `r length(unique(summary_input_overall$slider_country))` countries (see Figure 2) 
 
 ```{r country_recruitment,out.width = '100%', echo=FALSE,fig.cap = "Distribution of patients by country"}
-
+plot_map_world(data_map)
 patient.by.country.plot(patient.by.country.input)
 
 ```
