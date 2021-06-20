@@ -1,13 +1,9 @@
 ---
 title: "ISARIC (International Severe Acute Respiratory and Emerging Infections Consortium)"
 output:
-  pdf_document:
+  word_document:
     toc: no
-    fig_caption: true
-    extra_dependencies: ["subfig"]
-    latex_engine: xelatex
-    includes:
-      in_header: header.tex
+    fig_caption: yes
   html_document:
     df_print: paged
     number_sections: yes
@@ -15,16 +11,23 @@ output:
     toc_depth: 2
     toc_float:
       collapsed: no
+  pdf_document:
+    toc: no
+    fig_caption: yes
+    extra_dependencies: subfig
+    latex_engine: xelatex
+    includes:
+      in_header: header.tex
 urlcolor: blue
 header-includes:
-   - \usepackage{floatrow}
-   - \floatsetup[figure]{capposition=top}
+- \usepackage{floatrow}
+- \floatsetup[figure]{capposition=top}
 params:
-  rendered_by_shiny: FALSE
+  rendered_by_shiny: no
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard/")
+knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard/")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -35,11 +38,6 @@ knitr::opts_chunk$set(echo = FALSE,
 
 ```
 
-```{r progress1}
-if (params$rendered_by_shiny)
-  shiny::setProgress(0.2)
-
-```
 
 ```{r loading, include = FALSE}
 
@@ -58,20 +56,74 @@ ref.date <- ymd("2021-02-15")
 
 *A global federation of clinical research networks, providing a proficient, coordinated, and agile research response to outbreak-prone infectious diseases*
 
+# Abstract
 
-# COVID-19 Report: `17 May 2021`  {-}
-Containing data extracted 7 April 2021
+# Background
+
+This report describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and June 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to the contribution of `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (the international severe acute respiratory and emerging infection consortium), a grassroots collaboration https://isaric.org/.
+
+One-and-half year and over 3,800,000 deaths on [https://www.who.int/emergencies/diseases/novel-coronavirus-2019], COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, shaking economies, and killing thousands. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
+
+**The advantages of an international standardised case record form**. Novel diseases are, by definition, new; the scientific method is not. By developing consensus on a road map for clinical research methods before a pandemic, we are able to spend little further time defining study type, data collection tools, and potential outputs for evidence summarisation once the pathogen emerges. Using slightly adjusted standardised methods for novel diseases, evidence can be generated quickly.
+
+Comparable experimental data have allowed the development of research synthesis methods, achieving high levels of evidence. While small observational studies are easy to conduct, they are not so easily collated, reducing research synthesis. In contrast, large international observational studies with a standardised form allow for international data comparisons, analytical control of confounder, and therefore enable the acquisition of high levels of evidence.
+
+**How we got here with ISARIC**. In 2013, ISARIC and WHO implemented the standardised Clinical Characterisation Protocol to evolve clinical data into research evidence during health emergencies.  
+
+In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. Today, our partners have collected standardised, in-hospital clinical data from over half a million patients, in more than 700 sites, across 60 countries. This partner-fuelled growing initiative is the largest COVID-19 in-hospital database in the world.
+
+**What have our partners achieved**. Using the ISARIC database, our partners have produced evidence on XYZ areas of knowledge. XX articles have been published, XX are being peer-reviewed, and XX analyses are in progress. [link: website] 
+
+In this report, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme.[ref]The majority of this database is additionally available to external researchers via application to our Data Access Committee at https://www.iddo.org/covid19/data-sharing/accessing-data.  
+
+To contribute, please contact ncov@isaric.org. 
 
 
-```{r child ='markdown/Summary.Rmd'}
-```
+# Methods
 
+The results in this report are produced using data from the ISARIC COVID-19 database of international, prospective observational data on clinical features of patients admitted to hospital with Covid-19.  Data collection was structured on the ISARIC/WHO Clinical Characterisation Protocol for Severe Emerging Infections, a standardized protocol for investigation of severe acute infections by pathogens of public health interest[ref] and the ISARIC case report forms [ref] designed for standardized data collection from the start of an outbreak and rapid dissemination of clinical information.[ref].  Data are collected on Research electronic Data Capture (REDCap, version 8.11.11, Vanderbilt University, Nashville, Tenn.), hosted by the University of Oxford. Additional data, collected using a wide variety of data systems, were submitted by international investigators who were not using the University of Oxford REDCap instance. Data were curated by the Infectious Diseases Data Observatory [ref] to the CDISC Study Data Tabulation Model for harmonised analysis. [ref] The first patient was enrolled on 30 January 2020.  
+
+SDTM formatted data are processed in R 4.1.0 (R Core Team 2013). Initial data cleaning includes custom scripts designed to identify results of laboratory SARS-CoV-2 testing, and to standardise nomenclature for comorbidities, symptoms at admission, treatments, and outcomes.  
+
+Patients were excluded if they did not have laboratory-confirmed SARS-CoV-2 infection. Patients were considered to be lost to follow up if either a) they were transferred to another facility, or b) they had an unknown outcome and the last date upon which any data was recorded for them was 45 days or before the date of data extraction.  Patients with unknown outcome where the last recorded data was less than 45 days old was instead categorised as receiving ongoing care. 
+
+Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the report only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, in both the <10 year age group and the >= 10 year age group, are taken to be likely mis-entered and changed to missing. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction. Data from patients admitted less than 14 days before the date of extraction are considered embargoed and those individuals removed from consideration. 
+
+
+The following Covid-19 symptom definitions were used: 
+
+- World Health Organization (WHO):   
+      1. A combination of acute fever and cough,   
+      Or   
+      2. A combination of three or more of: fever, cough, general weakness and fatigue, headache, myalgia, sore throat, coryza, dyspnoea, anorexia, nausea and vomiting, diarrhoea, altered mental status   
+
+- Centers for Disease Control (CDC), United States:   
+      1.	At least two of: fever, chills (not available), rigors, myalgia, headache, sore throat, new olfactory and taste disorder,   
+      Or    
+      2.	At least one of: cough, shortness of breath, difficulty breathing (not available) 
+
+- Public Health England   
+New cough, or temperature ≥37.8°C, or a loss or change in sense of smell or taste  
+
+- European Centre for Disease Prevention and Control   
+At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusia or dysgeusia (dysgeusia not available) 
+
+Data manipulation is performed using the tidyverse collection of packages (Wickham et al. 2019), as well as ff (Adler et al. 2020) and dtplyr (Wickham 2021). Data visualisation makes use of ggplot (Wickham 2016) and its extension ggupset (Ahlmann-Eltze 2020). The report is generated using knitr (Xie 2021). 
+
+This report only includes individuals for whom data collection commenced on or before XX 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes; AND who have laboratory-confirmed SARS-COV-2 infection. 
+
+
+# Results
+
+The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flow chart (Figure 1) gives an overview of the cohort and outcomes as of date 2021. 
 
 ```{r cohortoverview,  out.width = "200%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 7 April 2020."}
 
 flowchart()
 
 ```
+
+These data have been contributed to by `r length(unique(summary_input_overall$siteid_final))` sites in `r length(unique(summary_input_overall$slider_country))` countries (see Figure 2) 
 
 ```{r country_recruitment,out.width = '100%', echo=FALSE,fig.cap = "Distribution of patients by country"}
 
@@ -80,16 +132,17 @@ patient.by.country.plot(patient.by.country.input)
 ```
 
 
-\newpage
 
+## Demographics and presenting features
 
-```{r progress2}
-if (params$rendered_by_shiny)
-  shiny::setProgress(0.4)
-```
+Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The minimum and maximum observed ages were `r min(summary_input$age, na.rm=T)` and `r max(summary_input$age, na.rm=T)` years respectively. The median age is `r median(summary_input$age, na.rm=T)` years.  
 
+The observed mean number of days from (first) symptom onset to hospital admission was `r round(mean((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T),1)`, with a standard deviation (SD) of `r round(sd((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T),1)` days and a median of `r median((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T)` days. 
 
-## Patient Characteristics
+The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were `r glue_collapse(symptom.prevalence.input %>% group_by(nice.symptom) %>% summarise(F=sum(times.present)) %>% ungroup() %>% arrange(desc(F)) %>% slice(1:5) %>% pull(nice.symptom) %>% str_to_lower(), sep = ', ', last=', and ')`. Frequencies of symptom prevalence vary with age. `r paste0(nrow(summary_input %>% filter(vs_oxysat<94)),'/',nrow(summary_input %>% filter(is.na(vs_oxysat)==F)))` (`r round(nrow(summary_input %>% filter(vs_oxysat<94))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients presented with oxygen saturations <94%.  
+
+(To be added) Christiana’s analysis on case definitions 
+
 
 ```{r agepyramid, echo = FALSE, fig.align="center", fig.cap = "Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up (LTFU)) at the time of report."}
 
@@ -128,7 +181,7 @@ upset.plot(comorbidity.upset.input, which.plot = "comorbidity") + ggtitle("(b)")
 
 \newpage
 
-## Variables by age
+### Variables by age
 
 ```{r comorbbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking"), fig.cap = "Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)"}
 
@@ -192,14 +245,58 @@ p_lab_crp(data_plot_lab_crp)
 ```
 
 
-```{r progress3}
-if (params$rendered_by_shiny)
-  shiny::setProgress(0.6)
-```
+\newpage
 
+## Treatment
+Antibiotics were received by `r paste0(length(which(summary_input$treat_antibiotic_agents==T)),'/',sum(is.na(summary_input$treat_antibiotic_agents)==F))` (`r round(length(which(summary_input$treat_antibiotic_agents==T))/sum(is.na(summary_input$treat_antibiotic_agents)==F)*100,1)`%) patients, and `r paste0(length(which(summary_input$treat_antiviral_agents==T)),'/',sum(is.na(summary_input$treat_antiviral_agents)==F))` (`r round(length(which(summary_input$treat_antiviral_agents==T))/sum(is.na(summary_input$treat_antiviral_agents)==F)*100,1)`%) received antivirals. These treatment categories are not mutually exclusive since some patients received multiple treatments. (The denominators differ due to data completeness). `r paste0(length(which(summary_input$oxygen_therapy==T)),'/',sum(is.na(summary_input$oxygen_therapy)==F))` (`r round(length(which(summary_input$oxygen_therapy==T))/sum(is.na(summary_input$oxygen_therapy)==F)*100,1)`%) patients received some degree of oxygen supplementation: of these, `r paste0(length(which(summary_input$treat_non_invasive_ventilation==T)),'/',sum(is.na(summary_input$treat_non_invasive_ventilation)==F))` (`r round(length(which(summary_input$treat_non_invasive_ventilation==T))/sum(is.na(summary_input$treat_non_invasive_ventilation)==F)*100,1)`%) received NIV and `r paste0(length(which(summary_input$treat_invasive_ventilation==T)),'/',sum(is.na(summary_input$treat_invasive_ventilation)==F))` (`r round(length(which(summary_input$treat_invasive_ventilation==T))/sum(is.na(summary_input$treat_invasive_ventilation)==F)*100,1)`%) IMV.  
+
+Of the patients admitted into ICU/HDU, `r paste0(length(which(summary_input$icu_treat_antibiotic_agents==T)),'/',sum(is.na(summary_input$icu_treat_antibiotic_agents)==F ))` (`r round(length(which(summary_input$icu_treat_antibiotic_agents==T))/sum(is.na(summary_input$icu_treat_antibiotic_agents)==F)*100,1)`%) received antibiotics and `r paste0(length(which(summary_input$icu_treat_antiviral_agents==T)),'/',sum(is.na(summary_input$icu_treat_antiviral_agents)==F))` (`r round(length(which(summary_input$icu_treat_antiviral_agents==T))/sum(is.na(summary_input$icu_treat_antiviral_agents)==F)*100,1)`%) antivirals. `r paste0(length(which(summary_input$icu_oxygen_therapy==T)),'/',sum(is.na(summary_input$icu_oxygen_therapy)==F))` (`r round(length(which(summary_input$icu_oxygen_therapy==T))/sum(is.na(summary_input$icu_oxygen_therapy)==F)*100,1)`%) received some degree of oxygen supplementation, of which, `r paste0(length(which(summary_input$icu_treat_non_invasive_ventilation==T)),'/',sum(is.na(summary_input$icu_treat_non_invasive_ventilation)==F))` (`r round(length(which(summary_input$icu_treat_non_invasive_ventilation==T))/sum(is.na(summary_input$icu_treat_non_invasive_ventilation)==F)*100,1)`%) received NIV and `r paste0(length(which(summary_input$icu_treat_invasive_ventilation==T)),'/',sum(is.na(summary_input$icu_treat_invasive_ventilation)==F))` (`r round(length(which(summary_input$icu_treat_invasive_ventilation==T))/sum(is.na(summary_input$icu_treat_invasive_ventilation)==F)*100,1)`%) IMV.  
+
+A total of `r length(which(summary_input$treat_non_invasive_ventilation==T))` patients received non-invasive mechanical ventilation (NIV). The mean and median durations from admission to receiving NIV were `r round(mean(summary_input$t_ad_niv, na.rm=T),1)` days and `r median(summary_input$t_ad_niv, na.rm=T)` days respectively (SD: `r round(sd(summary_input$t_ad_niv, na.rm=T),1)` days) – estimated from records on cases with complete records on dates of hospital admission and NIV onset (N = `r sum(is.na(summary_input$t_ad_niv)==F)`). The mean and median durations for NIV were `r round(mean(summary_input$dur_niv, na.rm=T),1)` days and `r median(summary_input$dur_niv, na.rm=T)` days respectively (SD: `r round(sd(summary_input$dur_niv, na.rm=T),1)` days) – estimated based on only those cases which have complete NIV duration records (N = `r sum(is.na(summary_input$dur_niv)==F)`).  
+
+A total of `r length(which(summary_input$treat_invasive_ventilation==T))` patients received invasive mechanical ventilation (IMV). The mean and median durations from admission to receiving IMV were `r round(mean(summary_input$t_ad_imv, na.rm=T),1)` days and `r median(summary_input$t_ad_imv, na.rm=T)` days respectively (SD: `r round(sd(summary_input$t_ad_imv, na.rm=T),1)` days) – estimated from records on cases with complete records on dates of hospital admission and IMV onset (N = `r sum(is.na(summary_input$t_ad_imv)==F)`). The mean, median and SD for the duration of IMV – estimated based on all `r sum(is.na(summary_input$dur_imv)==F)` cases with complete records on IMV stays – were `r round(mean(summary_input$dur_imv, na.rm=T),1)` days, `r median(summary_input$dur_imv, na.rm=T)` days and `r round(sd(summary_input$dur_imv, na.rm=T),1)` days respectively.  
+
+Corticosteroids were administered to `r paste0(length(which(summary_input$treat_corticosteroids==T)),'/',sum(is.na(summary_input$treat_corticosteroids)==F))` (`r round(length(which(summary_input$treat_corticosteroids==T))/sum(is.na(summary_input$treat_corticosteroids)==F)*100,1)`%) patients. This includes `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T)),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T)))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T))*100,1)`%) of those who received IMV, `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==F & oxygen_therapy==T)),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==F & oxygen_therapy==T)))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==F & oxygen_therapy==T))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==F & oxygen_therapy==T))*100,1)`%) of those who had oxygen therapy but not IMV, and `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F)),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F)))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F))*100,1)`%) of those who had no oxygen therapy. On 16 June, results for dexamethasone were released for the RECOVERY randomized controlled trial (RECOVERY, 2020; RECOVERY Collaborative Group, 2020). This trial found that dexamethasone reduced deaths for patients receiving IMV and oxygen therapy, but not among patients not receiving respiratory support. Of patients admitted since 16 June, corticosteroids were received by `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T & date_admit>'2020-06-16')),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T & date_admit>'2020-06-16')))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T & date_admit>'2020-06-16'))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T & date_admit>'2020-06-16'))*100,1)`%) of those who received IMV, `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==F & oxygen_therapy==T & date_admit>'2020-06-16')),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==F & oxygen_therapy==T & date_admit>'2020-06-16')))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==F & oxygen_therapy==T & date_admit>'2020-06-16'))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==F & oxygen_therapy==T & date_admit>'2020-06-16'))*100,1)`%) of those who had oxygen therapy but not IMV, and `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F & date_admit>'2020-06-16')),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F & date_admit>'2020-06-16')))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F & date_admit>'2020-06-16'))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F & date_admit>'2020-06-16'))*100,1)`%) of those who had no oxygen therapy.
 
 \newpage
-## Hospital stays and outcomes
+
+```{r treatprev, echo=FALSE, out.width= "100%", fig.height=4.5, message=FALSE, fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data."}
+
+treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE) + ggtitle("(a)")
+```
+
+```{r treatupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
+
+upset.plot(treatment.upset.input, which.plot = "treatment") + ggtitle("(b)")
+```
+
+\newpage
+### Intensive Care and High Dependency Unit Treatments
+
+```{r treaticuprev,  out.width= "100%", fig.height=4, message=FALSE, fig.cap = "(a) Treatments used amongst patients admitted to the ICU. This only includes patients for whom this information was recorded. (b) The distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. (c) Distribution of lengths of stay for patients who were admitted to ICU/HDU: total length of stay for this group and length of stay within intensive care. This only includes cases with reported completed stays. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+
+treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE) + ggtitle("(a)")
+```
+
+```{r treaticuupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
+upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(b)")
+```
+
+```{r icu_los,  out.width = '80%', echo=FALSE}
+length.of.stay.icu.plot(length.of.stay.icu.input) + ggtitle("(c)")
+```
+
+## Outcomes
+
+Outcomes have been recorded for `r nrow(summary_input%>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")))` patients (`r round(nrow(summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))/nrow(summary_input)*100,1)`%), consisting of `r nrow(summary_input%>%filter((slider_outcome=="Discharge")))` recoveries and `r nrow(summary_input%>%filter((slider_outcome=="Death")))` deaths. Outcome records are unavailable for `r nrow(summary_input%>%filter((slider_outcome=="LTFU")))` patients.  
+
+The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was `r round(mean((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)`, with SD `r round(sd((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)` days and a median of `r median((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T)` days. These estimates are based on all cases which have complete records on length of hospital stay (N = `r nrow(summary_input %>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")&! is.na(dur_ho)))`).  
+
+**ICU/HDU**: Of the 136337 patients with data on ward admissions available, a total of `r length(which(summary_input$slider_icu_ever==TRUE))` (19%) patients were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU), `r round(nrow(summary_input%>% filter(t_ad_icu==0))/nrow(summary_input%>% filter(!is.na(t_ad_icu)))*100,1) `% on the day of admission. Of these, `r nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death'))` died, and `r nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge'))` have recovered and been discharged. Outcome records are unavailable for `r nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU'))` cases.
+
+
+The distribution of the number of days from admission to ICU admission is shown in Figure 11. The duration of stay in ICU/HDU had a mean of `r round(mean(summary_input$dur_icu, na.rm=T),1)` days and a median of `r median(summary_input$dur_icu, na.rm=T)` (SD: `r round(sd(summary_input$dur_icu, na.rm=T),1)` days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = `r sum(is.na(summary_input$dur_icu)==F)`). 
+
 
 ```{r  staybysex, out.width= "80%", fig.height=4, fig.cap="Distribution of length of hospital stay, according to sex. This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
 
@@ -227,60 +324,21 @@ status.by.time.after.admission.plot(status.by.time.after.admission.input)
 outcomes.by.admission.date.plot(outcome_admission_date_input)
 ```
 
-\newpage
-## Treatment
 
-```{r treatprev, echo=FALSE, out.width= "100%", fig.height=4.5, message=FALSE, fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data."}
-
-treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE) + ggtitle("(a)")
-```
-
-```{r treatupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
-
-upset.plot(treatment.upset.input, which.plot = "treatment") + ggtitle("(b)")
-```
 
 \newpage
-## Intensive Care and High Dependency Unit Treatments
 
-```{r treaticuprev,  out.width= "100%", fig.height=4, message=FALSE, fig.cap = "(a) Treatments used amongst patients admitted to the ICU. This only includes patients for whom this information was recorded. (b) The distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. (c) Distribution of lengths of stay for patients who were admitted to ICU/HDU: total length of stay for this group and length of stay within intensive care. This only includes cases with reported completed stays. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+# Discussion and conclusions
+ 
+  
 
-treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE) + ggtitle("(a)")
-```
+## Acknowledgement
+This report is made possible through the efforts and expertise of the staff collecting data at our partner institutions across the globe, and the ISARIC Team. For a list of partners and team members, please visit rg/research/covid-19-clinical-research-resources/covid-19-data-management-hosting/covid19-clinical-data-contributors-list/. 
 
-```{r treaticuupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
-upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(b)")
-```
-
-```{r icu_los,  out.width = '80%', echo=FALSE}
-length.of.stay.icu.plot(length.of.stay.icu.input) + ggtitle("(c)")
-```
-
-
-```{r progress4}
-if (params$rendered_by_shiny)
-  shiny::setProgress(0.8)
-```
-\newpage
-```{r child = 'markdown/Background.Rmd'}
-```
-
-
-```{r child = 'markdown/Methods.Rmd'}
-```
-
-
-```{r child = 'markdown/Caveats.Rmd'}
-```
-
-```{r child = 'markdown/Teammembers.Rmd'}
-```
-
-```{r child = 'markdown/References.Rmd'}
-```
-
-
-## Summary tables
+## References
+ 
+  
+## Supplementary tables
 
 ```{r table1, tab.cap = "Patient Characteristics. Proportions are presented in parentheses, and have been rounded to two decimal places."}
 tables_supplementary(table_sup = patient.characteristic.table) 
