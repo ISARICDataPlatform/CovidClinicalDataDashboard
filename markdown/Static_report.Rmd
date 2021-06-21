@@ -3,8 +3,8 @@ title: "ISARIC (International Severe Acute Respiratory and Emerging Infections C
 output:
   pdf_document:
     toc: no
-    fig_caption: yes
-    extra_dependencies: subfig
+    fig_caption: true
+    extra_dependencies: ["subfig"]
     latex_engine: xelatex
     includes:
       in_header: header.tex
@@ -15,19 +15,16 @@ output:
     toc_depth: 2
     toc_float:
       collapsed: no
-  word_document:
-    toc: no
-    fig_caption: yes
 urlcolor: blue
 header-includes:
-- \usepackage{floatrow}
-- \floatsetup[figure]{capposition=top}
+   - \usepackage{floatrow}
+   - \floatsetup[figure]{capposition=top}
 params:
-  rendered_by_shiny: no
+  rendered_by_shiny: FALSE
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard/")
+knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -132,6 +129,7 @@ patient.by.country.plot(patient.by.country.input)
 ```
 
 
+\newpage
 
 ## Demographics and presenting features
 
@@ -285,6 +283,8 @@ upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(
 ```{r icu_los,  out.width = '80%', echo=FALSE}
 length.of.stay.icu.plot(length.of.stay.icu.input) + ggtitle("(c)")
 ```
+
+\newpage
 
 ## Outcomes
 
