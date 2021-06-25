@@ -147,7 +147,8 @@ list_data_files <- c(
   "status_by_time_after_admission_input.rda",
   "length_of_stay_icu_input.rda",
   "patient_by_country_input.rda",
-  "data_map.rda"
+  "data_map.rda",
+  "data_case_def_input.rda"
 )
 
 # check date (via file name) of contributions.mp4
