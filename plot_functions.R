@@ -989,3 +989,14 @@ ggplot(data = world_plot_data) +
   theme_classic()
 }
 
+plot_map_world <- function(data_case_def){
+  ggplot(data = data_case_def, aes(y = proportion, x = age10)) +
+    facet_grid(~ symptom) +
+    geom_bar(stat="identity")+
+    xlab("Age") + ylab("Proportion") + ylim(0, 1)+
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+          panel.grid.major = element_blank(),
+          panel.border = element_blank(),
+          panel.background = element_rect(fill = "white"),
+          legend.position = "none")
+}
