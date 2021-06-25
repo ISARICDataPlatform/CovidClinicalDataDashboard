@@ -1000,3 +1000,4 @@ plot_map_world <- function(data_case_def){
           panel.background = element_rect(fill = "white"),
           legend.position = "none")
 }
+
