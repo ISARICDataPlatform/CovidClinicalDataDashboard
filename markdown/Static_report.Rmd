@@ -24,7 +24,7 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -125,7 +125,6 @@ These data have been contributed to by `r length(unique(summary_input_overall$si
 ```{r country_recruitment,out.width = '100%', echo=FALSE,fig.cap = "Distribution of patients by country"}
 plot_map_world(data_map)
 patient.by.country.plot(patient.by.country.input)
-
 ```
 
 
@@ -140,6 +139,12 @@ The observed mean number of days from (first) symptom onset to hospital admissio
 The observed symptoms on admission partly represent case definitions and policies for hospital admission, which may change as time passes. The five most common symptoms at admission were `r glue_collapse(symptom.prevalence.input %>% group_by(nice.symptom) %>% summarise(F=sum(times.present)) %>% ungroup() %>% arrange(desc(F)) %>% slice(1:5) %>% pull(nice.symptom) %>% str_to_lower(), sep = ', ', last=', and ')`. Frequencies of symptom prevalence vary with age. `r paste0(nrow(summary_input %>% filter(vs_oxysat<94)),'/',nrow(summary_input %>% filter(is.na(vs_oxysat)==F)))` (`r round(nrow(summary_input %>% filter(vs_oxysat<94))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients presented with oxygen saturations <94%.  
 
 (To be added) Christiana’s analysis on case definitions 
+
+```{r case_def, echo = FALSE, fig.align="center", fig.cap = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"}
+
+plot_case_def(case.def.input)
+
+```
 
 
 ```{r agepyramid, echo = FALSE, fig.align="center", fig.cap = "Age and sex distribution of patients. Bar fills are outcome (death/discharge/lost to follow-up (LTFU)) at the time of report."}

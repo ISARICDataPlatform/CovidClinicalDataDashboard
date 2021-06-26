@@ -989,7 +989,7 @@ ggplot(data = world_plot_data) +
   theme_classic()
 }
 
-plot_map_world <- function(data_case_def){
+plot_case_def <- function(data_case_def){
   ggplot(data = data_case_def, aes(y = proportion, x = age10)) +
     facet_grid(~ symptom) +
     geom_bar(stat="identity")+
