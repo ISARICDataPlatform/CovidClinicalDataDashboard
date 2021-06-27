@@ -245,7 +245,7 @@ plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)
 Vital signs are presented in Figure 8 by age. `r paste0(nrow(summary_input %>% filter(vs_oxysat<94)),'/',nrow(summary_input %>% filter(is.na(vs_oxysat)==F)))` (`r round(nrow(summary_input %>% filter(vs_oxysat<94))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients presented with oxygen saturations <94%.  
 
 
-```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation"), fig.cap = "Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
+```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation"), fig.cap = "Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
 p_resp(data_plot_vs_resp)
 p_hr(data_plot_vs_hr)
@@ -260,7 +260,7 @@ p_oxysat(data_plot_vs_oxysat)
 ### Laboratory values 
 Laboratory tests results are available for a minority of patients. They are summarised in Figure 10a (biochemistry) and 10b (haematology and C-reactive protein). Urea increases with age.
 
-```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",   "Activated partial thromboplastin time (APTT)", "Protrombin time", "Urea"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
+```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",   "Activated partial thromboplastin time (APTT)", "Protrombin time", "Urea"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
 p_lab_alt(data_plot_lab_alt)
 p_lab_ast(data_plot_lab_ast)
@@ -333,9 +333,9 @@ upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(
 
 ## Key time variables
 
-The key time variables are presented in Table 6. Patients tend to come to the hospital relatively early into their illness with a mean of 7 days and a median of 3 days from symptoms onset. `r round(nrow(summary_input%>% filter(t_ad_icu==0))/nrow(summary_input%>% filter(!is.na(t_ad_icu)))*100,1) `%  of ICU/HDU admissions occur within the first day at the hospital. The mean and median duration of hospital stay are 18.1 and 9 days, respectively. The duration of stay in ICU/HDU had a mean of `r round(mean(summary_input$dur_icu, na.rm=T),1)` days and a median of `r median(summary_input$dur_icu, na.rm=T)` (SD: `r round(sd(summary_input$dur_icu, na.rm=T),1)` days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = `r sum(is.na(summary_input$dur_icu)==F)`). 
+The key time variables are presented in Table 5. Patients tend to come to the hospital relatively early into their illness with a mean of 7 days and a median of 3 days from symptoms onset. `r round(nrow(summary_input%>% filter(t_ad_icu==0))/nrow(summary_input%>% filter(!is.na(t_ad_icu)))*100,1) `%  of ICU/HDU admissions occur within the first day at the hospital. The mean and median duration of hospital stay are 18.1 and 9 days, respectively. The duration of stay in ICU/HDU had a mean of `r round(mean(summary_input$dur_icu, na.rm=T),1)` days and a median of `r median(summary_input$dur_icu, na.rm=T)` (SD: `r round(sd(summary_input$dur_icu, na.rm=T),1)` days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = `r sum(is.na(summary_input$dur_icu)==F)`). 
 
-\newpage
+
 ```{r table5, tab.cap = "Key time variables. SD: Standard deviation; IQR: Interquartile range. Outliers (values greater than 120) were excluded prior to the computation of estimates."}
 tables_supplementary(table_sup = key.times.table)
 
@@ -347,7 +347,8 @@ length.of.stay.icu.plot(length.of.stay.icu.input)
 ```
 
 \newpage
-The distribution of the number of days from admission to ICU admission is shown in Figure 13. 
+The distribution of the number of days from admission to ICU admission is shown in Figure 14. 
+
 ```{r  admissiontoICUoverall, out.width= "100%", fig.cap = "Distribution of time (in days) from hospital admission to ICU admission. The figure displays data on only those cases with a reported ICU start date."}
 admission.to.icu.plot(admission.to.icu.input)
 ```
@@ -356,12 +357,12 @@ admission.to.icu.plot(admission.to.icu.input)
 The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was `r round(mean((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)`, with SD `r round(sd((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)` days and a median of `r median((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T)` days. These estimates are based on all cases which have complete records on length of hospital stay (N = `r nrow(summary_input %>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")&! is.na(dur_ho)))`).The distributions of length of hospital stay are presented In Figure 15a according to sex and 15b by patient age group.  
 
 
-```{r  staybysex, out.width= "80%", fig.height=4, fig.cap="Distribution of length of hospital stay, according to sex (a) and patient age group (b). This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+```{r  staybysex, out.width= "100%", fig.height=3, fig.cap="Distribution of length of hospital stay, according to sex (a) and patient age group (b). This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
 
 length.of.stay.sex.plot(length.of.stay.sex.input) + ggtitle("(a)")
 ```
 
-```{r  staybyage, out.width= "80%", fig.height=4}
+```{r  staybyage, out.width= "100%", fig.height=3}
 
 length.of.stay.age.plot(length.of.stay.age.input) + ggtitle("(b)")
 ```
@@ -369,7 +370,7 @@ length.of.stay.age.plot(length.of.stay.age.input) + ggtitle("(b)")
 \newpage
 Outcomes are recorded for `r nrow(summary_input%>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")))` patients (`r round(nrow(summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))/nrow(summary_input)*100,1)`%), consisting of `r nrow(summary_input%>%filter((slider_outcome=="Discharge")))` recoveries and `r nrow(summary_input%>%filter((slider_outcome=="Death")))` deaths. Outcome records are unavailable for `r nrow(summary_input%>%filter((slider_outcome=="LTFU")))` patients.
 
-The overall estimated case fatality ratio (CFR) is XX% (95%CI) and is XX% (95%CI) for patients admitted to ICU/HDU - calculated out of those with data on outcome. 
+The overall estimated case fatality ratio (CFR) is `r round(nrow(summary_input%>%filter((slider_outcome=="Death")))/nrow(summary_input%>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")))*100,1)`% (95%CI `r paste0(round(binom.test(nrow(summary_input%>%filter((slider_outcome=="Death"))),nrow(summary_input%>%filter((slider_outcome=="Death"|slider_outcome=="Discharge"))))$conf.int[1]*100,1),"-",round(binom.test(nrow(summary_input%>%filter((slider_outcome=="Death"))),nrow(summary_input%>%filter((slider_outcome=="Death"|slider_outcome=="Discharge"))))$conf.int[2]*100,1))`) and is `r round(nrow(summary_input%>%filter((slider_outcome=="Death"&slider_icu_ever==TRUE)))/nrow(summary_input%>%filter(((slider_outcome=="Death"|slider_outcome=="Discharge")&slider_icu_ever==TRUE)))*100,1)`% (95%CI `r paste0(round(binom.test(nrow(summary_input%>%filter((slider_outcome=="Death"&slider_icu_ever==TRUE))),nrow(summary_input%>%filter(((slider_outcome=="Death"|slider_outcome=="Discharge")&slider_icu_ever==TRUE))))$conf.int[1]*100,1),"-",round(binom.test(nrow(summary_input%>%filter((slider_outcome=="Death"&slider_icu_ever==TRUE))),nrow(summary_input%>%filter(((slider_outcome=="Death"|slider_outcome=="Discharge")&slider_icu_ever==TRUE))))$conf.int[2]*100,1))`) for patients admitted to ICU/HDU - calculated out of those with data on outcome. 
 
 ```{r  timeline, out.width= "100%", fig.cap = "The distribution of patient status by number of days after admission. Patients with 'unknown' status have left the site at the time of report but have unknown outcomes due to missing data. The black line marks the end of 14 days."}
 
