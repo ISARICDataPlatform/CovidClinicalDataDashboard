@@ -195,7 +195,7 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
     xlab("Epidemiological week of admission/symptom onset") +
     ylab("Cumulative patient records") +
     scale_x_discrete(drop = F) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 7)) 
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 7),legend.position = "bottom") 
 
   return(plt)
 }
@@ -604,7 +604,7 @@ length.of.stay.sex.plot <- function(aggregated.tbl, ...){
     geom_violin(trim=F)+
     geom_boxplot(width=0.1, fill="white", outlier.shape = NA)  +
     scale_fill_viridis(drop = F, discrete = "true", option = "magma", begin = 0.25, end = 0.75) +
-    geom_text(stat="count", aes(label=..count..),y=-1, size=2)+
+    geom_text(stat="count", aes(label=..count..),y=-2, size=2.5)+
     labs(title=" ", x="Sex", y = "Length of hospital stay", fill="Sex") +
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
@@ -623,7 +623,7 @@ length.of.stay.age.plot <- function(aggregated.tbl, ...){
     geom_violin(trim=F) +
     geom_boxplot(width=0.05, fill="white", outlier.shape = NA)  +
     labs(title="  ", x="Age group", y = "Length of hospital stay", fill="Age") +
-    geom_text(stat="count", aes(label=..count..),y=-1, size=2)+
+    geom_text(stat="count", aes(label=..count..),y=-2, size=2)+
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
       axis.title.x = element_text( size=12),
@@ -677,7 +677,7 @@ length.of.stay.icu.plot <- function(aggregated.tbl,...){
     scale_fill_manual(values = c("darkorchid2", "darkorchid4")) +
     geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA)  +
     labs(title = " ", x = "Location", y = "Length of stay (days)") +
-    geom_text(stat="count", aes(label=..count..),y=0, size=2)+
+    geom_text(stat="count", aes(label=..count..),y=-2, size=2.5)+
     #ylim(c(0,max(aggregated.tbl$dur)))+
     theme(
       axis.title.x = element_text(size = 12),
@@ -702,8 +702,8 @@ patient.by.country.plot <- function(aggregated.tbl,dashboard = dashboard_equal,.
     text_size = 5
     axis_size = 13
   } else {
-    text_size = 3
-    axis_size = 6
+    text_size = 2
+    axis_size = 5
   }
   plt <- ggplot(data=aggregated.tbl) +
     geom_col(aes(x = Country, y=count), fill="turquoise4") +
@@ -1007,4 +1007,3 @@ plot_case_def <- function(data_case_def){
           legend.position = "none")
 }
 
-plot_map_world(data_map)
