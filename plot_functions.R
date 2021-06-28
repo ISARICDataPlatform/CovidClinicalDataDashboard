@@ -443,7 +443,7 @@ p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
-    geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("Oxygen saturation in room air (%)") +
+    geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("Oxygen saturation on room air (%)") +
     theme_bw() + labs(title = N) 
   if (dashboard==T){
     p <- p+
