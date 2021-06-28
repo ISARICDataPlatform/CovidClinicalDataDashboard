@@ -984,11 +984,17 @@ world_plot_data <- merge(world, data_map, all.x = TRUE, all.y = TRUE, by = "name
 
 ggplot(data = world_plot_data) +
   geom_sf(aes(fill = Freq)) +
-  scale_fill_viridis_c(option = "magma", na.value = "white", direction = -1, label = scales::comma, breaks = c(10, 100, 10000, 100000), trans = "log10") + 
-  labs(fill = "Number of patients") +
-  theme_classic()
+  scale_fill_viridis_c(option = "magma", na.value = "white", 
+                       direction = -1, label = scales::comma,
+                       breaks = c(10, 100, 1000, 10000, 100000), trans = "log10") + 
+  theme(legend.position="bottom",
+        legend.text =element_text(angle = 90,vjust = 0.5,hjust=0.4))+
+  labs(fill = "Number of patients") 
 }
 
+#################
+#Case definition
+#################
 plot_case_def <- function(data_case_def){
   ggplot(data = data_case_def, aes(y = proportion, x = age10)) +
     facet_grid(~ symptom) +
@@ -1001,3 +1007,4 @@ plot_case_def <- function(data_case_def){
           legend.position = "none")
 }
 
+plot_map_world(data_map)
