@@ -101,169 +101,85 @@ server <- function(input, output) {
   )
   
   output$agePyramid <- {
-    age.pyramid.reactive <- reactive({
-      fd <- age.pyramid.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    
-    renderPlot(confidentiality.check(age.pyramid.reactive(), age.pyramid.plot),
+    renderPlot(age_pyramid,
                height = 300)
   }
   
   output$outcomesByAdmissionDate <- {
-    outcomes.by.admission.date.reactive <- reactive({
-      fd <- outcome_admission_date_input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) 
-    })
     renderPlot(
-      confidentiality.check(
-        outcomes.by.admission.date.reactive(),
-        outcomes.by.admission.date.plot
-      ),
+      outcome_by_admission,
       height = 300
     )
   }
   
   output$symptomPrevalence <- {
-    symptom.prevalence.reactive <- reactive({
-      fd <- symptom.prevalence.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input)
-      
-    })
     renderPlot(
-      confidentiality.check(symptom.prevalence.reactive(), symptom.prevalence.plot),
+      symptom_prevalence,
       height = 500
     )
   }
   
   output$symptomUpset <- {
-    symptom.upset.reactive <- reactive({
-      fd <- symptom.upset.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(symptom.upset.reactive(), upset.plot, which.plot = "symptom"),
+      symptom_upset,
       height = 500
     )
   }
   
   output$symptomHeatmap <- {
-    renderPlot((heatmap_plot(data_plot_heatmap)), height = 500)
+    renderPlot(symptom_heatmap, height = 500)
   }
   
   
   
   output$comorbidityPrevalence <- {
-    comorbidity.prevalence.reactive <- reactive({
-      fd <- comorbidity.prevalence.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) 
-    })
     renderPlot(
-      confidentiality.check(
-        comorbidity.prevalence.reactive(),
-        comorbidity.prevalence.plot
-      ),
+      comorbidity_prevalence,
       height = 500
     )
   }
   
   output$comorbidityUpset <- {
-    comorbidity.upset.reactive <- reactive({
-      fd <- comorbidity.upset.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(comorbidity.upset.reactive(), upset.plot, which.plot = "comorbidity"),
+      comorbidity_upset,
       height = 500
     )
   }
   
   
   output$treatmentPrevalence <- {
-    treatment.prevalence.reactive <- reactive({
-      fd <- treatment.use.proportion.input %>%
-        slider.filters(input)
-    })
     renderPlot(
-      confidentiality.check(
-        treatment.prevalence.reactive(),
-        treatment.prevalence.plot,
-        icu = FALSE
-      ),
+      treatment_prevalence,
       height = 500
     )
   }
   
   
   output$treatmentUpset <- {
-    treatment.upset.reactive <- reactive({
-      fd <- treatment.upset.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(treatment.upset.reactive(), upset.plot, which.plot = "treatment"),
+      treatment_upset,
       height = 500
     )
   }
   
   
   output$icuTreatmentPrevalence <- {
-    icu.treatment.prevalence.reactive <- reactive({
-      fd <- icu.treatment.use.proportion.input %>%
-        slider.filters(input) 
-    })
     renderPlot(
-      confidentiality.check(
-        icu.treatment.prevalence.reactive(),
-        treatment.prevalence.plot,
-        icu = TRUE
-      ),
+      treatment_prevalence,
       height = 500
     )
   }
   
   output$icuTreatmentUpset <- {
-    icu.treatment.upset.reactive <- reactive({
-      fd <- icu.treatment.upset.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(icu.treatment.upset.reactive(), upset.plot, which.plot = "icu.treatment"),
+      treatment_upset_icu,
       height = 500
     )
   }
   
   output$lengthofstayICU <- {
-    length.of.stay.icu.reactive <- reactive({
-      fd <- length.of.stay.icu.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(length.of.stay.icu.reactive(), length.of.stay.icu.plot),
+      length_of_stay_icu,
       height = 500
     )
   }
@@ -286,62 +202,31 @@ server <- function(input, output) {
                        lat = 7.9,
                        zoom = 1.7)
   })
+  
   output$lengthofstaySex <- {
-    length.of.stay.sex.reactive <- reactive({
-      fd <- length.of.stay.sex.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-      
-    })
     renderPlot(
-      confidentiality.check(length.of.stay.sex.reactive(), length.of.stay.sex.plot),
+      length_of_stay_sex,
       height = 500
     )
   }
   
   output$lengthofstayAge <- {
-    length.of.stay.age.reactive <- reactive({
-      fd <- length.of.stay.age.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(length.of.stay.age.reactive(), length.of.stay.age.plot),
+      length_of_stay_age,
       height = 500
     )
   }
   
   output$admissiontoICU <- {
-    admission.to.icu.reactive <- reactive({
-      fd <- admission.to.icu.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(admission.to.icu.reactive(), admission.to.icu.plot),
+      admission_to_icu,
       height = 500
     )
   }
   
   output$StatusbyTime <- {
-    status.by.time.after.admission.reactive <- reactive({
-      fd <- status.by.time.after.admission.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(
-        status.by.time.after.admission.reactive(),
-        status.by.time.after.admission.plot
-      ),
+      status_by_time,
       height = 500
     )
     
@@ -349,469 +234,136 @@ server <- function(input, output) {
   
   
   output$lab_results_lab_crp <- {
-    data_plot_lab_crp.reactive <- reactive({
-      fd <- data_plot_lab_crp %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_crp.reactive(), p_lab_crp))
+    renderPlotly(crp)
   }
   
   output$lab_results_lab_lym <- {
-    data_plot_lab_lym.reactive <- reactive({
-      fd <- data_plot_lab_lym %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_lym.reactive(), p_lab_lym))
+    renderPlotly(lym)
   }
   
   output$lab_results_lab_neut <- {
-    data_plot_lab_neut.reactive <- reactive({
-      fd <- data_plot_lab_neut %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_neut.reactive(), p_lab_neut))
+    renderPlotly(neut)
   }
   
   output$lab_results_lab_wbc <- {
-    data_plot_lab_wbc.reactive <- reactive({
-      fd <- data_plot_lab_wbc %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_wbc.reactive(), p_lab_wbc))
+    renderPlotly(wbc)
   }
   
   output$lab_results_lab_urean <- {
-    data_plot_lab_urean.reactive <- reactive({
-      fd <- data_plot_lab_urean %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_urean.reactive(), p_lab_urean))
+    renderPlotly(urean)
   }
   
   output$lab_results_lab_pt <- {
-    data_plot_lab_pt.reactive <- reactive({
-      fd <- data_plot_lab_pt %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_pt.reactive(), p_lab_pt))
+    renderPlotly(pt)
   }
   
   output$lab_results_lab_alt <- {
-    data_plot_lab_alt.reactive <- reactive({
-      fd <- data_plot_lab_alt %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_alt.reactive(), p_lab_alt))
+    renderPlotly(alt)
   }
-  output$lab_results_lab_aptt <- {
-    data_plot_lab_aptt.reactive <- reactive({
-      fd <- data_plot_lab_aptt %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_aptt.reactive(), p_lab_aptt))
-  }
+
   output$lab_results_lab_bili <- {
-    data_plot_lab_bili.reactive <- reactive({
-      fd <- data_plot_lab_bili %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_bili.reactive(), p_lab_bili))
+    renderPlotly(bili)
   }
   output$lab_results_lab_ast <- {
-    data_plot_lab_ast.reactive <- reactive({
-      fd <- data_plot_lab_ast %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_lab_ast.reactive(), p_lab_ast))
+    renderPlotly(ast)
   }
   output$clinical_signs_vs_resp <- {
-    data_plot_vs_resp.reactive <- reactive({
-      fd <- data_plot_vs_resp %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_vs_resp.reactive(), p_resp))
+    renderPlotly(resp)
   }
   
   output$clinical_signs_vs_hr <- {
-    data_plot_vs_hr.reactive <- reactive({
-      fd <- data_plot_vs_hr %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_vs_hr.reactive(), p_hr))
+    renderPlotly(hr)
   }
   
   output$clinical_signs_vs_temp <- {
-    data_plot_vs_temp.reactive <- reactive({
-      fd <- data_plot_vs_temp %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_vs_temp.reactive(), p_temp))
+    renderPlotly(temp)
   }
   
   output$clinical_signs_vs_sysbp <- {
-    data_plot_vs_sysbp.reactive <- reactive({
-      fd <- data_plot_vs_sysbp %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_vs_sysbp.reactive(), p_sysbp))
+    renderPlotly(sysbp)
   }
   
   output$clinical_signs_vs_oxysat <- {
-    data_plot_vs_oxysat.reactive <- reactive({
-      fd <- data_plot_vs_oxysat %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(confidentiality.check(data_plot_vs_oxysat.reactive(), p_oxysat))
+    renderPlotly(oxysat)
   }
   
   output$PatientbyCountry <- {
-    patient.by.country.reactive <- reactive({
-      fd <- patient.by.country.input %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
     renderPlot(
-      confidentiality.check(patient.by.country.reactive(), patient.by.country.plot),
+      patient_by_country,
       height = 500
     )
   }
   
   output$age_comorbid_asthma <- {
-    data_plot_comorbid_asthma.reactive <- reactive({
-      fd <- data_plot_comorbid_asthma %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_comorbid_asthma.reactive(),
-        plot.prop.by.age_comorbid_asthma
-      )
-    )
+    renderPlotly(asthma)
   }
   
   output$age_comorbid_malignant_neoplasm <- {
-    data_plot_comorbid_malignant_neoplasm.reactive <- reactive({
-      fd <- data_plot_comorbid_asthma %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_comorbid_malignant_neoplasm.reactive(),
-        plot.prop.by.age_comorbid_malignant_neoplasm
-      )
-    )
+    renderPlotly(neoplasm)
   }
   
   output$age_comorbid_obesity <- {
-    data_plot_comorbid_obesity.reactive <- reactive({
-      fd <- data_plot_comorbid_obesity %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_comorbid_obesity.reactive(),
-        plot.prop.by.age_comorbid_obesity
-      )
-    )
+    renderPlotly(obesity)
   }
   
   output$age_comorbid_diabetes <- {
-    data_plot_comorbid_diabetes.reactive <- reactive({
-      fd <- data_plot_comorbid_diabetes %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_comorbid_diabetes.reactive(),
-        plot.prop.by.age_comorbid_diabetes
-      )
-    )
+    renderPlotly(diabetes)
   }
   
   output$age_comorbid_dementia <- {
-    data_plot_comorbid_dementia.reactive <- reactive({
-      fd <- data_plot_comorbid_dementia %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_comorbid_dementia.reactive(),
-        plot.prop.by.age_comorbid_dementia
-      )
-    )
+    renderPlotly(dementia)
   }
   
   output$age_comorbid_smoking <- {
-    data_plot_comorbid_smoking.reactive <- reactive({
-      fd <- data_plot_comorbid_smoking %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_comorbid_smoking.reactive(),
-        plot.prop.by.age_comorbid_smoking
-      )
-    )
+    renderPlotly(smoking)
   }
   
   output$age_comorbid_hypertension <- {
-    data_plot_comorbid_hypertension.reactive <- reactive({
-      fd <- data_plot_comorbid_hypertension %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_comorbid_hypertension.reactive(),
-        plot.prop.by.age_comorbid_hypertension
-      )
-    )
+    renderPlotly(hypertension)
   }
   
   output$age_symptoms_history_of_fever <- {
-    data_plot_symptoms_history_of_fever.reactive <- reactive({
-      fd <- data_plot_symptoms_history_of_fever %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_history_of_fever.reactive(),
-        plot.prop.by.age_symptoms_history_of_fever
-      )
-    )
+    renderPlotly(history_of_fever)
   }
   
   output$age_symptoms_cough <- {
-    data_plot_symptoms_cough.reactive <- reactive({
-      fd <- data_plot_symptoms_cough %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_cough.reactive(),
-        plot.prop.by.age_symptoms_cough
-      )
-    )
+    renderPlotly(cough)
   }
   
   output$age_symptoms_cough_fever <- {
-    data_plot_symptoms_cough_fever.reactive <- reactive({
-      fd <- data_plot_symptoms_cough_fever %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_cough_fever.reactive(),
-        plot.prop.by.age_symptoms_cough_fever
-      )
-    )
+    renderPlotly(cough_fever)
   }
   
   output$age_symptoms_shortness_of_breath <- {
-    data_plot_symptoms_shortness_of_breath.reactive <- reactive({
-      fd <- data_plot_symptoms_shortness_of_breath %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_shortness_of_breath.reactive(),
-        plot.prop.by.age_symptoms_shortness_of_breath
-      )
-    )
+    renderPlotly(shortness_of_breath)
   }
   
   output$age_symptoms_cought_fever_shortness_of_breath <- {
-    data_plot_symptoms_cought_fever_shortness_of_breath.reactive <-
-      reactive({
-        fd <- data_plot_symptoms_cought_fever_shortness_of_breath %>%
-          as.data.table() %>%
-          lazy_dt(immutable = FALSE) %>%
-          slider.filters(input) %>%
-          as_tibble()
-      })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_cought_fever_shortness_of_breath.reactive(),
-        plot.prop.by.age_symptoms_cought_fever_shortness_of_breath
-      )
-    )
+    renderPlotly(shortness_of_breath)
   }
   
   output$age_symptoms_upper_respiratory_tract_symptoms <- {
-    data_plot_symptoms_upper_respiratory_tract_symptoms.reactive <-
-      reactive({
-        fd <- data_plot_symptoms_upper_respiratory_tract_symptoms %>%
-          as.data.table() %>%
-          lazy_dt(immutable = FALSE) %>%
-          slider.filters(input) %>%
-          as_tibble()
-      })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_upper_respiratory_tract_symptoms.reactive(),
-        plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms
-      )
-    )
+    renderPlotly(upper_respiratory_tract_symptoms)
   }
   
   output$age_symptoms_altered_consciousness_confusion <- {
-    data_plot_symptoms_altered_consciousness_confusion.reactive <-
-      reactive({
-        fd <- data_plot_symptoms_altered_consciousness_confusion %>%
-          as.data.table() %>%
-          lazy_dt(immutable = FALSE) %>%
-          slider.filters(input) %>%
-          as_tibble()
-      })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_altered_consciousness_confusion.reactive(),
-        plot.prop.by.age_symptoms_altered_consciousness_confusion
-      )
-    )
+    renderPlotly(altered_consciousness_confusion)
   }
   
   output$age_symptoms_constitutional <- {
-    data_plot_symptoms_constitutional.reactive <- reactive({
-      fd <- data_plot_symptoms_constitutional %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_constitutional.reactive(),
-        plot.prop.by.age_symptoms_constitutional
-      )
-    )
+    renderPlotly(constitutional)
   }
   
   output$age_symptoms_vomiting_nausea <- {
-    data_plot_symptoms_vomiting_nausea.reactive <- reactive({
-      fd <- data_plot_symptoms_vomiting_nausea %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_vomiting_nausea.reactive(),
-        plot.prop.by.age_symptoms_vomiting_nausea
-      )
-    )
+    renderPlotly(vomiting_nausea)
   }
   
   output$age_symptoms_diarrhoea <- {
-    data_plot_symptoms_diarrhoea.reactive <- reactive({
-      fd <- data_plot_symptoms_diarrhoea %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_diarrhoea.reactive(),
-        plot.prop.by.age_symptoms_diarrhoea
-      )
-    )
+    renderPlotly(diarrhoea)
   }
   
   output$age_symptoms_abdominal_pain <- {
-    data_plot_symptoms_abdominal_pain.reactive <- reactive({
-      fd <- data_plot_symptoms_abdominal_pain %>%
-        as.data.table() %>%
-        lazy_dt(immutable = FALSE) %>%
-        slider.filters(input) %>%
-        as_tibble()
-    })
-    renderPlotly(
-      confidentiality.check(
-        data_plot_symptoms_abdominal_pain.reactive(),
-        plot.prop.by.age_symptoms_abdominal_pain
-      )
-    )
+    renderPlotly(abdominal_pain)
   }
   
   

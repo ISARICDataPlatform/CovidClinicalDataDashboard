@@ -303,10 +303,4 @@ knit("markdown/welcome_caveats.Rmd", output = "markdown/welcome_caveats.md")
 
 
 
-
-
-
-
-
-
-
+base::load("plots.Rdata")
