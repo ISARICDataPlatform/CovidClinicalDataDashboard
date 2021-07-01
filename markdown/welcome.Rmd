@@ -11,7 +11,6 @@ The ISARIC (International Severe Acute Respiratory and emerging Infections Conso
 
 This dashboard allows you to 
 - explore the data to understand the latest statistics of SARS-CoV-2 infection around the world.
-- manipulate data to visualize the statistics by age, sex, date, outcome, and country (please use the red button on the top-left corner).
 - download a summary report containing all of the graphs and tables in the dashboard. 
 
 If you have any questions about the content on this page, or ISARIC, or would like to know how you can become involved in this network, please email ncov@isaric.org.

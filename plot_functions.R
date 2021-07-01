@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = F
+dashboard_equal = T
 
 flowchart <- function(){
   
@@ -599,12 +599,17 @@ p_lab_ast <- function(aggregated.tbl, dashboard=dashboard_equal){
 }
 
 ###########################################################
-length.of.stay.sex.plot <- function(aggregated.tbl, ...){
+length.of.stay.sex.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ...){
+  if (dashboard==T){
+    s=5
+  }else{
+    s=2.5
+  }
   plt <- ggplot(aggregated.tbl, aes(x = sex, y = length.of.stay, fill=sex)) +
     geom_violin(trim=F)+
     geom_boxplot(width=0.1, fill="white", outlier.shape = NA)  +
     scale_fill_viridis(drop = F, discrete = "true", option = "magma", begin = 0.25, end = 0.75) +
-    geom_text(stat="count", aes(label=..count..),y=-2, size=2.5)+
+    geom_text(stat="count", aes(label=..count..),y=-2, size=s)+
     labs(title=" ", x="Sex", y = "Length of hospital stay", fill="Sex") +
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
@@ -618,12 +623,17 @@ length.of.stay.sex.plot <- function(aggregated.tbl, ...){
 }
 
 
-length.of.stay.age.plot <- function(aggregated.tbl, ...){
+length.of.stay.age.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ...){
+  if (dashboard==T){
+    s=4
+  }else{
+    s=2
+  }
   plt <- ggplot(aggregated.tbl, aes(x = agegp10, y = length.of.stay, fill=agegp10)) +
     geom_violin(trim=F) +
     geom_boxplot(width=0.05, fill="white", outlier.shape = NA)  +
     labs(title="  ", x="Age group", y = "Length of hospital stay", fill="Age") +
-    geom_text(stat="count", aes(label=..count..),y=-2, size=2)+
+    geom_text(stat="count", aes(label=..count..),y=-2, size=s)+
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
       axis.title.x = element_text( size=12),
@@ -671,13 +681,18 @@ status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
   plt
 }
 
-length.of.stay.icu.plot <- function(aggregated.tbl,...){
+length.of.stay.icu.plot <- function(aggregated.tbl,dashboard=dashboard_equal,...){
+  if (dashboard==T){
+    s=5
+  }else{
+    s=2.5
+  }
   plt <- ggplot(data = aggregated.tbl, aes(x = type, y = dur, fill = type)) +
     geom_violin(trim = TRUE, show.legend = FALSE,bw=2) +
     scale_fill_manual(values = c("darkorchid2", "darkorchid4")) +
     geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA)  +
     labs(title = " ", x = "Location", y = "Length of stay (days)") +
-    geom_text(stat="count", aes(label=..count..),y=-2, size=2.5)+
+    geom_text(stat="count", aes(label=..count..),y=-2, size=s)+
     #ylim(c(0,max(aggregated.tbl$dur)))+
     theme(
       axis.title.x = element_text(size = 12),

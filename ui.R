@@ -133,71 +133,6 @@ dashboardPage(
         )
       )
     ),
-    
-    dropdown(
-      inputId = "controls",
-      icon = icon("gear"),
-      size = "sm",
-      status = "custom",
-      tooltip = tooltipOptions(title = "Click for data settings"),
-      options = list(`style` = "btm-custom"),
-      tags$h3("Controls"),
-      awesomeCheckboxGroup(
-        inputId = "sex",
-        label = "Gender",
-        status = "custom",
-        choices = list(
-          "Male" = "Male",
-          "Female" = "Female",
-          "Unknown" = NA
-        ),
-        selected = c("Male", "Female", NA)
-      ),
-      sliderInput(
-        inputId = "agegp10",
-        label = "Age group",
-        min = 0,
-        max = 120,
-        step = 10,
-        value = c(0, 120),
-        dragRange = T
-      ),
-      
-      pickerInput(
-        inputId = "country",
-        label = "Country",
-        choices = countries,
-        selected = countries,
-        options = list(`actions-box` = TRUE),
-        multiple = TRUE
-      ),
-      awesomeCheckboxGroup(
-        inputId = "outcome",
-        label = "Outcome",
-        status = 'custom',
-        choices = list(
-          "Death" = "Death",
-          "LTFU" = "LTFU",
-          "Discharge" = "Discharge"
-        ),
-        selected = c("Death", "LTFU", "Discharge")
-      ),
-      awesomeCheckboxGroup(
-        inputId = "icu_ever",
-        label = "ICU admission",
-        status = 'custom',
-        choices = list("Yes" = TRUE, "No" = FALSE),
-        selected = c(TRUE, FALSE)
-      ),
-      pickerInput(
-        inputId = "admission_date",
-        label = "Month of admission",
-        choices = month.option.list,
-        selected = c(NA, month.options),
-        options = list(`actions-box` = TRUE),
-        multiple = TRUE
-      ),
-    ),
     hr(),
     tabItems(
       tabItem(tabName = "home", 
@@ -481,13 +416,6 @@ dashboardPage(
             title = 'ALT (units/L)'
           ),
           box(
-            plotlyOutput("lab_results_lab_aptt", height = "500px"),
-            width = 6,
-            height = 600,
-            solidHeader = T,
-            title = 'APTT (s)'
-          ),
-          box(
             plotlyOutput("lab_results_lab_bili", height = "500px"),
             width = 6,
             height = 600,
@@ -528,13 +456,6 @@ dashboardPage(
                 )
               ),
               fluidRow(
-                box(plotOutput("static_country"),
-                    title = "Disribution of patients by countries (all)",
-                    width = 12,
-                    height=550
-                )
-              ),
-              fluidRow(
                 box(includeMarkdown("markdown/Summary_dashboard_bottom.md"),
                     width = 12
                 )
@@ -551,49 +472,49 @@ dashboardPage(
               fluidRow(
                 box(
                   plotlyOutput("age_comorbid_asthma", height = "500px"),
-                  width = 4,
+                  width = 6,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with asthma"
                 ),
                 box(
                   plotlyOutput("age_comorbid_malignant_neoplasm", height = "500px"),
-                  width = 4,
+                  width = 6,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with malignant neoplasma"
                 ),
                 box(
                   plotlyOutput("age_comorbid_obesity", height = "500px"),
-                  width = 4,
+                  width = 6,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with obesity"
                 ),
                 box(
                   plotlyOutput("age_comorbid_diabetes", height = "500px"),
-                  width = 4,
+                  width = 6,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with diabetes"
                 ),
                 box(
                   plotlyOutput("age_comorbid_dementia", height = "500px"),
-                  width = 4,
+                  width = 6,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with dementia"
                 ),
                 box(
                   plotlyOutput("age_comorbid_smoking", height = "500px"),
-                  width = 4,
+                  width = 6,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion of smokers"
                 ),
                 box(
                   plotlyOutput("age_comorbid_hypertension", height = "500px"),
-                  width = 4,
+                  width = 6,
                   height = 400,
                   solidHeader = T,
                   title = "Proportion with hypertension"
@@ -612,77 +533,77 @@ dashboardPage(
         fluidRow(
           box(
             plotlyOutput("age_symptoms_history_of_fever", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with fever"
           ),
           box(
             plotlyOutput("age_symptoms_cough", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough"
           ),
           box(
             plotlyOutput("age_symptoms_cough_fever", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough or fever"
           ),
           box(
             plotlyOutput("age_symptoms_shortness_of_breath", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with shortness of breath"
           ),
           box(
             plotlyOutput("age_symptoms_cought_fever_shortness_of_breath", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough, fever, or shortness of breath"
           ),
           box(
             plotlyOutput("age_symptoms_upper_respiratory_tract_symptoms", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with upper respiratory tract symptoms"
           ),
           box(
             plotlyOutput("age_symptoms_altered_consciousness_confusion", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with confusion"
           ),
           box(
             plotlyOutput("age_symptoms_constitutional", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with constitutional symptoms"
           ),
           box(
             plotlyOutput("age_symptoms_vomiting_nausea", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with vomiting nausea"
           ),
           box(
             plotlyOutput("age_symptoms_diarrhoea", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with diarrhoea"
           ),
           box(
             plotlyOutput("age_symptoms_abdominal_pain", height = "500px"),
-            width = 4,
+            width = 6,
             height = 400,
             solidHeader = T,
             title = "Proportion with abdominal pain"
@@ -690,7 +611,6 @@ dashboardPage(
         )
       ),
       tabItem(tabName = "tables",
-              fluidRow("Note: controls (red botton above) are not applied to the summary tables on this page"),
               fluidRow(
                 box(uiOutput("table_patient_characteristic"), height = 670),
                 box(uiOutput("table_outcome_age_sex"), height = 670),
