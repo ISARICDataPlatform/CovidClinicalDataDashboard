@@ -107,9 +107,16 @@ At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusi
 
 Data manipulation is performed using the tidyverse collection of packages (Wickham et al. 2019), as well as ff (Adler et al. 2020) and dtplyr (Wickham 2021). Data visualisation makes use of ggplot (Wickham 2016) and its extension ggupset (Ahlmann-Eltze 2020). The report is generated using knitr (Xie 2021). 
 
-This report only includes individuals for whom data collection commenced on or before XX 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes; AND who have laboratory-confirmed SARS-COV-2 infection. 
+This report only includes individuals for whom data collection commenced on or before 25 May 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes; AND who have laboratory-confirmed SARS-COV-2 infection. 
 
 
+```{r case_def, echo = FALSE, fig.align="center", fig.cap = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"}
+
+plot_case_def(case.def.input)
+
+```
+
+\newpage
 # Results
 
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flow chart (Figure 1) gives an overview of the cohort and outcomes as of 25 May 2021. 
@@ -135,12 +142,6 @@ Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_
 
 ```{r table1, tab.cap = "Patient Characteristics. Proportions are presented in parentheses, and have been rounded to two decimal places."}
 tables_supplementary(table_sup = patient.characteristic.table[1:19,]) 
-```
-\newpage
-```{r case_def, echo = FALSE, fig.align="center", fig.cap = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"}
-
-#plot_case_def(case.def.input)
-
 ```
 
 \newpage
