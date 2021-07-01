@@ -13,7 +13,7 @@ knitr::opts_chunk$set(fig.path='Figs/')
 ```
 
 
-Please use the tabs on the left-hand side to navigate and view the results.
+**Please use the tabs on the left-hand side to navigate and view the results.**
 
 
 ## References
