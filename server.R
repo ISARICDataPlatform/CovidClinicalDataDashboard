@@ -100,15 +100,22 @@ server <- function(input, output) {
   }, deleteFile = TRUE
   )
   
+  output$case_def <- {
+    renderPlot(
+      case_def,
+      height = 400
+    )
+  }
+  
   output$agePyramid <- {
     renderPlot(age_pyramid,
-               height = 300)
+               height = 400)
   }
   
   output$outcomesByAdmissionDate <- {
     renderPlot(
-      outcome_by_admission,
-      height = 300
+      outcomes_by_admission,
+      height = 400
     )
   }
   

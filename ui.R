@@ -109,8 +109,7 @@ dashboardPage(
     ),
   
     hr(),
-    fluidRow(column(3, verbatimTextOutput("value"))),
-    fluidRow(column(3), downloadButton("downloadReport", "Generate report"))
+    fluidRow(column(3, verbatimTextOutput("value")))
   ),
   dashboardBody(
     tags$head(
@@ -155,18 +154,18 @@ dashboardPage(
       tabItem(tabName = "patients",
               fluidRow(
                 box(
-                  plotOutput("agePyramid", height = "300px"),
+                  plotOutput("agePyramid", height = "400px"),
                   "Bar fills are outcome (death/discharge/censored) at the time of report.",
                   width = 6,
-                  height = 400,
+                  height = 500,
                   solidHeader = T,
                   title = 'Age and sex distribution of patients'
                 ),
                 box(
-                  plotOutput("outcomesByAdmissionDate", height = "300px"),
+                  plotOutput("outcomesByAdmissionDate", height = "400px"),
                   "Bar fills are outcome (death/discharge/censored) at the time of report.",
                   width = 6,
-                  height = 400,
+                  height = 500,
                   solidHeader = T,
                   title = 'Cumulative patient count by admission date'
                 )
@@ -455,6 +454,12 @@ dashboardPage(
                     width = 12
                 )
               ),
+                box(
+                  plotOutput("case_def"),
+                  height = 500,
+                  width=12,
+                  title = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"
+                ),
               fluidRow(
                 box(includeMarkdown("markdown/Summary_dashboard_bottom.md"),
                     width = 12
