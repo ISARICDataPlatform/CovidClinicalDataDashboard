@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = T
+dashboard_equal = F
 
 flowchart <- function(){
   
