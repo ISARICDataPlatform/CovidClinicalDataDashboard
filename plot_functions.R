@@ -17,61 +17,66 @@ flowchart <- function(){
       tab3 [label = '@@3']
       
       node [shape = diamond, fillcolor=white]
-      
       tab4 [label = '@@4', height=2, width=2]
       tab5 [label = '@@5', height=2, width=2]
+      tab6 [label = '@@6', height=2, width=2]
       
       node [shape = rectangle, fillcolor= lightCoral] 
-      tab6 [label = '@@6',height=1, width=2]
-      tab7 [label = '@@7',height=0.8, width=1.5]
+      tab7 [label = '@@7',height=1, width=2]
       tab8 [label = '@@8',height=0.8, width=1.5]
       tab9 [label = '@@9',height=0.8, width=1.5]
+      tab10 [label = '@@10',height=0.8, width=1.5]
 
       node [shape = rectangle, fillcolor= lightSalmon] 
-      tab10 [label = '@@10',height=1, width=2]
-      tab11 [label = '@@11',height=0.8, width=1.5]
+      tab11 [label = '@@11',height=1, width=2]
       tab12 [label = '@@12',height=0.8, width=1.5]
       tab13 [label = '@@13',height=0.8, width=1.5]
+      tab14 [label = '@@14',height=0.8, width=1.5]
       
       
       # edge definitions with the node IDs
       tab1 -> tab2 [tailport=e, headport=w, constraint=false]
       tab1 -> tab3 [tailport=s]
       tab2 -> tab4 [headport=n]
-      tab3 -> tab5
-      tab5 -> tab6 [label = '@@14']
-      tab5 -> tab10 [label = '@@15']
-      tab6 -> tab7 [label = '@@16']
-      tab6 -> tab8 [label = '@@17']
-      tab6 -> tab9 [label = '@@18']
-      tab10 -> tab11 [label = '@@19']
-      tab10 -> tab12 [label = '@@20']
-      tab10 -> tab13 [label = '@@21']
+      tab2 -> tab5 [headport=n]
+      tab3 -> tab6
+      tab6 -> tab7 [label = '@@15']
+      tab6 -> tab11 [label = '@@16']
+      tab7 -> tab8 [label = '@@17']
+      tab7 -> tab9 [label = '@@18']
+      tab7 -> tab10 [label = '@@19']
+      tab11 -> tab12 [label = '@@20']
+      tab11 -> tab13 [label = '@@21']
+      tab11 -> tab14 [label = '@@22']
       }
+
+      
 
       [1]: paste0('All patients in ISARIC database \\n (N=', nrow(summary_input_overall), ')')
       [2]: paste0('EXCLUDED ', round((nrow(summary_input_overall)-nrow(summary_input))/nrow(summary_input_overall)*100,1),'%')
       [3]: paste0('ANALYSED ', round(nrow(summary_input)/nrow(summary_input_overall)*100,1),'%')
-      [4]: paste0('laboratory \\n or clinically negative or\\n not confirmed\\n (N=',nrow(summary_input_overall)-nrow(summary_input),')')
-      [5]: paste0('laboratory \\n or clinically confirmed \\n SARS-COV-2 infections\\n (N=',nrow(summary_input),')')
-      [6]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
-      [7]: paste0('Death\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
-      [8]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
-      [9]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU')), ')')
-      [10]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever))),')')
-      [11]: paste0('Death\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Death')), ')')
-      [12]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
-      [13]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever)) & slider_outcome=='LTFU')), ')')
-      [14]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table (slider_icu_ever))[2]*100,0), '%')
-      [15]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table(slider_icu_ever))[1]*100,0), '%')
-      [16]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[1]*100,0), '%')
-      [17]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[2]*100,0), '%')
-      [18]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[3]*100,0), '%')
-      [29]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[1]*100,0), '%')
-      [20]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[2]*100,0), '%')
-      [21]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[3]*100,0), '%')
+      [4]: paste0('laboratory \\n unknown and clinical \\n diagnosis unknown or negative \\n (N=',nrow(summary_input_overall%>%filter(is.na(cov_det_id) & (clin_diag_covid_19==FALSE | is.na(clin_diag_covid_19)))),')')
+      [5]: paste0('laboratory negative \\n (N=',nrow(summary_input_overall%>%filter(cov_det_id=='NEGATIVE')),')')
+      [6]: paste0('laboratory \\n or clinically confirmed \\n SARS-COV-2 infections\\n (N=',nrow(summary_input),')')
+      [7]: paste0('ICU/HDU \\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE)), ')')
+      [8]: paste0('Death\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Death')), ')')
+      [9]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='Discharge')), ')')
+      [10]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==TRUE & slider_outcome=='LTFU')), ')')
+      [11]: paste0('No ICU/HDU or ICU/HDU\\nstatus unknown\\n (N=', nrow(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever))),')')
+      [12]: paste0('Death\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))& slider_outcome=='Death')), ')')
+      [13]: paste0('Discharge\\n alive (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever))  & slider_outcome=='Discharge')), ')')
+      [14]: paste0('Lost to follow-up\\n (N=', nrow(summary_input %>% filter((slider_icu_ever==FALSE |is.na(slider_icu_ever)) & slider_outcome=='LTFU')), ')')
+      [15]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table (slider_icu_ever))[2]*100,0), '%')
+      [16]: paste0(round(prop.table(summary_input %>% mutate(slider_icu_ever=replace(slider_icu_ever,is.na(slider_icu_ever),FALSE)) %$% table(slider_icu_ever))[1]*100,0), '%')
+      [17]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[1]*100,0), '%')
+      [18]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[2]*100,0), '%')
+      [19]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==TRUE) %$% table(slider_outcome))[3]*100,0), '%')
+      [20]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[1]*100,0), '%')
+      [21]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[2]*100,0), '%')
+      [22]: paste0(round(prop.table(summary_input %>% filter(slider_icu_ever==FALSE|is.na(slider_icu_ever)) %$% table(slider_outcome))[3]*100,0), '%')
       "
   )
+  
   
  
 }
