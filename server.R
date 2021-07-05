@@ -102,53 +102,53 @@ server <- function(input, output) {
   
   output$case_def <- {
     renderPlot(
-      case_def,
+      plot_case_def(case.def.input),
       height = 400
     )
   }
   
   output$agePyramid <- {
-    renderPlot(age_pyramid,
-               height = 400)
+    renderPlot(age.pyramid.plot(age.pyramid.input),
+               height = 300)
   }
   
   output$outcomesByAdmissionDate <- {
     renderPlot(
-      outcomes_by_admission,
+      outcomes.by.admission.date.plot(outcome_admission_date_input),
       height = 400
     )
   }
   
   output$symptomPrevalence <- {
     renderPlot(
-      symptom_prevalence,
+      symptom.prevalence.plot(symptom.prevalence.input),
       height = 500
     )
   }
   
   output$symptomUpset <- {
     renderPlot(
-      symptom_upset,
+      upset.plot(symptom.upset.input, which.plot = "symptom"),
       height = 500
     )
   }
   
   output$symptomHeatmap <- {
-    renderPlot(symptom_heatmap, height = 500)
+    renderPlot(heatmap_plot(data_plot_heatmap), height = 500)
   }
   
   
   
   output$comorbidityPrevalence <- {
     renderPlot(
-      comorbidity_prevalence,
+      comorbidity.prevalence.plot(comorbidity.prevalence.input),
       height = 500
     )
   }
   
   output$comorbidityUpset <- {
     renderPlot(
-      comorbidity_upset,
+      upset.plot(comorbidity.upset.input, which.plot = "comorbidity"),
       height = 500
     )
   }
@@ -156,7 +156,7 @@ server <- function(input, output) {
   
   output$treatmentPrevalence <- {
     renderPlot(
-      treatment_prevalence,
+      treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE),
       height = 500
     )
   }
@@ -164,7 +164,7 @@ server <- function(input, output) {
   
   output$treatmentUpset <- {
     renderPlot(
-      treatment_upset,
+      upset.plot(treatment.upset.input, which.plot = "treatment"),
       height = 500
     )
   }
@@ -172,21 +172,21 @@ server <- function(input, output) {
   
   output$icuTreatmentPrevalence <- {
     renderPlot(
-      treatment_prevalence,
+      treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE),
       height = 500
     )
   }
   
   output$icuTreatmentUpset <- {
     renderPlot(
-      treatment_upset_icu,
+      upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment"),
       height = 500
     )
   }
   
   output$lengthofstayICU <- {
     renderPlot(
-      length_of_stay_icu,
+      length.of.stay.icu.plot(length.of.stay.icu.input),
       height = 500
     )
   }
@@ -212,28 +212,28 @@ server <- function(input, output) {
   
   output$lengthofstaySex <- {
     renderPlot(
-      length_of_stay_sex,
+      length.of.stay.sex.plot(length.of.stay.sex.input) ,
       height = 500
     )
   }
   
   output$lengthofstayAge <- {
     renderPlot(
-      length_of_stay_age,
+      length.of.stay.age.plot(length.of.stay.age.input),
       height = 500
     )
   }
   
   output$admissiontoICU <- {
     renderPlot(
-      admission_to_icu,
+      admission.to.icu.plot(admission.to.icu.input),
       height = 500
     )
   }
   
   output$StatusbyTime <- {
     renderPlot(
-      status_by_time,
+      status.by.time.after.admission.plot(status.by.time.after.admission.input),
       height = 500
     )
     
@@ -241,136 +241,136 @@ server <- function(input, output) {
   
   
   output$lab_results_lab_crp <- {
-    renderPlotly(crp)
+    renderPlotly(p_lab_crp(data_plot_lab_crp))
   }
   
   output$lab_results_lab_lym <- {
-    renderPlotly(lym)
+    renderPlotly(p_lab_lym(data_plot_lab_lym))
   }
   
   output$lab_results_lab_neut <- {
-    renderPlotly(neut)
+    renderPlotly(p_lab_neut(data_plot_lab_neut))
   }
   
   output$lab_results_lab_wbc <- {
-    renderPlotly(wbc)
+    renderPlotly(p_lab_wbc(data_plot_lab_wbc))
   }
   
   output$lab_results_lab_urean <- {
-    renderPlotly(urean)
+    renderPlotly(p_lab_urean(data_plot_lab_urean))
   }
   
   output$lab_results_lab_pt <- {
-    renderPlotly(pt)
+    renderPlotly(p_lab_pt(data_plot_lab_pt))
   }
   
   output$lab_results_lab_alt <- {
-    renderPlotly(alt)
+    renderPlotly(p_lab_alt(data_plot_lab_alt))
   }
 
   output$lab_results_lab_bili <- {
-    renderPlotly(bili)
+    renderPlotly(p_lab_bili(data_plot_lab_bili))
   }
   output$lab_results_lab_ast <- {
-    renderPlotly(ast)
+    renderPlotly(p_lab_ast(data_plot_lab_ast))
   }
   output$clinical_signs_vs_resp <- {
-    renderPlotly(resp)
+    renderPlotly(p_resp(data_plot_vs_resp))
   }
   
   output$clinical_signs_vs_hr <- {
-    renderPlotly(hr)
+    renderPlotly(p_hr(data_plot_vs_hr))
   }
   
   output$clinical_signs_vs_temp <- {
-    renderPlotly(temp)
+    renderPlotly(p_temp(data_plot_vs_temp))
   }
   
   output$clinical_signs_vs_sysbp <- {
-    renderPlotly(sysbp)
+    renderPlotly(p_sysbp(data_plot_vs_sysbp))
   }
   
   output$clinical_signs_vs_oxysat <- {
-    renderPlotly(oxysat)
+    renderPlotly(p_oxysat(data_plot_vs_oxysat))
   }
   
   output$PatientbyCountry <- {
     renderPlot(
-      patient_by_country,
+      patient.by.country.plot(patient.by.country.input),
       height = 500
     )
   }
   
   output$age_comorbid_asthma <- {
-    renderPlotly(asthma)
+    renderPlotly(plot.prop.by.age_comorbid_asthma(data_plot_comorbid_asthma, FALSE))
   }
   
   output$age_comorbid_malignant_neoplasm <- {
-    renderPlotly(neoplasm)
+    renderPlotly(plot.prop.by.age_comorbid_malignant_neoplasm(data_plot_comorbid_malignant_neoplasm, FALSE))
   }
   
   output$age_comorbid_obesity <- {
-    renderPlotly(obesity)
+    renderPlotly(plot.prop.by.age_comorbid_obesity(data_plot_comorbid_obesity, FALSE))
   }
   
   output$age_comorbid_diabetes <- {
-    renderPlotly(diabetes)
+    renderPlotly(plot.prop.by.age_comorbid_diabetes(data_plot_comorbid_diabetes, FALSE))
   }
   
   output$age_comorbid_dementia <- {
-    renderPlotly(dementia)
+    renderPlotly(plot.prop.by.age_comorbid_dementia(data_plot_comorbid_dementia, FALSE))
   }
   
   output$age_comorbid_smoking <- {
-    renderPlotly(smoking)
+    renderPlotly(plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE))
   }
   
   output$age_comorbid_hypertension <- {
-    renderPlotly(hypertension)
+    renderPlotly(plot.prop.by.age_comorbid_hypertension(data_plot_comorbid_hypertension, FALSE))
   }
   
   output$age_symptoms_history_of_fever <- {
-    renderPlotly(history_of_fever)
+    renderPlotly(plot.prop.by.age_symptoms_history_of_fever(data_plot_symptoms_history_of_fever, FALSE))
   }
   
   output$age_symptoms_cough <- {
-    renderPlotly(cough)
+    renderPlotly(plot.prop.by.age_symptoms_cough(data_plot_symptoms_cough, FALSE))
   }
   
   output$age_symptoms_cough_fever <- {
-    renderPlotly(cough_fever)
+    renderPlotly(plot.prop.by.age_symptoms_cough_fever(data_plot_symptoms_cough_fever, FALSE))
   }
   
   output$age_symptoms_shortness_of_breath <- {
-    renderPlotly(shortness_of_breath)
+    renderPlotly(plot.prop.by.age_symptoms_shortness_of_breath(data_plot_symptoms_shortness_of_breath, FALSE))
   }
   
   output$age_symptoms_cought_fever_shortness_of_breath <- {
-    renderPlotly(shortness_of_breath)
+    renderPlotly(plot.prop.by.age_symptoms_cought_fever_shortness_of_breath(data_plot_symptoms_cought_fever_shortness_of_breath, FALSE))
   }
   
   output$age_symptoms_upper_respiratory_tract_symptoms <- {
-    renderPlotly(upper_respiratory_tract_symptoms)
+    renderPlotly(plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms(data_plot_symptoms_upper_respiratory_tract_symptoms, FALSE))
   }
   
   output$age_symptoms_altered_consciousness_confusion <- {
-    renderPlotly(altered_consciousness_confusion)
+    renderPlotly(plot.prop.by.age_symptoms_altered_consciousness_confusion(data_plot_symptoms_altered_consciousness_confusion, FALSE))
   }
   
   output$age_symptoms_constitutional <- {
-    renderPlotly(constitutional)
+    renderPlotly(plot.prop.by.age_symptoms_constitutional(data_plot_symptoms_constitutional, FALSE))
   }
   
   output$age_symptoms_vomiting_nausea <- {
-    renderPlotly(vomiting_nausea)
+    renderPlotly(plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE))
   }
   
   output$age_symptoms_diarrhoea <- {
-    renderPlotly(diarrhoea)
+    renderPlotly(plot.prop.by.age_symptoms_diarrhoea(data_plot_symptoms_diarrhoea, FALSE))
   }
   
   output$age_symptoms_abdominal_pain <- {
-    renderPlotly(abdominal_pain)
+    renderPlotly(plot.prop.by.age_symptoms_abdominal_pain(data_plot_symptoms_abdominal_pain, FALSE))
   }
   
   

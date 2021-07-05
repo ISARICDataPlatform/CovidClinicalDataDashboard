@@ -28,7 +28,7 @@ Comparable experimental data have allowed the development of research synthesis 
 
 In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. Today, our partners have collected standardised, in-hospital clinical data from over half a million patients, in almost 800 sites, across more than 60 countries. This partner-fueled growing initiative is to our knowledge the largest COVID-19 in-hospital international database in the world.
 
-**What have our partners achieved**. Using the ISARIC database, our partners have produced evidence on XYZ areas of knowledge. XX articles have been published, XX are being peer-reviewed, and XX analyses are in progress. [link: website] 
+**What have our partners achieved**. Using the ISARIC and ISARIC4C databases, our partners have produced a broad range of evidence. More than 50 reports and manuscripts have been published to date and a further 25 are in progress or under peer-review. https://isaric.org/document-library/ , https://isaric4c.net/outputs/ and https://isaric.org/research/covid-19-clinical-research-resources/accessing-covid-19-clinical-data/approved-uses-of-platform-data/.
 
 In this report, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme.[2]The majority of this database is additionally available to external researchers via application to our Data Access Committee at https://www.iddo.org/covid19/data-sharing/accessing-data.  
 
