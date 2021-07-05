@@ -43,6 +43,11 @@ dashboardPage(
         tabName = "flowchart", 
         icon = icon("book")),
       menuItem(
+        "Country distribution",
+        tabName = "country",
+        icon = icon("globe")
+      ),
+      menuItem(
         "Patient characteristics",
         tabName = "patients",
         icon = icon("bed")
@@ -53,9 +58,29 @@ dashboardPage(
         icon = icon("stethoscope")
       ),
       menuItem(
+        "Symptoms by age",
+        tabName = "symptoms_by_age",
+        icon = icon("chart-bar")
+      ),
+      menuItem(
         "Comorbidities",
         tabName = "comorbidities",
         icon = icon("notes-medical")
+      ),
+      menuItem(
+        "Comorbidities by age",
+        tabName = "comorbidities_by_age",
+        icon = icon("chart-bar")
+      ),
+      menuItem(
+        "Vital signs",
+        tabName = "vital_signs",
+        icon = icon("file-medical-alt")
+      ),
+      menuItem(
+        "Laboratory results",
+        tabName = "lab_results",
+        icon = icon("vial")
       ),
       menuItem(
         "Treatment",
@@ -72,34 +97,9 @@ dashboardPage(
         icon = icon("hospital")
       ),
       menuItem(
-        "Vital signs",
-        tabName = "vital_signs",
-        icon = icon("file-medical-alt")
-      ),
-      menuItem(
-        "Laboratory results",
-        tabName = "lab_results",
-        icon = icon("vial")
-      ),
-      menuItem(
-        "Comorbidities by age",
-        tabName = "comorbidities_by_age",
-        icon = icon("chart-bar")
-      ),
-      menuItem(
-        "Symptoms by age",
-        tabName = "symptoms_by_age",
-        icon = icon("chart-bar")
-      ),
-      menuItem(
         "Summary tables",
         tabName = "tables",
         icon = icon("table")
-      ),
-      menuItem(
-        "Country distribution",
-        tabName = "country",
-        icon = icon("globe")
       ),
       menuItem(
         "Contributors",
@@ -154,19 +154,18 @@ dashboardPage(
       tabItem(tabName = "patients",
               fluidRow(
                 box(
-                  plotOutput("agePyramid", height = "400px"),
-                  "Bar fills are outcome (death/discharge/censored) at the time of report.",
-                  width = 6,
-                  height = 500,
-                  solidHeader = T,
+                  plotOutput("agePyramid", height = "300px"),
+                  "Bar fills are outcome (death/discharge/LTFU) at the time of report.",
+                  width = 7,
+                  height = 400,
                   title = 'Age and sex distribution of patients'
-                ),
+                )),
+                fluidRow(
                 box(
                   plotOutput("outcomesByAdmissionDate", height = "400px"),
-                  "Bar fills are outcome (death/discharge/censored) at the time of report.",
-                  width = 6,
+                  "Bar fills are outcome (death/discharge/LTFU) at the time of report.",
+                  width = 10,
                   height = 500,
-                  solidHeader = T,
                   title = 'Cumulative patient count by admission date'
                 )
               )),
@@ -435,7 +434,7 @@ dashboardPage(
                 box(
                   plotOutput("PatientbyCountry", height = "500px"),
                   "This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section.",
-                  width = 10,
+                  width = 12,
                   height = 1000,
                   solidHeader = T,
                   title = "Distribution of patients by country"
@@ -457,7 +456,7 @@ dashboardPage(
                 box(
                   plotOutput("case_def"),
                   height = 500,
-                  width=12,
+                  width=10,
                   title = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"
                 ),
               fluidRow(
