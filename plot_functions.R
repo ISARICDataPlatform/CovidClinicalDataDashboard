@@ -1015,7 +1015,7 @@ ggplot(data = world_plot_data) +
 #Case definition
 #################
 plot_case_def <- function(data_case_def){
-  ggplot(data = data_case_def, aes(y = proportion, x = age10)) +
+  ggplot(data = data_case_def, aes(y = proportion, x = slider_agegp10)) +
     facet_grid(~ symptom) +
     geom_bar(stat="identity")+
     xlab("Age") + ylab("Proportion") + ylim(0, 1)+
