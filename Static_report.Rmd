@@ -2,6 +2,7 @@
 title: "ISARIC (International Severe Acute Respiratory and Emerging Infections Consortium)"
 output:
   pdf_document:
+    keep_tex: true
     toc: no
     fig_caption: true
     extra_dependencies: ["subfig"]
@@ -24,7 +25,7 @@ params:
 ---
 
 ```{r setup, include = FALSE}
-knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="/Users/mdhall/CovidClinicalDataDashboard/")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -115,7 +116,7 @@ This report only includes individuals for whom data collection commenced on or b
 
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flow chart (Figure 1) gives an overview of the cohort and outcomes as of 25 May 2021. 
 
-```{r cohortoverview,  out.width = "200%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
+```{r cohortoverview,  fig.width = "100%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
 
 flowchart()
 
@@ -164,20 +165,11 @@ tables_supplementary(table_sup = symptoms.table)
 ```
 
 \newpage
-```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=4, message=FALSE, fig.cap='(a) Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded. (b) The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity. (c) Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.'}
+```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=4, fig.ncol = 1, message=FALSE, fig.cap='Clinical symptoms of patients at admission', fig.subcap=c("Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded.", "The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity.", "Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.")}
 
-symptom.prevalence.plot(symptom.prevalence.input) + ggtitle("(a)")
-```
-
-```{r symptomupset, echo=FALSE, out.width= "100%", fig.height = 3, message=FALSE}
-
-upset.plot(symptom.upset.input, which.plot = "symptom") + ggtitle("(b)")
-```
-\newpage
-
-```{r symptomheatmap, echo=FALSE, out.width= "100%", message=FALSE}
-
-heatmap_plot(data_plot_heatmap) + ggtitle("(c)")
+symptom.prevalence.plot(symptom.prevalence.input)
+upset.plot(symptom.upset.input, which.plot = "symptom")
+heatmap_plot(data_plot_heatmap)
 ```
 
 \newpage
@@ -224,12 +216,9 @@ Information is available on at least 75% of cases for diabetes, chronic pulmonar
 tables_supplementary(table_sup = comorbidity.table)
 ```
 
-```{r comorbprev, echo=FALSE, out.width= "100%", fig.height=4, message=FALSE, fig.cap = "(a) Frequency of comorbidities or other concomitant conditions seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this comorbidity over the number of patients for whom presence or absence of this comorbidity was recorded.  (b) The distribution of combinations of the five most common such conditions, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity."}
-comorbidity.prevalence.plot(comorbidity.prevalence.input) + ggtitle("(a)")
-```
-
-```{r comorbupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
-upset.plot(comorbidity.upset.input, which.plot = "comorbidity") + ggtitle("(b)")
+```{r comorbprev, echo=FALSE, out.width= "100%", fig.height=4, fig.ncol = 1, message=FALSE, fig.cap="Comorbidities and other concomitant conditions",fig.subcap = c("Frequency of comorbidities or other concomitant conditions seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this comorbidity over the number of patients for whom presence or absence of this comorbidity was recorded.","The distribution of combinations of the five most common such conditions, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity.")}
+comorbidity.prevalence.plot(comorbidity.prevalence.input) 
+upset.plot(comorbidity.upset.input, which.plot = "comorbidity") 
 ```
 
 The age distribution of the most frequent concomitant conditions is presented In Figure 8. Dementia and hypertension increase with age. 
@@ -269,18 +258,13 @@ p_oxysat(data_plot_vs_oxysat)
 ### Laboratory values 
 Laboratory tests results are available for a minority of patients. They are summarised in Figure 10a (biochemistry) and 10b (haematology and C-reactive protein). Urea increases with age.
 
-```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",  "Protrombin time", "Urea"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
+```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",  "Protrombin time", "Urea", "White blood cell count (WCC)", "Neutrophils", "Lymphocytes","C-reactive protein (CRP)"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
 p_lab_alt(data_plot_lab_alt)
 p_lab_ast(data_plot_lab_ast)
 p_lab_bili(data_plot_lab_bili)
 p_lab_pt(data_plot_lab_pt)
 p_lab_urean(data_plot_lab_urean)
-
-```
-
-```{r labs3, echo=FALSE, out.width= "50%", message=FALSE, fig.height=5, fig.ncol = 2,  fig.subcap=c("White blood cell count (WCC)", "Neutrophils", "Lymphocytes","C-reactive protein (CRP)"), fig.cap = "(continued) Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
-
 p_lab_wbc(data_plot_lab_wbc)
 p_lab_neut(data_plot_lab_neut)
 p_lab_lym(data_plot_lab_lym)
@@ -302,14 +286,10 @@ tables_supplementary(table_sup = treatments.table)
 
 \newpage
 
-```{r treatprev, echo=FALSE, out.width= "100%", fig.height=4.5, message=FALSE, fig.cap = "(a) Treatments used. This only includes patients for whom this information was recorded. (b) The distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data."}
+```{r treatprev, echo=FALSE, out.width= "100%", fig.height=4.5, message=FALSE, fig.ncol = 1, fig.cap = "Treatments in the entire population",  fig.subcap = c("Proportions of patients receiving each treatment. Bars are annotated with a fraction indicating the number of individuals receiving each treatment over the number for which this information was non-missing.", "Distribution of combinations of antimicrobial treatments and steroids administered during hospital stay, across all patients with completed hospital stay and recorded treatment data.")}
 
-treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE) + ggtitle("(a)")
-```
-
-```{r treatupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
-
-upset.plot(treatment.upset.input, which.plot = "treatment") + ggtitle("(b)")
+treatment.prevalence.plot(treatment.use.proportion.input, icu = FALSE)
+upset.plot(treatment.upset.input, which.plot = "treatment") 
 ```
 
 
@@ -328,13 +308,10 @@ A total of `r length(which(summary_input$treat_invasive_ventilation==T))` patien
 
 
 
-```{r treaticuprev,  out.width= "100%", fig.height=4, message=FALSE, fig.cap = "(a) Treatments used amongst patients admitted to the ICU. This only includes patients for whom this information was recorded. (b) The distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. "}
+```{r treaticuprev,  out.width= "100%", fig.height=4, message=FALSE, fig.ncol = 1, fig.cap = "Treatments in the ICU/HDU population",   fig.subcap = c("Proportions of patients receiving each treatment. Bars are annotated with a fraction indicating the number of individuals receiving each treatment over the number for which this information was non-missing.","Distribution of combinations of treatments administered during ICU/HDU stay. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively.")}
 
-treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE) + ggtitle("(a)")
-```
-
-```{r treaticuupset, echo=FALSE, out.width= "100%", fig.height = 4, message=FALSE}
-upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") + ggtitle("(b)")
+treatment.prevalence.plot(icu.treatment.use.proportion.input, icu = TRUE) 
+upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment") 
 ```
 
 \newpage
