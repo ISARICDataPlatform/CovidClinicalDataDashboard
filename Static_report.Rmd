@@ -116,7 +116,7 @@ This report only includes individuals for whom data collection commenced on or b
 
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flow chart (Figure 1) gives an overview of the cohort and outcomes as of 25 May 2021. 
 
-```{r cohortoverview,  out.width = "100%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
+```{r cohortoverview,  out.width = "180%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
 
 flowchart()
 
@@ -175,7 +175,7 @@ heatmap_plot(data_plot_heatmap)
 \newpage
 
 The observed symptoms on admission partly represent case definitions and policies for hospital admission,
-which may change as time passes.  The most common case definitions are met by few patients in our dataset, which varies by age. 
+which may change as time passes.  The most common case definitions are met by few patients in our dataset, which varies by age (Figure 6). 
 
 ```{r case_def, echo = FALSE, fig.align="center", fig.cap = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"}
 
@@ -184,7 +184,7 @@ plot_case_def(case.def.input)
 ```
 
 
-The frequency of presenting symptoms varies with age (Figure 6). Altered consciousness increases with age. Fever, respiratory and constitutional symptoms are mostly present in patients aged 40 and above.  The presence of gastro-intestinal symptoms appears to be age-independent. 
+The frequency of presenting symptoms varies with age (Figure 7). Altered consciousness increases with age. Fever, respiratory and constitutional symptoms are mostly present in patients aged 40 and above.  The presence of gastro-intestinal symptoms appears to be age-independent. 
 
 
 ```{r sympbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Abdominal pain", "Altered consciousness/confusion", "Constitutional symptoms (myalgia, joint pain, fatigue or headache)", "Cough", "Cough or fever", "Cough, fever or shortness of breath",  "History of fever", "Shortness of breath", "Upper respiratory tract symptoms (runny nose, sore throat or ear pain)","Diarrhoea", "Vomiting or nausea"), fig.cap = 'Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented. N is the number of individuals included in the plot (this varies between plots due to data completeness).'}
@@ -210,7 +210,7 @@ plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FA
 
 ### Comorbidities and other concomitant conditions at admission
 
-Information is available on at least 75% of cases for diabetes, chronic pulmonary disease, chronic kidney disease, asthma, malignant neoplasm, cardiac chronic disease, HIV/AIDS, and hypertension (Table 4). Conditions present in at least 10% of cases are hypertension (41% of those reported), smoking (35%), diabetes (28%), cardiac chronic disease (17%), obesity (12%), dementia, chronic neurological disease and rheumatological disease (each 10%). (Figure 7a). Combinations of the five most prevalent conditions are presented in Figure 7b. 
+Information is available on at least 75% of cases for diabetes, chronic pulmonary disease, chronic kidney disease, asthma, malignant neoplasm, cardiac chronic disease, HIV/AIDS, and hypertension (Table 4). Conditions present in at least 10% of cases are hypertension (41% of those reported), smoking (35%), diabetes (28%), cardiac chronic disease (17%), obesity (12%), dementia, chronic neurological disease and rheumatological disease (each 10%). (Figure 8a). Combinations of the five most prevalent conditions are presented in Figure 8b. 
 
 ```{r table4, tab.cap = "Prevalence of comorbidities."}
 tables_supplementary(table_sup = comorbidity.table)
@@ -221,10 +221,10 @@ comorbidity.prevalence.plot(comorbidity.prevalence.input)
 upset.plot(comorbidity.upset.input, which.plot = "comorbidity") 
 ```
 
-The age distribution of the most frequent concomitant conditions is presented In Figure 8. Dementia and hypertension increase with age. 
+The age distribution of the most frequent concomitant conditions is presented In Figure 9. Dementia and hypertension increase with age. 
 
 
-```{r comorbbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking"), fig.cap = "Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)"}
+```{r comorbbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking"), fig.cap = "Comorbidities recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)"}
 
 plot.prop.by.age_comorbid_asthma(data_plot_comorbid_asthma, FALSE)
 plot.prop.by.age_comorbid_dementia(data_plot_comorbid_dementia, FALSE)
@@ -239,7 +239,7 @@ plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)
 \newpage 
 
 ### Vital signs
-Vital signs are presented in Figure 8 by age. `r (nrow(summary_input %>% filter(is.na(oxygen_therapy)==F)))` (`r round(nrow(summary_input %>% filter(is.na(oxygen_therapy)==F))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients were admitted on an oxygen therapy and no information was present for `r (nrow(summary_input %>% filter(is.na(oxygen_therapy)==T)))` (`r round(nrow(summary_input %>% filter(is.na(oxygen_therapy)==T))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%). The panel with oxygen saturation depicts O2 on room air for those patients that didn't receive O2 on admission (`r nrow(data_plot_vs_oxysat)` (`r round(nrow(data_plot_vs_oxysat)/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%)). `r paste0(nrow(summary_input %>% filter(vs_oxysat<94)),'/',nrow(summary_input %>% filter(is.na(vs_oxysat)==F)))` (`r round(nrow(summary_input %>% filter(vs_oxysat<94))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients presented with oxygen saturation <94%, `r paste0(nrow(data_plot_vs_oxysat %>% filter(value<94)),'/',nrow(data_plot_vs_oxysat))` (`r round(nrow(data_plot_vs_oxysat %>% filter(value<94))/nrow(data_plot_vs_oxysat)*100,1)`%) patients with oxygen saturation <94% on room air.
+Vital signs are presented in Figure 10 by age. `r nrow(summary_input %>% filter(oxygen_therapy)==T)` (`r round(nrow(summary_input %>% filter(oxygen_therapy==T))/nrow(summary_input %>% filter(is.na(oxygen_therapy)==F))*100,1)`%) patients with oxygen therapy recorded were admitted on an oxygen therapy and no information was present for `r nrow(summary_input %>% filter(is.na(oxygen_therapy)==T))` (`r round(nrow(summary_input %>% filter(is.na(oxygen_therapy)==T))/nrow(summary_input)*100,1)`%). The panel with oxygen saturation depicts O2 on room air for those patients that didn't receive O2 on admission (`r nrow(data_plot_vs_oxysat)` (`r round(nrow(data_plot_vs_oxysat)/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%)). `r paste0(nrow(summary_input %>% filter(vs_oxysat<94)),'/',nrow(summary_input %>% filter(is.na(vs_oxysat)==F)))` (`r round(nrow(summary_input %>% filter(vs_oxysat<94))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients presented with oxygen saturation <94%, `r paste0(nrow(data_plot_vs_oxysat %>% filter(value<94)),'/',nrow(data_plot_vs_oxysat))` (`r round(nrow(data_plot_vs_oxysat %>% filter(value<94))/nrow(data_plot_vs_oxysat)*100,1)`%) patients with oxygen saturation <94% on room air.
 
 
 ```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation"), fig.cap = "Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
@@ -255,7 +255,7 @@ p_oxysat(data_plot_vs_oxysat)
 \newpage 
 
 ### Laboratory values 
-Laboratory tests results are available for a minority of patients. They are summarised in Figure 10a (biochemistry) and 10b (haematology and C-reactive protein). Urea increases with age.
+Laboratory tests results are available for a minority of patients. They are summarised in Figure 11. Urea increases with age.
 
 ```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",  "Protrombin time", "Urea", "White blood cell count (WCC)", "Neutrophils", "Lymphocytes","C-reactive protein (CRP)"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
@@ -298,7 +298,7 @@ upset.plot(treatment.upset.input, which.plot = "treatment")
 
 Of the `r nrow(summary_input)` patients with data on ward admissions available, a total of `r nrow(summary_input %>% filter(slider_icu_ever==T))` (`r round(nrow(summary_input %>% filter(slider_icu_ever==T))/nrow(summary_input)*100,1)`%) were admitted at some point of their illness into an intensive care unit (ICU) or high dependency unit (HDU), among which, `r nrow(summary_input %>% filter(slider_icu_ever==T&t_ad_icu==0))` (`r round(nrow(summary_input %>% filter(slider_icu_ever==T&t_ad_icu==0))/nrow(summary_input %>% filter(slider_icu_ever==T))*100,1)`%) on the day of admission. 
 
-The range of treatments received whilst in ICU/HDU is presented in Figure 12 a and b. Of the patients admitted into ICU/HDU, `r paste0(length(which(summary_input$icu_treat_antibiotic_agents==T)),'/',sum(is.na(summary_input$icu_treat_antibiotic_agents)==F ))` (`r round(length(which(summary_input$icu_treat_antibiotic_agents==T))/sum(is.na(summary_input$icu_treat_antibiotic_agents)==F)*100,1)`%) received antibiotics and `r paste0(length(which(summary_input$icu_treat_antiviral_agents==T)),'/',sum(is.na(summary_input$icu_treat_antiviral_agents)==F))` (`r round(length(which(summary_input$icu_treat_antiviral_agents==T))/sum(is.na(summary_input$icu_treat_antiviral_agents)==F)*100,1)`%) antivirals. `r paste0(length(which(summary_input$icu_oxygen_therapy==T)),'/',sum(is.na(summary_input$icu_oxygen_therapy)==F))` (`r round(length(which(summary_input$icu_oxygen_therapy==T))/sum(is.na(summary_input$icu_oxygen_therapy)==F)*100,1)`%) received some degree of oxygen supplementation, of which, `r paste0(length(which(summary_input$icu_treat_non_invasive_ventilation==T)),'/',sum(is.na(summary_input$icu_treat_non_invasive_ventilation)==F))` (`r round(length(which(summary_input$icu_treat_non_invasive_ventilation==T))/sum(is.na(summary_input$icu_treat_non_invasive_ventilation)==F)*100,1)`%) received NIV and `r paste0(length(which(summary_input$icu_treat_invasive_ventilation==T)),'/',sum(is.na(summary_input$icu_treat_invasive_ventilation)==F))` (`r round(length(which(summary_input$icu_treat_invasive_ventilation==T))/sum(is.na(summary_input$icu_treat_invasive_ventilation)==F)*100,1)`%) IMV.  
+The range of treatments received whilst in ICU/HDU is presented in Figure 13 a and b. Of the patients admitted into ICU/HDU, `r paste0(length(which(summary_input$icu_treat_antibiotic_agents==T)),'/',sum(is.na(summary_input$icu_treat_antibiotic_agents)==F ))` (`r round(length(which(summary_input$icu_treat_antibiotic_agents==T))/sum(is.na(summary_input$icu_treat_antibiotic_agents)==F)*100,1)`%) received antibiotics and `r paste0(length(which(summary_input$icu_treat_antiviral_agents==T)),'/',sum(is.na(summary_input$icu_treat_antiviral_agents)==F))` (`r round(length(which(summary_input$icu_treat_antiviral_agents==T))/sum(is.na(summary_input$icu_treat_antiviral_agents)==F)*100,1)`%) antivirals. `r paste0(length(which(summary_input$icu_oxygen_therapy==T)),'/',sum(is.na(summary_input$icu_oxygen_therapy)==F))` (`r round(length(which(summary_input$icu_oxygen_therapy==T))/sum(is.na(summary_input$icu_oxygen_therapy)==F)*100,1)`%) received some degree of oxygen supplementation, of which, `r paste0(length(which(summary_input$icu_treat_non_invasive_ventilation==T)),'/',sum(is.na(summary_input$icu_treat_non_invasive_ventilation)==F))` (`r round(length(which(summary_input$icu_treat_non_invasive_ventilation==T))/sum(is.na(summary_input$icu_treat_non_invasive_ventilation)==F)*100,1)`%) received NIV and `r paste0(length(which(summary_input$icu_treat_invasive_ventilation==T)),'/',sum(is.na(summary_input$icu_treat_invasive_ventilation)==F))` (`r round(length(which(summary_input$icu_treat_invasive_ventilation==T))/sum(is.na(summary_input$icu_treat_invasive_ventilation)==F)*100,1)`%) IMV.  
 
 A total of `r length(which(summary_input$treat_non_invasive_ventilation==T))` patients received non-invasive mechanical ventilation (NIV). The mean and median durations from admission to receiving NIV were `r round(mean(summary_input$t_ad_niv, na.rm=T),1)` days and `r median(summary_input$t_ad_niv, na.rm=T)` days respectively (SD: `r round(sd(summary_input$t_ad_niv, na.rm=T),1)` days) – estimated from records on cases with complete records on dates of hospital admission and NIV onset (N = `r sum(is.na(summary_input$t_ad_niv)==F)`). The mean and median durations for NIV were `r round(mean(summary_input$dur_niv, na.rm=T),1)` days and `r median(summary_input$dur_niv, na.rm=T)` days respectively (SD: `r round(sd(summary_input$dur_niv, na.rm=T),1)` days) – estimated based on only those cases which have complete NIV duration records (N = `r sum(is.na(summary_input$dur_niv)==F)`).  
 
@@ -331,24 +331,20 @@ length.of.stay.icu.plot(length.of.stay.icu.input)
 ```
 
 \newpage
-The distribution of the number of days from admission to ICU admission is shown in Figure 14. 
+The distribution of the number of days from admission to ICU admission is shown in Figure 15. 
 
 ```{r  admissiontoICUoverall, out.width= "100%", fig.cap = "Distribution of time (in days) from hospital admission to ICU admission. The figure displays data on only those cases with a reported ICU start date."}
 admission.to.icu.plot(admission.to.icu.input)
 ```
 
 \newpage
-The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was `r round(mean((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)`, with SD `r round(sd((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)` days and a median of `r median((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T)` days. These estimates are based on all cases which have complete records on length of hospital stay (N = `r nrow(summary_input %>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")&! is.na(dur_ho)))`).The distributions of length of hospital stay are presented In Figure 15a according to sex and 15b by patient age group.  
+The observed mean duration for the number of days from hospital admission to outcome (death or discharge) was `r round(mean((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)`, with SD `r round(sd((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T),1)` days and a median of `r median((summary_input%>%filter(slider_outcome=="Death"|slider_outcome=="Discharge"))$dur_ho, na.rm=T)` days. These estimates are based on all cases which have complete records on length of hospital stay (N = `r nrow(summary_input %>%filter((slider_outcome=="Death"|slider_outcome=="Discharge")&! is.na(dur_ho)))`).The distributions of length of hospital stay are presented In Figure 16a according to sex and 16b by patient age group.  
 
 
-```{r  staybysex, out.width= "100%", fig.height=3, fig.cap="Distribution of length of hospital stay, according to sex (a) and patient age group (b). This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest."}
+```{r  staybysex, out.width= "100%", fig.height=3,fig.ncol = 1, fig.cap="Distribution of length of hospital stay. This only includes cases with reported outcomes. The coloured areas indicate the kernel probability density of the observed data and the box plots show the median and interquartile range of the variable of interest.", fig.subcap=c("Distribution of length of hospital stay, according to sex.","Distribution of length of hospital stay, according to age.")}
 
-length.of.stay.sex.plot(length.of.stay.sex.input) + ggtitle("(a)")
-```
-
-```{r  staybyage, out.width= "100%", fig.height=3}
-
-length.of.stay.age.plot(length.of.stay.age.input) + ggtitle("(b)")
+length.of.stay.sex.plot(length.of.stay.sex.input) 
+length.of.stay.age.plot(length.of.stay.age.input) 
 ```
 
 \newpage
