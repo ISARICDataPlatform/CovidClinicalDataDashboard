@@ -83,7 +83,7 @@ SDTM formatted data are processed in R 4.1.0 (R Core Team 2013). Initial data cl
 
 Patients are excluded if they did not have laboratory or clinically confirmed SARS-CoV-2 infection. Patients are considered to be lost to follow up if either a) they were transferred to another facility, or b) they had an unknown outcome and the last date upon which any data was recorded for them was 45 days or before the date of data extraction.  Patients with unknown outcome where the last recorded data was less than 45 days old are instead categorised as receiving ongoing care. 
 
-Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the report only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, in both the <10 year age group and the >= 10 year age group, are taken to be likely mis-entered and changed to missing. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction. Data from patients admitted less than 14 days before the date of extraction are considered embargoed and those individuals removed from consideration. 
+Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the report only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, in both the <10 year age group and the >= 10 year age group, are taken to be likely mis-entered and changed to missing. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction.  
 
 
 The following Covid-19 symptom definitions were used: 
@@ -114,7 +114,7 @@ This report only includes individuals for whom data collection commenced on or b
 
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flow chart (Figure 1) gives an overview of the cohort and outcomes as of 25 May 2021. 
 
-```{r cohortoverview,  out.width = "180%", fig.align="center", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
+```{r cohortoverview,  out.width = "140%", fig.align="left", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
 
 flowchart()
 
