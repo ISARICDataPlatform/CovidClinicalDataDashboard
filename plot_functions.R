@@ -352,15 +352,7 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
   
   
   
-  unspun.table <- aggregated.tbl %>% nest(data = c(slider_sex,
-                                                   slider_country,
-                                                   slider_icu_ever,
-                                                   slider_outcome,
-                                                   slider_monthyear,
-                                                   slider_agegp10,
-                                                   which.present,
-                                                   lower.age.bound,
-                                                   upper.age.bound)) %>%
+  unspun.table <- aggregated.tbl %>% nest(data = c(which.present)) %>%
     mutate(repdata = map2(count, data, function(c,d){
       d %>% slice(rep(1:nrow(d), c))
     })) %>%
@@ -457,6 +449,20 @@ p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
   p
 }
 
+p_oxysat_therapy <- function(aggregated.tbl, dashboard=dashboard_equal){
+  
+  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
+  
+  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
+    geom_boxplot(fill="lightblue")  + xlab("Age groups") + ylab("Oxygen saturation on oxygen therapy (%)") +
+    theme_bw() + labs(title = N) 
+  if (dashboard==T){
+    p <- p+
+      geom_text(aes(label=paste0("N=",..count..)),y=min(aggregated.tbl$value)*0.995 , stat='count', alpha=0)
+    p <- ggplotly(p, tooltip="text") %>% layout(height=500)
+  }
+  p
+}
 ######Plots for the lab data############
 
 
@@ -1015,7 +1021,7 @@ ggplot(data = world_plot_data) +
 #Case definition
 #################
 plot_case_def <- function(data_case_def){
-  ggplot(data = data_case_def, aes(y = proportion, x = age10)) +
+  ggplot(data = data_case_def, aes(y = proportion, x = slider_agegp10)) +
     facet_grid(~ symptom) +
     geom_bar(stat="identity")+
     xlab("Age") + ylab("Proportion") + ylim(0, 1)+

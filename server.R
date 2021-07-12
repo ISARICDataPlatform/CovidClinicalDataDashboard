@@ -294,6 +294,10 @@ server <- function(input, output) {
     renderPlotly(p_oxysat(data_plot_vs_oxysat))
   }
   
+  output$clinical_signs_vs_oxysat_therapy <- {
+    renderPlotly(p_oxysat_therapy(data_plot_vs_oxysat_therapy))
+  }
+  
   output$PatientbyCountry <- {
     renderPlot(
       patient.by.country.plot(patient.by.country.input),

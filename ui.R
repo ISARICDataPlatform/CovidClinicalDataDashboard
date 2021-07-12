@@ -350,7 +350,14 @@ dashboardPage(
                   width = 6,
                   height = 600,
                   solidHeader = T,
-                  title = 'Oxygen saturation in room air (%)'
+                  title = 'Oxygen saturation on room air (%)'
+                ),
+                box(
+                  plotlyOutput("clinical_signs_vs_oxysat_therapy", height = "500px"),
+                  width = 6,
+                  height = 600,
+                  solidHeader = T,
+                  title = 'Oxygen saturation on oxygen therapy (%)'
                 )
               )),
       tabItem(
