@@ -240,14 +240,14 @@ plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)
 Vital signs are presented in Figure 10 by age. `r nrow(summary_input %>% filter(oxygen_therapy)==T)` (`r round(nrow(summary_input %>% filter(oxygen_therapy==T))/nrow(summary_input %>% filter(is.na(oxygen_therapy)==F))*100,1)`%) patients with oxygen therapy recorded were admitted on an oxygen therapy and no information was present for `r nrow(summary_input %>% filter(is.na(oxygen_therapy)==T))` (`r round(nrow(summary_input %>% filter(is.na(oxygen_therapy)==T))/nrow(summary_input)*100,1)`%). The panel with oxygen saturation depicts O2 on room air for those patients that didn't receive O2 on admission (`r nrow(data_plot_vs_oxysat)` (`r round(nrow(data_plot_vs_oxysat)/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%)). `r paste0(nrow(summary_input %>% filter(vs_oxysat<94)),'/',nrow(summary_input %>% filter(is.na(vs_oxysat)==F)))` (`r round(nrow(summary_input %>% filter(vs_oxysat<94))/nrow(summary_input %>% filter(is.na(vs_oxysat)==F))*100,1)`%) patients presented with oxygen saturation <94%, `r paste0(nrow(data_plot_vs_oxysat %>% filter(value<94)),'/',nrow(data_plot_vs_oxysat))` (`r round(nrow(data_plot_vs_oxysat %>% filter(value<94))/nrow(data_plot_vs_oxysat)*100,1)`%) patients with oxygen saturation <94% on room air.
 
 
-```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation"), fig.cap = "Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
+```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation on room air","Oxygen saturation on oxygen therapy"), fig.cap = "Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
 p_resp(data_plot_vs_resp)
 p_hr(data_plot_vs_hr)
 p_temp(data_plot_vs_temp)
 p_sysbp(data_plot_vs_sysbp)
 p_oxysat(data_plot_vs_oxysat)
-
+p_oxysat_therapy(data_plot_vs_oxysat_therapy)
 ```
 
 \newpage 

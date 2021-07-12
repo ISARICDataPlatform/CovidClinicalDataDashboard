@@ -91,6 +91,7 @@ list_data_files <- c(
   "data_plot_vs_temp.rda",
   "data_plot_vs_sysbp.rda",
   "data_plot_vs_oxysat.rda",
+  "data_plot_vs_oxysat_therapy.rda",
   #Load the laboratory data
   "data_plot_lab_crp.rda",
   "data_plot_lab_lym.rda",
