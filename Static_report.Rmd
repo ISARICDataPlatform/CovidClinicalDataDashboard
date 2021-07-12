@@ -70,8 +70,6 @@ Comparable experimental data have allowed the development of research synthesis 
 
 In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. Today, our partners have collected standardised, in-hospital clinical data from over half a million patients, in almost 800 sites, across more than 60 countries. This partner-fueled growing initiative is to our knowledge the largest COVID-19 in-hospital international database in the world.
 
-**What have our partners achieved**. Using the ISARIC and ISARIC4C databases, our partners have produced a broad range of evidence. More than 50 reports and manuscripts have been published to date and a further 25 are in progress or under peer-review. https://isaric.org/document-library/ , https://isaric4c.net/outputs/ and https://isaric.org/research/covid-19-clinical-research-resources/accessing-covid-19-clinical-data/approved-uses-of-platform-data/.
-
 In this report, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme.[2]The majority of this database is additionally available to external researchers via application to our Data Access Committee at https://www.iddo.org/covid19/data-sharing/accessing-data.  
 
 To contribute, please contact ncov@isaric.org. 
@@ -369,8 +367,24 @@ outcomes.by.admission.date.plot(outcome_admission_date_input)
 \newpage
 
 # Discussion and conclusions
- 
-  
+
+
+COVID-19 has tested the effectiveness of ISARIC’s operating model: a global, open-source, collaborative approach set up 10 years ago to prevent illness and deaths from infectious disease outbreaks.
+
+In January 2020, ISARIC launched its COVID-19 Clinical Characterisation Protocol (CCP) [https://isaric.org/research/covid-19-clinical-research-resources/clinical-characterisation-protocol-ccp/] and Case Report Form (CRF) [https://isaric.org/research/covid-19-clinical-research-resources/covid-19-crf/ ] as well as a free data management platform for researchers to upload their clinical data, globally. The ISARIC COVID-19 CCP database was open and publicly accessible from late January 2020, when less than a thousand COVID-19 cases had been reported globally; by mid-February 2020, the first patient record was successfully uploaded the platform; by mid-March 2020, the platform had ten thousand records. 
+
+Now, 18 months into the pandemic, with more than half-a-million records, the ISARIC clinical data platform has grown to become the largest international individual patient dataset of COVID-19 hospitalised cases. ISARIC is a model of global peer-to-peer collaboration, with contributions by just under 800 sites in about 60 countries, with similar representations of patients from high-income and low- and middle-income countries. 
+
+This report describes the features of COVID-19 patients in the entire cohort, made from cases accrued over 18 months with different contributions from various countries. Everyone can trace the evolution over time of the database through 14 previous versions of this report [https://isaric.org/research/covid-19-clinical-research-resources/evidence-reports/]. In addition, specific questions regarding clinical presentations, risks factors for outcomes, and trends are addressed through ad-hoc analyses.
+
+Partners can submit ad-hoc analyses to access the half-a-million case-based dataset using our Statistical Analysis Plan form (SAP; https://isaric.org/research/isaric-partner-analysis-frequently-asked-questions/). Once a SAP is submitted, our statistical team assesses the analysis plan for quality of research and feasibility of data. Then, our clinical team provides feedback on clinical relevance and overlapping with other analyses. Once this process is finalised, the SAP is sent to all ISARIC collaborators for review. This initial peer review process ensures that research is of utmost quality and a truly participatory approach. 
+
+All ISARIC contributors are invited to participate in analyses through review and input on the SAP and the resulting publication. The outputs of our joint work are disseminated as widely as possible to inform patient care and public health policy. ISARIC aims to include the names of all those who contribute data in the cited authorship of publications, subject to the submission of contact details and confirmation of acceptance of the final manuscript within the required timelines, per ICMJE policies and the ISARIC publication policy. 
+
+**What have our partners achieved**
+Using the ISARIC and ISARIC4C databases, our partners have produced a broad range of evidence. More than 50 reports and manuscripts have been published to date, and a further 25 are in progress or under peer-review. https://isaric.org/document-library/ , https://isaric4c.net/outputs/ and https://isaric.org/research/covid-19-clinical-research-resources/accessing-covid-19-clinical-data/approved-uses-of-platform-data/.
+
+True international collaboration during a pandemic is key to putting data into action. ISARIC partners have achieved this objective, and the results are shown in this special issue with half-a-million patients. 
 
 ## Acknowledgement
 This report is made possible through the efforts and expertise of the staff collecting data at our partner institutions across the globe, and the ISARIC Team. For a list of partners and team members, please visit rg/research/covid-19-clinical-research-resources/covid-19-data-management-hosting/covid19-clinical-data-contributors-list/. 
