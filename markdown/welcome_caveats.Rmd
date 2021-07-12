@@ -15,6 +15,4 @@ output: html_document
 
 5) Please pay attention to the denominators in the the frequency plots as they are ordered by proportion rather than frequency.
 
-6) Please note that the data is split on death/discharge/LTFU mutually exclusive but not exhaustive due to missing data.
-
-7) Some patients may be participants in clinical trials of experimental interventions. 
+6) Some patients may be participants in clinical trials of experimental interventions. 
