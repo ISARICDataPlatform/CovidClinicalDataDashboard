@@ -55,7 +55,6 @@ ref.date <- ymd("2021-05-25")
 
 *A global federation of clinical research networks, providing a proficient, coordinated, and agile research response to outbreak-prone infectious diseases*
 
-# Abstract
 
 # Background
 
@@ -104,7 +103,7 @@ The following Covid-19 symptom definitions were used:
 New cough, or temperature ≥37.8°C, or a loss or change in sense of smell or taste  
 
 - European Centre for Disease Prevention and Control   
-At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusia or dysgeusia (dysgeusia not available) 
+At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusia or dysgeusia 
 
 Data manipulation is performed using the tidyverse collection of packages (Wickham et al. 2019), as well as ff (Adler et al. 2020) and dtplyr (Wickham 2021). Data visualisation makes use of ggplot (Wickham 2016) and its extension ggupset (Ahlmann-Eltze 2020). The report is generated using knitr (Xie 2021). 
 
@@ -147,7 +146,7 @@ tables_supplementary(table_sup = patient.characteristic.table[1:19,])
 age.pyramid.plot(age.pyramid.input)
 
 ```
-
+\newpage
 ```{r table2, tab.cap = "Outcome by age and sex. Proportions are calculated using the column total as the denominator."}
 tables_supplementary(table_sup = outcome.age.sex.table)
 ```
@@ -279,7 +278,7 @@ Antibiotics were given to `r paste0(length(which(summary_input$treat_antibiotic_
 
 Corticosteroids were administered to `r paste0(length(which(summary_input$treat_corticosteroids==T)),'/',sum(is.na(summary_input$treat_corticosteroids)==F))` (`r round(length(which(summary_input$treat_corticosteroids==T))/sum(is.na(summary_input$treat_corticosteroids)==F)*100,1)`%) patients. This includes `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T)),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T)))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T))*100,1)`%) of those who received IMV, `r paste0(nrow(summary_input %>%filter(treat_corticosteroids==T & (treat_invasive_ventilation==F | is.na(treat_invasive_ventilation)) & oxygen_therapy==T)),'/', nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & (treat_invasive_ventilation==F | is.na(treat_invasive_ventilation)) & oxygen_therapy==T)))` (`r round(nrow(summary_input %>%filter(treat_corticosteroids==T & (treat_invasive_ventilation==F | is.na(treat_invasive_ventilation)) & oxygen_therapy==T))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & (treat_invasive_ventilation==F | is.na(treat_invasive_ventilation)) & oxygen_therapy==T))*100,1)`%) of those who had oxygen therapy but not IMV, and `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F)),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F)))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F))*100,1)`%) of those who had no oxygen therapy. On 16 June, results for dexamethasone were released for the RECOVERY randomized controlled trial [13,14]. This trial found that dexamethasone reduced deaths for patients receiving IMV and oxygen therapy, but not among patients not receiving respiratory support. Of patients admitted since 16 June 2020, corticosteroids were given to `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T & date_admit>'2020-06-16')),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T & date_admit>'2020-06-16')))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & treat_invasive_ventilation==T & date_admit>'2020-06-16'))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & treat_invasive_ventilation==T & date_admit>'2020-06-16'))*100,1)`%) of those who received IMV, and `r paste0(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F & date_admit>'2020-06-16')),'/',nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F & date_admit>'2020-06-16')))` (`r round(nrow(summary_input %>% filter(treat_corticosteroids==T & oxygen_therapy==F & date_admit>'2020-06-16'))/nrow(summary_input %>% filter(is.na(treat_corticosteroids)==F & oxygen_therapy==F & date_admit>'2020-06-16'))*100,1)`%) of those with no oxygen therapy.
 
-
+\newpage
 ```{r table5, tab.cap = "Treatment use. The counts presented for treatments include all cases, not only cases with complete details of treatments (as expressed in the summary)."}
 tables_supplementary(table_sup = treatments.table)
 ```
@@ -320,7 +319,7 @@ upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment")
 The key time variables are presented in Table 6. Patients tend to come to the hospital relatively early into their illness with a mean of 7 days and a median of 3 days from symptoms onset. `r round(nrow(summary_input%>% filter(t_ad_icu==0))/nrow(summary_input%>% filter(!is.na(t_ad_icu)))*100,1) `%  of ICU/HDU admissions occur within the first day at the hospital. The mean and median duration of hospital stay are 18.1 and 9 days, respectively. The duration of stay in ICU/HDU had a mean of `r round(mean(summary_input$dur_icu, na.rm=T),1)` days and a median of `r median(summary_input$dur_icu, na.rm=T)` (SD: `r round(sd(summary_input$dur_icu, na.rm=T),1)` days) – estimated on only those cases with complete records for ICU/HDU duration or ICU/HDU start/end dates (N = `r sum(is.na(summary_input$dur_icu)==F)`). 
 
 
-
+\newpage
 ```{r table6, tab.cap = "Key time variables. SD: Standard deviation; IQR: Interquartile range. Outliers (values greater than 120) were excluded prior to the computation of estimates."}
 tables_supplementary(table_sup = key.times.table)
 
@@ -392,7 +391,7 @@ True international collaboration during a pandemic is key to putting data into a
 This report is made possible through the efforts and expertise of the staff collecting data at our partner institutions across the globe, and the ISARIC Team. For a list of partners and team members, please visit rg/research/covid-19-clinical-research-resources/covid-19-data-management-hosting/covid19-clinical-data-contributors-list/. 
 
 ## References
-[1]https://www.who.int/emergencies/diseases/novel-coronavirus-2019 
+[1]https://www.who.int/emergencies/diseases/novel-coronavirus-2019
 [2]https://isaric.org/research/isaric-partner-analysis-frequently-asked-questions/  
 [3]International Severe Acute Respiratory and Emerging Infection Consortium, World Health Organization. ISARIC/WHO Clinical Characterisation Protocol for Severe Emerging Infections, version 3.2: ISARIC, 2020.   
 [4]International Severe Acute Respiratory and Emerging Infection Consortium. COVID-19 CRF and Completion Guide. Available at: https://isaric.org/research/covid-19-clinical-research-resources/covid-19-crf/.   
