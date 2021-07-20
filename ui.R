@@ -156,7 +156,7 @@ dashboardPage(
                 box(
                   plotOutput("agePyramid", height = "300px"),
                   "Bar fills are outcome (death/discharge/LTFU) at the time of report.",
-                  width = 7,
+                  width = 6,
                   height = 400,
                   title = 'Age and sex distribution of patients'
                 )),
@@ -544,77 +544,77 @@ dashboardPage(
         fluidRow(
           box(
             plotlyOutput("age_symptoms_history_of_fever", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with fever"
           ),
           box(
             plotlyOutput("age_symptoms_cough", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough"
           ),
           box(
             plotlyOutput("age_symptoms_cough_fever", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough or fever"
           ),
           box(
             plotlyOutput("age_symptoms_shortness_of_breath", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with shortness of breath"
           ),
           box(
             plotlyOutput("age_symptoms_cought_fever_shortness_of_breath", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with cough, fever, or shortness of breath"
           ),
           box(
             plotlyOutput("age_symptoms_upper_respiratory_tract_symptoms", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with upper respiratory tract symptoms"
           ),
           box(
             plotlyOutput("age_symptoms_altered_consciousness_confusion", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with confusion"
           ),
           box(
             plotlyOutput("age_symptoms_constitutional", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with constitutional symptoms"
           ),
           box(
             plotlyOutput("age_symptoms_vomiting_nausea", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with vomiting nausea"
           ),
           box(
             plotlyOutput("age_symptoms_diarrhoea", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with diarrhoea"
           ),
           box(
             plotlyOutput("age_symptoms_abdominal_pain", height = "500px"),
-            width = 6,
+            width = 4,
             height = 400,
             solidHeader = T,
             title = "Proportion with abdominal pain"
