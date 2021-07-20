@@ -141,7 +141,7 @@ dashboardPage(
                 box(
                   uiOutput("contributions_video", align = "center"),
                   solidHeader = T,
-                  title = "Conributions of patient records"
+                  title = "Contributions of patient records"
                   ),
                 box(
                   imageOutput("age_pyramid_gif"),
