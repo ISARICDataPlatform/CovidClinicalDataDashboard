@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = F
+dashboard_equal = T
 
 flowchart <- function(){
   
@@ -780,7 +780,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     data = d,
     aes(x = d$X, y = mean, text=paste0(x,"/",n)),
     shape = "square",
-    size = (d$size)/5,
+    size = (d$size)/8,
     colour = "navy"
   )
   lines <- geom_linerange(

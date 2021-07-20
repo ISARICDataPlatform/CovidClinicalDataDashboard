@@ -68,8 +68,8 @@ source("plot_functions.R")
 
 # specify path constants 
 DIR_SENSITIVE_DATA <- 'sensitive_data' # note all files here are ignored by git except README.md - see .gitignore
-FILE_CONTRIBUTIONS_VIDEO <- 'contributions.mp4' 
-FILE_GIF_IMAGE <- paste('figure/outcomes_by_age_gender_from_march2020.gif')
+FILE_CONTRIBUTIONS_VIDEO <- 'contributions_may2021.mp4' 
+FILE_GIF_IMAGE <- paste('figure/outcomes_by_age_gender_may2021.gif')
 FILE_MAP_RDS <- 'map_data.rds'
 
 # itemise all the data files
