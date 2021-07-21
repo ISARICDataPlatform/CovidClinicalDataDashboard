@@ -26,7 +26,7 @@ params:
 
 ```{r setup, include = FALSE}
 
-knitr::opts_knit$set(root.dir="C:/Users/baruj003/Desktop/21/working_R/oxford/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="~/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -134,7 +134,7 @@ patient.by.country.plot(patient.by.country.input)
 
 ### Demographics
 Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The median age is `r median(summary_input$age, na.rm=T)` years ranging from `r min(summary_input$age, na.rm=T)` to `r max(summary_input$age, na.rm=T)` years. One-third of the patients are 70 years old and above. Demographics, including age, sex, and outcome, are presented in Table 1 and Figure 4.    
-
+\newpage
 ```{r table1, tab.cap = "Patient Characteristics. Proportions are presented in parentheses, and have been rounded to two decimal places."}
 tables_supplementary(table_sup = patient.characteristic.table[1:19,]) 
 ```
