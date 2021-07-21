@@ -192,8 +192,15 @@ dashboardPage(
                   height = 600,
                   solidHeader = T,
                   title = 'Heatmap of symptoms at admission'
-                )
-              )),
+                ),
+                box(
+                  plotOutput("case_def"),
+                  height = 500,
+                  width=10,
+                  title = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"
+                ),
+              ),
+              ),
       tabItem(tabName = "comorbidities",
               fluidRow(
                 box(
@@ -376,7 +383,7 @@ dashboardPage(
             width = 6,
             height = 600,
             solidHeader = T,
-            title = 'CRP (mg/L)'
+            title = 'C-Reactive Protein(CRP) (mg/L)'
           ),
           box(
             plotlyOutput("lab_results_lab_lym", height = "500px"),
@@ -397,7 +404,7 @@ dashboardPage(
             width = 6,
             height = 600,
             solidHeader = T,
-            title = 'WBC (10^9/L)'
+            title = 'White Blood Cell(WBC) (10^9/L)'
           ),
           box(
             plotlyOutput("lab_results_lab_urean", height = "500px"),
@@ -411,14 +418,14 @@ dashboardPage(
             width = 6,
             height = 600,
             solidHeader = T,
-            title = 'Protrombin time (s)'
+            title = 'Protrombin (s)'
           ),
           box(
             plotlyOutput("lab_results_lab_alt", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
-            title = 'ALT (units/L)'
+            title = 'Alanine transaminase(ALT) (units/L)'
           ),
           box(
             plotlyOutput("lab_results_lab_bili", height = "500px"),
@@ -432,7 +439,7 @@ dashboardPage(
             width = 6,
             height = 600,
             solidHeader = T,
-            title = 'AST (units/L)'
+            title = 'Aspartate Transaminase(AST) (units/L)'
           )
         )
       ),
@@ -460,12 +467,6 @@ dashboardPage(
                     width = 12
                 )
               ),
-                box(
-                  plotOutput("case_def"),
-                  height = 500,
-                  width=10,
-                  title = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"
-                ),
               fluidRow(
                 box(includeMarkdown("markdown/Summary_dashboard_bottom.md"),
                     width = 12
@@ -603,7 +604,7 @@ dashboardPage(
             width = 4,
             height = 400,
             solidHeader = T,
-            title = "Proportion with vomiting nausea"
+            title = "Proportion with vomiting or nausea"
           ),
           box(
             plotlyOutput("age_symptoms_diarrhoea", height = "500px"),
