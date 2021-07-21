@@ -16,45 +16,44 @@ knitr::opts_chunk$set(fig.path='Figs/')
 
 # Background
 
-This report describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and June 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to the contribution of `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (the international severe acute respiratory and emerging infection consortium), a grassroots collaboration https://isaric.org/.
+This dashboard describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and June 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration https://isaric.org/.
 
-One-and-half year and over 3,800,000 deaths on [1], COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, shaking economies, and killing millions. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
+After one-and-a-half years and over 4 million deaths, COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, and shaking economies. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
 
-**The advantages of an international standardised case record form**. Novel diseases are, by definition, new; the scientific method is not. By developing consensus on a road map for clinical research methods before a pandemic, we are able to spend little further time defining study type, data collection tools, and potential outputs for evidence summarisation once the pathogen emerges. Using slightly adjusted standardised methods for novel diseases, evidence can be generated quickly.
+**The advantages of an international standardised case record form**. Novel diseases are, by definition, new; the scientific method is not. By developing consensus on a road map for clinical research methods before a pandemic, we are able to minimise further time defining study types, data collection tools, and potential outputs for evidence summarisation once the pathogen emerges. Using slightly adjusted standardised methods for novel diseases, evidence can be generated quickly.
 
-Comparable experimental data have allowed the development of research synthesis methods, achieving high levels of evidence. While small observational studies are easy to conduct, they are not so easily collated, reducing research synthesis. In contrast, large international observational studies with a standardised form allow for international data comparisons, analytical control of confounder, and therefore enable the acquisition of high levels of evidence.
+While small observational studies are easy to conduct, they often record different data or may record variables in different ways. This may not allow data to be collated or findings to be compared across studies, or combined to produce a more powerful and accurate representation. In contrast, large international observational studies with a standardised form allow for international data comparisons, improved analytic control of confounders, and therefore enable the acquisition of high levels of evidence.
 
-**How we got here with ISARIC**. In 2013, ISARIC and WHO implemented the standardised Clinical Characterisation Protocol to evolve clinical data into research evidence during health emergencies.  
+
+**How we got here with ISARIC**. In 2013, ISARIC and the World Health Organisation (WHO) implemented the standardised Clinical Characterisation Protocol to evolve clinical data into research evidence during health emergencies.  
 
 In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. Today, our partners have collected standardised, in-hospital clinical data from over half a million patients, in almost 800 sites, across more than 60 countries. This partner-fueled growing initiative is to our knowledge the largest COVID-19 in-hospital international database in the world.
 
-**What have our partners achieved**. Using the ISARIC and ISARIC4C databases, our partners have produced a broad range of evidence. More than 50 reports and manuscripts have been published to date and a further 25 are in progress or under peer-review. https://isaric.org/document-library/ , https://isaric4c.net/outputs/ and https://isaric.org/research/covid-19-clinical-research-resources/accessing-covid-19-clinical-data/approved-uses-of-platform-data/.
-
-In this report, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme.[2]The majority of this database is additionally available to external researchers via application to our Data Access Committee at https://www.iddo.org/covid19/data-sharing/accessing-data.  
+In this dashboard, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme [2]. The majority of this database is additionally available to external researchers via application to our Data Access Committee at https://www.iddo.org/covid19/data-sharing/accessing-data.  
 
 To contribute, please contact ncov@isaric.org. 
 
 
 # Methods
 
-The results in this report are produced using data from the ISARIC COVID-19 database of international, prospective observational data on clinical features of patients admitted to hospital with Covid-19.  Data collection was structured on the ISARIC/WHO Clinical Characterisation Protocol for Severe Emerging Infections, a standardized protocol for investigation of severe acute infections by pathogens of public health interest[3] and the ISARIC case report forms [4] designed for standardized data collection from the start of an outbreak and rapid dissemination of clinical information[5-9].  Data are collected on Research electronic Data Capture (REDCap, version 8.11.11, Vanderbilt University, Nashville, Tenn.), hosted by the University of Oxford. Additional data, collected using a wide variety of data systems, are submitted by international investigators who are not using the University of Oxford REDCap instance. Data are curated by the Infectious Diseases Data Observatory [10] to the CDISC Study Data Tabulation Model for harmonised analysis[11] The first patient was enrolled on 30 January 2020.  
+The results in this dashboard are produced using data from the ISARIC COVID-19 database of international, prospective observational data on clinical features of patients admitted to hospital with COVID-19.  Data collection was structured on the ISARIC/WHO Clinical Characterisation Protocol for Severe Emerging Infections, a standardized protocol for investigation of severe acute infections by pathogens of public health interest [3] and the ISARIC case report forms [4] designed for standardized data collection from the start of an outbreak and rapid dissemination of clinical information [5-9].  Data are collected on Research electronic Data Capture (REDCap, version 8.11.11, Vanderbilt University, Nashville, Tenn.), hosted by the University of Oxford. Additional data, collected using a wide variety of data systems, are submitted by international investigators who are not using the University of Oxford REDCap instance. Data are curated by the Infectious Diseases Data Observatory [10] to the CDISC Study Data Tabulation Model for harmonised analysis [11] The first patient was enrolled on 30 January 2020.  
 
 SDTM formatted data are processed in R 4.1.0 (R Core Team 2013). Initial data cleaning includes custom scripts designed to identify results of laboratory SARS-CoV-2 testing, and to standardise nomenclature for comorbidities, symptoms at admission, treatments, and outcomes.  
 
-Patients are excluded if they did not have laboratory-confirmed SARS-CoV-2 infection. Patients are considered to be lost to follow up if either a) they were transferred to another facility, or b) they had an unknown outcome and the last date upon which any data was recorded for them was 45 days or before the date of data extraction.  Patients with unknown outcome where the last recorded data was less than 45 days old are instead categorised as receiving ongoing care. 
+Patients are excluded if they did not have laboratory or clinically confirmed SARS-CoV-2 infection. Patients are considered to be lost to follow up if either a) they were transferred to another facility, or b) they had an unknown outcome and the last date upon which any data was recorded for them was 45 days or before the date of data extraction.  Patients with unknown outcome where the last recorded data was less than 45 days old are instead categorised as receiving ongoing care. 
 
-Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the report only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, in both the <10 year age group and the >= 10 year age group, are taken to be likely mis-entered and changed to missing. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction. Data from patients admitted less than 14 days before the date of extraction are considered embargoed and those individuals removed from consideration. 
+Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the dashboard only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, within both the <10 year age group and the >= 10 year age group, are taken to be likely mis-entered and changed to missing. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction.  
 
 
-The following Covid-19 symptom definitions were used: 
+The following COVID-19 symptom definitions were used: 
 
-- World Health Organization (WHO):   
+- WHO:   
       1. A combination of acute fever and cough,   
       Or   
       2. A combination of three or more of: fever, cough, general weakness and fatigue, headache, myalgia, sore throat, coryza, dyspnoea, anorexia, nausea and vomiting, diarrhoea, altered mental status   
 
 - Centers for Disease Control (CDC), United States:   
-      1.	At least two of: fever, chills (not available), rigors, myalgia, headache, sore throat, new olfactory and taste disorder,   
+      1.	At least two of: fever, chills (not available), rigors (not available), myalgia, headache, sore throat, new olfactory and taste disorder,   
       Or    
       2.	At least one of: cough, shortness of breath, difficulty breathing (not available) 
 
@@ -62,10 +61,8 @@ The following Covid-19 symptom definitions were used:
 New cough, or temperature ≥37.8°C, or a loss or change in sense of smell or taste  
 
 - European Centre for Disease Prevention and Control   
-At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusia or dysgeusia (dysgeusia not available) 
+At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusia or dysgeusia 
 
-Data manipulation is performed using the tidyverse collection of packages (Wickham et al. 2019), as well as ff (Adler et al. 2020) and dtplyr (Wickham 2021). Data visualisation makes use of ggplot (Wickham 2016) and its extension ggupset (Ahlmann-Eltze 2020). The report is generated using knitr (Xie 2021). 
-
-This report only includes individuals for whom data collection commenced on or before 25 May 2021. (We have applied a 14-day rule to focus analysis on individuals who are more likely to have a recorded outcome. By excluding patients enrolled during the last 14 days, we aim to reduce the number of incomplete data records and thus improve the generalisability of the results and the accuracy of the outcomes; AND who have laboratory-confirmed SARS-COV-2 infection. 
+This dashboard only includes individuals for whom data collection commenced on or before 25 May 2021. 
 
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flowchart gives an overview of the cohort and outcomes as of 25 May 2021. 
