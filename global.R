@@ -300,4 +300,4 @@ knit("markdown/Summary_dashboard_bottom.Rmd", output = "markdown/Summary_dashboa
 knit("markdown/welcome.Rmd", output = "markdown/welcome.md")
 knit("markdown/welcome_caveats.Rmd", output = "markdown/welcome_caveats.md")
 
-
+colnames(patient.characteristic.table) <- c("Variable", "Count (proportion)")
