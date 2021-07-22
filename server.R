@@ -126,7 +126,7 @@ server <- function(input, output) {
     )
   }
   
-  output$symtpomUpset <- {
+  output$symptomUpset <- {
     renderCachedPlot(
       upset.plot(symptom.upset.input, which.plot = "symptom"),
       input$sidebarcollapsed,
@@ -244,61 +244,61 @@ server <- function(input, output) {
   
   
   output$lab_results_lab_crp <- {
-    renderPlotly(p_lab_crp(data_plot_lab_crp))
+    renderPlotly(p_lab_crp(data_plot_lab_crp)) %>% bindCache(input$sidebarcollapsed)
   } 
   
   output$lab_results_lab_lym <- {
-    renderPlotly(p_lab_lym(data_plot_lab_lym))
+    renderPlotly(p_lab_lym(data_plot_lab_lym)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_neut <- {
-    renderPlotly(p_lab_neut(data_plot_lab_neut))
+    renderPlotly(p_lab_neut(data_plot_lab_neut)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_wbc <- {
-    renderPlotly(p_lab_wbc(data_plot_lab_wbc))
+    renderPlotly(p_lab_wbc(data_plot_lab_wbc)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_urean <- {
-    renderPlotly(p_lab_urean(data_plot_lab_urean))
+    renderPlotly(p_lab_urean(data_plot_lab_urean)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_pt <- {
-    renderPlotly(p_lab_pt(data_plot_lab_pt))
+    renderPlotly(p_lab_pt(data_plot_lab_pt)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_alt <- {
-    renderPlotly(p_lab_alt(data_plot_lab_alt))
+    renderPlotly(p_lab_alt(data_plot_lab_alt)) %>% bindCache(input$sidebarcollapsed)
   }
 
   output$lab_results_lab_bili <- {
-    renderPlotly(p_lab_bili(data_plot_lab_bili))
+    renderPlotly(p_lab_bili(data_plot_lab_bili)) %>% bindCache(input$sidebarcollapsed)
   }
   output$lab_results_lab_ast <- {
-    renderPlotly(p_lab_ast(data_plot_lab_ast))
+    renderPlotly(p_lab_ast(data_plot_lab_ast)) %>% bindCache(input$sidebarcollapsed)
   }
   output$clinical_signs_vs_resp <- {
-    renderPlotly(p_resp(data_plot_vs_resp))
+    renderPlotly(p_resp(data_plot_vs_resp)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_hr <- {
-    renderPlotly(p_hr(data_plot_vs_hr))
+    renderPlotly(p_hr(data_plot_vs_hr)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_temp <- {
-    renderPlotly(p_temp(data_plot_vs_temp))
+    renderPlotly(p_temp(data_plot_vs_temp)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_sysbp <- {
-    renderPlotly(p_sysbp(data_plot_vs_sysbp))
+    renderPlotly(p_sysbp(data_plot_vs_sysbp)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_oxysat <- {
-    renderPlotly(p_oxysat(data_plot_vs_oxysat))
+    renderPlotly(p_oxysat(data_plot_vs_oxysat)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_oxysat_therapy <- {
-    renderPlotly(p_oxysat_therapy(data_plot_vs_oxysat_therapy))
+    renderPlotly(p_oxysat_therapy(data_plot_vs_oxysat_therapy)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$PatientbyCountry <- {
@@ -309,75 +309,75 @@ server <- function(input, output) {
   }
   
   output$age_comorbid_asthma <- {
-    renderPlotly(plot.prop.by.age_comorbid_asthma(data_plot_comorbid_asthma, FALSE))
+    renderPlotly(plot.prop.by.age_comorbid_asthma(data_plot_comorbid_asthma, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_comorbid_malignant_neoplasm <- {
-    renderPlotly(plot.prop.by.age_comorbid_malignant_neoplasm(data_plot_comorbid_malignant_neoplasm, FALSE))
+    renderPlotly(plot.prop.by.age_comorbid_malignant_neoplasm(data_plot_comorbid_malignant_neoplasm, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_comorbid_obesity <- {
-    renderPlotly(plot.prop.by.age_comorbid_obesity(data_plot_comorbid_obesity, FALSE))
+    renderPlotly(plot.prop.by.age_comorbid_obesity(data_plot_comorbid_obesity, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_comorbid_diabetes <- {
-    renderPlotly(plot.prop.by.age_comorbid_diabetes(data_plot_comorbid_diabetes, FALSE))
+    renderPlotly(plot.prop.by.age_comorbid_diabetes(data_plot_comorbid_diabetes, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_comorbid_dementia <- {
-    renderPlotly(plot.prop.by.age_comorbid_dementia(data_plot_comorbid_dementia, FALSE))
+    renderPlotly(plot.prop.by.age_comorbid_dementia(data_plot_comorbid_dementia, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_comorbid_smoking <- {
-    renderPlotly(plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE))
+    renderPlotly(plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_comorbid_hypertension <- {
-    renderPlotly(plot.prop.by.age_comorbid_hypertension(data_plot_comorbid_hypertension, FALSE))
+    renderPlotly(plot.prop.by.age_comorbid_hypertension(data_plot_comorbid_hypertension, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_history_of_fever <- {
-    renderPlotly(plot.prop.by.age_symptoms_history_of_fever(data_plot_symptoms_history_of_fever, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_history_of_fever(data_plot_symptoms_history_of_fever, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_cough <- {
-    renderPlotly(plot.prop.by.age_symptoms_cough(data_plot_symptoms_cough, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_cough(data_plot_symptoms_cough, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_cough_fever <- {
-    renderPlotly(plot.prop.by.age_symptoms_cough_fever(data_plot_symptoms_cough_fever, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_cough_fever(data_plot_symptoms_cough_fever, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_shortness_of_breath <- {
-    renderPlotly(plot.prop.by.age_symptoms_shortness_of_breath(data_plot_symptoms_shortness_of_breath, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_shortness_of_breath(data_plot_symptoms_shortness_of_breath, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_cought_fever_shortness_of_breath <- {
-    renderPlotly(plot.prop.by.age_symptoms_cought_fever_shortness_of_breath(data_plot_symptoms_cought_fever_shortness_of_breath, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_cought_fever_shortness_of_breath(data_plot_symptoms_cought_fever_shortness_of_breath, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_upper_respiratory_tract_symptoms <- {
-    renderPlotly(plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms(data_plot_symptoms_upper_respiratory_tract_symptoms, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_upper_respiratory_tract_symptoms(data_plot_symptoms_upper_respiratory_tract_symptoms, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_altered_consciousness_confusion <- {
-    renderPlotly(plot.prop.by.age_symptoms_altered_consciousness_confusion(data_plot_symptoms_altered_consciousness_confusion, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_altered_consciousness_confusion(data_plot_symptoms_altered_consciousness_confusion, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_constitutional <- {
-    renderPlotly(plot.prop.by.age_symptoms_constitutional(data_plot_symptoms_constitutional, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_constitutional(data_plot_symptoms_constitutional, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_vomiting_nausea <- {
-    renderPlotly(plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_diarrhoea <- {
-    renderPlotly(plot.prop.by.age_symptoms_diarrhoea(data_plot_symptoms_diarrhoea, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_diarrhoea(data_plot_symptoms_diarrhoea, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$age_symptoms_abdominal_pain <- {
-    renderPlotly(plot.prop.by.age_symptoms_abdominal_pain(data_plot_symptoms_abdominal_pain, FALSE))
+    renderPlotly(plot.prop.by.age_symptoms_abdominal_pain(data_plot_symptoms_abdominal_pain, FALSE)) %>% bindCache(input$sidebarcollapsed)
   }
   
   
