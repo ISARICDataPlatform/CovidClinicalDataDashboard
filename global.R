@@ -5,7 +5,7 @@ library(renv)
 # Then comment out the following line for the second deployment. It's mad, but there you go.
 # devtools::install_github("ISARICDataPlatform/CovidClinicalDataProcessor")
 # devtools::install_github("kamclean/collaborator")
-library(CovidClinicalDataProcessor)
+# library(CovidClinicalDataProcessor)
 library(shinydashboard)
 library(shinyWidgets)
 library(ISOcodes)
