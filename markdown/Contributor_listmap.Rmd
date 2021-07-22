@@ -5,9 +5,7 @@ knit: (function(inputFile, encoding) { rmarkdown::render(inputFile, encoding = e
                                          
 ---
 
-*Please note that this page features contributing sites only. If you would are registered and would like to contribute, contact ncov@isaric.org*
-
-We extend our thanks to all of the staff at our partner sites collecting data from across the globe:
+**We extend our thanks to all of the staff at our partner sites collecting data from across the globe:**
 
 ```{r, list, eval=T, echo = FALSE, warning=FALSE, message=FALSE}
 map.data %>%

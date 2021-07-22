@@ -126,13 +126,13 @@ server <- function(input, output) {
     )
   }
   
-  output$symptomUpset <- {
-    renderPlot(
+  output$symtpomUpset <- {
+    renderCachedPlot(
       upset.plot(symptom.upset.input, which.plot = "symptom"),
-      height = 500
+      input$sidebarcollapsed,
+      sizeGrowthRatio(height = 500)
     )
   }
-  
   output$symptomHeatmap <- {
     renderPlot(heatmap_plot(data_plot_heatmap), height = 500)
   }
@@ -147,9 +147,10 @@ server <- function(input, output) {
   }
   
   output$comorbidityUpset <- {
-    renderPlot(
+    renderCachedPlot(
       upset.plot(comorbidity.upset.input, which.plot = "comorbidity"),
-      height = 500
+      input$sidebarcollapsed,
+      sizeGrowthRatio(height = 500)
     )
   }
   
@@ -163,9 +164,10 @@ server <- function(input, output) {
   
   
   output$treatmentUpset <- {
-    renderPlot(
+    renderCachedPlot(
       upset.plot(treatment.upset.input, which.plot = "treatment"),
-      height = 500
+      input$sidebarcollapsed,
+      sizeGrowthRatio(height = 500)
     )
   }
   
@@ -178,9 +180,10 @@ server <- function(input, output) {
   }
   
   output$icuTreatmentUpset <- {
-    renderPlot(
+    renderCachedPlot(
       upset.plot(icu.treatment.upset.input, which.plot = "icu.treatment"),
-      height = 500
+      input$sidebarcollapsed,
+      sizeGrowthRatio(height = 500)
     )
   }
   
@@ -242,7 +245,7 @@ server <- function(input, output) {
   
   output$lab_results_lab_crp <- {
     renderPlotly(p_lab_crp(data_plot_lab_crp))
-  }
+  } 
   
   output$lab_results_lab_lym <- {
     renderPlotly(p_lab_lym(data_plot_lab_lym))
