@@ -317,50 +317,42 @@ dashboardPage(
       tabItem(tabName = "vital_signs",
               fluidRow(
                 box(
-                  img(src="example3.PNG",height=450),
-                  height=550,
-                  width = 8,
-                  title = 'Example'
-                )
-              ),
-              fluidRow(
-                box(
-                  plotlyOutput("clinical_signs_vs_resp", height = "500px"),
+                  plotOutput("clinical_signs_vs_resp", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Respiratory rate (min)'
                 ),
                 box(
-                  plotlyOutput("clinical_signs_vs_hr", height = "500px"),
+                  plotOutput("clinical_signs_vs_hr", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Heart rate (min)'
                 ),
                 box(
-                  plotlyOutput("clinical_signs_vs_temp", height = "500px"),
+                  plotOutput("clinical_signs_vs_temp", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Temperature (Celsius)'
                 ),
                 box(
-                  plotlyOutput("clinical_signs_vs_sysbp", height = "500px"),
+                  plotOutput("clinical_signs_vs_sysbp", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Systolic blood pressure (mmHg)'
                 ),
                 box(
-                  plotlyOutput("clinical_signs_vs_oxysat", height = "500px"),
+                  plotOutput("clinical_signs_vs_oxysat", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
                   title = 'Oxygen saturation on room air (%)'
                 ),
                 box(
-                  plotlyOutput("clinical_signs_vs_oxysat_therapy", height = "500px"),
+                  plotOutput("clinical_signs_vs_oxysat_therapy", height = "500px"),
                   width = 6,
                   height = 600,
                   solidHeader = T,
@@ -371,71 +363,63 @@ dashboardPage(
         tabName = "lab_results",
         fluidRow(
           box(
-            img(src="example3.PNG",height=450),
-            height=550,
-            width =8,
-            title = 'Example'
-          )
-        ),
-        fluidRow(
-          box(
-            plotlyOutput("lab_results_lab_crp", height = "500px"),
+            plotOutput("lab_results_lab_crp", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'C-Reactive Protein(CRP) (mg/L)'
           ),
           box(
-            plotlyOutput("lab_results_lab_lym", height = "500px"),
+            plotOutput("lab_results_lab_lym", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Lymphocytes (10^9/L)'
           ),
           box(
-            plotlyOutput("lab_results_lab_neut", height = "500px"),
+            plotOutput("lab_results_lab_neut", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Neutrophils (10^9/L)'
           ),
           box(
-            plotlyOutput("lab_results_lab_wbc", height = "500px"),
+            plotOutput("lab_results_lab_wbc", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'White Blood Cell(WBC) (10^9/L)'
           ),
           box(
-            plotlyOutput("lab_results_lab_urean", height = "500px"),
+            plotOutput("lab_results_lab_urean", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Urea (mmol/L)'
           ),
           box(
-            plotlyOutput("lab_results_lab_pt", height = "500px"),
+            plotOutput("lab_results_lab_pt", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Protrombin (s)'
           ),
           box(
-            plotlyOutput("lab_results_lab_alt", height = "500px"),
+            plotOutput("lab_results_lab_alt", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Alanine transaminase(ALT) (units/L)'
           ),
           box(
-            plotlyOutput("lab_results_lab_bili", height = "500px"),
+            plotOutput("lab_results_lab_bili", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
             title = 'Bilirubin (mmol/L)'
           ),
           box(
-            plotlyOutput("lab_results_lab_ast", height = "500px"),
+            plotOutput("lab_results_lab_ast", height = "500px"),
             width = 6,
             height = 600,
             solidHeader = T,
