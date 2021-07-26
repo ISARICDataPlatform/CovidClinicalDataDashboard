@@ -88,18 +88,28 @@ server <- function(input, output) {
     )
   })
   
-  output$age_pyramid_gif <- renderImage({
-    # load gif
-    gif_image <- image_read(FILE_GIF_IMAGE)
-    # write to tmp file
-    tmpfile <- gif_image %>%
-      image_scale("600x360!") %>%
-      image_write(tempfile(fileext = 'gif'), format = 'gif')
-    # return temp file as list object with specified features to be read by ui
-    list(src = tmpfile, contentType = "image/gif")
-  }, deleteFile = TRUE
-  )
+  output$age_pyramid_video <- renderUI({
+    tags$video(
+      src=FILE_AGE_PYRAMID_VIDEO,
+      width='600px',
+      height='360px',
+      type='video/mp4',
+      controls="controls"
+    )
+  })
   
+  # output$age_pyramid_gif <- renderImage({
+  #   # load gif
+  #   gif_image <- image_read(FILE_GIF_IMAGE)
+  #   # write to tmp file
+  #   tmpfile <- gif_image %>%
+  #     image_scale("600x360!") %>%
+  #     image_write(tempfile(fileext = 'gif'), format = 'gif')
+  #   # return temp file as list object with specified features to be read by ui
+  #   list(src = tmpfile, contentType = "image/gif")
+  # }, deleteFile = TRUE
+  # )
+  # 
   output$case_def <- {
     renderPlot(
       plot_case_def(case.def.input),
