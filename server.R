@@ -244,61 +244,61 @@ server <- function(input, output) {
   
   
   output$lab_results_lab_crp <- {
-    renderPlotly(p_lab_crp(data_plot_lab_crp)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_crp(data_plot_lab_crp)) %>% bindCache(input$sidebarcollapsed)
   } 
   
   output$lab_results_lab_lym <- {
-    renderPlotly(p_lab_lym(data_plot_lab_lym)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_lym(data_plot_lab_lym)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_neut <- {
-    renderPlotly(p_lab_neut(data_plot_lab_neut)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_neut(data_plot_lab_neut)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_wbc <- {
-    renderPlotly(p_lab_wbc(data_plot_lab_wbc)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_wbc(data_plot_lab_wbc)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_urean <- {
-    renderPlotly(p_lab_urean(data_plot_lab_urean)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_urean(data_plot_lab_urean)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_pt <- {
-    renderPlotly(p_lab_pt(data_plot_lab_pt)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_pt(data_plot_lab_pt)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$lab_results_lab_alt <- {
-    renderPlotly(p_lab_alt(data_plot_lab_alt)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_alt(data_plot_lab_alt)) %>% bindCache(input$sidebarcollapsed)
   }
 
   output$lab_results_lab_bili <- {
-    renderPlotly(p_lab_bili(data_plot_lab_bili)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_bili(data_plot_lab_bili)) %>% bindCache(input$sidebarcollapsed)
   }
   output$lab_results_lab_ast <- {
-    renderPlotly(p_lab_ast(data_plot_lab_ast)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_lab_ast(data_plot_lab_ast)) %>% bindCache(input$sidebarcollapsed)
   }
   output$clinical_signs_vs_resp <- {
-    renderPlotly(p_resp(data_plot_vs_resp)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_resp(data_plot_vs_resp)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_hr <- {
-    renderPlotly(p_hr(data_plot_vs_hr)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_hr(data_plot_vs_hr)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_temp <- {
-    renderPlotly(p_temp(data_plot_vs_temp)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_temp(data_plot_vs_temp)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_sysbp <- {
-    renderPlotly(p_sysbp(data_plot_vs_sysbp)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_sysbp(data_plot_vs_sysbp)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_oxysat <- {
-    renderPlotly(p_oxysat(data_plot_vs_oxysat)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_oxysat(data_plot_vs_oxysat)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$clinical_signs_vs_oxysat_therapy <- {
-    renderPlotly(p_oxysat_therapy(data_plot_vs_oxysat_therapy)) %>% bindCache(input$sidebarcollapsed)
+    renderPlot(p_oxysat_therapy(data_plot_vs_oxysat_therapy)) %>% bindCache(input$sidebarcollapsed)
   }
   
   output$PatientbyCountry <- {
