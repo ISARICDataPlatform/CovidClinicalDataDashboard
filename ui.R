@@ -266,8 +266,7 @@ dashboardPage(
       tabItem(tabName = "contributors",
               fluidRow(
                 box(
-                  leafletOutput("contributorsMap"),
-                  title = "Contributors Map",
+                  tags$iframe(seamless="seamless",src="https://www.google.com/maps/d/u/2/embed?mid=1m6gbS4Iqb_4G6EX-YuEJnjF3KxYd38fd&ll=22.763700700551322%2C-118.77549999999997&z=2",height=500,width=1400),
                   width = 12
                 )
               ),
