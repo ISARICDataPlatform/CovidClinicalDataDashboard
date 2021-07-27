@@ -460,58 +460,51 @@ dashboardPage(
       tabItem(tabName = "comorbidities_by_age",
               fluidRow(
                 box(
-                  img(src="example2.PNG",height=350),
-                  height=450,
+                  img(src="example2.PNG",
+                      height=350),
                   title = 'Example'
                 )
               ),
               fluidRow(
                 box(
-                  plotlyOutput("age_comorbid_asthma", height = "500px"),
-                  width = 6,
-                  height = 400,
+                  plotlyOutput("age_comorbid_asthma"),
+                  width = 4,
                   solidHeader = T,
                   title = "Proportion with asthma"
                 ),
                 box(
-                  plotlyOutput("age_comorbid_malignant_neoplasm", height = "500px"),
-                  width = 6,
-                  height = 400,
+                  plotlyOutput("age_comorbid_malignant_neoplasm"),
+                  width = 4,
                   solidHeader = T,
                   title = "Proportion with malignant neoplasma"
                 ),
                 box(
-                  plotlyOutput("age_comorbid_obesity", height = "500px"),
-                  width = 6,
-                  height = 400,
+                  plotlyOutput("age_comorbid_obesity"),
+                  width = 4,
                   solidHeader = T,
                   title = "Proportion with obesity"
                 ),
                 box(
-                  plotlyOutput("age_comorbid_diabetes", height = "500px"),
-                  width = 6,
-                  height = 400,
+                  plotlyOutput("age_comorbid_diabetes"),
+                  width = 4,
                   solidHeader = T,
                   title = "Proportion with diabetes"
                 ),
                 box(
-                  plotlyOutput("age_comorbid_dementia", height = "500px"),
-                  width = 6,
-                  height = 400,
+                  plotlyOutput("age_comorbid_dementia"),
+                  width = 4,
                   solidHeader = T,
                   title = "Proportion with dementia"
                 ),
                 box(
-                  plotlyOutput("age_comorbid_smoking", height = "500px"),
-                  width = 6,
-                  height = 400,
+                  plotlyOutput("age_comorbid_smoking"),
+                  width = 4,
                   solidHeader = T,
                   title = "Proportion of smokers"
                 ),
                 box(
-                  plotlyOutput("age_comorbid_hypertension", height = "500px"),
-                  width = 6,
-                  height = 400,
+                  plotlyOutput("age_comorbid_hypertension"),
+                  width = 4,
                   solidHeader = T,
                   title = "Proportion with hypertension"
                 )
@@ -522,85 +515,73 @@ dashboardPage(
         fluidRow(
           box(
             img(src="example2.PNG",height=350),
-            height=450,
             title = 'Example'
           )
         ),
         fluidRow(
           box(
-            plotlyOutput("age_symptoms_history_of_fever", height = "500px"),
+            plotlyOutput("age_symptoms_history_of_fever"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with fever"
           ),
           box(
-            plotlyOutput("age_symptoms_cough", height = "500px"),
+            plotlyOutput("age_symptoms_cough"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with cough"
           ),
           box(
-            plotlyOutput("age_symptoms_cough_fever", height = "500px"),
+            plotlyOutput("age_symptoms_cough_fever"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with cough or fever"
           ),
           box(
-            plotlyOutput("age_symptoms_shortness_of_breath", height = "500px"),
+            plotlyOutput("age_symptoms_shortness_of_breath"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with shortness of breath"
           ),
           box(
-            plotlyOutput("age_symptoms_cought_fever_shortness_of_breath", height = "500px"),
+            plotlyOutput("age_symptoms_cought_fever_shortness_of_breath"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with cough, fever, or shortness of breath"
           ),
           box(
-            plotlyOutput("age_symptoms_upper_respiratory_tract_symptoms", height = "500px"),
+            plotlyOutput("age_symptoms_upper_respiratory_tract_symptoms"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with upper respiratory tract symptoms"
           ),
           box(
-            plotlyOutput("age_symptoms_altered_consciousness_confusion", height = "500px"),
+            plotlyOutput("age_symptoms_altered_consciousness_confusion"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with confusion"
           ),
           box(
-            plotlyOutput("age_symptoms_constitutional", height = "500px"),
+            plotlyOutput("age_symptoms_constitutional"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with constitutional symptoms"
           ),
           box(
-            plotlyOutput("age_symptoms_vomiting_nausea", height = "500px"),
+            plotlyOutput("age_symptoms_vomiting_nausea"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with vomiting or nausea"
           ),
           box(
-            plotlyOutput("age_symptoms_diarrhoea", height = "500px"),
+            plotlyOutput("age_symptoms_diarrhoea"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with diarrhoea"
           ),
           box(
-            plotlyOutput("age_symptoms_abdominal_pain", height = "500px"),
+            plotlyOutput("age_symptoms_abdominal_pain"),
             width = 4,
-            height = 400,
             solidHeader = T,
             title = "Proportion with abdominal pain"
           )

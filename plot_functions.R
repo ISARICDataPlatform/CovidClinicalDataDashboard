@@ -906,7 +906,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.l
     labs(title = N)
   
   if (dashboard==T){
-    p <- ggplotly(p,tooltip="text") %>% layout(height=350)
+    p <- ggplotly(p,tooltip="text", height = 350) %>% layout()
   }
   
   return(p)
