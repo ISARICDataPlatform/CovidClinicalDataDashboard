@@ -15,8 +15,10 @@ knitr::opts_chunk$set(fig.path='Figs/')
 
 **Please use the tabs on the left-hand side to navigate and view the results.**
 
+### Contributors to dashboard and report development
+Joaquín Baruch, Gail Carson, Barbara Wanjiru Citarella, Drew Dagens, Emmanuelle Dankwa, Jake Dunning, Martina Escher, Matthew Hall, Samuel Hinton, Peter Horby, Christiana Kartsonaki, Sadie Kelly, Kalynn Kennon, Samual MacDonald, Kenneth A. McLean, Laura Merson, Piero L. Olliaro, Mark G. Pritchard, Amanda Rojek, Sally Shrapnel, Aapeli Vuorinen, Jia Wei
 
-## References
+### References
 [1]https://www.who.int/emergencies/diseases/novel-coronavirus-2019 
 [2]https://isaric.org/research/isaric-partner-analysis-frequently-asked-questions/  
 [3]International Severe Acute Respiratory and Emerging Infection Consortium, World Health Organization. ISARIC/WHO Clinical Characterisation Protocol for Severe Emerging Infections, version 3.2: ISARIC, 2020.   

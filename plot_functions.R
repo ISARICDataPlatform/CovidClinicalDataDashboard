@@ -495,7 +495,7 @@ p_lab_crp <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
-    geom_boxplot(fill="lightblue",outlier.shape = NA) +xlab("Age groups") + ylab("CRP (mg/L)") + 
+    geom_boxplot(fill="lightblue") +xlab("Age groups") + ylab("CRP (mg/L)") + 
     theme_bw() +labs(title = N)
   if (dashboard==T){
     p=p+theme(

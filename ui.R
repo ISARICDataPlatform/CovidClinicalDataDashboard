@@ -102,7 +102,7 @@ dashboardPage(
         icon = icon("table")
       ),
       menuItem(
-        "Contributors",
+        "Data contributors",
         tabName = "contributors",
         icon = icon("users")
       )
@@ -144,7 +144,7 @@ dashboardPage(
                   title = "Contributions of patient records"
                   ),
                 box(
-                  imageOutput("age_pyramid_gif"),
+                  uiOutput("age_pyramid_video", align = "center"),
                   solidHeader = T,
                   title = "Outcomes by age and gender"
                   )
