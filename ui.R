@@ -546,6 +546,7 @@ dashboardPage(
           box(
             plotlyOutput("age_symptoms_cought_fever_shortness_of_breath"),
             width = 4,
+            height = 400,
             solidHeader = T,
             title = "Proportion with cough, fever, or shortness of breath"
           ),
