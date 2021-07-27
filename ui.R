@@ -102,7 +102,7 @@ dashboardPage(
         icon = icon("table")
       ),
       menuItem(
-        "Contributors",
+        "Data contributors",
         tabName = "contributors",
         icon = icon("users")
       )
