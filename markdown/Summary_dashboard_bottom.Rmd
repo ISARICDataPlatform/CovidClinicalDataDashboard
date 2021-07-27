@@ -19,8 +19,8 @@ knitr::opts_chunk$set(fig.path='Figs/')
 Joaquín Baruch, Gail Carson, Barbara Wanjiru Citarella, Drew Dagens, Emmanuelle Dankwa, Jake Dunning, Martina Escher, Matthew Hall, Samuel Hinton, Peter Horby, Christiana Kartsonaki, Sadie Kelly, Kalynn Kennon, Samual MacDonald, Kenneth A. McLean, Laura Merson, Piero L. Olliaro, Mark G. Pritchard, Amanda Rojek, Sally Shrapnel, Aapeli Vuorinen, Jia Wei
 
 ### References
-[1]https://www.who.int/emergencies/diseases/novel-coronavirus-2019 
-[2]https://isaric.org/research/isaric-partner-analysis-frequently-asked-questions/  
+[1]WHO novel coronavirus 2019 (hyperlink to https://www.who.int/emergencies/diseases/novel-coronavirus-2019)   
+[2]ISARIC Partner Analysis frequently asked questions (hyperlink to https://isaric.org/research/isaric-partner-analysis-frequently-asked-questions/)  
 [3]International Severe Acute Respiratory and Emerging Infection Consortium, World Health Organization. ISARIC/WHO Clinical Characterisation Protocol for Severe Emerging Infections, version 3.2: ISARIC, 2020.   
 [4]International Severe Acute Respiratory and Emerging Infection Consortium. COVID-19 CRF. Available at: https://isaric.tghn.org/COVID-19-CRF/.   
 [5]Huang C, Wang Y, Li X, et al. Clinical features of patients infected with 2019 novel coronavirus in Wuhan, China. Lancet 2020; 395(10223): 497-506.   
@@ -28,5 +28,5 @@ Joaquín Baruch, Gail Carson, Barbara Wanjiru Citarella, Drew Dagens, Emmanuelle
 [7]Zhou F, Yu T, Du R, et al. Clinical course and risk factors for mortality of adult inpatients with COVID-19 in Wuhan, China: a retrospective cohort study. Lancet 2020; 395(10229): 1054-62.   
 [8]Dunning JW, Merson L, Rohde GGU, et al. Open source clinical science for emerging infections. Lancet Infect Dis 2014; 14(1): 8-9.   
 [9]ISARIC clinical characterisation group. Global outbreak research: harmony not hegemony. Lancet Infect Dis 2020; 20(7): 770-2.   
-[10]www.iddo.org   
-[11]https://www.cdisc.org/standards/foundational/sdtm  
+[10]IDDO website  (hyperlink to www.iddo.org)   
+[11]Clinical Data Interchange Standards Consortium (hyperlink to https://www.cdisc.org/standards/foundational/sdtm )  
