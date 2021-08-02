@@ -140,11 +140,13 @@ dashboardPage(
               fluidRow(
                 box(
                   uiOutput("contributions_video", align = "center"),
+                  "Animation shows the contributions of patient records by country according to dates.",
                   solidHeader = T,
                   title = "Contributions of patient records"
                   ),
                 box(
                   uiOutput("age_pyramid_video", align = "center"),
+                  "Animation shows the outcomes by age and gender according to months.",
                   solidHeader = T,
                   title = "Outcomes by age and gender"
                   )
@@ -181,7 +183,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("symptomUpset", height = "500px"),
-                  "Graph shows the distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity. The most common symptom combination is shortness of breath, cough, and history of fever (12.5%).",
+                  "Graph shows the distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence (filled) or absence (empty) of each symptom. The most common symptom combination is shortness of breath, cough, and history of fever (12.5%).",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -208,7 +210,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("comorbidityPrevalence", height = "500px"),
-                  "Graph shows the prevalence of comorbidities. Conditions present in at least 10% of cases are hypertension (41% of those reported), smoking (35%), diabetes (28%), cardiac chronic disease (17%), obesity (12%), dementia, chronic neurological disease and rheumatological disease (each 10%). Bars are labelled with the fraction of patients presenting with the comorbidity to the number of patients with data on the comorbidity recorded",
+                  "Graph shows the prevalence of comorbidities. Conditions present in at least 10% of cases are hypertension (41% of those reported), smoking (35%), diabetes (28%), cardiac chronic disease (17%), obesity (12%), dementia, chronic neurological disease and rheumatological disease (each 10%). Bars are labelled with the fraction of patients presenting with the comorbidity to the number of patients with data on the comorbidity recorded.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -235,7 +237,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("treatmentUpset", height = "500px"),
-                  "Graph shows the distribution of combinations of 5 most common treatments, across all patients with completed hospital stay and recorded treatment data.",
+                  "Graph shows the distribution of combinations of 5 most common treatments, across all patients with completed hospital stay and recorded treatment data. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -246,7 +248,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("icuTreatmentPrevalence", height = "500px"),
-                  "Graph shows the proportion of treatments receiving each treatment in ICU. 91.9% received antibiotics and 37.1% antivirals. 87.2% received some degree of oxygen supplementation, of which, 48.2% received NIV and 59.8% IMV. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
+                  "Graph shows the proportion of treatments receiving each treatment in ICU. 91.9% received antibiotics and 37.1% antivirals. 87.2% received some degree of oxygen supplementation, of which, 48.2% received NIV and 59.8% IMV. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -384,7 +386,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_lym", height = "500px"),
-            "Graph shows lymphocytes levels in 108373 patients at presentation by age group. The median level is 2.9 *10^9/L in children under 10 years, 1.9 *10^9/L in children aged 10-19 years, and decreases to 0.8 *10^9/L in adults aged 70 and above.",
+            "Graph shows lymphocyte levels in 108373 patients at presentation by age group. The median level is 2.9 *10^9/L in children under 10 years, 1.9 *10^9/L in children aged 10-19 years, and decreases to 0.8 *10^9/L in adults aged 70 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -392,7 +394,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_neut", height = "500px"),
-            "Graph shows neutrophils levels in 107659 patients at presentation by age group. The median level increases from 3.8 *10^9/L in children under 10 to 6 *10^9/L in adults aged 90 and above.",
+            "Graph shows neutrophil levels in 107659 patients at presentation by age group. The median level increases from 3.8 *10^9/L in children under 10 to 6 *10^9/L in adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -469,6 +471,7 @@ dashboardPage(
               fluidRow(
                 box(flowchart(),
                     title = "Patients inclusion flowchart",
+                    "Graph shows the patient inclusion flowchart, among 516889 patients, 442643 (85.7%) were included. 70476 (16%) were admitted to ICU/HDU. ",
                     width = 12
                 )
               ),
