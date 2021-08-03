@@ -810,7 +810,7 @@ patient.by.country.plot <- function(aggregated.tbl,dashboard = dashboard_equal,.
 #' @export plot.prop.by.age
 #' @keywords internal
 ############################################
-plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 750, condition.in.label = TRUE, dashboard = dashboard_equal, ...) {
+plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 1000, condition.in.label = TRUE, dashboard = dashboard_equal, ...) {
   data2 <- data
   summ <- data2 %>%
     add_column(All = 1)%>%

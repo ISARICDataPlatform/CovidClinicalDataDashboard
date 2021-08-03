@@ -16,7 +16,7 @@ knitr::opts_chunk$set(fig.path='Figs/')
 
 # Background
 
-This dashboard describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and June 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration https://isaric.org/.
+This dashboard describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and June 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration (hyperlink to https://isaric.org/).
 
 After one-and-a-half years and over 4 million deaths, COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, and shaking economies. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
 
@@ -29,7 +29,7 @@ While small observational studies are easy to conduct, they often record differe
 
 In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. Today, our partners have collected standardised, in-hospital clinical data from over half a million patients, in almost 800 sites, across more than 60 countries. This partner-fueled growing initiative is to our knowledge the largest COVID-19 in-hospital international database in the world.
 
-In this dashboard, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme [2]. The majority of this database is additionally available to external researchers via application to our Data Access Committee at https://www.iddo.org/covid19/data-sharing/accessing-data.  
+In this dashboard, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme [2]. The majority of this database is additionally available to external researchers via application to our Data Access Committee (hyperlink to https://www.iddo.org/covid19/data-sharing/accessing-data)  
 
 To contribute, please contact ncov@isaric.org. 
 
