@@ -79,23 +79,12 @@ server <- function(input, output) {
   }
   
   output$contributions_video <- renderUI({
-    tags$video(
-      src=FILE_CONTRIBUTIONS_VIDEO,
-      width='600px',
-      height='360px',
-      type='video/mp4',
-      controls="controls"
-    )
+    HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/RM2LtQFM-y8" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
   })
   
   output$age_pyramid_video <- renderUI({
-    tags$video(
-      src=FILE_AGE_PYRAMID_VIDEO,
-      width='600px',
-      height='360px',
-      type='video/mp4',
-      controls="controls"
-    )
+    HTML('<iframe width="560" height="315" src="https://www.youtube.com/embed/7ZfYf5wTBaQ" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>')
+    
   })
   
   # output$age_pyramid_gif <- renderImage({
