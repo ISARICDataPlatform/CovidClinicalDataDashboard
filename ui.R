@@ -140,13 +140,13 @@ dashboardPage(
               fluidRow(
                 box(
                   uiOutput("contributions_video", align = "center"),
-                  "Animation shows the contributions of patient records by country according to dates.",
+                  "Animated map highlighting the growth of patient records chronologically from 1 February 2020 to 24 May 2021.",
                   solidHeader = T,
                   title = "Contributions of patient records"
                   ),
                 box(
                   uiOutput("age_pyramid_video", align = "center"),
-                  "Animation shows the outcomes by age and gender according to months.",
+                  "Animated graphic showing the chronological patient outcomes according to their gender and age.",
                   solidHeader = T,
                   title = "Outcomes by age and gender"
                   )
