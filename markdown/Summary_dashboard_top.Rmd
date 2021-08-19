@@ -27,7 +27,7 @@ While small observational studies are easy to conduct, they often record differe
 
 **How we got here with ISARIC**. In 2013, ISARIC and the World Health Organisation (WHO) implemented the standardised Clinical Characterisation Protocol to evolve clinical data into research evidence during health emergencies.  
 
-In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. Today, our partners have collected standardised, in-hospital clinical data from over half a million patients, in almost 800 sites, across more than 60 countries. This partner-fueled growing initiative is to our knowledge the largest COVID-19 in-hospital international database in the world.
+In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. Today, our partners have collected standardised, in-hospital clinical data from over half a million patients, in more than 1600 sites, across 60 countries. More than half of these patients live in low- and middle-income countries. This partner-fueled growing initiative is to our knowledge the largest COVID-19 in-hospital international database in the world.
 
 In this dashboard, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme [2]. The majority of this database is additionally available to external researchers via application to our Data Access Committee (hyperlink to https://www.iddo.org/covid19/data-sharing/accessing-data)  
 
