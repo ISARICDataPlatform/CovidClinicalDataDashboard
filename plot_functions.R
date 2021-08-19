@@ -155,29 +155,19 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
     ungroup() %>%
     as_tibble() %>%
     complete(
-      slider_sex,
-      nesting(slider_agegp10, lower.age.bound, upper.age.bound),
-      slider_country,
       nesting(
         calendar.year.admit,
         calendar.month.admit,
         year.epiweek.admit
       ),
       slider_outcome,
-      slider_icu_ever,
       fill = list(count = 0)
     ) %>%
     arrange(year.epiweek.admit) %>%
     as.data.table() %>%
     lazy_dt(immutable = FALSE) %>%
     group_by(
-      slider_sex,
       slider_outcome,
-      slider_country,
-      slider_agegp10,
-      lower.age.bound,
-      upper.age.bound,
-      slider_icu_ever
     ) %>%
     mutate(cum.count = cumsum(count)) %>%
     ungroup() %>%
@@ -186,12 +176,9 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
     select(-cum.count) %>%
     group_by(year.epiweek.admit, slider_outcome) %>%
     summarise(cum.count = sum(temp.cum.count)) %>%
-    as_tibble()
-  
-  
-  
-  peak.cases <- aggregated.tbl %>% group_by(year.epiweek.admit) %>% summarise(count = sum(cum.count)) %>% pull(count) %>% max()
-  
+    as_tibble() %>% 
+    filter(slider_outcome!="Ongoing care")
+
   plt <- ggplot(aggregated.tbl) +
     geom_col(aes(x = year.epiweek.admit, y=cum.count, fill = slider_outcome), width = 0.95) +
     theme_bw() +
