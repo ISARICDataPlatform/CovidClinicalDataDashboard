@@ -115,7 +115,7 @@ This report only includes individuals for whom data collection commenced on or b
 The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flow chart (Figure 1) gives an overview of the cohort and outcomes as of 25 May 2021. 
 
 
-```{r cohortoverview,  out.width = "100%", fig.align="left", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
+```{r cohortoverview,  out.width = "450pt", fig.align="left", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
 
 
 flowchart()
