@@ -150,7 +150,23 @@ list_data_files <- c(
   "length_of_stay_icu_input.rda",
   "patient_by_country_input.rda",
   "data_map.rda",
-  "data_case_def_input.rda"
+  "data_case_def_input.rda",
+  "data_country_input.rda",
+  "summary_country_date_input.rda",
+  "comorb_South_Asia_input.rda",
+  "comorb_Sub_Saharan_Africa_input.rda",
+  "comorb_Europe_and_Central_Asia_input.rda",
+  "comorb_Middle_East_and_North_Africa_input.rda",
+  "comorb_Latin_America_and_Caribbean_input.rda",
+  "comorb_East_Asia_and_Pacific_input.rda",
+  "comorb_North_America_input.rda",
+  "symptoms_South_Asia_input.rda",
+  "symptoms_Sub_Saharan_Africa_input.rda",
+  "symptoms_Europe_and_Central_Asia_input.rda",
+  "symptoms_Middle_East_and_North_Africa_input.rda",
+  "symptoms_Latin_America_and_Caribbean_input.rda",
+  "symptoms_East_Asia_and_Pacific_input.rda",
+  "symptoms_North_America_input.rda"
 )
 
 # check date (via file name) of contributions.mp4

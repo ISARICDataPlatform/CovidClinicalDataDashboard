@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = F
+dashboard_equal = T
 
 flowchart <- function(){
   
@@ -90,7 +90,8 @@ age.pyramid.plot <- function(aggregated.tbl, dashboard=dashboard_equal, ...){
     angle_dash = 90
   }
   # @todo get rid of this at the aggregation stage
-  aggregated.tbl <- aggregated.tbl %>% filter(!is.na(slider_agegp10))
+  aggregated.tbl <- aggregated.tbl %>% filter(!is.na(slider_agegp10)) %>% 
+    filter(slider_outcome%in%c("Death","Discharge","LTFU"))
   
   
   aggregated.tbl <- aggregated.tbl %>%
@@ -217,7 +218,8 @@ prevalence.plot.preparation <- function(aggregated.tbl, variable.name){
 
 symptom.prevalence.plot <- function(aggregated.tbl, dashboard=dashboard_equal, ...){
   aggregated.tbl <- aggregated.tbl %>%
-    prevalence.plot.preparation(variable.name = "nice.symptom")
+    prevalence.plot.preparation(variable.name = "nice.symptom") %>% 
+    filter(times.recorded>=50000)
   
   aggregated.tbl$order=as.numeric(aggregated.tbl$order)
   aggregated.tbl$nice.symptom<- 
@@ -252,7 +254,8 @@ symptom.prevalence.plot <- function(aggregated.tbl, dashboard=dashboard_equal, .
 
 comorbidity.prevalence.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ...){
   aggregated.tbl <- aggregated.tbl %>%
-    prevalence.plot.preparation(variable.name = "nice.comorbidity")
+    prevalence.plot.preparation(variable.name = "nice.comorbidity")%>% 
+    filter(times.recorded>=50000)
   
   aggregated.tbl$order=as.numeric(aggregated.tbl$order)
   aggregated.tbl$nice.comorbidity<- 
@@ -291,8 +294,12 @@ treatment.prevalence.plot <- function(aggregated.tbl, icu = FALSE,dashboard=dash
   
   if(icu){
     colours <- c("darkorchid2", "darkorchid4")
+    aggregated.tbl <- aggregated.tbl %>%
+      filter(times.recorded>=10000)
   } else {
     colours <- c("chartreuse2", "chartreuse4")
+    aggregated.tbl <- aggregated.tbl %>%
+      filter(times.recorded>=50000)
   }
 
   aggregated.tbl$order=as.numeric(aggregated.tbl$order)
@@ -1083,3 +1090,53 @@ plot_case_def <- function(data_case_def){
           legend.position = "none")
 }
 
+
+##############number by region
+number_by_region <- function(data_country){
+  ggplot(data_country, aes(x = x_axis, y = Freq, fill = new_region)) +
+    theme_classic() + 
+    geom_bar(stat="identity", colour="black", size= 0.5) + 
+    scale_y_log10(breaks = c(1,10,100,1000,10000, 100000), labels = scales::comma) +
+    scale_fill_brewer(palette="Set2", name = "" ) + 
+    scale_x_discrete(limits = as.vector(data_country$x_axis), labels = data_country$iso3) + 
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1)) +
+    xlab('Countries/Regions') + 
+    ylab('Number of records') + 
+    theme(axis.title.x = element_text(size=14, face="bold"),
+          axis.title.y = element_text(size=14, face="bold")) + 
+    theme(legend.position = "top")
+}
+
+month_by_region <- function(summary_country_date){
+  ggplot(summary_country_date, aes(x = time_id, y = sum_records, fill = new_region)) +
+    theme_classic() + 
+    geom_bar(position = "stack", stat="identity", colour="black", size= 0.7, width=0.8) + 
+    geom_vline(xintercept = 12.5, linetype="dashed", color = "black", size=0.5) + 
+    scale_fill_brewer(palette="Set2", name = "" ) + 
+    scale_x_discrete(limits = as.vector(summary_country_date$time_id), labels = summary_country_date$new_month) + 
+    xlab('Months') + 
+    ylab('Number of records') + 
+    theme(axis.title.x = element_text(size=14, face="bold"),
+          axis.title.y = element_text(size=14, face="bold")) + 
+    annotate("text", x=1,  y=50000, label = "2020") +
+    annotate("text", x=15,  y=50000, label = "2021") +
+    theme(legend.position = "top")
+}
+
+plot_by_region <- function(data_plot,fill_color = 'navy'){
+  
+  current_title <- str_replace_all(data_plot$wb_region, '_', ' ')
+  
+  ggplot(data_plot, aes(y=order_var , x = freq_outcome, alpha = alpha_outcome)) +
+    theme_classic() + 
+    geom_bar(stat="identity", colour="black", size= 0.5, fill = fill_color) + 
+    geom_text(aes(y=order_var , x = freq_outcome +10, label=times.recorded), size = 4, alpha = 1) +
+    scale_y_discrete(limits = as.vector(data_plot$order_var), labels = data_plot$outcome_names) + 
+    scale_x_continuous(limits = c(0, 100)) + 
+    xlab('%') + 
+    ylab('') +
+    theme(axis.title.x = element_text(size=14, face="bold")) + 
+    theme(legend.position = "top") + 
+    labs(title= paste(current_title ,' (N=', unique(data_plot$times.total), ')') ) + 
+    theme(legend.position = "none")
+}

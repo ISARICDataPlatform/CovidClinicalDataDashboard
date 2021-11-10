@@ -420,4 +420,106 @@ server <- function(input, output) {
     )
     
   })
+  
+  output$number_by_region <- {
+    renderPlot(
+      number_by_region(data_country_input),
+      height = 500
+    )
+  }
+  output$date_by_region <- {
+    renderPlot(
+      month_by_region(summary_country_date_input),
+      height = 500
+    )
+  }
+  
+  
+  output$comorb_1<- {
+    renderPlot(
+      plot_by_region(comorb_East_Asia_and_Pacific_input),
+      height = 500
+    )
+  }
+  
+  output$comorb_2<- {
+    renderPlot(
+      plot_by_region(comorb_Latin_America_and_Caribbean_input),
+      height = 500
+    )
+  }
+  output$comorb_3<- {
+    renderPlot(
+      plot_by_region(comorb_North_America_input),
+      height = 500
+    )
+  }
+  output$comorb_4<- {
+    renderPlot(
+      plot_by_region(comorb_Sub_Saharan_Africa_input),
+      height = 500
+    )
+  }
+  output$comorb_5<- {
+    renderPlot(
+      plot_by_region(comorb_Europe_and_Central_Asia_input),
+      height = 500
+    )
+  }
+  output$comorb_6<- {
+    renderPlot(
+      plot_by_region(comorb_Middle_East_and_North_Africa_input),
+      height = 500
+    )
+  }
+  output$comorb_7<- {
+    renderPlot(
+      plot_by_region(comorb_South_Asia_input),
+      height = 500
+    )
+  }
+ 
+  output$symptom_1<- {
+    renderPlot(
+      plot_by_region(symptoms_East_Asia_and_Pacific_input),
+      height = 500
+    )
+  }
+  
+  output$symptom_2<- {
+    renderPlot(
+      plot_by_region(symptoms_Latin_America_and_Caribbean_input),
+      height = 500
+    )
+  }
+  output$symptom_3<- {
+    renderPlot(
+      plot_by_region(symptoms_North_America_input),
+      height = 500
+    )
+  }
+  output$symptom_4<- {
+    renderPlot(
+      plot_by_region(symptoms_Sub_Saharan_Africa_input),
+      height = 500
+    )
+  }
+  output$symptom_5<- {
+    renderPlot(
+      plot_by_region(symptoms_Europe_and_Central_Asia_input),
+      height = 500
+    )
+  }
+  output$symptom_6<- {
+    renderPlot(
+      plot_by_region(symptoms_Middle_East_and_North_Africa_input),
+      height = 500
+    )
+  }
+  output$symptom_7<- {
+    renderPlot(
+      plot_by_region(symptoms_South_Asia_input),
+      height = 500
+    )
+  } 
 }

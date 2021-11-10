@@ -63,6 +63,11 @@ dashboardPage(
         icon = icon("chart-bar")
       ),
       menuItem(
+        "Symptoms by region",
+        tabName = "symptoms_by_region",
+        icon = icon("chart-bar")
+      ),
+      menuItem(
         "Comorbidities",
         tabName = "comorbidities",
         icon = icon("notes-medical")
@@ -70,6 +75,11 @@ dashboardPage(
       menuItem(
         "Comorbidities by age",
         tabName = "comorbidities_by_age",
+        icon = icon("chart-bar")
+      ),
+      menuItem(
+        "Comorbidities by region",
+        tabName = "comorbidities_by_region",
         icon = icon("chart-bar")
       ),
       menuItem(
@@ -95,6 +105,11 @@ dashboardPage(
         "Hospital stays",
         tabName = "hospital_stays",
         icon = icon("hospital")
+      ),
+      menuItem(
+        "Vaccinations",
+        tabName = "vaccination",
+        icon = icon("syringe")
       ),
       menuItem(
         "Summary tables",
@@ -456,9 +471,23 @@ dashboardPage(
                   plotOutput("PatientbyCountry", height = "500px"),
                   "Graph shows the distribution of patients by country. This reflects data on only those countries that are contributing data on patients who satisfy the inclusion criteria outlined in the summary section.",
                   width = 12,
-                  height = 1000,
+                  height = 600,
                   solidHeader = T,
                   title = "Distribution of patients by country"
+                ),
+                box(
+                  plotOutput("number_by_region", height = "500px"),
+                  width = 12,
+                  height = 600,
+                  solidHeader = T,
+                  title = "Distribution of patients by region"
+                ),
+                box(
+                  plotOutput("date_by_region", height = "500px"),
+                  width = 12,
+                  height = 600,
+                  solidHeader = T,
+                  title = "Distribution of patients by region and time"
                 )
               )
       ),
@@ -547,6 +576,98 @@ dashboardPage(
                   height=550,
                   solidHeader = T,
                   title = "Proportion with hypertension"
+                )
+              )
+      ),
+      tabItem(tabName = "comorbidities_by_region",
+              fluidRow(
+                box(
+                  plotOutput("comorb_1"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("comorb_2"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("comorb_3"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("comorb_4"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("comorb_5"),
+                  width =6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("comorb_6"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("comorb_7"),
+                  width =6,
+                  height=550,
+                  solidHeader = T
+                )
+              )
+      ),
+      tabItem(tabName = "symptoms_by_region",
+              fluidRow(
+                box(
+                  plotOutput("symptom_1"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("symptom_2"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("symptom_3"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("symptom_4"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("symptom_5"),
+                  width =6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("symptom_6"),
+                  width = 6,
+                  height=550,
+                  solidHeader = T
+                ),
+                box(
+                  plotOutput("symptom_7"),
+                  width =6,
+                  height=550,
+                  solidHeader = T
                 )
               )
       ),
