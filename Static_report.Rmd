@@ -26,7 +26,7 @@ params:
 
 ```{r setup, include = FALSE}
 
-knitr::opts_knit$set(root.dir="~/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -48,7 +48,7 @@ source("global.R")
 ###### THIS NEEDS AUTOMATION #####
 
 pub.date <- today()
-ref.date <- ymd("2021-05-25")
+ref.date <- ymd("2021-09-20")
 
 
 ```
@@ -58,9 +58,9 @@ ref.date <- ymd("2021-05-25")
 
 # Background
 
-This report describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and June 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration https://isaric.org/.
+This report describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and September 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration https://isaric.org/.
 
-After one-and-a-half years and over 4 million deaths, COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, and shaking economies. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
+After over 250 million cases and over 5 million deaths, COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, and shaking economies. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
 
 **The advantages of an international standardised case record form**. Novel diseases are, by definition, new; the scientific method is not. By developing consensus on a road map for clinical research methods before a pandemic, we are able to minimise further time defining study types, data collection tools, and potential outputs for evidence summarisation once the pathogen emerges. Using slightly adjusted standardised methods for novel diseases, evidence can be generated quickly.
 
@@ -69,7 +69,7 @@ While small observational studies are easy to conduct, they often record differe
 
 **How we got here with ISARIC**. In 2013, ISARIC and the World Health Organisation (WHO) implemented the standardised Clinical Characterisation Protocol to evolve clinical data into research evidence during health emergencies.  
 
-In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. Today, our partners have collected standardised, in-hospital clinical data from over half a million patients, in more than 1600 sites, across 60 countries. More than half of these patients live in low- and middle-income countries. This partner-fueled growing initiative is to our knowledge the largest COVID-19 in-hospital international database in the world.
+In January 2020, we launched our case report form when only 846 COVID-19 cases had been reported globally. The first patient was enrolled on 30 January 2020. Today, our partners have collected standardised, in-hospital clinical data from over 700,000 patients, in `r length(unique(summary_input_overall$siteid_final))` sites, across `r length(unique(summary_input_overall$slider_country))` countries. More than half of these patients live in low- and middle-income countries. This partner-fueled growing initiative is to our knowledge the largest COVID-19 in-hospital international database in the world.
 
 In this report, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme [2]. The majority of this database is additionally available to external researchers via application to our Data Access Committee at https://www.iddo.org/covid19/data-sharing/accessing-data.  
 
@@ -78,13 +78,13 @@ To contribute, please contact ncov@isaric.org.
 
 # Methods
 
-The results in this report are produced using data from the ISARIC COVID-19 database of international, prospective observational data on clinical features of patients admitted to hospital with COVID-19.  Data collection was structured on the ISARIC/WHO Clinical Characterisation Protocol for Severe Emerging Infections, a standardized protocol for investigation of severe acute infections by pathogens of public health interest [3] and the ISARIC case report forms [4] designed for standardized data collection from the start of an outbreak and rapid dissemination of clinical information [5-9].  Data are collected on Research electronic Data Capture (REDCap, version 8.11.11, Vanderbilt University, Nashville, Tenn.), hosted by the University of Oxford. Additional data, collected using a wide variety of data systems, are submitted by international investigators who are not using the University of Oxford REDCap instance. Data are curated by the Infectious Diseases Data Observatory [10] to the CDISC Study Data Tabulation Model for harmonised analysis [11] The first patient was enrolled on 30 January 2020.  
+The results in this report are produced using data from the ISARIC COVID-19 database of international, prospective observational data on clinical features of patients admitted to hospital with COVID-19.  Data collection was structured on the ISARIC/WHO Clinical Characterisation Protocol for Severe Emerging Infections, a standardized protocol for investigation of severe acute infections by pathogens of public health interest [3] and the ISARIC case report forms [4] designed for standardized data collection from the start of an outbreak and rapid dissemination of clinical information [5-9].  Data are collected on Research electronic Data Capture (REDCap, version 8.11.11, Vanderbilt University, Nashville, Tenn.), hosted by the University of Oxford. Additional data, collected using a wide variety of data systems, are submitted by international investigators who are not using the University of Oxford REDCap instance. Data are curated by the Infectious Diseases Data Observatory [10] to the CDISC Study Data Tabulation Model for harmonised analysis [11].   
 
 SDTM formatted data are processed in R 4.1.0 (R Core Team 2013). Initial data cleaning includes custom scripts designed to identify results of laboratory SARS-CoV-2 testing, and to standardise nomenclature for comorbidities, symptoms at admission, treatments, and outcomes.  
 
 Patients are excluded if they did not have laboratory or clinically confirmed SARS-CoV-2 infection. Patients are considered to be lost to follow up if either a) they were transferred to another facility, or b) they had an unknown outcome and the last date upon which any data was recorded for them was 45 days or before the date of data extraction.  Patients with unknown outcome where the last recorded data was less than 45 days old are instead categorised as receiving ongoing care. 
 
-Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the report only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, within both the <10 year age group and the >= 10 year age group, are taken to be likely mis-entered and changed to missing. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction.  
+Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the report only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, within both the <10 year age group and the >= 10 year age group, are taken to be likely mis-entered and changed to missing for this report. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction.  
 
 
 The following COVID-19 symptom definitions were used: 
@@ -107,33 +107,37 @@ At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusi
 
 Data manipulation is performed using the tidyverse collection of packages (Wickham et al. 2019), as well as ff (Adler et al. 2020) and dtplyr (Wickham 2021). Data visualisation makes use of ggplot (Wickham 2016) and its extension ggupset (Ahlmann-Eltze 2020). The report is generated using knitr (Xie 2021). 
 
-This report only includes individuals for whom data collection commenced on or before 25 May 2021. 
+This report only includes individuals for whom data collection commenced on or before 20 September 2021. 
 
 \newpage
 # Results
 
-The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flow chart (Figure 1) gives an overview of the cohort and outcomes as of 25 May 2021. 
+The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flow chart (Figure 1) gives an overview of the cohort and outcomes as of 20 September 2021. 
 
 
-```{r cohortoverview,  out.width = "450pt", fig.align="left", fig.cap = "Overview of cohort and outcomes as of 25 May 2021."}
+```{r cohortoverview,  out.width = "875pt", fig.align="left", fig.cap = "Overview of cohort and outcomes as of 20 September 2021."}
 
 
 flowchart()
 
 ```
 
-These data have been contributed to by `r length(unique(summary_input_overall$siteid_final))` sites in `r length(unique(summary_input_overall$slider_country))` countries (see Figure 2 and Figure 3). `r nrow(summary_input_overall%>%filter(income!="High income"))` (`r round(nrow(summary_input_overall%>%filter(income!="High income"))/nrow(summary_input_overall%>%filter(!is.na(income)))*100,1)`%) of the patients are from low- and middle-income and `r nrow(summary_input_overall%>%filter(income=="High income"))` (`r round(nrow(summary_input_overall%>%filter(income=="High income"))/nrow(summary_input_overall%>%filter(!is.na(income)))*100,1)`%) from high-income countries. The two largest contributors to the database are South Africa (`r round(nrow(patient.by.country.input[patient.by.country.input$slider_country=="South Africa",])/nrow(patient.by.country.input)*100,1)`%) and the UK (`r round(nrow(patient.by.country.input[patient.by.country.input$slider_country=="United Kingdom",])/nrow(patient.by.country.input)*100,1)`%). 
+These data have been contributed to by `r length(unique(summary_input_overall$siteid_final))` sites in `r length(unique(summary_input_overall$slider_country))` countries (see Figure 2 and Figure 3). `r nrow(summary_input_overall%>%filter(income!="High income"))` (`r round(nrow(summary_input_overall%>%filter(income!="High income"))/nrow(summary_input_overall%>%filter(!is.na(income)))*100,1)`%) of the patients are from low- and middle-income and `r nrow(summary_input_overall%>%filter(income=="High income"))` (`r round(nrow(summary_input_overall%>%filter(income=="High income"))/nrow(summary_input_overall%>%filter(!is.na(income)))*100,1)`%) from high-income countries. The two largest contributors to the database are South Africa (`r round(nrow(patient.by.country.input[patient.by.country.input$slider_country=="South Africa",])/nrow(patient.by.country.input)*100,1)`%) and the UK (`r round(nrow(patient.by.country.input[patient.by.country.input$slider_country=="United Kingdom",])/nrow(patient.by.country.input)*100,1)`%). Plots grouped by regions and calendar time are shown in Figure 4 and 5. 
 
 ```{r country_recruitment,out.width = '100%', echo=FALSE,fig.cap = "Distribution of patients by country"}
 plot_map_world(data_map)
 patient.by.country.plot(patient.by.country.input)
 ```
 
+```{r country_recruitment2,out.width = '100%', echo=FALSE,fig.cap = "Distribution of patients by region"}
+number_by_region(data_country_input)
+month_by_region(summary_country_date_input)
+```
 
 \newpage
 
 ### Demographics
-Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The median age is `r median(summary_input$age, na.rm=T)` years ranging from `r min(summary_input$age, na.rm=T)` to `r max(summary_input$age, na.rm=T)` years. One-third of the patients are 70 years old and above. Demographics, including age, sex, and outcome, are presented in Table 1 and Figure 4.    
+Of these `r nrow(summary_input)` cases, `r nrow(summary_input %>% filter(slider_sex=='Male'))` are males and `r nrow(summary_input %>% filter(slider_sex=='Female'))` are females – sex is unreported for `r nrow(summary_input %>% filter(is.na(slider_sex)|slider_sex==""))` cases. The median age is `r median(summary_input$age, na.rm=T)` years ranging from `r min(summary_input$age, na.rm=T)` to `r max(summary_input$age, na.rm=T)` years. One-third of the patients are 70 years old and above. Demographics, including age, sex, and outcome, are presented in Table 1 and Figure 6.    
 \newpage
 ```{r table1, tab.cap = "Patient Characteristics. Proportions are presented in parentheses, and have been rounded to two decimal places."}
 tables_supplementary(table_sup = patient.characteristic.table[1:19,]) 
@@ -147,7 +151,7 @@ age.pyramid.plot(age.pyramid.input)
 
 ```
 \newpage
-```{r table2, tab.cap = "Outcome by age and sex. Proportions are calculated using the column total as the denominator."}
+```{r table2, tab.cap = "Outcome by age and sex. Proportions are calculated using the row total as the denominator."}
 tables_supplementary(table_sup = outcome.age.sex.table)
 ```
 
@@ -156,9 +160,9 @@ tables_supplementary(table_sup = outcome.age.sex.table)
 ### Presenting symptoms
 The observed mean number of days from (first) symptom onset to hospital admission was `r round(mean((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T),1)`, with a standard deviation (SD) of `r round(sd((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T),1)` days and a median of `r median((summary_input%>%filter(t_son_ad>=0))$t_son_ad, na.rm=T)` days. 
 
-A detailed analysis of patients' symptoms has been reported in a previous publication [12]. The prevalence of symptoms on admission to the hospital is summarised in Table 3 and Figure 5a. Information is available on more than half of patients for shortness of breath, cough, fever, vomiting/nausea, diarrhoea, altered consciousness/confusion, fatigue/malaise, muscle aches/joint pain, headache. The five most common symptoms at admission are `r glue_collapse(symptom.prevalence.input %>% group_by(nice.symptom) %>% summarise(F=sum(times.present)) %>% ungroup() %>% arrange(desc(F)) %>% slice(1:5) %>% pull(nice.symptom) %>% str_to_lower(), sep = ', ', last=', and ')`, accounting for `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Shortness of breath"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Shortness of breath"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Cough"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Cough"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="History of fever"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="History of fever"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Fatigue/malaise"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Fatigue/malaise"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Altered consciousness/confusion"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Altered consciousness/confusion"&times.recorded!=0) %>% pull(times.recorded))*100,1)`% of patients with symptom recorded.
+A detailed analysis of patients' symptoms has been reported in a previous publication [12]. The prevalence of symptoms on admission to the hospital is summarised in Table 3 and Figure 7a. Information is available on more than 30% patients for shortness of breath, cough, fever, vomiting/nausea, diarrhoea, altered consciousness/confusion, fatigue/malaise, muscle aches/joint pain, headache. The five most common symptoms at admission are `r glue_collapse(symptom.prevalence.input %>% group_by(nice.symptom) %>% summarise(F=sum(times.present)) %>% ungroup() %>% arrange(desc(F)) %>% slice(1:5) %>% pull(nice.symptom) %>% str_to_lower(), sep = ', ', last=', and ')`, accounting for `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Shortness of breath"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Shortness of breath"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Cough"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Cough"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="History of fever"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="History of fever"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Fatigue/malaise"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Fatigue/malaise"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Altered consciousness/confusion"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Altered consciousness/confusion"&times.recorded!=0) %>% pull(times.recorded))*100,1)`% of patients with symptom recorded.
 
-Clusters of symptoms are presented in Figure 5b and 5c. The most common symptom combination is shortness of breath, cough, and history of fever.
+Clusters of symptoms are presented in Figure 7b and 7c. The most common symptom combination is shortness of breath, cough, and history of fever.
 
 ```{r table3, tab.cap = "Prevalence of symptoms."}
 tables_supplementary(table_sup = symptoms.table)
@@ -175,7 +179,7 @@ heatmap_plot(data_plot_heatmap)
 \newpage
 
 The observed symptoms on admission partly represent case definitions and policies for hospital admission,
-which may change as time passes.  The most common case definitions are met by few patients in our dataset, which varies by age (Figure 6). 
+which may change as time passes.  The most common case definitions are met by 25%-70% patients in our dataset, which varies by age (Figure 6). 
 
 ```{r case_def, echo = FALSE, fig.align="center", fig.cap = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"}
 
@@ -183,8 +187,8 @@ plot_case_def(case.def.input)
 
 ```
 
-
-The frequency of presenting symptoms varies with age (Figure 7). Altered consciousness increases with age. Fever, respiratory and constitutional symptoms are mostly present in patients aged 40 and above.  The presence of gastro-intestinal symptoms appears to be age-independent. 
+\newpage
+The frequency of presenting symptoms varies with age (Figure 9). Altered consciousness increases with age. Fever, respiratory and constitutional symptoms are mostly present in patients aged 40 and above.  The presence of gastro-intestinal symptoms appears to be age-independent. 
 
 
 ```{r sympbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Abdominal pain", "Altered consciousness/confusion", "Constitutional symptoms (myalgia, joint pain, fatigue or headache)", "Cough", "Cough or fever", "Cough, fever or shortness of breath",  "History of fever", "Shortness of breath", "Upper respiratory tract symptoms (runny nose, sore throat or ear pain)","Diarrhoea", "Vomiting or nausea"), fig.cap = 'Symptoms recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented. N is the number of individuals included in the plot (this varies between plots due to data completeness).'}
@@ -205,12 +209,27 @@ plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FA
 
 ```
 
+\newpage
+In Figure 10, we present the frequencies of most common symptoms varied by regions.Each panel corresponds to a different region, and within region, symptoms that were present more often correspond to higher y-axis coordinates. To improve visualization, transparency decreases with increasing frequency. 
+
+
+```{r sympbyregion, echo=FALSE, out.width= "50%", message=FALSE, fig.height=6, fig.ncol = 2, fig.subcap=c("East Asia and Pacific", "Latin America and Caribbean", "North America", "Sub-Saharan Africa", "Europe and Central Asia", "Middle East and North Africa",  "South Asia"), fig.cap = 'Symptoms recorded at hospital presentation stratified by region'}
+
+plot_by_region(symptoms_East_Asia_and_Pacific_input)
+plot_by_region(symptoms_Latin_America_and_Caribbean_input)
+plot_by_region(symptoms_North_America_input)
+plot_by_region(symptoms_Sub_Saharan_Africa_input)
+plot_by_region(symptoms_Europe_and_Central_Asia_input)
+plot_by_region(symptoms_Middle_East_and_North_Africa_input)
+plot_by_region(symptoms_South_Asia_input)
+
+```
 
 \newpage 
 
 ### Comorbidities and other concomitant conditions at admission
 
-Information is available on at least 75% of cases for diabetes, chronic pulmonary disease, chronic kidney disease, asthma, malignant neoplasm, cardiac chronic disease, HIV/AIDS, and hypertension (Table 4). Conditions present in at least 10% of cases are hypertension (41% of those reported), smoking (35%), diabetes (28%), cardiac chronic disease (17%), obesity (12%), dementia, chronic neurological disease and rheumatological disease (each 10%). (Figure 8a). Combinations of the five most prevalent conditions are presented in Figure 8b. 
+Information is available on at least 75% of cases for diabetes, chronic pulmonary disease, chronic kidney disease, asthma, malignant neoplasm, cardiac chronic disease, HIV/AIDS, and hypertension (Table 4). Conditions present in at least 10% of cases are hypertension (31% of those reported), diabetes (22%), cardiac chronic disease (11%) (Figure 11a). Combinations of the five most prevalent conditions are presented in Figure 11b. 
 
 ```{r table4, tab.cap = "Prevalence of comorbidities."}
 tables_supplementary(table_sup = comorbidity.table)
@@ -221,7 +240,8 @@ comorbidity.prevalence.plot(comorbidity.prevalence.input)
 upset.plot(comorbidity.upset.input, which.plot = "comorbidity") 
 ```
 
-The age distribution of the most frequent concomitant conditions is presented In Figure 9. Dementia and hypertension increase with age. 
+\newpage
+The age distribution of the most frequent concomitant conditions is presented in Figure 12. Dementia and hypertension increase with age. 
 
 
 ```{r comorbbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking"), fig.cap = "Comorbidities recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)"}
@@ -236,10 +256,25 @@ plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)
 
 ```
 
+\newpage
+In Figure 13, the frequencies of most common comorbidities in patients by regions. Each panel corresponds to a different region, and within region, more frequent comorbidities correspond to higher y-axis coordinates. To improve visualization, transparency decreases with increasing frequency. 
+
+```{r comorbbyregion, echo=FALSE, out.width= "33%", message=FALSE, fig.height=6, fig.ncol = 2, fig.subcap=c("East Asia and Pacific", "Latin America and Caribbean", "North America", "Sub-Saharan Africa", "Europe and Central Asia", "Middle East and North Africa",  "South Asia"), fig.cap = "Comorbidities recorded at hospital presentation stratified by region."}
+
+plot_by_region(comorb_East_Asia_and_Pacific_input)
+plot_by_region(comorb_Latin_America_and_Caribbean_input)
+plot_by_region(comorb_North_America_input)
+plot_by_region(comorb_Sub_Saharan_Africa_input)
+plot_by_region(comorb_Europe_and_Central_Asia_input)
+plot_by_region(comorb_Middle_East_and_North_Africa_input)
+plot_by_region(comorb_South_Asia_input)
+
+```
+
 \newpage 
 
 ### Vital signs
-Oxygen saturation was recorded for `r (nrow(data_plot_vs_oxysat))+(nrow(data_plot_vs_oxysat_therapy))` patients at admission. Of these, `r round(nrow(data_plot_vs_oxysat_therapy)/(nrow(data_plot_vs_oxysat)+nrow(data_plot_vs_oxysat_therapy))*100, 1)`% were on oxygen therapy, and `r round(nrow(data_plot_vs_oxysat)/(nrow(data_plot_vs_oxysat)+nrow(data_plot_vs_oxysat_therapy))*100, 1)`% were not. At admission, the median oxygen saturation of those who were on oxygen therapy was `r median(data_plot_vs_oxysat_therapy$value, na.rm=T)`%, whereas the median was `r median(data_plot_vs_oxysat$value, na.rm=T)`% for those who were not on oxygen therapy (Figure 10 provides a breakdown of oxygen saturation by age and oxygen therapy status). Among those who were on oxygen therapy at admission (N = `r nrow(data_plot_vs_oxysat_therapy)`), `r round(nrow(data_plot_vs_oxysat_therapy %>% filter(value<94))/nrow(data_plot_vs_oxysat_therapy)*100,1)`% had oxygen saturation <94, and among those who were not on oxygen therapy at admission (N = `r nrow(data_plot_vs_oxysat)`), `r round(nrow(data_plot_vs_oxysat %>% filter(value<94))/nrow(data_plot_vs_oxysat)*100,1)`% had oxygen saturation <94. All vital signs are presented in Figure 10 by age. 
+Oxygen saturation was recorded for `r (nrow(data_plot_vs_oxysat))+(nrow(data_plot_vs_oxysat_therapy))` patients at admission. Of these, `r round(nrow(data_plot_vs_oxysat_therapy)/(nrow(data_plot_vs_oxysat)+nrow(data_plot_vs_oxysat_therapy))*100, 1)`% were on oxygen therapy, and `r round(nrow(data_plot_vs_oxysat)/(nrow(data_plot_vs_oxysat)+nrow(data_plot_vs_oxysat_therapy))*100, 1)`% were not. At admission, the median oxygen saturation of those who were on oxygen therapy was `r median(data_plot_vs_oxysat_therapy$value, na.rm=T)`%, whereas the median was `r median(data_plot_vs_oxysat$value, na.rm=T)`% for those who were not on oxygen therapy (Figure 14 provides a breakdown of oxygen saturation by age and oxygen therapy status). Among those who were on oxygen therapy at admission (N = `r nrow(data_plot_vs_oxysat_therapy)`), `r round(nrow(data_plot_vs_oxysat_therapy %>% filter(value<94))/nrow(data_plot_vs_oxysat_therapy)*100,1)`% had oxygen saturation <94, and among those who were not on oxygen therapy at admission (N = `r nrow(data_plot_vs_oxysat)`), `r round(nrow(data_plot_vs_oxysat %>% filter(value<94))/nrow(data_plot_vs_oxysat)*100,1)`% had oxygen saturation <94. All vital signs are presented in Figure 14 by age. 
 
 
 ```{r labs1, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2, fig.subcap=c("Respiratory rate", "Heart rate", "Temperature", "Systolic blood pressure", "Oxygen saturation on room air","Oxygen saturation on oxygen therapy"), fig.cap = "Box and whisker plots for observations at hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
@@ -255,7 +290,7 @@ p_oxysat_therapy(data_plot_vs_oxysat_therapy)
 \newpage 
 
 ### Laboratory values 
-Laboratory tests results are available for a minority of patients. They are summarised in Figure 11.
+Laboratory tests results are available for a minority of patients. They are summarised in Figure 15.
 
 ```{r labs2, echo=FALSE, out.width= "50%", message=FALSE, fig.height=3.5, fig.ncol = 2,  fig.subcap=c("Alanine transaminase (ALT)", "Aspartate transaminase (AST)", "Bilirubin",  "Protrombin time", "Urea", "White blood cell count (WCC)", "Neutrophils", "Lymphocytes","C-reactive protein (CRP)"), fig.cap = "Box and whisker plots for laboratory results within 24 hours of hospital presentation stratified by age group. Outliers are omitted. N is the number of individuals included in the plot (this varies between plots due to data completeness)."}
 
