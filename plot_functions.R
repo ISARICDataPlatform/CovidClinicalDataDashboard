@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = T
+dashboard_equal = F
 
 flowchart <- function(){
   
@@ -374,7 +374,7 @@ p_resp <- function(aggregated.tbl, dashboard=dashboard_equal){
     
     p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
       geom_boxplot(fill="lightblue",outlier.shape=NA) +xlab("Age groups") + ylab("Respiratory rate (min)") + 
-      theme_bw() + labs(title = N) 
+      theme_bw() + labs(title = N) +coord_cartesian(ylim=c(15,60))
     if (dashboard==T){
       p=p+theme(
         plot.title = element_text( size=16),
@@ -393,7 +393,7 @@ p_hr <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)+xlab("Age groups") + ylab("Heart rate (min)") + 
-    theme_bw() + labs(title = N) 
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(50,200))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -412,7 +412,7 @@ p_temp <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA) +xlab("Age groups") + ylab("Temperature (Celsius)") + 
-    theme_bw() + labs(title = N) 
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(35,40))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -431,7 +431,7 @@ p_sysbp <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + ylim(30,NA)+
-    theme_bw() + labs(title = N) 
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(50,200))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -450,7 +450,7 @@ p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("Oxygen saturation on room air (%)") +
-    theme_bw() + labs(title = N) 
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(85,100))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -469,7 +469,7 @@ p_oxysat_therapy <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("Oxygen saturation on oxygen therapy (%)") +
-    theme_bw() + labs(title = N) 
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(80,100))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -490,7 +490,7 @@ p_lab_crp <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA) +xlab("Age groups") + ylab("CRP (mg/L)") + 
-    theme_bw() +labs(title = N)
+    theme_bw() +labs(title = N)+coord_cartesian(ylim=c(0,22))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -509,7 +509,7 @@ p_lab_lym <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)+xlab("Age groups") + ylab("Lymphocytes (10^9/L)") + 
-    theme_bw() +labs(title = N)
+    theme_bw() +labs(title = N)+coord_cartesian(ylim=c(0,10))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -527,7 +527,7 @@ p_lab_neut <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA) +xlab("Age groups") + ylab("Neutrophils (10^9/L)") + 
-    theme_bw() +labs(title = N) 
+    theme_bw() +labs(title = N) +coord_cartesian(ylim=c(0,16))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -545,7 +545,7 @@ p_lab_wbc <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)+xlab("Age groups") + ylab("WBC (10^9/L)") + 
-    theme_bw() +labs(title = N) 
+    theme_bw() +labs(title = N) +coord_cartesian(ylim=c(0,22))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -563,7 +563,7 @@ p_lab_urean <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("Urea (mmol/L)") +
-    theme_bw() +labs(title = N)
+    theme_bw() +labs(title = N)+coord_cartesian(ylim=c(0,25))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -581,7 +581,7 @@ p_lab_pt <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("Protrombin time (s)") +
-    theme_bw() +labs(title = N) 
+    theme_bw() +labs(title = N) +coord_cartesian(ylim=c(10,20))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -599,7 +599,7 @@ p_lab_alt <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("ALT (units/L)") +
-    theme_bw() +labs(title = N)
+    theme_bw() +labs(title = N)+coord_cartesian(ylim=c(0,120))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -612,30 +612,13 @@ p_lab_alt <- function(aggregated.tbl, dashboard=dashboard_equal){
   p
 }
 
-p_lab_aptt <- function(aggregated.tbl, dashboard=dashboard_equal){
-  N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
-  
-  p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
-    geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("APTT (s)") +
-    theme_bw() +labs(title = N) 
-  if (dashboard==T){
-    p=p+theme(
-      plot.title = element_text( size=16),
-      axis.title.x = element_text( size=14),
-      axis.text.x = element_text( size=14),
-      axis.title.y = element_text( size=14),
-      axis.text.y = element_text( size=14)
-    ) 
-  }
-  p
-}
 
 p_lab_bili <- function(aggregated.tbl, dashboard=dashboard_equal){
   N <- paste("N = ", nrow(aggregated.tbl), sep = "", collapse = NULL)
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("Bilirubin (mmol/L)") +
-    theme_bw() +labs(title = N) 
+    theme_bw() +labs(title = N) +coord_cartesian(ylim=c(0,50))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -653,7 +636,7 @@ p_lab_ast <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("AST (units/L)") +
-    theme_bw() +labs(title = N) 
+    theme_bw() +labs(title = N) +coord_cartesian(ylim=c(0,120))
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -671,13 +654,13 @@ length.of.stay.sex.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ..
   if (dashboard==T){
     s=5
   }else{
-    s=2.5
+    s=2
   }
   plt <- ggplot(aggregated.tbl, aes(x = sex, y = length.of.stay, fill=sex)) +
     geom_violin(trim=F)+
     geom_boxplot(width=0.1, fill="white", outlier.shape = NA)  +
     scale_fill_viridis(drop = F, discrete = "true", option = "magma", begin = 0.25, end = 0.75) +
-    geom_text(stat="count", aes(label=..count..),y=-2, size=s)+
+    geom_text(stat="count", aes(label=..count..),y=-1, size=s)+
     labs(title=" ", x="Sex", y = "Length of hospital stay", fill="Sex") +
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
@@ -701,7 +684,7 @@ length.of.stay.age.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ..
     geom_violin(trim=F) +
     geom_boxplot(width=0.05, fill="white", outlier.shape = NA)  +
     labs(title="  ", x="Age group", y = "Length of hospital stay", fill="Age") +
-    geom_text(stat="count", aes(label=..count..),y=-2, size=s)+
+    geom_text(stat="count", aes(label=..count..),y=-1, size=s)+
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
       axis.title.x = element_text( size=12),

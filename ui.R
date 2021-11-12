@@ -477,6 +477,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("number_by_region", height = "500px"),
+                  "Graph shows the number of participants recruited in each country is shown in the y-axis, which uses on the log-scale. Countries were grouped in different regions, and within regions were ordered according to the number of participants recruited.",
                   width = 12,
                   height = 600,
                   solidHeader = T,
@@ -484,6 +485,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("date_by_region", height = "500px"),
+                  "Graph shows the number of participants recruited since the beginning of pandemic is presented by calendar time. Region-specific numbers are represented by different colours. The vertical dashed line represents Different from the previous figure, the y-axis is on linear scale.",
                   width = 12,
                   height = 600,
                   solidHeader = T,
@@ -580,6 +582,7 @@ dashboardPage(
               )
       ),
       tabItem(tabName = "comorbidities_by_region",
+              "This page shows the frequencies of most common comorbidities in patients in the dataset. Each panel corresponds to a different region, and within region, more frequent comorbidities correspond to higher y-axis coordinates. To improve visualization, transparency decreases with increasing frequency. ",
               fluidRow(
                 box(
                   plotOutput("comorb_1"),
@@ -626,6 +629,7 @@ dashboardPage(
               )
       ),
       tabItem(tabName = "symptoms_by_region",
+              "This page shows the frequencies of most common symptoms in patients in the dataset. Each panel corresponds to a different region, and within region, symptoms that were present more often correspond to higher y-axis coordinates. To improve visualization, transparency decreases with increasing frequency. ",
               fluidRow(
                 box(
                   plotOutput("symptom_1"),
