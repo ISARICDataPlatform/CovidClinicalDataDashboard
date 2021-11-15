@@ -2,7 +2,7 @@ library(rmarkdown)
 library(tidyverse)
 library(glue)
 library(tinytex)
-install_tinytex()
+#install_tinytex()
 
 
 # run the old version
@@ -13,46 +13,28 @@ render("Static_report.Rmd", "pdf_document")
 tex.lines <- read_lines("Static_report.tex")
 
 
-# Replace figure 5
-fig5.line.no <- which(startsWith(tex.lines, "\\subfloat[Frequency of symptoms seen at admission amongst COVID-19 patients"))
+# Replace figure 7
+fig7.line.no <- which(startsWith(tex.lines, "\\subfloat[Frequency of symptoms seen at admission amongst COVID-19 patients"))
 
-old.fig5 <- tex.lines[fig5.line.no]
+old.fig7 <- tex.lines[fig7.line.no]
 
-fig5.caption.and.label <- str_match(old.fig5, ".*(\\\\caption.*)")[,2]
+fig7.caption.and.label <- str_match(old.fig7, ".*(\\\\caption.*)")[,2]
 
-new.fig5 <- str_replace(old.fig5, fixed(fig5.caption.and.label), "")
+new.fig7 <- str_replace(old.fig7, fixed(fig7.caption.and.label), "")
 
-interfigure.5.a <- paste0(fig5.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat")
-interfigure.5.b <- paste0("\\end{figure}", "\\begin{figure}\\ContinuedFloat")
+interfigure.7.a <- paste0(fig7.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat")
+interfigure.7.b <- paste0("\\end{figure}", "\\begin{figure}\\ContinuedFloat")
 
-new.fig5 <- str_replace(new.fig5, fixed("\\newline"), interfigure.5.a)
-new.fig5 <- str_replace(new.fig5, fixed("\\newline"), interfigure.5.b)
+new.fig7 <- str_replace(new.fig7, fixed("\\newline"), interfigure.7.a)
+new.fig7 <- str_replace(new.fig7, fixed("\\newline"), interfigure.7.b)
 
-tex.lines[fig5.line.no] <- new.fig5
-tex.lines <- append(tex.lines, "\\setcounter{figure}{5}", after = fig5.line.no )
-
-
-
-# Replace figure 6
-fig8.line.no <- which(startsWith(tex.lines, "\\subfloat[Frequency of comorbidities or other concomitant conditions"))
-
-old.fig8 <- tex.lines[fig8.line.no]
-
-fig8.caption.and.label <- str_match(old.fig8, ".*(\\\\caption.*)")[,2]
-
-new.fig8 <- str_replace(old.fig8, fixed(fig8.caption.and.label), "")
-
-interfigure.8 <- paste0(fig8.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat")
-
-new.fig8 <- str_replace(new.fig8, fixed("\\newline"), interfigure.8)
-
-tex.lines[fig8.line.no] <- new.fig8
-
-tex.lines <- append(tex.lines, "\\setcounter{figure}{8}", after = fig8.line.no )
+tex.lines[fig7.line.no] <- new.fig7
+tex.lines <- append(tex.lines, "\\setcounter{figure}{7}", after = fig7.line.no )
 
 
-# Replace figure 8
-fig11.line.no <- which(startsWith(tex.lines, "\\subfloat[Alanine transaminase (ALT"))
+
+# Replace figure 11
+fig11.line.no <- which(startsWith(tex.lines, "\\subfloat[Frequency of comorbidities or other concomitant conditions"))
 
 old.fig11 <- tex.lines[fig11.line.no]
 
@@ -60,50 +42,68 @@ fig11.caption.and.label <- str_match(old.fig11, ".*(\\\\caption.*)")[,2]
 
 new.fig11 <- str_replace(old.fig11, fixed(fig11.caption.and.label), "")
 
-interfigure.11 <- paste0(fig11.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat\\subfloat[Neutrophils")
+interfigure.11 <- paste0(fig11.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat")
 
-new.fig11 <- str_replace(new.fig11, fixed("\\newline\\subfloat[Neutrophils"), interfigure.11)
+new.fig11 <- str_replace(new.fig11, fixed("\\newline"), interfigure.11)
 
 tex.lines[fig11.line.no] <- new.fig11
 
 tex.lines <- append(tex.lines, "\\setcounter{figure}{11}", after = fig11.line.no )
 
 
+# Replace figure 15
+fig15.line.no <- which(startsWith(tex.lines, "\\subfloat[Alanine transaminase (ALT"))
 
-# Replace figure 9
-fig12.line.no <- which(startsWith(tex.lines, "\\subfloat[Proportions of patients receiving each treatment"))[1]
+old.fig15 <- tex.lines[fig15.line.no]
 
-old.fig12 <- tex.lines[fig12.line.no]
+fig15.caption.and.label <- str_match(old.fig15, ".*(\\\\caption.*)")[,2]
 
-fig12.caption.and.label <- str_match(old.fig12, ".*(\\\\caption.*)")[,2]
+new.fig15 <- str_replace(old.fig15, fixed(fig15.caption.and.label), "")
 
-new.fig12 <- str_replace(old.fig12, fixed(fig12.caption.and.label), "")
+interfigure.15 <- paste0(fig15.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat\\subfloat[Neutrophils")
 
-interfigure.12 <- paste0(fig12.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat")
+new.fig15 <- str_replace(new.fig15, fixed("\\newline\\subfloat[Neutrophils"), interfigure.15)
 
-new.fig12 <- str_replace(new.fig12, fixed("\\newline"), interfigure.12)
+tex.lines[fig15.line.no] <- new.fig15
 
-tex.lines[fig12.line.no] <- new.fig12
-
-tex.lines <- append(tex.lines, "\\setcounter{figure}{12}", after = fig12.line.no )
+tex.lines <- append(tex.lines, "\\setcounter{figure}{15}", after = fig15.line.no )
 
 
-# Replace figure 13
-fig13.line.no <- which(startsWith(tex.lines, "\\subfloat[Proportions of patients receiving each treatment"))[2]
 
-old.fig13 <- tex.lines[fig13.line.no]
+# Replace figure 16
+fig16.line.no <- which(startsWith(tex.lines, "\\subfloat[Proportions of patients receiving each treatment"))[1]
 
-fig13.caption.and.label <- str_match(old.fig13, ".*(\\\\caption.*)")[,2]
+old.fig16 <- tex.lines[fig16.line.no]
 
-new.fig13 <- str_replace(old.fig13, fixed(fig13.caption.and.label), "")
+fig16.caption.and.label <- str_match(old.fig16, ".*(\\\\caption.*)")[,2]
 
-interfigure.13 <- paste0(fig13.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat")
+new.fig16 <- str_replace(old.fig16, fixed(fig16.caption.and.label), "")
 
-new.fig13 <- str_replace(new.fig13, fixed("\\newline"), interfigure.13)
+interfigure.16 <- paste0(fig16.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat")
 
-tex.lines[fig13.line.no] <- new.fig13
+new.fig16 <- str_replace(new.fig16, fixed("\\newline"), interfigure.16)
 
-tex.lines <- append(tex.lines, "\\setcounter{figure}{13}", after = fig13.line.no )
+tex.lines[fig16.line.no] <- new.fig16
+
+tex.lines <- append(tex.lines, "\\setcounter{figure}{16}", after = fig16.line.no )
+
+
+# Replace figure 17
+fig17.line.no <- which(startsWith(tex.lines, "\\subfloat[Proportions of patients receiving each treatment"))[2]
+
+old.fig17 <- tex.lines[fig17.line.no]
+
+fig17.caption.and.label <- str_match(old.fig17, ".*(\\\\caption.*)")[,2]
+
+new.fig17 <- str_replace(old.fig17, fixed(fig17.caption.and.label), "")
+
+interfigure.17 <- paste0(fig17.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat")
+
+new.fig17 <- str_replace(new.fig17, fixed("\\newline"), interfigure.17)
+
+tex.lines[fig17.line.no] <- new.fig17
+
+tex.lines <- append(tex.lines, "\\setcounter{figure}{17}", after = fig17.line.no )
 
 
 

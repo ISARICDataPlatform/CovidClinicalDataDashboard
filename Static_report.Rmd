@@ -179,7 +179,7 @@ heatmap_plot(data_plot_heatmap)
 \newpage
 
 The observed symptoms on admission partly represent case definitions and policies for hospital admission,
-which may change as time passes.  The most common case definitions are met by 25%-70% patients in our dataset, which varies by age (Figure 6). 
+which may change as time passes.  The most common case definitions are met by 25%-70% patients in our dataset, which varies by age (Figure 8). 
 
 ```{r case_def, echo = FALSE, fig.align="center", fig.cap = "Proportion of patients that meet the 4 most common COVID-19 symptom case definitions by age"}
 
@@ -213,7 +213,7 @@ plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FA
 In Figure 10, we present the frequencies of most common symptoms varied by regions.Each panel corresponds to a different region, and within region, symptoms that were present more often correspond to higher y-axis coordinates. To improve visualization, transparency decreases with increasing frequency. 
 
 
-```{r sympbyregion, echo=FALSE, out.width= "50%", message=FALSE, fig.height=6, fig.ncol = 2, fig.subcap=c("East Asia and Pacific", "Latin America and Caribbean", "North America", "Sub-Saharan Africa", "Europe and Central Asia", "Middle East and North Africa",  "South Asia"), fig.cap = 'Symptoms recorded at hospital presentation stratified by region'}
+```{r sympbyregion, echo=FALSE, out.width= "33%", message=FALSE, fig.height=6, fig.ncol = 2, fig.subcap=c("East Asia and Pacific", "Latin America and Caribbean", "North America", "Sub-Saharan Africa", "Europe and Central Asia", "Middle East and North Africa",  "South Asia"), fig.cap = 'Symptoms recorded at hospital presentation stratified by region'}
 
 plot_by_region(symptoms_East_Asia_and_Pacific_input)
 plot_by_region(symptoms_Latin_America_and_Caribbean_input)
