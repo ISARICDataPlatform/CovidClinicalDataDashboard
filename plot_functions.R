@@ -374,7 +374,8 @@ p_resp <- function(aggregated.tbl, dashboard=dashboard_equal){
     
     p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
       geom_boxplot(fill="lightblue",outlier.shape=NA) +xlab("Age groups") + ylab("Respiratory rate (min)") + 
-      theme_bw() + labs(title = N) +coord_cartesian(ylim=c(15,60))
+      theme_bw() + labs(title = N) +coord_cartesian(ylim=c(15,60))+
+      geom_hline(yintercept = 16, linetype=2)
     if (dashboard==T){
       p=p+theme(
         plot.title = element_text( size=16),
@@ -393,7 +394,9 @@ p_hr <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)+xlab("Age groups") + ylab("Heart rate (min)") + 
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(50,200))
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(50,200))+
+    geom_hline(yintercept = 100, linetype=2)
+  
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -412,7 +415,9 @@ p_temp <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA) +xlab("Age groups") + ylab("Temperature (Celsius)") + 
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(35,40))
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(35,40))+
+    geom_hline(yintercept = 37.2, linetype=2)
+  
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -431,7 +436,9 @@ p_sysbp <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + ylim(30,NA)+
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(50,200))
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(50,200))+
+    geom_hline(yintercept = 120, linetype=2)
+  
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -450,7 +457,9 @@ p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("Oxygen saturation on room air (%)") +
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(85,100))
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(85,100))+
+    geom_hline(yintercept = 95, linetype=2)
+  
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -469,7 +478,9 @@ p_oxysat_therapy <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.shape=NA)  + xlab("Age groups") + ylab("Oxygen saturation on oxygen therapy (%)") +
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(80,100))
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(80,100))+
+    geom_hline(yintercept = 95, linetype=2)
+  
   if (dashboard==T){
     p=p+theme(
       plot.title = element_text( size=16),
@@ -1049,7 +1060,7 @@ world_plot_data <- merge(world, data_map, all.x = TRUE, all.y = TRUE, by = "name
 
 
 ggplot(data = world_plot_data) +
-  geom_sf(aes(fill = Freq)) +
+  geom_sf(aes(fill = Freq),lwd=0.1) +
   scale_fill_viridis_c(option = "magma", na.value = "white", 
                        direction = -1, label = scales::comma,
                        breaks = c(10, 100, 1000, 10000, 100000), trans = "log10") + 
@@ -1087,7 +1098,7 @@ number_by_region <- function(data_country){
     ylab('Number of records') + 
     theme(axis.title.x = element_text(size=14, face="bold"),
           axis.title.y = element_text(size=14, face="bold")) + 
-    theme(legend.position = "top")
+    theme(legend.position = "top",legend.text = element_text(size=8),legend.key.size = unit(0.2,"cm"))
 }
 
 month_by_region <- function(summary_country_date){
@@ -1103,8 +1114,8 @@ month_by_region <- function(summary_country_date){
           axis.title.y = element_text(size=14, face="bold")) + 
     annotate("text", x=1,  y=50000, label = "2020") +
     annotate("text", x=15,  y=50000, label = "2021") +
-    theme(legend.position = "top")
-}
+    theme(legend.position = "top",legend.text = element_text(size=8),legend.key.size = unit(0.2,"cm"))
+  }
 
 plot_by_region <- function(data_plot,fill_color = 'navy'){
   
