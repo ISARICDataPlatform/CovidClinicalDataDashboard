@@ -16,9 +16,9 @@ knitr::opts_chunk$set(fig.path='Figs/')
 
 # Background
 
-This dashboard describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and June 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration (hyperlink to https://isaric.org/).
+This dashboard describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and September 2021 in `r length(unique(summary_input_overall$slider_country))` countries throughout the world. This has been possible thanks to `r length(unique(summary_input_overall$siteid_final))` institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration (hyperlink to https://isaric.org/).
 
-After one-and-a-half years and over 4 million deaths, COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, and shaking economies. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
+After over 250 million cases and over 5 million deaths, COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, and shaking economies. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
 
 **The advantages of an international standardised case record form**. Novel diseases are, by definition, new; the scientific method is not. By developing consensus on a road map for clinical research methods before a pandemic, we are able to minimise further time defining study types, data collection tools, and potential outputs for evidence summarisation once the pathogen emerges. Using slightly adjusted standardised methods for novel diseases, evidence can be generated quickly.
 
@@ -63,6 +63,6 @@ New cough, or temperature ≥37.8°C, or a loss or change in sense of smell or t
 - European Centre for Disease Prevention and Control   
 At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusia or dysgeusia 
 
-This dashboard only includes individuals for whom data collection commenced on or before 25 May 2021. 
+This dashboard only includes individuals for whom data collection commenced on or before 20 September 2021. 
 
-The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flowchart gives an overview of the cohort and outcomes as of 25 May 2021. 
+The cohort satisfying the above criteria has **`r nrow(summary_input)`** cases. The flowchart gives an overview of the cohort and outcomes as of 20 September 2021. 

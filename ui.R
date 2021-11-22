@@ -106,11 +106,11 @@ dashboardPage(
         tabName = "hospital_stays",
         icon = icon("hospital")
       ),
-      menuItem(
-        "Vaccinations",
-        tabName = "vaccination",
-        icon = icon("syringe")
-      ),
+      # menuItem(
+      #   "Vaccinations",
+      #   tabName = "vaccination",
+      #   icon = icon("syringe")
+      # ),
       menuItem(
         "Summary tables",
         tabName = "tables",
@@ -155,7 +155,7 @@ dashboardPage(
               fluidRow(
                 box(
                   uiOutput("contributions_video", align = "center"),
-                  "Animated map highlighting the growth of patient records chronologically from 1 February 2020 to 24 May 2021.",
+                  "Animated map highlighting the growth of patient records chronologically from 1 February 2020 to 20 September 2021.",
                   solidHeader = T,
                   title = "Contributions of patient records"
                   ),
@@ -190,7 +190,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("symptomPrevalence", height = "500px"),
-                  "Graph shows the prevalence of symptoms at admission. The five most common symptoms at admission were shortness of breath, cough, history of fever, fatigue/malaise, and altered consciousness/confusion, accounting for 57.8%, 56%, 53.1%, 37.7%,20.2% of patients with symptom recorded. Bars are labelled with the fraction of patients presenting with the symptom to the number of patients with data on the symptom recorded.",
+                  "Graph shows the prevalence of symptoms at admission. The five most common symptoms at admission were shortness of breath, cough, history of fever, fatigue/malaise, and altered consciousness/confusion, accounting for 58.9%, 57.1%, 53.2%, 38.3%, 19.4% of patients with symptom recorded. Bars are labelled with the fraction of patients presenting with the symptom to the number of patients with data on the symptom recorded.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -225,7 +225,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("comorbidityPrevalence", height = "500px"),
-                  "Graph shows the prevalence of comorbidities. Conditions present in at least 10% of cases are hypertension (41% of those reported), smoking (35%), diabetes (28%), cardiac chronic disease (17%), obesity (12%), dementia, chronic neurological disease and rheumatological disease (each 10%). Bars are labelled with the fraction of patients presenting with the comorbidity to the number of patients with data on the comorbidity recorded.",
+                  "Graph shows the prevalence of comorbidities. Conditions present in at least 10% of cases are hypertension (31% of those reported), diabetes (22%), cardiac chronic disease (11%). Bars are labelled with the fraction of patients presenting with the comorbidity to the number of patients with data on the comorbidity recorded.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -244,7 +244,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("treatmentPrevalence", height = "500px"),
-                  "Graph shows the proportion of patients receiving each treatment. Antibiotics were given to 61.5% of patients. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
+                  "Graph shows the proportion of patients receiving each treatment. Antibiotics were given to 56.4% of patients. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -263,7 +263,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("icuTreatmentPrevalence", height = "500px"),
-                  "Graph shows the proportion of treatments receiving each treatment in ICU. 91.9% received antibiotics and 37.1% antivirals. 87.2% received some degree of oxygen supplementation, of which, 48.2% received NIV and 59.8% IMV. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded.",
+                  "Graph shows the proportion of treatments receiving each treatment in ICU. 91.6% received antibiotics and 37.4% antivirals. 95.4% received some degree of oxygen supplementation, of which, 48.2% received NIV and 60.5% IMV. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -322,7 +322,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("admissiontoICU", height = "500px"),
-                  "Graph shows the distribution of time from hospital admission to ICU admission. The figure displays data on only those cases with a reported ICU start date. 52.9% of ICU admissions occur within the first day at the hospital.",
+                  "Graph shows the distribution of time from hospital admission to ICU admission. The figure displays data on only those cases with a reported ICU start date. 55.2% of ICU admissions occur within the first day at the hospital.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -330,7 +330,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("StatusbyTime", height = "500px"),
-                  "Graph shows the distribution of patient status by number of days after admission. The overall estimated case fatality ratio (CFR) is 24.9% (95%CI 24.8-25) and is 37.9% (95%CI 37.5-38.3) for patients admitted to ICU. The observed median duration from hospital admission to outcome (death or discharge) was 8 days.",
+                  "Graph shows the distribution of patient status by number of days after admission. The overall estimated case fatality ratio (CFR) is 25.3% (95%CI 25.1-25.4) and is 37.8% (95%CI 37.5-38.2) for patients admitted to ICU. The observed median duration from hospital admission to outcome (death or discharge) was 8 days.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -341,7 +341,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("clinical_signs_vs_resp", height = "500px"),
-                  "Graph shows median respiratory rates for 175320 patients at presentation by age group. The median level was 33 breaths per minute in children under 10, and 20 breaths per minute in children 10-19, increases to 22 breaths per minute in adults aged 50-59 years, and decreases to 20 breaths per minute in adults aged 90 and above.",
+                  "Graph shows median respiratory rates for 201299 patients at presentation by age group. The median level was 33 breaths per minute in children under 10, and 20 breaths per minute in children 10-19, increases to 22 breaths per minute in adults aged 50-59 years, and decreases to 20 breaths per minute in adults aged 90 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -349,7 +349,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("clinical_signs_vs_hr", height = "500px"),
-                  "Graph shows median heart rates for 174950 patients at presentation by age group. The median level decreases from 138 beats per minute in children under 10 years, to 93 beats per minute in adults aged 50-59 years, and further decreases to 83 beats per minute in adults aged 90 and above.",
+                  "Graph shows median heart rates for 200547 patients at presentation by age group. The median level decreases from 138 beats per minute in children under 10 years, to 93 beats per minute in adults aged 50-59 years, and further decreases to 83 beats per minute in adults aged 90 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -357,7 +357,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("clinical_signs_vs_temp", height = "500px"),
-                  "Graph shows median temperature levels for 182771 patients at presentation by age group. The median level increases from 36.9 celsius in children aged 10-19 years, to 37.2 celsius in adults aged 50-59 years, then decreases to 36.8 celsius in adults aged 90 and above.",
+                  "Graph shows median temperature levels for 208876 patients at presentation by age group. The median level increases from 36.9 celsius in children aged 10-19 years, to 37.2 celsius in adults aged 50-59 years, then decreases to 36.8 celsius in adults aged 90 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -365,7 +365,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("clinical_signs_vs_sysbp", height = "500px"),
-                  "Graph shows median systolic blood pressure levels for 181533 patients at presentation by age group. The median level increases from 119 mmHg in children aged 10-19 years, to 129 mmHg in adults aged 50-59 years, and further increases to 134 mmHg in adults aged 90 and above.",
+                  "Graph shows median systolic blood pressure levels for 207624 patients at presentation by age group. The median level increases from 119 mmHg in children aged 10-19 years, to 129 mmHg in adults aged 50-59 years, and further increases to 134 mmHg in adults aged 90 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -373,7 +373,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("clinical_signs_vs_oxysat", height = "500px"),
-                  "Graph shows oxygen saturation on room air levels for 116910 patients at presentation by age group. The median level decreases from 98% in children aged 10-19 years, to 95% in adults aged 50-59 years, and further increases to 96% in adults aged 90 and above.",
+                  "Graph shows oxygen saturation on room air levels for 132536 patients at presentation by age group. The median level decreases from 98% in children aged 10-19 years, to 95% in adults aged 50-59 years, and further increases to 96% in adults aged 90 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -381,7 +381,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("clinical_signs_vs_oxysat_therapy", height = "500px"),
-                  "Graph shows oxygen saturation on oxygen therapy levels for 66031 patients at presentation by age group. The median level decreases from 96% in children aged 10-19 years, to 95% in adults aged 30-89 years, then increases to 96% in adults aged 90 and above.",
+                  "Graph shows oxygen saturation on oxygen therapy levels for 67339 patients at presentation by age group. The median level decreases from 96% in children aged 10-19 years, to 95% in adults aged 30-89 years, then increases to 96% in adults aged 90 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -393,7 +393,7 @@ dashboardPage(
         fluidRow(
           box(
             plotOutput("lab_results_lab_crp", height = "500px"),
-            "Graph shows C-Reactive Protein levels in 115262 patients at presentation by age group. The median level is 9.5 mg/L in children under 10 years, 8 mg/L in children aged 10-19 years, and around 7 mg/L in adults aged 20 and above.",
+            "Graph shows C-Reactive Protein levels in 132542 patients at presentation by age group. The median level is 9.5 mg/L in children under 10 years, 8 mg/L in children aged 10-19 years, and around 7 mg/L in adults aged 20 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -401,7 +401,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_lym", height = "500px"),
-            "Graph shows lymphocyte levels in 108373 patients at presentation by age group. The median level is 2.9 *10^9/L in children under 10 years, 1.9 *10^9/L in children aged 10-19 years, and decreases to 0.8 *10^9/L in adults aged 70 and above.",
+            "Graph shows lymphocyte levels in 124962 patients at presentation by age group. The median level is 2.9 *10^9/L in children under 10 years, 1.9 *10^9/L in children aged 10-19 years, and decreases to 0.8 *10^9/L in adults aged 70 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -409,7 +409,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_neut", height = "500px"),
-            "Graph shows neutrophil levels in 107659 patients at presentation by age group. The median level increases from 3.8 *10^9/L in children under 10 to 6 *10^9/L in adults aged 90 and above.",
+            "Graph shows neutrophil levels in 124090 patients at presentation by age group. The median level increases from 3.8 *10^9/L in children under 10 to 6 *10^9/L in adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -417,7 +417,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_wbc", height = "500px"),
-            "Graph shows white blood cell levels in 115262 patients at presentation by age group. The median level decreases from 9.5 *10^9/L in children under 10 to 7 *10^9/L in adults aged 30-60 years, and increases to 7.7 *10^9/L in adults aged 90 and above.",
+            "Graph shows white blood cell levels in 132542 patients at presentation by age group. The median level decreases from 9.5 *10^9/L in children under 10 to 7 *10^9/L in adults aged 30-60 years, and increases to 7.7 *10^9/L in adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -425,7 +425,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_urean", height = "500px"),
-            "Graph shows urea levels in 103651 patients at presentation by age group. The median level increases from 3.5 mmol/L in children under 10 to 10 mmol/L in adults aged 90 and above.",
+            "Graph shows urea levels in 119413 patients at presentation by age group. The median level increases from 3.5 mmol/L in children under 10 to 10 mmol/L in adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -433,7 +433,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_pt", height = "500px"),
-            "Graph shows protrombin time in 59159 patients at presentation by age group. The median time is around 12-13 s across all age groups.",
+            "Graph shows protrombin time in 68583 patients at presentation by age group. The median time is around 12-13 s across all age groups.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -441,7 +441,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_alt", height = "500px"),
-            "Graph shows ALT levels in 74854 patients at presentation by age group. The median level is 24 units/L in children under 10, 18 units/L in children aged 10-19, increases to 37 units/L in adults aged 40-49, and then decreases to 18 units/L in adults aged 90 and above.",
+            "Graph shows ALT levels in 82835 patients at presentation by age group. The median level is 24 units/L in children under 10, 18 units/L in children aged 10-19, increases to 37 units/L in adults aged 40-49, and then decreases to 18 units/L in adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -449,7 +449,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_bili", height = "500px"),
-            "Graph shows bilirubin levels in 78187 patients at presentation by age group. The median level is 8 mmol/L for adults under 49 years, 9 mmol/L for adults aged 50-69 years, and 10 mmol/L for adults aged 70 and above.",
+            "Graph shows bilirubin levels in 86595 patients at presentation by age group. The median level is 8 mmol/L for adults under 49 years, 9 mmol/L for adults aged 50-69 years, and 10 mmol/L for adults aged 70 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -457,7 +457,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_ast", height = "500px"),
-            "Graph shows AST levels in 17896 patients at presentation by age group. The median level is 43 units/L for children under 10, 22 units/L for children aged 10-19, increases to 43 units/L for adults aged 60-69, then decreases to 35 units/L for adults aged 90 and above.",
+            "Graph shows AST levels in 19216 patients at presentation by age group. The median level is 43 units/L for children under 10, 22 units/L for children aged 10-19, increases to 43 units/L for adults aged 60-69, then decreases to 35 units/L for adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -502,7 +502,7 @@ dashboardPage(
               fluidRow(
                 box(flowchart(),
                     title = "Patients inclusion flowchart",
-                    "Graph shows the patient inclusion flowchart, among 516889 patients, 442643 (85.7%) were included. 70476 (16%) were admitted to ICU/HDU. ",
+                    "Graph shows the patient inclusion flowchart, among 708052 patients, 615683 (87%) were included. 88416 (14%) were admitted to ICU/HDU. ",
                     width = 12
                 )
               ),
@@ -525,7 +525,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotlyOutput("age_comorbid_asthma"),
-                  "Graph shows proportions for 356090 patients with asthma at presentation by age group. The incidence of asthma increases from 6.2% in children aged 10-19 years, to 9.4% in adults aged 50-59 years, and decreases to 8.4% in adults aged 90 and above.",
+                  "Graph shows proportions for 474901 patients with asthma at presentation by age group. The incidence of asthma increases from 6.2% in children aged 10-19 years, to 9.4% in adults aged 50-59 years, and decreases to 8.4% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -533,7 +533,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_malignant_neoplasm"),
-                  "Graph shows proportions for 355209 patients with malignant neoplasma at presentation by age group. The incidence of malignant neoplasma increases from 1.3% in children aged 10-19 years, to 2.7% in adults aged 50-59 years, and increases to 11.4% in adults aged 90 and above.",
+                  "Graph shows proportions for 471267 patients with malignant neoplasma at presentation by age group. The incidence of malignant neoplasma increases from 1.3% in children aged 10-19 years, to 2.7% in adults aged 50-59 years, and increases to 11.4% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -541,7 +541,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_obesity"),
-                  "Graph shows proportion for 236237 patients with obesity at presentation by age group. The incidence of obesity increases from 4.7% in children aged 10-19 years, to 20.3% in adults aged 50-59 years, then decreases to 3.5% in adults aged 90 and above.",
+                  "Graph shows proportion for 278808 patients with obesity at presentation by age group. The incidence of obesity increases from 4.7% in children aged 10-19 years, to 20.3% in adults aged 50-59 years, then decreases to 3.5% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -549,7 +549,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_diabetes"),
-                  "Graph shows proportion for 367813 patients with diabetes at presentation by age group. The incidence of diabetes increases from 4.7% in children aged 10-19 years, to 31.4% in adults aged 50-59 years, then decreases to 22.9% in adults aged 90 and above.",
+                  "Graph shows proportion for 492165 patients with diabetes at presentation by age group. The incidence of diabetes increases from 4.7% in children aged 10-19 years, to 31.4% in adults aged 50-59 years, then decreases to 22.9% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -557,7 +557,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_dementia"),
-                  "Graph shows proportions for 186818 patients with dementia at presentation by age group. The incidence of dementia increases from 0% in children aged 10-19 years, to 0.8% in adults aged 50-59 years, then further increases to 33.9% in adults aged 90 and above.",
+                  "Graph shows proportions for 211603 patients with dementia at presentation by age group. The incidence of dementia increases from 0% in children aged 10-19 years, to 0.8% in adults aged 50-59 years, then further increases to 33.9% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -565,7 +565,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_smoking"),
-                  "Graph shows proportions for 151991 smokers at presentation by age group. The incidence of smokers increases from 7.4% in children aged 10-19 years, to 30.0% in adults aged 50-59 years, then further increases to 34.8% in adults aged 90 and above.",
+                  "Graph shows proportions for 181281 smokers at presentation by age group. The incidence of smokers increases from 7.4% in children aged 10-19 years, to 30.0% in adults aged 50-59 years, then further increases to 34.8% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -573,7 +573,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_hypertension"),
-                  "Graph shows proportions for 343741 patients with hypertension at presentation by age group. The incidence of hypertension increases from 2.3% in children aged 10-19 years, to 40.4% in adults aged 50-59 years, then further increases to 61.2% in adults aged 90 and above.",
+                  "Graph shows proportions for 471492 patients with hypertension at presentation by age group. The incidence of hypertension increases from 2.3% in children aged 10-19 years, to 40.4% in adults aged 50-59 years, then further increases to 61.2% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -688,7 +688,7 @@ dashboardPage(
         fluidRow(
           box(
             plotlyOutput("age_symptoms_history_of_fever"),
-            "Graph shows proportions for 184350 patients with fever at presentation by age group. The incidence of fever increases from 36.4% in children aged 10-19 years, to 64.5% in adults aged 50-59 years, then gradually decreases to 37.6% in adults aged 90 and above.",
+            "Graph shows proportions for 207946 patients with fever at presentation by age group. The incidence of fever increases from 36.4% in children aged 10-19 years, to 64.5% in adults aged 50-59 years, then gradually decreases to 37.6% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -696,7 +696,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_cough"),
-            "Graph shows proportions for 184209 patients with cough at presentation by age group. The incidence of cough increases from 27.8% in children aged 10-19 years, to 68.1% in adults aged 50-59 years, then gradually decreases to 41.7% in adults aged 90 and above.",
+            "Graph shows proportions for 208051 patients with cough at presentation by age group. The incidence of cough increases from 27.8% in children aged 10-19 years, to 68.1% in adults aged 50-59 years, then gradually decreases to 41.7% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -704,7 +704,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_cough_fever"),
-            "Graph shows proportions for 188593 patients with cough or fever at presentation by age group. The incidence of cough or fever increases from 36.4% in children aged 10-19 years, to 79.3% in adults aged 50-59 years, then gradually decreases to 55.6% in adults aged 90 and above.",
+            "Graph shows proportions for 212914 patients with cough or fever at presentation by age group. The incidence of cough or fever increases from 36.4% in children aged 10-19 years, to 79.3% in adults aged 50-59 years, then gradually decreases to 55.6% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -712,7 +712,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_shortness_of_breath"),
-            "Graph shows proportions for 184710 patients with shortness of breath at presentation by age group. The incidence of shortness of breath increases from 18.8% in children aged 10-19 years, to 70.0% in adults aged 50-59 years, then gradually decreases to 45.5% in adults aged 90 and above years.",
+            "Graph shows proportions for 208771 patients with shortness of breath at presentation by age group. The incidence of shortness of breath increases from 18.8% in children aged 10-19 years, to 70.0% in adults aged 50-59 years, then gradually decreases to 45.5% in adults aged 90 and above years.",
             width = 4,
             height=580,
             solidHeader = T,
@@ -720,7 +720,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_cought_fever_shortness_of_breath"),
-            "Graph shows proportions for 190444 patients with cough, fever, or shortness of breath at presentation by age group. The incidence of cough, fever, or shortness of breath increases from 48.8% in children aged 10-19 years, to 86.0% in adults aged 50-59 years, then gradually decreases to 65.8% in adults aged 90 and above.",
+            "Graph shows proportions for 215087 patients with cough, fever, or shortness of breath at presentation by age group. The incidence of cough, fever, or shortness of breath increases from 48.8% in children aged 10-19 years, to 86.0% in adults aged 50-59 years, then gradually decreases to 65.8% in adults aged 90 and above.",
             width = 4,
             height=580,
             solidHeader = T,
@@ -728,7 +728,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_upper_respiratory_tract_symptoms"),
-            "Graph shows proportions for 160027 patients with upper respiratory tract symptoms at presentation by age group. The incidence of upper respiratory tract symptoms decreases from 16.1% in children aged 10-19 years, to 11.9% in adults aged 50-59 years, then further decreases to 3.3% in adults aged 90 and above.",
+            "Graph shows proportions for 181213 patients with upper respiratory tract symptoms at presentation by age group. The incidence of upper respiratory tract symptoms decreases from 16.1% in children aged 10-19 years, to 11.9% in adults aged 50-59 years, then further decreases to 3.3% in adults aged 90 and above.",
             width = 4,
             height=580,
             solidHeader = T,
@@ -736,7 +736,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_altered_consciousness_confusion"),
-            "Graph shows proportions for 168889 patients with confusion at presentation by age group. The incidence of confusion increases from 6.8% in children aged 10-19 years, to 8.2% in adults aged 50-59 years, and further increases to 40.3% in adults aged 90 and above.",
+            "Graph shows proportions for 191771 patients with confusion at presentation by age group. The incidence of confusion increases from 6.8% in children aged 10-19 years, to 8.2% in adults aged 50-59 years, and further increases to 40.3% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -744,7 +744,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_constitutional"),
-            "Graph shows proportions for 174951 patients with constitutional symptoms at presentation by age group. The incidence of constitutional symptoms increases from 27.3% in children aged 10-19 years, to 53.3% in adults aged 50-59 years, then decreases to 35.1% in adults aged 90 and above.",
+            "Graph shows proportions for 197993 patients with constitutional symptoms at presentation by age group. The incidence of constitutional symptoms increases from 27.3% in children aged 10-19 years, to 53.3% in adults aged 50-59 years, then decreases to 35.1% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -752,7 +752,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_vomiting_nausea"),
-            "Graph shows proportions for 172850 patients with vomiting or nausea at presentation by age group. The incidence of vomiting or nausea decreases from 20.4% in children aged 10-19 years, to 20.2% in adults aged 50-59 years, then decreases to 10.6% in adults aged 90 and above.",
+            "Graph shows proportions for 195735 patients with vomiting or nausea at presentation by age group. The incidence of vomiting or nausea decreases from 20.4% in children aged 10-19 years, to 20.2% in adults aged 50-59 years, then decreases to 10.6% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -760,7 +760,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_diarrhoea"),
-            "Graph shows proportions for 173334 patients with diarrhoea at presentation by age group. The incidence of diarrhoea increases from 9.0% in children aged 10-19 years, to 19.9% in adults aged 50-59 years, then decreases to 9.1% in adults aged 90 and above.",
+            "Graph shows proportions for 196130 patients with diarrhoea at presentation by age group. The incidence of diarrhoea increases from 9.0% in children aged 10-19 years, to 19.9% in adults aged 50-59 years, then decreases to 9.1% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -768,7 +768,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_abdominal_pain"),
-            "Graph shows proportions for 169163 patients with abdominal pain at presentation by age group. The incidence of abdominal pain decreases from 17.7% in children aged 10-19 years, to 9.3% in adults aged 50-59 years, and further decreases to 6.5% in adults aged 90 and above.",
+            "Graph shows proportions for 191507 patients with abdominal pain at presentation by age group. The incidence of abdominal pain decreases from 17.7% in children aged 10-19 years, to 9.3% in adults aged 50-59 years, and further decreases to 6.5% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
