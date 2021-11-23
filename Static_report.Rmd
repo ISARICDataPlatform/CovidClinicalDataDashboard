@@ -73,6 +73,8 @@ In January 2020, we launched our case report form when only 846 COVID-19 cases h
 
 In this report, we present the current state of our database, which all our collaborators can access by submitting a statistical analysis plan to our clinical team. We encourage our collaborators to test their research hypothesis within the framework of ISARIC’s collaborative Partner Analysis scheme [2]. The majority of this database is additionally available to external researchers via application to our Data Access Committee at https://www.iddo.org/covid19/data-sharing/accessing-data.  
 
+These analyses are available on the ISARIC COVID-19 Dashboard at https://livedataoxford.shinyapps.io/CovidClinicalDataDashboard/
+
 To contribute, please contact ncov@isaric.org. 
 
 
@@ -122,8 +124,7 @@ flowchart()
 
 ```
 
-Data have been contributed by 1669 sites in `r length(unique(na.omit(summary_input_overall$slider_country)))` countries (see Figure 2). `r nrow(summary_input_overall%>%filter(income!="High income"))` (`r round(nrow(summary_input_overall%>%filter(income!="High income"))/nrow(summary_input_overall%>%filter(!is.na(income)))*100,1)`%) of the patients are from low- and middle-income and `r nrow(summary_input_overall%>%filter(income=="High income"))` (`r round(nrow(summary_input_overall%>%filter(income=="High income"))/nrow(summary_input_overall%>%filter(!is.na(income)))*100,1)`%) from high-income countries. The two largest contributors to the database are South Africa (`r round(nrow(patient.by.country.input[patient.by.country.input$slider_country=="South Africa",])/nrow(patient.by.country.input)*100,1)`%) and the UK (`r round(nrow(patient.by.country.input[patient.by.country.input$slider_country=="United Kingdom",])/nrow(patient.by.country.input)*100,1)`%). Plots grouped by regions and calendar time are shown in Figure 3 and 4. 
-The cohort satisfying the inclusion criteria has **`r nrow(summary_input)`** cases. 
+Data have been contributed by 1669 sites in `r length(unique(na.omit(summary_input_overall$slider_country)))` countries (see Figure 2). `r nrow(summary_input_overall%>%filter(income!="High income"))` (`r round(nrow(summary_input_overall%>%filter(income!="High income"))/nrow(summary_input_overall%>%filter(!is.na(income)))*100,1)`%) of the patients are from low- and middle-income and `r nrow(summary_input_overall%>%filter(income=="High income"))` (`r round(nrow(summary_input_overall%>%filter(income=="High income"))/nrow(summary_input_overall%>%filter(!is.na(income)))*100,1)`%) from high-income countries. The two largest contributors to the database are South Africa (`r round(nrow(patient.by.country.input[patient.by.country.input$slider_country=="South Africa",])/nrow(patient.by.country.input)*100,1)`%) and the UK (`r round(nrow(patient.by.country.input[patient.by.country.input$slider_country=="United Kingdom",])/nrow(patient.by.country.input)*100,1)`%). Plots grouped by regions and calendar time are shown in Figure 3 and 4. The cohort satisfying the inclusion criteria has **`r nrow(summary_input)`** cases. 
 
 ```{r country_recruitment,out.width = '100%', echo=FALSE,fig.cap = "Distribution of patients by country"}
 plot_map_world(data_map)
@@ -169,7 +170,7 @@ tables_supplementary(table_sup = symptoms.table)
 ```
 
 \newpage
-```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=4, fig.ncol = 1, message=FALSE, fig.cap='Clinical symptoms of patients at admission', fig.subcap=c("Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded.", "The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity.", "Heatmap for correlation between symptoms. Fill colour is the $\phi$ correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.")}
+```{r symptomprev, echo=FALSE, out.width= "100%", fig.height=4, fig.ncol = 1, message=FALSE, fig.cap='Clinical symptoms of patients at admission', fig.subcap=c("Frequency of symptoms seen at admission amongst COVID-19 patients. Bars are annotated with a fraction representing the number of patients presenting with this symptom over the number of patients for whom presence or absence of this symptom was recorded.", "The distribution of combinations of the five most common symptoms, amongst all patients for whom these data were recorded. Filled and empty circles below the x-axis indicate the presence or absence of each comorbidity.", "Heatmap for correlation between symptoms. Fill colour is the phi correlation coefficient for each pair of symptoms, calculated amongst patients with recorded presence or absence of both.")}
 
 symptom.prevalence.plot(symptom.prevalence.input)
 upset.plot(symptom.upset.input, which.plot = "symptom")
@@ -244,7 +245,7 @@ upset.plot(comorbidity.upset.input, which.plot = "comorbidity")
 The age distribution of the most frequent concomitant conditions is presented in Figure 11. Dementia and hypertension increase with age. 
 
 
-```{r comorbbyage, echo=FALSE, out.width= "50%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking"), fig.cap = "Comorbidities recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)"}
+```{r comorbbyage, echo=FALSE, out.width= "33%", message=FALSE, fig.height=4, fig.ncol = 3, fig.subcap=c("Asthma", "Dementia", "Diabetes mellitus", "Hypertension", "Malignant neoplasm", "Obesity", "Smoking"), fig.cap = "Comorbidities recorded at hospital presentation stratified by age group. Boxes show the proportion of individuals with each symptom, with error bars showing 95\\% confidence intervals.  The size of each box is proportional to the number of individuals represented.  N is the number of individuals included in the plot (this varies between plots due to data completeness)"}
 
 plot.prop.by.age_comorbid_asthma(data_plot_comorbid_asthma, FALSE)
 plot.prop.by.age_comorbid_dementia(data_plot_comorbid_dementia, FALSE)
@@ -259,7 +260,7 @@ plot.prop.by.age_comorbid_smoking(data_plot_comorbid_smoking, FALSE)
 \newpage
 In Figure 12, the frequencies of most common comorbidities in patients by regions. Each panel corresponds to a different region, and within region, more frequent comorbidities correspond to higher y-axis coordinates. To improve visualization, transparency decreases with increasing frequency. 
 
-```{r comorbbyregion, echo=FALSE, out.width= "33%", message=FALSE, fig.height=6, fig.ncol = 2, fig.subcap=c("East Asia and Pacific", "Latin America and Caribbean", "North America", "Sub-Saharan Africa", "Europe and Central Asia", "Middle East and North Africa",  "South Asia"), fig.cap = "Comorbidities recorded at hospital presentation stratified by region. N next to each bar represents the number of patients recorded"}
+```{r comorbbyregion, echo=FALSE, out.width= "50%", message=FALSE, fig.height=6, fig.ncol = 2, fig.subcap=c("East Asia and Pacific", "Latin America and Caribbean", "North America", "Sub-Saharan Africa", "Europe and Central Asia", "Middle East and North Africa",  "South Asia"), fig.cap = "Comorbidities recorded at hospital presentation stratified by region. N next to each bar represents the number of patients recorded"}
 
 plot_by_region(comorb_East_Asia_and_Pacific_input)
 plot_by_region(comorb_Latin_America_and_Caribbean_input)
