@@ -459,7 +459,7 @@ p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.size=0.4)  + xlab("Age groups") + ylab("Oxygen saturation on room air (%)") +
     theme_bw() + labs(title = N) +coord_cartesian(ylim=c(85,100))+
-    geom_hline(yintercept = 95, linetype=2)
+    geom_hline(yintercept = 94, linetype=2)
   
   if (dashboard==T){
     p=p+theme(
@@ -480,7 +480,7 @@ p_oxysat_therapy <- function(aggregated.tbl, dashboard=dashboard_equal){
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.size=0.4)  + xlab("Age groups") + ylab("Oxygen saturation on oxygen therapy (%)") +
     theme_bw() + labs(title = N) +coord_cartesian(ylim=c(80,100))+
-    geom_hline(yintercept = 95, linetype=2)
+    geom_hline(yintercept = 94, linetype=2)
   
   if (dashboard==T){
     p=p+theme(
@@ -748,14 +748,14 @@ length.of.stay.icu.plot <- function(aggregated.tbl,dashboard=dashboard_equal,...
   if (dashboard==T){
     s=5
   }else{
-    s=2.5
+    s=2
   }
   plt <- ggplot(data = aggregated.tbl, aes(x = type, y = dur, fill = type)) +
     geom_violin(trim = TRUE, show.legend = FALSE,bw=2) +
     scale_fill_manual(values = c("darkorchid2", "darkorchid4")) +
     geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA)  +
     labs(title = " ", x = "Location", y = "Length of stay (days)") +
-    geom_text(stat="count", aes(label=..count..),y=-2, size=s)+
+    geom_text(stat="count", aes(label=..count..),y=-1, size=s)+
     #ylim(c(0,max(aggregated.tbl$dur)))+
     theme(
       axis.title.x = element_text(size = 12),
