@@ -26,7 +26,7 @@ params:
 
 ```{r setup, include = FALSE}
 
-knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="~/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -214,7 +214,6 @@ plot.prop.by.age_symptoms_vomiting_nausea(data_plot_symptoms_vomiting_nausea, FA
 
 \newpage
 In Figure 9, we present the frequencies of most common symptoms varied by regions. Each panel corresponds to a different region, and within region, symptoms that were present more often correspond to higher y-axis coordinates. To improve visualization, transparency decreases with increasing frequency. 
-
 
 ```{r sympbyregion, echo=FALSE, out.width= "50%", message=FALSE, fig.height=6, fig.ncol = 2, fig.subcap=c("", "", "", "", "", "", ""), fig.cap = 'Symptoms recorded at hospital presentation stratified by region. N next to each bar represents the number of patients recorded.'}
 

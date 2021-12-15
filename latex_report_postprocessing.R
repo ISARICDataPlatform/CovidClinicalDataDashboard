@@ -12,6 +12,17 @@ render("Static_report.Rmd", "pdf_document")
 #read the TeX file
 tex.lines <- read_lines("Static_report.tex")
 
+# Overwrite the flowchart figure width
+
+fig1.line.no <- which(str_detect(tex.lines, "Static_report_files/figure-latex/cohortoverview-1"))
+old.fig1 <- tex.lines[fig1.line.no]
+
+fig1.width <- str_match(old.fig1, ".*\\[width=([0-9]+)pt\\].*")[,2]
+
+new.fig1.width <- "400"
+
+new.fig1 <- str_replace(old.fig1, fixed(fig1.width), new.fig1.width)
+tex.lines[fig1.line.no] <- new.fig1
 
 # Replace figure 6
 fig6.line.no <- which(startsWith(tex.lines, "\\subfloat[Frequency of symptoms seen at admission amongst COVID-19 patients"))
@@ -31,7 +42,23 @@ new.fig6 <- str_replace(new.fig6, fixed("\\newline"), interfigure.6.b)
 tex.lines[fig6.line.no] <- new.fig6
 tex.lines <- append(tex.lines, "\\setcounter{figure}{6}", after = fig6.line.no )
 
+# Replace figure 9
 
+fig9.line.no <- which(startsWith(tex.lines, "\\subfloat[\\label{fig:sympbyregion-1}]"))
+
+old.fig9 <- tex.lines[fig9.line.no]
+
+fig9.caption.and.label <- str_match(old.fig9, ".*(\\\\caption.*)")[,2]
+
+new.fig9 <- str_replace(old.fig9, fixed(fig9.caption.and.label), "")
+
+interfigure.9 <- paste0(fig9.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat\\subfloat[\\label{fig:sympbyregion-5}]")
+
+new.fig9 <- str_replace(new.fig9, fixed("\\newline\\subfloat[\\label{fig:sympbyregion-5}]"), interfigure.9)
+
+tex.lines[fig9.line.no] <- new.fig9
+
+tex.lines <- append(tex.lines, "\\setcounter{figure}{9}", after = fig9.line.no )
 
 # Replace figure 10
 fig10.line.no <- which(startsWith(tex.lines, "\\subfloat[Frequency of comorbidities or other concomitant conditions"))
@@ -49,6 +76,24 @@ new.fig10 <- str_replace(new.fig10, fixed("\\newline"), interfigure.10)
 tex.lines[fig10.line.no] <- new.fig10
 
 tex.lines <- append(tex.lines, "\\setcounter{figure}{10}", after = fig10.line.no )
+
+# Replace figure 12
+
+fig12.line.no <- which(startsWith(tex.lines, "\\subfloat[\\label{fig:comorbbyregion-1}]"))
+
+old.fig12 <- tex.lines[fig12.line.no]
+
+fig12.caption.and.label <- str_match(old.fig12, ".*(\\\\caption.*)")[,2]
+
+new.fig12 <- str_replace(old.fig12, fixed(fig12.caption.and.label), "")
+
+interfigure.12 <- paste0(fig12.caption.and.label, "\\end{figure}", "\\begin{figure}\\ContinuedFloat\\subfloat[\\label{fig:comorbbyregion-5}]")
+
+new.fig12 <- str_replace(new.fig12, fixed("\\newline\\subfloat[\\label{fig:comorbbyregion-5}]"), interfigure.12)
+
+tex.lines[fig12.line.no] <- new.fig12
+
+tex.lines <- append(tex.lines, "\\setcounter{figure}{9}", after = fig12.line.no )
 
 
 # Replace figure 14
