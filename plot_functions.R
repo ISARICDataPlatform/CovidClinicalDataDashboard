@@ -416,8 +416,7 @@ p_temp <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.size=0.4) +xlab("Age groups") + ylab("Temperature (Celsius)") + 
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(35,40))+
-    geom_hline(yintercept = 37.2, linetype=2)
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(35,40))
   
   if (dashboard==T){
     p=p+theme(
@@ -437,8 +436,7 @@ p_sysbp <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=slider_agegp10, y=value)) + 
     geom_boxplot(fill="lightblue",outlier.size=0.4)+xlab("Age groups") + ylab("Systolic blood pressure (mmHg)") + ylim(30,NA)+
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(50,200))+
-    geom_hline(yintercept = 100, linetype=2)
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(50,200))
   
   if (dashboard==T){
     p=p+theme(
@@ -458,8 +456,7 @@ p_oxysat <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.size=0.4)  + xlab("Age groups") + ylab("Oxygen saturation on room air (%)") +
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(85,100))+
-    geom_hline(yintercept = 94, linetype=2)
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(85,100))
   
   if (dashboard==T){
     p=p+theme(
@@ -479,8 +476,7 @@ p_oxysat_therapy <- function(aggregated.tbl, dashboard=dashboard_equal){
   
   p <- ggplot(data = aggregated.tbl, aes(x=factor(slider_agegp10), y=value)) + 
     geom_boxplot(fill="lightblue",outlier.size=0.4)  + xlab("Age groups") + ylab("Oxygen saturation on oxygen therapy (%)") +
-    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(80,100))+
-    geom_hline(yintercept = 94, linetype=2)
+    theme_bw() + labs(title = N) +coord_cartesian(ylim=c(80,100))
   
   if (dashboard==T){
     p=p+theme(
@@ -666,19 +662,19 @@ length.of.stay.sex.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ..
   if (dashboard==T){
     s=5
   }else{
-    s=2
+    s=3
   }
   plt <- ggplot(aggregated.tbl, aes(x = sex, y = length.of.stay, fill=sex)) +
     geom_violin(trim=F)+
     geom_boxplot(width=0.1, fill="white", outlier.shape = NA)  +
     scale_fill_viridis(drop = F, discrete = "true", option = "magma", begin = 0.25, end = 0.75) +
-    geom_text(stat="count", aes(label=..count..),y=-1, size=s)+
+    geom_text(stat="count", aes(label=..count..),y=-3, size=s)+
     labs(title=" ", x="Sex", y = "Length of hospital stay", fill="Sex") +
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
       axis.title.x = element_text( size=12),
       axis.title.y = element_text( size=12)
-    ) +  ylim(c(0,max(aggregated.tbl$length.of.stay))) + xlim(c("Male","Female"))+
+    ) +  ylim(c(-5,max(aggregated.tbl$length.of.stay))) + xlim(c("Male","Female"))+
     theme(panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                           colour = "grey"), panel.background = element_rect(fill = 'white', colour = 'white'), panel.grid.major = element_line(size = 0.5, linetype = 'solid',colour = "grey"),  axis.line = element_line(colour = "black"), panel.border = element_rect(colour = 'black', fill = NA, size=1) )
   
@@ -690,21 +686,21 @@ length.of.stay.age.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ..
   if (dashboard==T){
     s=4
   }else{
-    s=2
+    s=2.5
   }
   plt <- ggplot(aggregated.tbl, aes(x = agegp10, y = length.of.stay, fill=agegp10)) +
     geom_violin(trim=F) +
     geom_boxplot(width=0.05, fill="white", outlier.shape = NA)  +
     labs(title="  ", x="Age group", y = "Length of hospital stay", fill="Age") +
-    geom_text(stat="count", aes(label=..count..),y=-1, size=s)+
+    geom_text(stat="count", aes(label=..count..),y=-3, size=s)+
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
       axis.title.x = element_text( size=12),
       axis.title.y = element_text( size=12)
-    ) + #ylim(0, length(0, max(aggregated.tbl$length.of.stay))+5) +
+    ) + 
     scale_fill_viridis(option = "magma", discrete = T, drop = F, begin = 0.4, end = 1) +
     scale_x_discrete(drop = F) +
-    ylim(c(0,max(aggregated.tbl$length.of.stay))) +xlim(unique(length.of.stay.age.input$agegp10) %>% sort())+
+    ylim(c(-5,max(aggregated.tbl$length.of.stay))) +xlim(unique(length.of.stay.age.input$agegp10) %>% sort())+
     theme(panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                           colour = "grey"), panel.background = element_rect(fill = 'white', colour = 'white'), panel.grid.major = element_line(size = 0.5, linetype = 'solid',colour = "grey"),  axis.line = element_line(colour = "black"), panel.border = element_rect(colour = 'black', fill = NA, size=1) )
   
@@ -748,15 +744,15 @@ length.of.stay.icu.plot <- function(aggregated.tbl,dashboard=dashboard_equal,...
   if (dashboard==T){
     s=5
   }else{
-    s=2
+    s=3
   }
   plt <- ggplot(data = aggregated.tbl, aes(x = type, y = dur, fill = type)) +
     geom_violin(trim = TRUE, show.legend = FALSE,bw=2) +
     scale_fill_manual(values = c("darkorchid2", "darkorchid4")) +
     geom_boxplot(width = 0.1, fill = "white", outlier.shape = NA)  +
     labs(title = " ", x = "Location", y = "Length of stay (days)") +
-    geom_text(stat="count", aes(label=..count..),y=-1, size=s)+
-    #ylim(c(0,max(aggregated.tbl$dur)))+
+    geom_text(stat="count", aes(label=..count..),y=-2, size=s)+
+    ylim(c(-5,max(aggregated.tbl$dur)))+
     theme(
       axis.title.x = element_text(size = 12),
       axis.title.y = element_text(size = 12),
@@ -1076,6 +1072,7 @@ ggplot(data = world_plot_data) +
 plot_case_def <- function(data_case_def){
   ggplot(data = data_case_def, aes(y = proportion, x = slider_agegp10)) +
     facet_grid(~ symptom) +
+    geom_text(aes(label=text),y=0.95,x="40-49",data=data.frame(text=c("Overall: 75%","Oveall: 82%","Overall: 75%","Overall: 60%"),symptom=c("CDC","ECDC","PHE","WHO")))+
     geom_bar(stat="identity")+
     xlab("Age") + ylab("Proportion") + ylim(0, 1)+
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
@@ -1110,7 +1107,7 @@ month_by_region <- function(summary_country_date){
     scale_fill_brewer(palette="Set2", name = "" ) + 
     scale_x_discrete(limits = as.vector(summary_country_date$time_id), labels = summary_country_date$new_month) + 
     xlab('Months') + 
-    ylab('Number of records') + 
+    ylab('Number of patients') + 
     theme(axis.title.x = element_text(size=14, face="bold"),
           axis.title.y = element_text(size=14, face="bold")) + 
     annotate("text", x=1,  y=50000, label = "2020") +
