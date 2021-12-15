@@ -281,7 +281,7 @@ dashboardPage(
         fluidRow(
           box(
             plotlyOutput("age_symptoms_history_of_fever"),
-            "Graph shows proportions for 207919 patients with fever at presentation by age group. The incidence of fever increases from 36.4% in children aged 10-19 years, to 64.5% in adults aged 50-59 years, then gradually decreases to 37.6% in adults aged 90 and above.",
+            "Graph shows proportions for 207919 patients with fever at presentation by age group. The incidence of fever increases from 41.8% in children aged 10-19 years, to 63.6% in adults aged 50-59 years, then gradually decreases to 37.6% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -289,7 +289,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_cough"),
-            "Graph shows proportions for 208011 patients with cough at presentation by age group. The incidence of cough increases from 27.8% in children aged 10-19 years, to 68.1% in adults aged 50-59 years, then gradually decreases to 41.7% in adults aged 90 and above.",
+            "Graph shows proportions for 208021 patients with cough at presentation by age group. The incidence of cough increases from 31.7% in children aged 10-19 years, to 68.5% in adults aged 50-59 years, then gradually decreases to 42.1% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -297,7 +297,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_cough_fever"),
-            "Graph shows proportions for 212882 patients with cough or fever at presentation by age group. The incidence of cough or fever increases from 36.4% in children aged 10-19 years, to 79.3% in adults aged 50-59 years, then gradually decreases to 55.6% in adults aged 90 and above.",
+            "Graph shows proportions for 212882 patients with cough or fever at presentation by age group. The incidence of cough or fever increases from 51.3% in children aged 10-19 years, to 79.6% in adults aged 50-59 years, then gradually decreases to 56.0% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -305,7 +305,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_shortness_of_breath"),
-            "Graph shows proportions for 208740 patients with shortness of breath at presentation by age group. The incidence of shortness of breath increases from 18.8% in children aged 10-19 years, to 70.0% in adults aged 50-59 years, then gradually decreases to 45.5% in adults aged 90 and above years.",
+            "Graph shows proportions for 208740 patients with shortness of breath at presentation by age group. The incidence of shortness of breath increases from 23.5% in children aged 10-19 years, to 70.3% in adults aged 50-59 years, then gradually decreases to 46.0% in adults aged 90 and above years.",
             width = 4,
             height=580,
             solidHeader = T,
@@ -313,7 +313,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_cought_fever_shortness_of_breath"),
-            "Graph shows proportions for 215051 patients with cough, fever, or shortness of breath at presentation by age group. The incidence of cough, fever, or shortness of breath increases from 48.8% in children aged 10-19 years, to 86.0% in adults aged 50-59 years, then gradually decreases to 65.8% in adults aged 90 and above.",
+            "Graph shows proportions for 215051 patients with cough, fever, or shortness of breath at presentation by age group. The incidence of cough, fever, or shortness of breath increases from 54.7% in children aged 10-19 years, to 86.4% in adults aged 50-59 years, then gradually decreases to 66.3% in adults aged 90 and above.",
             width = 4,
             height=580,
             solidHeader = T,
@@ -321,7 +321,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_upper_respiratory_tract_symptoms"),
-            "Graph shows proportions for 181192 patients with upper respiratory tract symptoms at presentation by age group. The incidence of upper respiratory tract symptoms decreases from 16.1% in children aged 10-19 years, to 11.9% in adults aged 50-59 years, then further decreases to 3.3% in adults aged 90 and above.",
+            "Graph shows proportions for 181192 patients with upper respiratory tract symptoms at presentation by age group. The incidence of upper respiratory tract symptoms decreases from 16.1% in children aged 10-19 years, to 11.7% in adults aged 50-59 years, then further decreases to 3.2% in adults aged 90 and above.",
             width = 4,
             height=580,
             solidHeader = T,
@@ -329,7 +329,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_altered_consciousness_confusion"),
-            "Graph shows proportions for 191747 patients with confusion at presentation by age group. The incidence of confusion increases from 6.8% in children aged 10-19 years, to 8.2% in adults aged 50-59 years, and further increases to 40.3% in adults aged 90 and above.",
+            "Graph shows proportions for 191747 patients with confusion at presentation by age group. The incidence of confusion increases from 7.5% in children aged 10-19 years, to 8.1% in adults aged 50-59 years, and further increases to 40.2% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -337,7 +337,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_constitutional"),
-            "Graph shows proportions for 197970 patients with constitutional symptoms at presentation by age group. The incidence of constitutional symptoms increases from 27.3% in children aged 10-19 years, to 53.3% in adults aged 50-59 years, then decreases to 35.1% in adults aged 90 and above.",
+            "Graph shows proportions for 197970 patients with constitutional symptoms at presentation by age group. The incidence of constitutional symptoms increases from 31.9% in children aged 10-19 years, to 53.4% in adults aged 50-59 years, then decreases to 35.4% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -345,7 +345,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_vomiting_nausea"),
-            "Graph shows proportions for 195712 patients with vomiting or nausea at presentation by age group. The incidence of vomiting or nausea decreases from 20.4% in children aged 10-19 years, to 20.2% in adults aged 50-59 years, then decreases to 10.6% in adults aged 90 and above.",
+            "Graph shows proportions for 195712 patients with vomiting or nausea at presentation by age group. The incidence of vomiting or nausea decreases from 23.5% in children aged 10-19 years, to 20.1% in adults aged 50-59 years, then decreases to 10.7% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -353,7 +353,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_diarrhoea"),
-            "Graph shows proportions for 196108 patients with diarrhoea at presentation by age group. The incidence of diarrhoea increases from 9.0% in children aged 10-19 years, to 19.9% in adults aged 50-59 years, then decreases to 9.1% in adults aged 90 and above.",
+            "Graph shows proportions for 196108 patients with diarrhoea at presentation by age group. The incidence of diarrhoea increases from 10.3% in children aged 10-19 years, to 19.7% in adults aged 50-59 years, then decreases to 9.2% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -361,7 +361,7 @@ dashboardPage(
           ),
           box(
             plotlyOutput("age_symptoms_abdominal_pain"),
-            "Graph shows proportions for 191485 patients with abdominal pain at presentation by age group. The incidence of abdominal pain decreases from 17.7% in children aged 10-19 years, to 9.3% in adults aged 50-59 years, and further decreases to 6.5% in adults aged 90 and above.",
+            "Graph shows proportions for 191485 patients with abdominal pain at presentation by age group. The incidence of abdominal pain decreases from 19.1% in children aged 10-19 years, to 9.1% in adults aged 50-59 years, and further decreases to 6.4% in adults aged 90 and above.",
             width = 4,
             height=550,
             solidHeader = T,
@@ -448,7 +448,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotlyOutput("age_comorbid_asthma"),
-                  "Graph shows proportions for 474580 patients with asthma at presentation by age group. The incidence of asthma increases from 6.2% in children aged 10-19 years, to 9.4% in adults aged 50-59 years, and decreases to 8.4% in adults aged 90 and above.",
+                  "Graph shows proportions for 474580 patients with asthma at presentation by age group. The incidence of asthma increases from 6.0% in children aged 10-19 years, to 8.8% in adults aged 50-59 years, and decreases to 8.3% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -456,7 +456,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_malignant_neoplasm"),
-                  "Graph shows proportions for 470966 patients with malignant neoplasma at presentation by age group. The incidence of malignant neoplasma increases from 1.3% in children aged 10-19 years, to 2.7% in adults aged 50-59 years, and increases to 11.4% in adults aged 90 and above.",
+                  "Graph shows proportions for 470966 patients with malignant neoplasma at presentation by age group. The incidence of malignant neoplasma increases from 1.2% in children aged 10-19 years, to 2.3% in adults aged 50-59 years, and increases to 11.1% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -464,7 +464,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_obesity"),
-                  "Graph shows proportion for 278556 patients with obesity at presentation by age group. The incidence of obesity increases from 4.7% in children aged 10-19 years, to 20.3% in adults aged 50-59 years, then decreases to 3.5% in adults aged 90 and above.",
+                  "Graph shows proportion for 278556 patients with obesity at presentation by age group. The incidence of obesity increases from 5.1% in children aged 10-19 years, to 21.6% in adults aged 50-59 years, then decreases to 3.5% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -472,7 +472,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_diabetes"),
-                  "Graph shows proportion for 491791 patients with diabetes at presentation by age group. The incidence of diabetes increases from 4.7% in children aged 10-19 years, to 31.4% in adults aged 50-59 years, then decreases to 22.9% in adults aged 90 and above.",
+                  "Graph shows proportion for 491791 patients with diabetes at presentation by age group. The incidence of diabetes increases from 5.6% in children aged 10-19 years, to 30.1% in adults aged 50-59 years, then decreases to 22.6% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -480,7 +480,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_dementia"),
-                  "Graph shows proportions for 211562 patients with dementia at presentation by age group. The incidence of dementia increases from 0% in children aged 10-19 years, to 0.8% in adults aged 50-59 years, then further increases to 33.9% in adults aged 90 and above.",
+                  "Graph shows proportions for 211562 patients with dementia at presentation by age group. The incidence of dementia increases from 0% in children aged 10-19 years, to 0.8% in adults aged 50-59 years, then further increases to 33.5% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -488,7 +488,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_smoking"),
-                  "Graph shows proportions for 181050 smokers at presentation by age group. The incidence of smokers increases from 7.4% in children aged 10-19 years, to 30.0% in adults aged 50-59 years, then further increases to 34.8% in adults aged 90 and above.",
+                  "Graph shows proportions for 181050 smokers at presentation by age group. The incidence of smokers increases from 6.9% in children aged 10-19 years, to 27.3% in adults aged 50-59 years, then further increases to 34.7% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,
@@ -496,7 +496,7 @@ dashboardPage(
                 ),
                 box(
                   plotlyOutput("age_comorbid_hypertension"),
-                  "Graph shows proportions for 471096 patients with hypertension at presentation by age group. The incidence of hypertension increases from 2.3% in children aged 10-19 years, to 40.4% in adults aged 50-59 years, then further increases to 61.2% in adults aged 90 and above.",
+                  "Graph shows proportions for 471096 patients with hypertension at presentation by age group. The incidence of hypertension increases from 2.3% in children aged 10-19 years, to 39.9% in adults aged 50-59 years, then further increases to 60.6% in adults aged 90 and above.",
                   width = 4,
                   height=550,
                   solidHeader = T,

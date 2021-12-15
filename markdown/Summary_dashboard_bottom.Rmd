@@ -29,4 +29,5 @@ Joaquín Baruch, Gail Carson, Barbara Wanjiru Citarella, Drew Dagens, Emmanuelle
 [8]Dunning JW, Merson L, Rohde GGU, et al. Open source clinical science for emerging infections. Lancet Infect Dis 2014; 14(1): 8-9.   
 [9]ISARIC clinical characterisation group. Global outbreak research: harmony not hegemony. Lancet Infect Dis 2020; 20(7): 770-2.   
 [10]IDDO website  (hyperlink to www.iddo.org)   
-[11]Clinical Data Interchange Standards Consortium (hyperlink to https://www.cdisc.org/standards/foundational/sdtm )  
+[11]Clinical Data Interchange Standards Consortium (hyperlink to https://www.cdisc.org/standards/foundational/sdtm)     
+[12]R Core Team (2020). R: A language and environment for statistical computing. R Foundation for Statistical Computing, Vienna, Austria. URL: https://www.R-project.org/.  

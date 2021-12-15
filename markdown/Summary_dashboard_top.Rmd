@@ -42,14 +42,15 @@ SDTM formatted data are processed in R 4.1.0 [12]. Initial data cleaning include
 
 Patients are excluded if they did not have laboratory or clinically confirmed SARS-CoV-2 infection. Patients are considered to be lost to follow up if either a) they were transferred to another facility, or b) they had an unknown outcome and the last date upon which any data was recorded for them was 45 days or before the date of data extraction.  Patients with unknown outcome where the last recorded data was less than 45 days old are instead categorised as receiving ongoing care. 
 
-Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the report only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, within both the <10 year age group and the $\geq$ 10 year age group, are taken to be likely mis-entered and changed to missing for this report. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction.  
+Comorbidities, symptoms at admission, and treatments (in both the full population and the intensive care unit (ICU)/high dependency unit (HDU) population) are included in the report only if at least 10% of patients have their presence or absence recorded. Laboratory and vital sign measurements that fall within the top 2.5% and bottom 2.5% of values, within both the <10 year age group and the ≥ 10 year age group, are taken to be likely mis-entered and changed to missing for this report. Similarly, variables for time durations are converted to missing if their values are either negative or in the top 2.5% of values. Dates are converted to missing where they are before the 1st January 2020 (except for dates of birth and hospital admission) or after the date of data extraction.  
+
 
 The following COVID-19 symptom definitions were used: 
 
 - WHO:   
       1. A combination of acute fever and cough,   
       Or   
-      2. A combination of three or more of: fever, cough, general weakness and fatigue, headache, myalgia, sore throat, coryza, dyspnoea, anorexia, nausea and vomiting, diarrhoea, altered mental status   
+      2. A combination of three or more of: fever, cough, general weakness and fatigue, headache, myalgia (we used muscle aches, joint pain), sore throat, coryza (we used runny nose), dyspnoea (we used shortness of breath), anorexia, nausea and vomiting, diarrhoea, altered mental status (we used altered consciousness or confusion)  
 
 - Centers for Disease Control (CDC), United States:   
       1.	At least two of: fever, chills (not available), rigors (not available), myalgia, headache, sore throat, new olfactory and taste disorder,   
@@ -57,7 +58,7 @@ The following COVID-19 symptom definitions were used:
       2.	At least one of: cough, shortness of breath, difficulty breathing (not available) 
 
 - Public Health England   
-New cough, or temperature ≥37.8°C, or a loss or change in sense of smell or taste  
+New cough (we used cough), or temperature ≥ 37.8°C (we used history of fever), or a loss or change in sense of smell or taste  
 
 - European Centre for Disease Prevention and Control   
 At least one of: cough, fever, shortness of breath, sudden onset anosmia, ageusia or dysgeusia 

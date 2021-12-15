@@ -83,12 +83,6 @@ flowchart <- function(){
 
 
 age.pyramid.plot <- function(aggregated.tbl, dashboard=dashboard_equal, ...){
-  # print(nrow(aggregated.tbl))
-  if (dashboard == TRUE) {
-    angle_dash = 0
-  } else {
-    angle_dash = 90
-  }
   # @todo get rid of this at the aggregation stage
   aggregated.tbl <- aggregated.tbl %>% filter(!is.na(slider_agegp10)) %>% 
     filter(slider_outcome%in%c("Death","Discharge","LTFU"))
@@ -140,7 +134,7 @@ age.pyramid.plot <- function(aggregated.tbl, dashboard=dashboard_equal, ...){
       xmin = length(levels(aggregated.tbl$slider_agegp10))+1.5,
       xmax = length(levels(aggregated.tbl$slider_agegp10))+1.5) +
     theme(plot.margin=unit(c(30,5,5,5.5,5.5),"pt"),
-          axis.text.x=element_text(angle = angle_dash, vjust = 0.5))
+          axis.text.x=element_text(angle = 90, vjust = 0.5))
   
   plt
   
@@ -829,7 +823,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 1000, condition.in.
     data = d,
     aes(x = d$X, y = mean, text=paste0(x,"/",n)),
     shape = "square",
-    size = (d$size)/5,
+    size = (d$size)/7,
     colour = "navy"
   )
   lines <- geom_linerange(
@@ -1084,35 +1078,54 @@ plot_case_def <- function(data_case_def){
 
 
 ##############number by region
-number_by_region <- function(data_country){
+number_by_region <- function(data_country, dashboard=dashboard_equal){
+  if (dashboard == TRUE) {
+    axis_size = 13
+    legend_size=13
+    key_size=1
+  } else {
+    axis_size = 5
+    legend_size=8
+    key_size=0.2
+  }
   ggplot(data_country, aes(x = x_axis, y = Freq, fill = new_region)) +
     theme_classic() + 
     geom_bar(stat="identity", colour="black", size= 0.5) + 
     scale_y_log10(breaks = c(1,10,100,1000,10000, 100000), labels = scales::comma) +
     scale_fill_brewer(palette="Set2", name = "" ) + 
     scale_x_discrete(limits = as.vector(data_country$x_axis), labels = data_country$slider_country) + 
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1,size=5)) +
+    theme(axis.text.x = element_text(angle = 45,hjust=1,size=axis_size)) +
     xlab('Countries/Regions') + 
     ylab('Number of patients') + 
     theme(axis.title.x = element_text(size=14, face="bold"),
           axis.title.y = element_text(size=14, face="bold")) + 
-    theme(legend.position = "top",legend.text = element_text(size=8),legend.key.size = unit(0.2,"cm"))
+    theme(legend.position = "top",legend.text = element_text(size=legend_size),legend.key.size = unit(key_size,"cm"))
 }
 
-month_by_region <- function(summary_country_date){
+month_by_region <- function(summary_country_date, dashboard=dashboard_equal){
+  if (dashboard == TRUE) {
+    axis_size = 13
+    legend_size=13
+    key_size=1
+  } else {
+    axis_size = 8
+    legend_size=8
+    key_size=0.2
+  }
   ggplot(summary_country_date, aes(x = time_id, y = sum_records, fill = new_region)) +
     theme_classic() + 
     geom_bar(position = "stack", stat="identity", colour="black", size= 0.3, width=0.8) + 
     geom_vline(xintercept = 12.5, linetype="dashed", color = "black", size=0.5) + 
     scale_fill_brewer(palette="Set2", name = "" ) + 
     scale_x_discrete(limits = as.vector(summary_country_date$time_id), labels = summary_country_date$new_month) + 
+    theme(axis.text.x = element_text(size=axis_size)) +
     xlab('Months') + 
     ylab('Number of patients') + 
     theme(axis.title.x = element_text(size=14, face="bold"),
           axis.title.y = element_text(size=14, face="bold")) + 
     annotate("text", x=1,  y=50000, label = "2020") +
     annotate("text", x=15,  y=50000, label = "2021") +
-    theme(legend.position = "top",legend.text = element_text(size=8),legend.key.size = unit(0.2,"cm"))
+    theme(legend.position = "top",legend.text = element_text(size=legend_size),legend.key.size = unit(key_size,"cm"))
   }
 
 plot_by_region <- function(data_plot,fill_color = 'navy'){
