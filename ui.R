@@ -555,7 +555,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("clinical_signs_vs_resp", height = "500px"),
-                  "Graph shows median respiratory rates for 201231 patients at presentation by age group. The median level was 33 breaths per minute in children under 10, and 20 breaths per minute in children 10-19, increases to 22 breaths per minute in adults aged 50-59 years, and decreases to 20 breaths per minute in adults aged 90 and above.",
+                  "Graph shows median respiratory rates for 201231 patients at presentation by age group. The median level was 35 breaths per minute in children under 10, and 20 breaths per minute in children 10-19, increases to 22 breaths per minute in adults aged 50-59 years, and decreases to 20 breaths per minute in adults aged 90 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -563,7 +563,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("clinical_signs_vs_hr", height = "500px"),
-                  "Graph shows median heart rates for 200478 patients at presentation by age group. The median level decreases from 138 beats per minute in children under 10 years, to 93 beats per minute in adults aged 50-59 years, and further decreases to 83 beats per minute in adults aged 90 and above.",
+                  "Graph shows median heart rates for 200478 patients at presentation by age group. The median level decreases from 140 beats per minute in children under 10 years, to 93 beats per minute in adults aged 50-59 years, and further decreases to 83 beats per minute in adults aged 90 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -595,7 +595,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("clinical_signs_vs_oxysat_therapy", height = "500px"),
-                  "Graph shows oxygen saturation on oxygen therapy levels for 67316 patients at presentation by age group. The median level decreases from 96% in children aged 10-19 years, to 95% in adults aged 30-89 years, then increases to 96% in adults aged 90 and above.",
+                  "Graph shows oxygen saturation on oxygen therapy levels for 67316 patients at presentation by age group. The median level decreases from 96% in children aged 10-19 years, to 94% in adults aged 60-79 years, then increases to 95% in adults aged 80 and above.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -607,7 +607,7 @@ dashboardPage(
         fluidRow(
           box(
             plotOutput("lab_results_lab_crp", height = "500px"),
-            "Graph shows C-Reactive Protein levels in 13291 patients at presentation by age group. The median level is 9.5 mg/L in children under 10 years, 8 mg/L in children aged 10-19 years, and around 7 mg/L in adults aged 20 and above.",
+            "Graph shows C-Reactive Protein levels in 13291 patients at presentation by age group. The median level is 9.2 mg/L in children under 10 years, 7.7 mg/L in children aged 10-19 years, and around 7 mg/L in adults aged 20 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -615,7 +615,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_lym", height = "500px"),
-            "Graph shows lymphocyte levels in 124926 patients at presentation by age group. The median level is 2.9 *10^9/L in children under 10 years, 1.9 *10^9/L in children aged 10-19 years, and decreases to 0.8 *10^9/L in adults aged 70 and above.",
+            "Graph shows lymphocyte levels in 124926 patients at presentation by age group. The median level is 2.9 *10^9/L in children under 10 years, 1.5 *10^9/L in children aged 10-19 years, and decreases to 0.8 *10^9/L in adults aged 70 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -631,7 +631,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_wbc", height = "500px"),
-            "Graph shows white blood cell levels in 132491 patients at presentation by age group. The median level decreases from 9.5 *10^9/L in children under 10 to 7 *10^9/L in adults aged 30-60 years, and increases to 7.7 *10^9/L in adults aged 90 and above.",
+            "Graph shows white blood cell levels in 132491 patients at presentation by age group. The median level decreases from 9.2 *10^9/L in children under 10 to 7 *10^9/L in adults aged 30-60 years, and increases to 7.7 *10^9/L in adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -655,7 +655,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_alt", height = "500px"),
-            "Graph shows ALT levels in 82808 patients at presentation by age group. The median level is 24 units/L in children under 10, 18 units/L in children aged 10-19, increases to 37 units/L in adults aged 40-49, and then decreases to 18 units/L in adults aged 90 and above.",
+            "Graph shows ALT levels in 82808 patients at presentation by age group. The median level is 24 units/L in children under 10, 19 units/L in children aged 10-19, increases to 37 units/L in adults aged 40-49, and then decreases to 18 units/L in adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -671,7 +671,7 @@ dashboardPage(
           ),
           box(
             plotOutput("lab_results_lab_ast", height = "500px"),
-            "Graph shows AST levels in 19210 patients at presentation by age group. The median level is 43 units/L for children under 10, 22 units/L for children aged 10-19, increases to 43 units/L for adults aged 60-69, then decreases to 35 units/L for adults aged 90 and above.",
+            "Graph shows AST levels in 19210 patients at presentation by age group. The median level is 39 units/L for children under 10, 23 units/L for children aged 10-19, increases to 43 units/L for adults aged 60-69, then decreases to 35 units/L for adults aged 90 and above.",
             width = 6,
             height = 650,
             solidHeader = T,
@@ -683,7 +683,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("treatmentPrevalence", height = "500px"),
-                  "Graph shows the proportion of patients receiving each treatment. Antibiotics were given to 56.4% of patients. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded",
+                  "Graph shows the proportion of patients receiving each treatment. Antibiotics were given to 56.4% of patients. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded. Oxygen therapy variable includes high flow nasal cannula, non-invasive ventilation, and invasive ventilation.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -691,7 +691,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("treatmentUpset", height = "500px"),
-                  "Graph shows the distribution of combinations of 5 most common treatments, across all patients with completed hospital stay and recorded treatment data. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively.",
+                  "Graph shows the distribution of combinations of 5 most common treatments, across all patients with completed hospital stay and recorded treatment data. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. Oxygen therapy variable includes high flow nasal cannula, non-invasive ventilation, and invasive ventilation.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -702,7 +702,7 @@ dashboardPage(
               fluidRow(
                 box(
                   plotOutput("icuTreatmentPrevalence", height = "500px"),
-                  "Graph shows the proportion of treatments receiving each treatment in ICU. 91.6% received antibiotics and 37.4% antivirals. 95.4% received some degree of oxygen supplementation, of which, 48.2% received NIV and 60.5% IMV. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded.",
+                  "Graph shows the proportion of treatments receiving each treatment in ICU. 91.6% received antibiotics and 37.4% antivirals. 95.4% received some degree of oxygen supplementation, of which, 48.2% received NIV and 60.5% IMV. Bars are labelled with the fraction of patients given the treatment to the number of patients with data on the treatment recorded. Oxygen therapy variable includes high flow nasal cannula, non-invasive ventilation, and invasive ventilation.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
@@ -710,7 +710,7 @@ dashboardPage(
                 ),
                 box(
                   plotOutput("icuTreatmentUpset", height = "500px"),
-                  "Graph shows the distribution of combinations of 5 most common treatments in ICU. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively.",
+                  "Graph shows the distribution of combinations of 5 most common treatments in ICU. Filled and empty circles below the x-axis indicate treatments that were and were not administered respectively. Oxygen therapy variable includes high flow nasal cannula, non-invasive ventilation, and invasive ventilation.",
                   width = 6,
                   height = 650,
                   solidHeader = T,
