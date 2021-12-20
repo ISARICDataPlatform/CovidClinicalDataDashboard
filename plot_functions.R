@@ -1009,7 +1009,7 @@ heatmap_plot <- function(data_plot_heatmap){
 
 tables_supplementary <- function(table_sup, title_table_1 = NA, title_table_2 = NA){
   table_example <- flextable(table_sup)
-  table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "header")
+  table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "all")
   table_example <- fontsize(table_example, i = NULL, j = NULL, size = 8, part = "body")
   table_example <- font(table_example, fontname="Arial", part = "all")
   if(!is.na(title_table_2)){
@@ -1018,7 +1018,7 @@ tables_supplementary <- function(table_sup, title_table_1 = NA, title_table_2 = 
   if(!is.na(title_table_1)){
     table_example <- add_header_lines(table_example, values = title_table_1, top = TRUE)
   }
-  table_example <- autofit(table_example, add_w = 0.1, add_h = 0.1, part = c("body", "header"))
+  table_example <- autofit(table_example, add_w = 0.1, add_h = 0.05, part = c("body", "header"))
 
   table_example
 }
@@ -1066,7 +1066,7 @@ ggplot(data = world_plot_data) +
 plot_case_def <- function(data_case_def){
   ggplot(data = data_case_def, aes(y = proportion, x = slider_agegp10)) +
     facet_grid(~ symptom) +
-    geom_text(aes(label=text),y=0.95,x="40-49",data=data.frame(text=c("Overall: 75%","Oveall: 82%","Overall: 75%","Overall: 60%"),symptom=c("CDC","ECDC","PHE","WHO")))+
+    geom_text(aes(label=text),y=0.95,x="40-49",data=data.frame(text=c("Overall: 75%","Overall: 82%","Overall: 75%","Overall: 60%"),symptom=c("CDC","ECDC","PHE","WHO")))+
     geom_bar(stat="identity")+
     xlab("Age") + ylab("Proportion") + ylim(0, 1)+
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),

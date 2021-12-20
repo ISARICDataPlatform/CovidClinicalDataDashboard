@@ -26,7 +26,7 @@ params:
 
 ```{r setup, include = FALSE}
 
-knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="~/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -167,6 +167,8 @@ The observed mean number of days from (first) symptom onset to hospital admissio
 A detailed analysis of patients' symptoms has been reported in a previous publication [19]. The prevalence of symptoms on admission to the hospital is summarised in Table 3 and Figure 6a. (Note that South Africa did not collect symptoms data. The overall frequency of missing data outside South Africa is 11%). The five most common symptoms at admission are `r glue_collapse(symptom.prevalence.input %>% group_by(nice.symptom) %>% summarise(F=sum(times.present)) %>% ungroup() %>% arrange(desc(F)) %>% slice(1:5) %>% pull(nice.symptom) %>% str_to_lower(), sep = ', ', last=', and ')`, accounting for `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Shortness of breath"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Shortness of breath"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Cough"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Cough"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="History of fever"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="History of fever"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Fatigue/malaise"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Fatigue/malaise"&times.recorded!=0) %>% pull(times.recorded))*100,1)`%, `r round(sum(symptom.prevalence.input %>% filter(nice.symptom=="Altered consciousness/confusion"&times.present!=0) %>% pull(times.present))/sum(symptom.prevalence.input %>% filter(nice.symptom=="Altered consciousness/confusion"&times.recorded!=0) %>% pull(times.recorded))*100,1)`% of patients with at least one symptom recorded.
 
 Clusters of symptoms are presented in Figure 6b and 6c. The most common symptom combination is shortness of breath, cough, and history of fever.
+
+\newpage
 
 ```{r table3, tab.cap = "Prevalence of symptoms."}
 tables_supplementary(table_sup = symptoms.table)
