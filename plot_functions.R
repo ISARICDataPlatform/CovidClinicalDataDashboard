@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = F
+dashboard_equal = T
 
 flowchart <- function(){
   
@@ -134,7 +134,7 @@ age.pyramid.plot <- function(aggregated.tbl, dashboard=dashboard_equal, ...){
       xmin = length(levels(aggregated.tbl$slider_agegp10))+1.5,
       xmax = length(levels(aggregated.tbl$slider_agegp10))+1.5) +
     theme(plot.margin=unit(c(30,5,5,5.5,5.5),"pt"),
-          axis.text.x=element_text(angle = 90, vjust = 0.5))
+          axis.text.x=element_text(angle = 90, vjust = 0.5, size = 12))
   
   plt
   
@@ -184,7 +184,7 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
                                         "2020-28","2020-31","2020-34","2020-37","2020-40","2020-43","2020-46","2020-49","2020-52",
                                         "2021-1","2021-4","2021-4","2021-7","2021-10","2021-13","2021-16","2021-19","2021-22","2021-25",
                                         "2021-28","2021-31","2021-34","2021-37")) +
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 7),legend.position = "bottom") 
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 10),legend.position = "bottom") 
 
   return(plt)
 }
@@ -357,7 +357,9 @@ upset.plot <- function(aggregated.tbl, which.plot = "comorbidity", ...){
     theme_bw() +
     xlab(xlab) +
     ylab("Proportion of patients") +
-    scale_x_upset()
+    scale_x_upset() +
+    theme(axis.title = element_text(size = 13), 
+          combmatrix.label.text = element_text(size=12))
 }
 
 
@@ -659,15 +661,15 @@ length.of.stay.sex.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ..
     s=3
   }
   plt <- ggplot(aggregated.tbl, aes(x = sex, y = length.of.stay, fill=sex)) +
-    geom_violin(trim=F)+
+    geom_violin(trim=F, adjust = 2)+
     geom_boxplot(width=0.1, fill="white", outlier.shape = NA)  +
     scale_fill_viridis(drop = F, discrete = "true", option = "magma", begin = 0.25, end = 0.75) +
     geom_text(stat="count", aes(label=..count..),y=-3, size=s)+
     labs(title=" ", x="Sex", y = "Length of hospital stay", fill="Sex") +
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
-      axis.title.x = element_text( size=12),
-      axis.title.y = element_text( size=12)
+      axis.title = element_text( size=14),
+      axis.text =element_text(size = 12),
     ) +  ylim(c(-5,max(aggregated.tbl$length.of.stay))) + xlim(c("Male","Female"))+
     theme(panel.grid.minor = element_line(size = 0.25, linetype = 'solid',
                                           colour = "grey"), panel.background = element_rect(fill = 'white', colour = 'white'), panel.grid.major = element_line(size = 0.5, linetype = 'solid',colour = "grey"),  axis.line = element_line(colour = "black"), panel.border = element_rect(colour = 'black', fill = NA, size=1) )
@@ -689,8 +691,8 @@ length.of.stay.age.plot <- function(aggregated.tbl,dashboard=dashboard_equal, ..
     geom_text(stat="count", aes(label=..count..),y=-3, size=s)+
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
-      axis.title.x = element_text( size=12),
-      axis.title.y = element_text( size=12)
+      axis.title = element_text( size=14),
+      axis.text =element_text(size = 12),
     ) + 
     scale_fill_viridis(option = "magma", discrete = T, drop = F, begin = 0.4, end = 1) +
     scale_x_discrete(drop = F) +
@@ -708,8 +710,8 @@ admission.to.icu.plot <- function(aggregated.tbl, ...){
     theme_bw() + 
     theme(
       plot.title = element_text( size=14, face="bold", hjust = 0.5),
-      axis.title.x = element_text( size=12),
-      axis.title.y = element_text( size=12)
+      axis.title = element_text( size=14),
+      axis.text = element_text(size = 12)
     ) +
     scale_x_continuous(limits = c(-1,20), breaks =  seq(0,20,1)) 
   
@@ -727,6 +729,11 @@ status.by.time.after.admission.plot <- function(aggregated.tbl, ...){
     geom_bar(aes(x = day, y=count, fill = status), position = "fill", stat = "identity") +
     scale_fill_brewer(palette = "Dark2", name  = "Status", drop = F, labels = c("Discharged", "Unknown", "Ward", "ICU", "Death")) +
     theme_bw() +
+    theme(
+      plot.title = element_text( size=14, face="bold", hjust = 0.5),
+      axis.title = element_text( size=14),
+      axis.text = element_text(size = 12)
+    ) +
     xlab("Days relative to admission") +
     #annotate(geom = "segment", x = 14.5, xend = 14.5, y = 0, yend = 1) +
     ylab("Proportion")
@@ -748,8 +755,8 @@ length.of.stay.icu.plot <- function(aggregated.tbl,dashboard=dashboard_equal,...
     geom_text(stat="count", aes(label=..count..),y=-2, size=s)+
     ylim(c(-5,max(aggregated.tbl$dur)))+
     theme(
-      axis.title.x = element_text(size = 12),
-      axis.title.y = element_text(size = 12),
+      axis.title  = element_text(size = 14),
+      axis.text =element_text(size = 12),
       panel.grid.minor = element_line(size = 0.25, linetype = "solid",
                                       colour = "grey"),
       panel.background = element_rect(fill = "white", colour = "white"),
@@ -885,7 +892,7 @@ plot.prop.by.age <- function(data, var, name, ymax = 1, sz = 1000, condition.in.
     labs(title = N)
   
   if (dashboard==T){
-    p <- ggplotly(p,tooltip="text", height = 350) %>% layout()
+    p <- ggplotly(p,tooltip="text") %>% layout()
   }
   
   return(p)
@@ -999,7 +1006,7 @@ heatmap_plot <- function(data_plot_heatmap){
           panel.grid.minor = element_blank(),
           axis.title.x=element_blank(),
           axis.title.y=element_blank(),
-          text = element_text(size=9),
+          text = element_text(size=12),
           axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
     coord_fixed()
 }
@@ -1069,7 +1076,7 @@ plot_case_def <- function(data_case_def){
     geom_text(aes(label=text),y=0.95,x="40-49",data=data.frame(text=c("Overall: 75%","Overall: 82%","Overall: 75%","Overall: 60%"),symptom=c("CDC","ECDC","PHE","WHO")))+
     geom_bar(stat="identity")+
     xlab("Age") + ylab("Proportion") + ylim(0, 1)+
-    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1),
+    theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 10),
           panel.grid.major = element_blank(),
           panel.border = element_blank(),
           panel.background = element_rect(fill = "white"),
@@ -1140,7 +1147,7 @@ plot_by_region <- function(data_plot,fill_color = 'navy'){
     scale_x_continuous(limits = c(0, 100)) + 
     xlab('%') + 
     ylab('') +
-    theme(axis.title.x = element_text(size=14, face="bold")) + 
+    theme(axis.title.x = element_text(size=14, face="bold"), axis.text.x = element_text(size = 12)) + 
     theme(legend.position = "top") + 
     labs(title= paste(current_title ,' (N=', unique(data_plot$times.total), ')') ) + 
     theme(legend.position = "none")
