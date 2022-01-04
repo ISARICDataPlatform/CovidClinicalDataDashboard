@@ -26,7 +26,7 @@ params:
 
 ```{r setup, include = FALSE}
 
-knitr::opts_knit$set(root.dir="~/CovidClinicalDataDashboard")
+knitr::opts_knit$set(root.dir="C:/Users/K/Desktop/ISARIC/CovidClinicalDataDashboard")
 
 knitr::opts_chunk$set(echo = FALSE, 
                       warning = FALSE, 
@@ -58,7 +58,7 @@ ref.date <- ymd("2021-09-20")
 
 # Background
 
-This report describes the clinical presentation, treatment and outcome of a cohort of over half a million patients with COVID-19 hospitalised between January 2020 and September 2021 in `r length(unique(na.omit(summary_input_overall$slider_country)))` countries throughout the world. This has been possible thanks to 1669 institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration https://isaric.org/.
+This report describes the clinical presentation, treatment and outcome of a cohort of over 700,000 patients with COVID-19 hospitalised between January 2020 and September 2021 in `r length(unique(na.omit(summary_input_overall$slider_country)))` countries throughout the world. This has been possible thanks to 1669 institutions and their clinical teams contributing to ISARIC (International Severe Acute Respiratory and Emerging Infection Consortium), a grassroots collaboration https://isaric.org/.
 
 After over 250 million cases and over 5 million deaths, COVID-19 is clearly showing us how pandemics disrupt populations by stretching healthcare systems, and shaking economies. Although clinicians and well-equipped surveillance systems can adapt to health emergencies by implementing new treatments and information systems, clinical research lacks this agility.
 
@@ -417,7 +417,7 @@ Now, 22 months into the pandemic, with more than half-a-million records, the ISA
 
 This report describes the features of COVID-19 patients in the entire cohort, made from cases accrued over 22 months with different contributions from various countries. Everyone can trace the evolution over time of the database through 15 previous versions of this report [https://isaric.org/research/covid-19-clinical-research-resources/evidence-reports/]. In addition, specific questions regarding clinical presentations, risks factors for outcomes, and trends are addressed through ad-hoc analyses.
 
-Partners can submit ad-hoc request to perform analyses, to access the half-a-million case-based dataset, by using our Statistical Analysis Plan form (SAP; https://isaric.org/research/isaric-partner-analysis-frequently-asked-questions/). Once a SAP has been submitted, our statistical team assesses the plan for quality of research and feasibility of data analysis. Then, our clinical team provides feedback on clinical relevance and overlap with other analyses. Once this process has been completed, the SAP is sent to all ISARIC collaborators for the opportunity to review. This initial peer review process ensures that research is of the utmost quality and it helps encourage a truly participatory approach. 
+Partners can submit ad-hoc request to perform analyses, to access the 700,000 case-based dataset, by using our Statistical Analysis Plan form (SAP; https://isaric.org/research/isaric-partner-analysis-frequently-asked-questions/). Once a SAP has been submitted, our statistical team assesses the plan for quality of research and feasibility of data analysis. Then, our clinical team provides feedback on clinical relevance and overlap with other analyses. Once this process has been completed, the SAP is sent to all ISARIC collaborators for the opportunity to review. This initial peer review process ensures that research is of the utmost quality and it helps encourage a truly participatory approach. 
 
 All ISARIC contributors are invited to participate in analyses through review and input on the SAP and the resulting publication. The outputs of our joint work are disseminated as widely as possible to inform patient care and public health policy. ISARIC aims to include the names of all those who contribute data in the cited authorship of publications, subject to the submission of contact details and confirmation of acceptance of the final manuscript within the required timelines, per ICMJE policies and the ISARIC publication policy. 
 

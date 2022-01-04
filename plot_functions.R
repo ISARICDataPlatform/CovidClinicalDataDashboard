@@ -1,7 +1,7 @@
 ###############################
 #' @usage If running dashboard, leave dashboard_equal = TRUE, 
 #' if running report,dashboard_equal = FALSE
-dashboard_equal = T
+dashboard_equal = F
 
 flowchart <- function(){
   
@@ -1006,7 +1006,7 @@ heatmap_plot <- function(data_plot_heatmap){
           panel.grid.minor = element_blank(),
           axis.title.x=element_blank(),
           axis.title.y=element_blank(),
-          text = element_text(size=12),
+          text = element_text(size=10),
           axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5)) +
     coord_fixed()
 }
