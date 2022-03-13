@@ -183,7 +183,8 @@ outcomes.by.admission.date.plot <- function(aggregated.tbl, embargo.limit, ...){
     scale_x_discrete(drop = F, breaks=c("2020-1","2020-4","2020-7","2020-10","2020-13","2020-16","2020-19","2020-22","2020-25",
                                         "2020-28","2020-31","2020-34","2020-37","2020-40","2020-43","2020-46","2020-49","2020-52",
                                         "2021-1","2021-4","2021-4","2021-7","2021-10","2021-13","2021-16","2021-19","2021-22","2021-25",
-                                        "2021-28","2021-31","2021-34","2021-37")) +
+                                        "2021-28","2021-31","2021-34","2021-37","2021-40","2021-43","2021-46","2021-49","2021-52",
+                                        "2022-1")) +
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust=1, size = 10),legend.position = "bottom") 
 
   return(plt)
@@ -1073,7 +1074,7 @@ ggplot(data = world_plot_data) +
 plot_case_def <- function(data_case_def){
   ggplot(data = data_case_def, aes(y = proportion, x = slider_agegp10)) +
     facet_grid(~ symptom) +
-    geom_text(aes(label=text),y=0.95,x="40-49",data=data.frame(text=c("Overall: 75%","Overall: 82%","Overall: 75%","Overall: 60%"),symptom=c("CDC","ECDC","PHE","WHO")))+
+    geom_text(aes(label=text),y=0.95,x="40-49",data=data.frame(text=c("Overall: 77%","Overall: 84%","Overall: 77%","Overall: 61%"),symptom=c("CDC","ECDC","PHE","WHO")))+
     geom_bar(stat="identity")+
     xlab("Age") + ylab("Proportion") + ylim(0, 1)+
     theme(axis.text.x = element_text(angle = 90, vjust = 0.5, hjust = 1, size = 10),
@@ -1123,6 +1124,7 @@ month_by_region <- function(summary_country_date, dashboard=dashboard_equal){
     theme_classic() + 
     geom_bar(position = "stack", stat="identity", colour="black", size= 0.3, width=0.8) + 
     geom_vline(xintercept = 12.5, linetype="dashed", color = "black", size=0.5) + 
+    geom_vline(xintercept = 24.5, linetype="dashed", color = "black", size=0.5) + 
     scale_fill_brewer(palette="Set2", name = "" ) + 
     scale_x_discrete(limits = as.vector(summary_country_date$time_id), labels = summary_country_date$new_month) + 
     theme(axis.text.x = element_text(size=axis_size)) +
@@ -1132,6 +1134,7 @@ month_by_region <- function(summary_country_date, dashboard=dashboard_equal){
           axis.title.y = element_text(size=14, face="bold")) + 
     annotate("text", x=1,  y=50000, label = "2020") +
     annotate("text", x=15,  y=50000, label = "2021") +
+    annotate("text", x=25,  y=50000, label = "2022") +
     theme(legend.position = "top",legend.text = element_text(size=legend_size),legend.key.size = unit(key_size,"cm"))
   }
 
