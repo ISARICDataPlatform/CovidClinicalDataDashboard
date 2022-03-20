@@ -9,7 +9,7 @@ flowchart <- function(){
       graph [layout=dot, fontsize=14, fontname=Arial]
       
       # node definitions with substituted label text
-      node [shape = rectangle, style = filled, fontname=Arial]        
+      node [shape = rectangle, style = filled, fontname=Calibri]        
       tab1 [label = '@@1', fillcolor=Navy, fontcolor=white]
       
       node [shape = plaintext, fillcolor=white] 
@@ -1145,7 +1145,7 @@ plot_by_region <- function(data_plot,fill_color = 'navy'){
   ggplot(data_plot, aes(y=order_var , x = freq_outcome, alpha = alpha_outcome)) +
     theme_classic() + 
     geom_bar(stat="identity", colour="black", size= 0.5, fill = fill_color) + 
-    geom_text(aes(y=order_var , x = freq_outcome +10, label=times.recorded), size = 4, alpha = 1) +
+    geom_text(aes(y=order_var , x = freq_outcome +12, label=paste0(times.present,"/",times.recorded)), size =3, alpha = 1) +
     scale_y_discrete(limits = as.vector(data_plot$order_var), labels = data_plot$outcome_names) + 
     scale_x_continuous(limits = c(0, 100)) + 
     xlab('%') + 
